@@ -19,6 +19,19 @@
 		3D47258621BA228C00C0E7CF /* 分享给同学@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D47258421BA228C00C0E7CF /* 分享给同学@2x.png */; };
 		3D47258721BA228C00C0E7CF /* 分享给同学@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D47258521BA228C00C0E7CF /* 分享给同学@3x.png */; };
 		3D47258A21BA2A7F00C0E7CF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D47258921BA2A7F00C0E7CF /* MainViewController.m */; };
+		3D47259021BA591C00C0E7CF /* YZPullDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D47258C21BA591C00C0E7CF /* YZPullDownMenu.m */; };
+		3D47259121BA591C00C0E7CF /* YZCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D47258E21BA591C00C0E7CF /* YZCover.m */; };
+		3D47259521BA5BA700C0E7CF /* YZMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D47259421BA5BA700C0E7CF /* YZMenuButton.m */; };
+		3D47259C21BA5C5300C0E7CF /* UIView+YZCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D47259B21BA5C5300C0E7CF /* UIView+YZCategory.m */; };
+		3D4725A221BA5F1600C0E7CF /* VersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4725A121BA5F1600C0E7CF /* VersionViewController.m */; };
+		3D4725A521BA5F3F00C0E7CF /* SubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4725A421BA5F3F00C0E7CF /* SubjectViewController.m */; };
+		3D4725AB21BA63E600C0E7CF /* GradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4725AA21BA63E600C0E7CF /* GradeViewController.m */; };
+		3D4725AE21BA67C700C0E7CF /* ClassificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4725AD21BA67C700C0E7CF /* ClassificationCell.m */; };
+		3D4725B121BA78CA00C0E7CF /* CollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4725B021BA78CA00C0E7CF /* CollectionHeaderView.m */; };
+		3D4725B621BA7E5400C0E7CF /* 标签-向下箭头@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4725B221BA7E5400C0E7CF /* 标签-向下箭头@3x.png */; };
+		3D4725B721BA7E5400C0E7CF /* 标签-向上箭头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4725B321BA7E5400C0E7CF /* 标签-向上箭头@2x.png */; };
+		3D4725B821BA7E5400C0E7CF /* 标签-向上箭头@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4725B421BA7E5400C0E7CF /* 标签-向上箭头@3x.png */; };
+		3D4725B921BA7E5400C0E7CF /* 标签-向下箭头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4725B521BA7E5400C0E7CF /* 标签-向下箭头@2x.png */; };
 		3D7C713221A659DD008F9D52 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C713121A659DD008F9D52 /* SearchViewController.m */; };
 		3D7D18D921AB9BD0006B9C8F /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18D821AB9BD0006B9C8F /* SearchResultViewController.m */; };
 		3D7D18E021AC1997006B9C8F /* AnswerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18DF21AC1997006B9C8F /* AnswerDetailViewController.m */; };
@@ -121,6 +134,32 @@
 		3D47258521BA228C00C0E7CF /* 分享给同学@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享给同学@3x.png"; sourceTree = "<group>"; };
 		3D47258821BA2A7F00C0E7CF /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		3D47258921BA2A7F00C0E7CF /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		3D47258C21BA591C00C0E7CF /* YZPullDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZPullDownMenu.m; sourceTree = "<group>"; };
+		3D47258D21BA591C00C0E7CF /* YZCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZCover.h; sourceTree = "<group>"; };
+		3D47258E21BA591C00C0E7CF /* YZCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZCover.m; sourceTree = "<group>"; };
+		3D47258F21BA591C00C0E7CF /* YZPullDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZPullDownMenu.h; sourceTree = "<group>"; };
+		3D47259321BA5BA600C0E7CF /* YZMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZMenuButton.h; sourceTree = "<group>"; };
+		3D47259421BA5BA700C0E7CF /* YZMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZMenuButton.m; sourceTree = "<group>"; };
+		3D47259621BA5C1C00C0E7CF /* 上拉icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上拉icon@3x.png"; sourceTree = "<group>"; };
+		3D47259721BA5C1D00C0E7CF /* 下拉icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下拉icon@3x.png"; sourceTree = "<group>"; };
+		3D47259821BA5C1D00C0E7CF /* 上拉icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上拉icon@2x.png"; sourceTree = "<group>"; };
+		3D47259921BA5C1D00C0E7CF /* 下拉icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下拉icon@2x.png"; sourceTree = "<group>"; };
+		3D47259A21BA5C5300C0E7CF /* UIView+YZCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YZCategory.h"; sourceTree = "<group>"; };
+		3D47259B21BA5C5300C0E7CF /* UIView+YZCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YZCategory.m"; sourceTree = "<group>"; };
+		3D4725A021BA5F1600C0E7CF /* VersionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionViewController.h; sourceTree = "<group>"; };
+		3D4725A121BA5F1600C0E7CF /* VersionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionViewController.m; sourceTree = "<group>"; };
+		3D4725A321BA5F3F00C0E7CF /* SubjectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubjectViewController.h; sourceTree = "<group>"; };
+		3D4725A421BA5F3F00C0E7CF /* SubjectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubjectViewController.m; sourceTree = "<group>"; };
+		3D4725A921BA63E600C0E7CF /* GradeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GradeViewController.h; sourceTree = "<group>"; };
+		3D4725AA21BA63E600C0E7CF /* GradeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradeViewController.m; sourceTree = "<group>"; };
+		3D4725AC21BA67C700C0E7CF /* ClassificationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassificationCell.h; sourceTree = "<group>"; };
+		3D4725AD21BA67C700C0E7CF /* ClassificationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassificationCell.m; sourceTree = "<group>"; };
+		3D4725AF21BA78CA00C0E7CF /* CollectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionHeaderView.h; sourceTree = "<group>"; };
+		3D4725B021BA78CA00C0E7CF /* CollectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionHeaderView.m; sourceTree = "<group>"; };
+		3D4725B221BA7E5400C0E7CF /* 标签-向下箭头@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签-向下箭头@3x.png"; sourceTree = "<group>"; };
+		3D4725B321BA7E5400C0E7CF /* 标签-向上箭头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签-向上箭头@2x.png"; sourceTree = "<group>"; };
+		3D4725B421BA7E5400C0E7CF /* 标签-向上箭头@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签-向上箭头@3x.png"; sourceTree = "<group>"; };
+		3D4725B521BA7E5400C0E7CF /* 标签-向下箭头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签-向下箭头@2x.png"; sourceTree = "<group>"; };
 		3D7C713021A659DD008F9D52 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		3D7C713121A659DD008F9D52 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		3D7D18D721AB9BD0006B9C8F /* SearchResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
@@ -264,6 +303,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D47258B21BA58F800C0E7CF /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				3D47259221BA59B000C0E7CF /* PullDownMenu */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		3D47259221BA59B000C0E7CF /* PullDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				3D47259A21BA5C5300C0E7CF /* UIView+YZCategory.h */,
+				3D47259B21BA5C5300C0E7CF /* UIView+YZCategory.m */,
+				3D47259321BA5BA600C0E7CF /* YZMenuButton.h */,
+				3D47259421BA5BA700C0E7CF /* YZMenuButton.m */,
+				3D47258D21BA591C00C0E7CF /* YZCover.h */,
+				3D47258E21BA591C00C0E7CF /* YZCover.m */,
+				3D47258F21BA591C00C0E7CF /* YZPullDownMenu.h */,
+				3D47258C21BA591C00C0E7CF /* YZPullDownMenu.m */,
+			);
+			path = PullDownMenu;
+			sourceTree = "<group>";
+		};
 		3D7C712F21A659BD008F9D52 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +333,14 @@
 				3D7C713121A659DD008F9D52 /* SearchViewController.m */,
 				3D7D18D721AB9BD0006B9C8F /* SearchResultViewController.h */,
 				3D7D18D821AB9BD0006B9C8F /* SearchResultViewController.m */,
+				3D4725A921BA63E600C0E7CF /* GradeViewController.h */,
+				3D4725AA21BA63E600C0E7CF /* GradeViewController.m */,
+				3D4725A021BA5F1600C0E7CF /* VersionViewController.h */,
+				3D4725A121BA5F1600C0E7CF /* VersionViewController.m */,
+				3D4725A321BA5F3F00C0E7CF /* SubjectViewController.h */,
+				3D4725A421BA5F3F00C0E7CF /* SubjectViewController.m */,
+				3D4725AF21BA78CA00C0E7CF /* CollectionHeaderView.h */,
+				3D4725B021BA78CA00C0E7CF /* CollectionHeaderView.m */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -298,6 +368,7 @@
 			children = (
 				3D7D18F121AE83A6006B9C8F /* login */,
 				3D9EA91021994A16006AF423 /* Resource */,
+				3D47258B21BA58F800C0E7CF /* Lib */,
 				3D9EAF1021A3CBBF006AF423 /* Util */,
 				3D9EA90E21992B17006AF423 /* Cell */,
 				3D9EA90A219916D3006AF423 /* Model */,
@@ -358,6 +429,8 @@
 				3D7D18F721B0CCCF006B9C8F /* MyListViewCell.m */,
 				3D47255F21B6482200C0E7CF /* SearchHistoryCell.h */,
 				3D47256021B6482200C0E7CF /* SearchHistoryCell.m */,
+				3D4725AC21BA67C700C0E7CF /* ClassificationCell.h */,
+				3D4725AD21BA67C700C0E7CF /* ClassificationCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -420,6 +493,14 @@
 		3D9EA932219A9D88006AF423 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				3D4725B321BA7E5400C0E7CF /* 标签-向上箭头@2x.png */,
+				3D4725B421BA7E5400C0E7CF /* 标签-向上箭头@3x.png */,
+				3D4725B521BA7E5400C0E7CF /* 标签-向下箭头@2x.png */,
+				3D4725B221BA7E5400C0E7CF /* 标签-向下箭头@3x.png */,
+				3D47259821BA5C1D00C0E7CF /* 上拉icon@2x.png */,
+				3D47259621BA5C1C00C0E7CF /* 上拉icon@3x.png */,
+				3D47259921BA5C1D00C0E7CF /* 下拉icon@2x.png */,
+				3D47259721BA5C1D00C0E7CF /* 下拉icon@3x.png */,
 				3D47258421BA228C00C0E7CF /* 分享给同学@2x.png */,
 				3D47258521BA228C00C0E7CF /* 分享给同学@3x.png */,
 				3D47256621B79CD500C0E7CF /* 管理@2x.png */,
@@ -636,6 +717,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D4725B621BA7E5400C0E7CF /* 标签-向下箭头@3x.png in Resources */,
 				3D9EA957219C26AF006AF423 /* 返回@2x.png in Resources */,
 				3D9EA954219C2649006AF423 /* logo@3x.png in Resources */,
 				3D9EA953219C2649006AF423 /* logo@2x.png in Resources */,
@@ -646,7 +728,9 @@
 				3D9EA96A219D7405006AF423 /* qq@3x.png in Resources */,
 				3D9EA92B219A9B9C006AF423 /* 检查更新@3x.png in Resources */,
 				3D9EA93B219A9DBF006AF423 /* 我的-激活@2x.png in Resources */,
+				3D4725B721BA7E5400C0E7CF /* 标签-向上箭头@2x.png in Resources */,
 				3D9EA958219C26AF006AF423 /* 返回@3x.png in Resources */,
+				3D4725B821BA7E5400C0E7CF /* 标签-向上箭头@3x.png in Resources */,
 				3D9EAEFD21A2D895006AF423 /* 首页头图@2x.png in Resources */,
 				3D9EA928219A9B9C006AF423 /* 分享应用@3x.png in Resources */,
 				3D9EA942219A9DBF006AF423 /* 学习-激活@2x.png in Resources */,
@@ -659,6 +743,7 @@
 				3D9EA8FA2195A788006AF423 /* LaunchScreen.storyboard in Resources */,
 				3D47256821B79CD500C0E7CF /* 管理@2x.png in Resources */,
 				3D9EA926219A9B9C006AF423 /* 用户反馈@3x.png in Resources */,
+				3D4725B921BA7E5400C0E7CF /* 标签-向下箭头@2x.png in Resources */,
 				3D9EAF0521A2E18E006AF423 /* 扫一扫@3x.png in Resources */,
 				3D9EA966219D7405006AF423 /* 微信@3x.png in Resources */,
 				3D7D18F221AE83A6006B9C8F /* login in Resources */,
@@ -732,8 +817,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D7D18F821B0CCCF006B9C8F /* MyListViewCell.m in Sources */,
+				3D4725B121BA78CA00C0E7CF /* CollectionHeaderView.m in Sources */,
+				3D4725A221BA5F1600C0E7CF /* VersionViewController.m in Sources */,
 				9F740E6721B8F6C700EE9657 /* UpAnswerViewController.m in Sources */,
 				9F4D104621B7E83C00F4610A /* FillBookInformationView.m in Sources */,
+				3D47259C21BA5C5300C0E7CF /* UIView+YZCategory.m in Sources */,
 				3D7D18ED21AE42E0006B9C8F /* TTUserModel.m in Sources */,
 				3D47256121B6482200C0E7CF /* SearchHistoryCell.m in Sources */,
 				3D9EA90D219916F6006AF423 /* Book.m in Sources */,
@@ -743,15 +831,18 @@
 				3D9EAF0F21A39BF0006AF423 /* RecommendStaticCell.m in Sources */,
 				9F4D104C21B7F9A100F4610A /* NIDropDown.m in Sources */,
 				3D9EA90921990802006AF423 /* MyViewController.m in Sources */,
+				3D47259021BA591C00C0E7CF /* YZPullDownMenu.m in Sources */,
 				3D1C2BDE21A5430400725BD4 /* NSString+MD5.m in Sources */,
 				3D7C713221A659DD008F9D52 /* SearchViewController.m in Sources */,
 				9F4D104321B7E5FC00F4610A /* FillBookInformationViewController.m in Sources */,
 				3D9EA91321994E35006AF423 /* MyViewStaticCell.m in Sources */,
+				3D4725AE21BA67C700C0E7CF /* ClassificationCell.m in Sources */,
 				3D9EAF0921A39968006AF423 /* RecommendTableView.m in Sources */,
 				9F4D103421B7C67A00F4610A /* ForgetPwdViewController.m in Sources */,
 				3D7D18E321AD24C7006B9C8F /* AnswerCell.m in Sources */,
 				9F4D102821B7C65E00F4610A /* LTTextView.m in Sources */,
 				9F4D109E21B8037900F4610A /* NSArray+SafeObjectArray.m in Sources */,
+				3D4725AB21BA63E600C0E7CF /* GradeViewController.m in Sources */,
 				3D7D18E621AD66A2006B9C8F /* QRScanViewController.m in Sources */,
 				9F4D103121B7C67A00F4610A /* ForgetPwdView.m in Sources */,
 				9FD90A1421B915D000EDF389 /* CommonAlterView.m in Sources */,
@@ -766,10 +857,13 @@
 				3D47257621BA20C300C0E7CF /* QRCodeView.m in Sources */,
 				3D7D18FB21B0CEE4006B9C8F /* MyListView.m in Sources */,
 				3D9EA95E219D6024006AF423 /* LoginTextField.m in Sources */,
+				3D4725A521BA5F3F00C0E7CF /* SubjectViewController.m in Sources */,
 				3D9EA94C219BBA19006AF423 /* UITextView+UITextView_Placeholder.m in Sources */,
 				3D9EA8EF2195A787006AF423 /* AppDelegate.m in Sources */,
 				9FD90A2021B91FB000EDF389 /* SubmitCollectionViewCell.m in Sources */,
 				9F4D103A21B7CEB700F4610A /* InputBarCodeViewController.m in Sources */,
+				3D47259121BA591C00C0E7CF /* YZCover.m in Sources */,
+				3D47259521BA5BA700C0E7CF /* YZMenuButton.m in Sources */,
 				3D9EAF1821A52E49006AF423 /* AnswerViewController.m in Sources */,
 				3D47256421B7855800C0E7CF /* MyListViewController.m in Sources */,
 				9F4D109F21B8037900F4610A /* UIButton+Category.m in Sources */,

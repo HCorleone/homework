@@ -7,12 +7,13 @@
 //
 
 #import "MyListViewController.h"
+#import "AnswerViewController.h"
 #import "RecommendTableView.h"
 #import "SearchViewController.h"
 #import "RecommendStaticCell.h"
 #import "Book.h"
 
-@interface MyListViewController ()<UITableViewDataSource>
+@interface MyListViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIView *navView;
 @property (nonatomic, strong) NSMutableArray *myListViewData;
@@ -65,15 +66,15 @@
         make.centerY.mas_equalTo(backBtn);
     }];
     //管理按钮
-    UIButton *manageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [manageBtn setImage:[UIImage imageNamed:@"管理"] forState:UIControlStateNormal];
-    [manageBtn addTarget:self action:@selector(manageCell) forControlEvents:UIControlEventTouchUpInside];
-    [navView addSubview:manageBtn];
-    [manageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(24, 24));
-        make.right.mas_equalTo(self.navView).with.offset(-20);
-        make.bottom.mas_equalTo(self.navView).with.offset(-10);
-    }];
+//    UIButton *manageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [manageBtn setImage:[UIImage imageNamed:@"管理"] forState:UIControlStateNormal];
+//    [manageBtn addTarget:self action:@selector(manageCell) forControlEvents:UIControlEventTouchUpInside];
+//    [navView addSubview:manageBtn];
+//    [manageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(24, 24));
+//        make.right.mas_equalTo(self.navView).with.offset(-20);
+//        make.bottom.mas_equalTo(self.navView).with.offset(-10);
+//    }];
 }
 
 - (void)manageCell {
@@ -121,6 +122,9 @@
         if ([responseObject[@"code"] integerValue] == 200) {
             if (responseObject[@"datas"] == [NSNull null]) {
                 NSLog(@"数组为空");
+                if (self.myListView) {
+                    self.myListView.hidden = YES;
+                }
             }
             else {
                 NSArray *jsonDataArr = responseObject[@"datas"];
@@ -133,7 +137,7 @@
                 }
                 if (self.myListView) {
                     self.myListView.hidden = NO;
-                    [self.myListView reloadDataWithList:self.myListViewData];
+//                    [self.myListView reloadDataWithList:self.myListViewData];
                 }
                 else {
                     [self setupMyList:self.myListViewData];
@@ -150,6 +154,7 @@
     self.myListView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 66, screenWidth,screenHeight - 66) style:UITableViewStylePlain withArray:array];
     [self.view addSubview:self.myListView];
     self.myListView.dataSource = self;
+    self.myListView.delegate = self;
     self.myListView.scrollEnabled = YES;
     self.myListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 76)];
     self.myListView.tableFooterView.backgroundColor = whitecolor;
@@ -214,22 +219,59 @@
     return cell;
 }
 
+#pragma 重写tableviewdelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 128;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    AnswerViewController *answerVC = [[AnswerViewController alloc]init];
+    answerVC.bookModel = self.myListViewData[indexPath.row];
+    [self.navigationController pushViewController:answerVC animated:YES];
+}
+
 #pragma 编辑方法
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
-        
-    }
-    else
-    {
-        
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Book *model = [self.myListViewData objectAtIndex:indexPath.row];
+        [self.myListViewData removeObjectAtIndex:indexPath.row];
+        [self.myListView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self userDisLike:model];
     }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return @"取消";
+    return @"取消收藏";
 }
 
-
+- (void)userDisLike:(Book *)model {
+    
+    NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
+    
+    NSString *URL = @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?";
+    NSDictionary *dict = @{
+                           @"h":@"ZYDelUserLikeHandler",
+                           @"openID":openId,
+                           @"answerIDs":model.answerID,
+                           @"pkn":@"com.enjoytime.palmhomework",
+                           @"sourceType":@"rec",
+                           @"av":@"_debug_"
+                           };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if ([responseObject[@"code"]integerValue] == 200) {
+            NSLog(@"取消收藏");
+            [self downloadDataForMyList];
+        }
+        
+    } failure:nil];
+    [dataTask resume];
+    
+}
 @end
