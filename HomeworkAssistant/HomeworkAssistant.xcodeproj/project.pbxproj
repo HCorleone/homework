@@ -98,6 +98,7 @@
 		9F740E6721B8F6C700EE9657 /* UpAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F740E6621B8F6C700EE9657 /* UpAnswerViewController.m */; };
 		9FD90A1421B915D000EDF389 /* CommonAlterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A1321B915D000EDF389 /* CommonAlterView.m */; };
 		9FD90A2021B91FB000EDF389 /* SubmitCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A1E21B91FB000EDF389 /* SubmitCollectionViewCell.m */; };
+		9FD90A3221BA49C000EDF389 /* EditorNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A3121BA49C000EDF389 /* EditorNameView.m */; };
 		EB9AA2F1DEEC58D054515ADB /* libPods-HomeworkAssistant.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F857E4F36CA277C9BE2D06 /* libPods-HomeworkAssistant.a */; };
 /* End PBXBuildFile section */
 
@@ -245,6 +246,8 @@
 		9FD90A1321B915D000EDF389 /* CommonAlterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAlterView.m; sourceTree = "<group>"; };
 		9FD90A1E21B91FB000EDF389 /* SubmitCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitCollectionViewCell.m; sourceTree = "<group>"; };
 		9FD90A1F21B91FB000EDF389 /* SubmitCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitCollectionViewCell.h; sourceTree = "<group>"; };
+		9FD90A3021BA49C000EDF389 /* EditorNameView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorNameView.h; sourceTree = "<group>"; };
+		9FD90A3121BA49C000EDF389 /* EditorNameView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditorNameView.m; sourceTree = "<group>"; };
 		C8F857E4F36CA277C9BE2D06 /* libPods-HomeworkAssistant.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HomeworkAssistant.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E44170AF14A5B0A29A093372 /* Pods-HomeworkAssistant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkAssistant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeworkAssistant/Pods-HomeworkAssistant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -520,6 +523,8 @@
 			children = (
 				3D47257521BA20C300C0E7CF /* QRCodeView.h */,
 				3D47257421BA20C300C0E7CF /* QRCodeView.m */,
+				9FD90A3021BA49C000EDF389 /* EditorNameView.h */,
+				9FD90A3121BA49C000EDF389 /* EditorNameView.m */,
 				9F4D103C21B7D05E00F4610A /* My */,
 			);
 			path = View;
@@ -756,6 +761,7 @@
 				3D7D18F021AE69E6006B9C8F /* TTUserManager.m in Sources */,
 				3D9EAF1E21A5305C006AF423 /* AnswerDetailCollectionView.m in Sources */,
 				3D9EAF1B21A53010006AF423 /* AnswerDetail.m in Sources */,
+				9FD90A3221BA49C000EDF389 /* EditorNameView.m in Sources */,
 				3D7D18E021AC1997006B9C8F /* AnswerDetailViewController.m in Sources */,
 				3D47257621BA20C300C0E7CF /* QRCodeView.m in Sources */,
 				3D7D18FB21B0CEE4006B9C8F /* MyListView.m in Sources */,
