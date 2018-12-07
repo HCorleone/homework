@@ -13,7 +13,7 @@
 #import "shareDialog.h"
 #import <UShareUI/UShareUI.h>
 #import "UIImageView+WebCache.h"
-#import "UPLoadViewController.h"
+#import "QRScanViewController.h"
 
 @interface MyViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -59,10 +59,10 @@
     [self.view addSubview:sloginView];
     sloginView.backgroundColor = [UIColor whiteColor];
     sloginView.layer.cornerRadius = 10;
-//    sloginView.layer.shadowColor = [UIColor blackColor].CGColor;
-//    sloginView.layer.shadowOffset = CGSizeMake(0, 2);
-//    sloginView.layer.shadowOpacity = 0.5;
-//    sloginView.layer.shadowRadius = 3;
+    //    sloginView.layer.shadowColor = [UIColor blackColor].CGColor;
+    //    sloginView.layer.shadowOffset = CGSizeMake(0, 2);
+    //    sloginView.layer.shadowOpacity = 0.5;
+    //    sloginView.layer.shadowRadius = 3;
     [sloginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view).offset(31.5);
         make.right.mas_equalTo(self.view).offset(-31.5);
@@ -121,7 +121,7 @@
 
 //上传答案
 - (void)toUpLoad {
-    [self.navigationController pushViewController:[[UPLoadViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[QRScanViewController alloc] init] animated:YES];
 }
 
 - (void)logout {

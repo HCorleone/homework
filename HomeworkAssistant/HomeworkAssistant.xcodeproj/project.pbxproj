@@ -86,7 +86,6 @@
 		9F4D103221B7C67A00F4610A /* SingUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D102E21B7C67900F4610A /* SingUpViewController.m */; };
 		9F4D103321B7C67A00F4610A /* SingUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D102F21B7C67900F4610A /* SingUpView.m */; };
 		9F4D103421B7C67A00F4610A /* ForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D103021B7C67A00F4610A /* ForgetPwdViewController.m */; };
-		9F4D103721B7CCC100F4610A /* UPLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D103621B7CCC100F4610A /* UPLoadViewController.m */; };
 		9F4D103A21B7CEB700F4610A /* InputBarCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D103921B7CEB700F4610A /* InputBarCodeViewController.m */; };
 		9F4D104321B7E5FC00F4610A /* FillBookInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D104221B7E5FC00F4610A /* FillBookInformationViewController.m */; };
 		9F4D104621B7E83C00F4610A /* FillBookInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D104521B7E83C00F4610A /* FillBookInformationView.m */; };
@@ -220,8 +219,6 @@
 		9F4D102E21B7C67900F4610A /* SingUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingUpViewController.m; sourceTree = "<group>"; };
 		9F4D102F21B7C67900F4610A /* SingUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingUpView.m; sourceTree = "<group>"; };
 		9F4D103021B7C67A00F4610A /* ForgetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdViewController.m; sourceTree = "<group>"; };
-		9F4D103521B7CCC100F4610A /* UPLoadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UPLoadViewController.h; sourceTree = "<group>"; };
-		9F4D103621B7CCC100F4610A /* UPLoadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UPLoadViewController.m; sourceTree = "<group>"; };
 		9F4D103821B7CEB700F4610A /* InputBarCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputBarCodeViewController.h; sourceTree = "<group>"; };
 		9F4D103921B7CEB700F4610A /* InputBarCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputBarCodeViewController.m; sourceTree = "<group>"; };
 		9F4D104121B7E5FC00F4610A /* FillBookInformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FillBookInformationViewController.h; sourceTree = "<group>"; };
@@ -380,8 +377,6 @@
 				3D9EA90821990802006AF423 /* MyViewController.m */,
 				3D9EA91821998BC4006AF423 /* JYViewController.h */,
 				3D9EA91921998BC4006AF423 /* JYViewController.m */,
-				9F4D103521B7CCC100F4610A /* UPLoadViewController.h */,
-				9F4D103621B7CCC100F4610A /* UPLoadViewController.m */,
 				9F4D103821B7CEB700F4610A /* InputBarCodeViewController.h */,
 				9F4D103921B7CEB700F4610A /* InputBarCodeViewController.m */,
 				9F4D104121B7E5FC00F4610A /* FillBookInformationViewController.h */,
@@ -739,7 +734,6 @@
 				3D9EA90D219916F6006AF423 /* Book.m in Sources */,
 				3D9EA8FD2195A788006AF423 /* main.m in Sources */,
 				9F4D103221B7C67A00F4610A /* SingUpViewController.m in Sources */,
-				9F4D103721B7CCC100F4610A /* UPLoadViewController.m in Sources */,
 				3D9EAF0F21A39BF0006AF423 /* RecommendStaticCell.m in Sources */,
 				9F4D104C21B7F9A100F4610A /* NIDropDown.m in Sources */,
 				3D9EA90921990802006AF423 /* MyViewController.m in Sources */,
@@ -914,7 +908,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7T7PP6R6DZ;
+				DEVELOPMENT_TEAM = 5855LWABM9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/QQLogin",
@@ -946,7 +940,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7T7PP6R6DZ;
+				DEVELOPMENT_TEAM = 5855LWABM9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/QQLogin",
