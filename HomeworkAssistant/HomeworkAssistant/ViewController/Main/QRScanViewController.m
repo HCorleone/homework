@@ -11,6 +11,8 @@
 #import "QRScanViewController.h"
 #import "SGQRCode.h"
 #import "MyViewController.h"
+#import "InputBarCodeViewController.h"
+#import "FillBookInformationViewController.h"
 
 @interface QRScanViewController ()<SGQRCodeScanManagerDelegate>
 
@@ -64,14 +66,17 @@
             make.centerY.mas_equalTo(backBtn);
             make.right.mas_equalTo(self.view).offset(-20);
         }];
-        [backBtn addTarget:self action:@selector(toManual) forControlEvents:UIControlEventTouchUpInside];
+        [manualBtn addTarget:self action:@selector(toManual) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
+//点击按钮
 - (void)toManual {
     //手动输入条形码
     [self.scanView removeTimer];
     [self.scanManager stopRunning];
+    
+    [self.navigationController pushViewController:[[InputBarCodeViewController alloc] init] animated:YES];
 }
 
 - (void)backToVc {
@@ -99,6 +104,12 @@
     }
     else if ([self.lastVC isKindOfClass:[MyViewController class]]){
         
+        [self.scanView removeTimer];
+        [self.scanManager stopRunning];
+        //扫码结果
+        FillBookInformationViewController *fill = [[FillBookInformationViewController alloc] init];
+        userDefaults(result, @"InputBarCode");
+        [self.navigationController pushViewController:fill animated:YES];
     }
 }
 

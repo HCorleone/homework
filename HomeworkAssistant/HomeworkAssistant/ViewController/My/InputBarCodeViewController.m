@@ -43,7 +43,7 @@
     _inputField.textColor = UIColorFromRGB(0x8F9394);
     _inputField.text = @"请输入书籍条形码";
     _inputField.font = [UIFont systemFontOfSize:14.0];
-//    _inputField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    //    _inputField.clearButtonMode = UITextFieldViewModeWhileEditing;
     _inputField.delegate = self;
     [self.view addSubview:_inputField];
     [_inputField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,8 +76,8 @@
 -(void)pressBtn{
     
     FillBookInformationViewController *fill = [[FillBookInformationViewController alloc] init];
-//    fill.fillView = [[FillBookInformationView alloc] init];
-//    fill.fillView.codeLabel.text = self.inputField.text;
+    //    fill.fillView = [[FillBookInformationView alloc] init];
+    //    fill.fillView.codeLabel.text = self.inputField.text;
     userDefaults(self.inputField.text, @"InputBarCode");
     [self.navigationController pushViewController:fill animated:YES];
 }

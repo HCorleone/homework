@@ -51,9 +51,10 @@
         self.list = [NSArray arrayWithArray:arr];
         self.imageList = [NSArray arrayWithArray:imgArr];
         if ([direction isEqualToString:@"up"]) {
-            self.frame = CGRectMake(btn.origin.x, btn.origin.y, btn.size.width, 0);
+        self.frame = CGRectMake(btn.origin.x, btn.origin.y, btn.size.width, 0);
             self.layer.shadowOffset = CGSizeMake(-5, -5);
         }else if ([direction isEqualToString:@"down"]) {
+            
             self.frame = CGRectMake(btn.origin.x, btn.origin.y+btn.size.height, btn.size.width, 0);
             self.layer.shadowOffset = CGSizeMake(-5, 5);
         }

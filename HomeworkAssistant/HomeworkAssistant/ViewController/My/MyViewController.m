@@ -13,13 +13,19 @@
 #import "shareDialog.h"
 #import <UShareUI/UShareUI.h>
 #import "UIImageView+WebCache.h"
-#import "UPLoadViewController.h"
+#import "QRScanViewController.h"
+#import "EditorNameView.h"
+#import "NIDropDown.h"
 
-@interface MyViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface MyViewController () <UITableViewDelegate, UITableViewDataSource, NIDropDownDelegate>
 
 @property (nonatomic, strong) UIView *loginView;
 @property (nonatomic, strong) UITableView *menuView;
 @property (nonatomic, strong) UIView *sloginView;
+/** 视图 */
+@property (nonatomic, strong) EditorNameView *editor;
+/** 下拉菜单 */
+@property (nonatomic, strong) NIDropDown *dropDown;
 
 @end
 
@@ -38,12 +44,14 @@
     [self setupLoginView];
     [self setupMenu];
     
+    
     if ([TTUserManager sharedInstance].isLogin) {
         [self setupSLoginView];
     }
     else {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeView:) name:@"loginSuccess" object:nil];
     }
+    
     
 }
 
@@ -59,10 +67,10 @@
     [self.view addSubview:sloginView];
     sloginView.backgroundColor = [UIColor whiteColor];
     sloginView.layer.cornerRadius = 10;
-//    sloginView.layer.shadowColor = [UIColor blackColor].CGColor;
-//    sloginView.layer.shadowOffset = CGSizeMake(0, 2);
-//    sloginView.layer.shadowOpacity = 0.5;
-//    sloginView.layer.shadowRadius = 3;
+    //    sloginView.layer.shadowColor = [UIColor blackColor].CGColor;
+    //    sloginView.layer.shadowOffset = CGSizeMake(0, 2);
+    //    sloginView.layer.shadowOpacity = 0.5;
+    //    sloginView.layer.shadowRadius = 3;
     [sloginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view).offset(31.5);
         make.right.mas_equalTo(self.view).offset(-31.5);
@@ -82,6 +90,7 @@
     headImg.layer.masksToBounds = YES;
     headImg.layer.cornerRadius = 50;
     
+    //用户名
     UILabel *userName = [[UILabel alloc]init];
     [sloginView addSubview:userName];
     userName.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:20];
@@ -92,11 +101,23 @@
         
     }];
     
+    //编辑个人信息
+    UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    editorBtn.backgroundColor = [UIColor grayColor];
+    [editorBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [editorBtn addTarget:self action:@selector(clickEditor) forControlEvents:UIControlEventTouchUpInside];
+    [sloginView addSubview:editorBtn];
+    [editorBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(sloginView).offset(-20);
+        make.centerY.mas_equalTo(userName);
+    }];
+    
+    //注销
     UIButton *logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [sloginView addSubview:logoutBtn];
     [logoutBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(sloginView).offset(-20);
-        make.centerY.mas_equalTo(userName);
+        make.top.mas_equalTo(userName.mas_bottom).offset(50);
     }];
     logoutBtn.backgroundColor = [UIColor clearColor];
     [logoutBtn setTitleColor:[UIColor colorWithHexString:@"#8F9394"] forState:UIControlStateNormal];
@@ -121,7 +142,7 @@
 
 //上传答案
 - (void)toUpLoad {
-    [self.navigationController pushViewController:[[UPLoadViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[QRScanViewController alloc] init] animated:YES];
 }
 
 - (void)logout {
@@ -133,6 +154,70 @@
     self.sloginView.hidden = YES;
     [self.sloginView removeFromSuperview];
     
+}
+
+//编辑界面
+-(void)getEditorView {
+    
+    _editor = [[EditorNameView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    _editor.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+    __weak typeof(self) weakSelf = self;
+    _editor.clickBlock = ^(UIButton * _Nonnull btn) {
+        switch (btn.tag) {
+            case 1001:
+            {
+                NSLog(@"年级");
+               NSArray *arr = [NSArray arrayWithObjects:@"学前", @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级", @"七年级", @"八年级", @"九年级", @"高一", @"高二", @"高三", nil];
+                if(weakSelf.dropDown == nil) {
+                    CGFloat f = 300;
+                    weakSelf.dropDown = [[NIDropDown alloc]showDropDown:weakSelf.editor.downBtn theHeight:&f theArr:arr theImgArr:nil theDirection:@"down" withViewController:weakSelf];
+                    [weakSelf.dropDown setDropDownSelectionColor:[UIColor whiteColor]];
+                    weakSelf.dropDown.delegate = weakSelf;
+                }
+                else {
+                    [weakSelf.dropDown hideDropDown:weakSelf.editor.downBtn];
+                }
+            }
+                break;
+                
+            case 1002:
+            {
+                NSLog(@"地区");
+            }
+                break;
+                
+            case 1003:
+            {
+                NSLog(@"确认");
+            }
+                break;
+            case 1004:
+                
+            {
+                NSLog(@"取消");
+                weakSelf.editor.hidden = YES;
+                [weakSelf.editor removeFromSuperview];
+                [[weakSelf rdv_tabBarController] setTabBarHidden:NO animated:NO];
+            }
+                break;
+                
+        }
+    };
+    [self.view addSubview:_editor];
+    
+}
+
+-(void)clickEditor {
+    
+    NSLog(@"编辑个人信息");
+    [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
+    [self getEditorView];
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    //隐藏
+    [self.dropDown hideDropDown:self.editor.downBtn];
 }
 
 - (void)setupLoginView {
@@ -325,6 +410,20 @@
     }
     return [templateGX stringByReplacingOccurrencesOfString:@"APP_ID" withString:appId];
     
+}
+
+#pragma mark - NIDropDownDelegate 代理
+- (void) niDropDownDelegateMethod:(UIView *)sender withTitle:(NSString *)title {
+    
+    
+    NSLog(@"%@", self.editor.downBtn.titleLabel.text);
+    [self.editor.downBtn setTitle:title forState:UIControlStateNormal];
+    
+    
+}
+
+- (void)niDropDownHidden{
+    _dropDown = nil;
 }
 
 
