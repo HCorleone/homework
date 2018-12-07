@@ -1,0 +1,331 @@
+//
+//  MyViewController.m
+//  HomeworkAssistant
+//
+//  Created by 无敌帅枫 on 2018/11/12.
+//  Copyright © 2018 无敌帅枫. All rights reserved.
+//
+
+#import "MyViewController.h"
+#import "MyViewStaticCell.h"
+#import "JYViewController.h"
+#import "LoginViewController.h"
+#import "shareDialog.h"
+#import <UShareUI/UShareUI.h>
+#import "UIImageView+WebCache.h"
+#import "UPLoadViewController.h"
+
+@interface MyViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) UIView *loginView;
+@property (nonatomic, strong) UITableView *menuView;
+@property (nonatomic, strong) UIView *sloginView;
+
+@end
+
+@implementation MyViewController
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
+    
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.navigationController.navigationBar.hidden = YES;
+    
+    [self setupLoginView];
+    [self setupMenu];
+    
+    if ([TTUserManager sharedInstance].isLogin) {
+        [self setupSLoginView];
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeView:) name:@"loginSuccess" object:nil];
+    }
+    
+}
+
+- (void)changeView:(id)sender {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"loginSuccess" object:nil];
+    NSLog(@"接到用户登陆成功通知，更改MyView的界面");
+    [self setupSLoginView];
+}
+
+
+- (void)setupSLoginView {
+    UIView *sloginView = [[UIView alloc]init];
+    [self.view addSubview:sloginView];
+    sloginView.backgroundColor = [UIColor whiteColor];
+    sloginView.layer.cornerRadius = 10;
+//    sloginView.layer.shadowColor = [UIColor blackColor].CGColor;
+//    sloginView.layer.shadowOffset = CGSizeMake(0, 2);
+//    sloginView.layer.shadowOpacity = 0.5;
+//    sloginView.layer.shadowRadius = 3;
+    [sloginView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view).offset(31.5);
+        make.right.mas_equalTo(self.view).offset(-31.5);
+        make.top.mas_equalTo(self.view).offset(75);
+        make.height.mas_equalTo(0.3 * screenHeight);
+    }];
+    self.sloginView = sloginView;
+    
+    UIImageView *headImg = [[UIImageView alloc]init];
+    [headImg sd_setImageWithURL:[NSURL URLWithString:[TTUserManager sharedInstance].currentUser.headImgUrl]];
+    [sloginView addSubview:headImg];
+    [headImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(sloginView).offset(20);
+        make.top.mas_equalTo(sloginView).offset(20);
+        make.size.mas_equalTo(CGSizeMake(100, 100));
+    }];
+    headImg.layer.masksToBounds = YES;
+    headImg.layer.cornerRadius = 50;
+    
+    UILabel *userName = [[UILabel alloc]init];
+    [sloginView addSubview:userName];
+    userName.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:20];
+    userName.text = [TTUserManager sharedInstance].currentUser.name;
+    [userName mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(headImg.mas_right).with.offset(15);
+        make.top.mas_equalTo(sloginView).offset(35);
+        
+    }];
+    
+    UIButton *logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [sloginView addSubview:logoutBtn];
+    [logoutBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(sloginView).offset(-20);
+        make.centerY.mas_equalTo(userName);
+    }];
+    logoutBtn.backgroundColor = [UIColor clearColor];
+    [logoutBtn setTitleColor:[UIColor colorWithHexString:@"#8F9394"] forState:UIControlStateNormal];
+    [logoutBtn setTitle:@"注销" forState:UIControlStateNormal];
+    [logoutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *uploadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [sloginView addSubview:uploadBtn];
+    [uploadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(sloginView).offset(-20);
+        make.left.mas_equalTo(sloginView).offset(20);
+        make.bottom.mas_equalTo(sloginView).offset(-20);
+        make.height.mas_equalTo(40);
+    }];
+    uploadBtn.layer.masksToBounds = YES;
+    uploadBtn.layer.cornerRadius = 20;
+    uploadBtn.backgroundColor = maincolor;
+    [uploadBtn setTitleColor:whitecolor forState:UIControlStateNormal];
+    [uploadBtn setTitle:@"上传答案" forState:UIControlStateNormal];
+    [uploadBtn addTarget:self action:@selector(toUpLoad) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//上传答案
+- (void)toUpLoad {
+    [self.navigationController pushViewController:[[UPLoadViewController alloc] init] animated:YES];
+}
+
+- (void)logout {
+    NSLog(@"用户登出，发出通知，并更改myview界面");
+    [TTUserManager sharedInstance].isLogin = NO;
+    [[TTUserManager sharedInstance]clearCurrentUserInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"userLogout" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeView:) name:@"loginSuccess" object:nil];
+    self.sloginView.hidden = YES;
+    [self.sloginView removeFromSuperview];
+    
+}
+
+- (void)setupLoginView {
+    //登陆框
+    self.loginView = [[UIView alloc]init];
+    [self.view addSubview:self.loginView];
+    self.loginView.backgroundColor = [UIColor whiteColor];
+    self.loginView.layer.cornerRadius = 10;
+    self.loginView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.loginView.layer.shadowOffset = CGSizeMake(0, 2);
+    self.loginView.layer.shadowOpacity = 0.5;
+    self.loginView.layer.shadowRadius = 3;
+    [self.loginView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view).offset(31.5);
+        make.right.mas_equalTo(self.view).offset(-31.5);
+        make.top.mas_equalTo(self.view).offset(75);
+        make.height.mas_equalTo(0.3 * screenHeight);
+    }];
+    //logo
+    UIImageView *headImg = [[UIImageView alloc]init];
+    headImg.image = [UIImage imageNamed:@"logo"];
+    [self.loginView addSubview:headImg];
+    [headImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.loginView);
+        make.top.mas_equalTo(self.loginView.mas_top).with.offset(28.5);
+        make.size.mas_equalTo(CGSizeMake(70, 70));
+    }];
+    //登陆注册按钮
+    UIButton *logoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    logoBtn.backgroundColor = maincolor;
+    logoBtn.layer.cornerRadius = 15;
+    [logoBtn setTitle:@"登陆/注册" forState:UIControlStateNormal];
+    logoBtn.titleLabel.textColor = whitecolor;
+    logoBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
+    [self.loginView addSubview:logoBtn];
+    [logoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.loginView);
+        make.top.mas_equalTo(headImg.mas_bottom).with.offset(20);
+        make.left.mas_equalTo(self.loginView).offset(80);
+        make.right.mas_equalTo(self.loginView).offset(-80);
+        make.height.mas_equalTo(36);
+    }];
+    [logoBtn addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+- (void)setupMenu {
+    //菜单选项
+    self.menuView = [[UITableView alloc]init];
+    [self.view addSubview:self.menuView];
+    self.menuView.delegate = self;
+    self.menuView.dataSource = self;
+    self.menuView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.menuView.backgroundColor = [UIColor whiteColor];
+    self.menuView.scrollEnabled = NO;
+    [self.menuView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view).offset(41.5);
+        make.right.mas_equalTo(self.view).offset(-41.5);
+        make.top.mas_equalTo(self.loginView.mas_bottom).with.offset(36);
+        make.bottom.mas_equalTo(self.view).offset(-55);
+    }];
+}
+
+
+- (void)login:(id)sender {
+    LoginViewController *loginVC = [[LoginViewController alloc]init];
+    [self.navigationController pushViewController:loginVC animated:YES];
+}
+
+
+#pragma mark - 静态tableView DataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 4;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MyViewStaticCell *cell = [MyViewStaticCell cellWithTableView:tableView];
+    switch (indexPath.row) {
+        case 0:{
+            cell.icon.image = [UIImage imageNamed:@"用户反馈"];
+            cell.title.text = @"提供建议";
+            break;
+        }
+        case 1:{
+            cell.icon.image = [UIImage imageNamed:@"用户好评"];
+            cell.title.text = @"给个好评";
+            break;
+        }
+        case 2:{
+            cell.icon.image = [UIImage imageNamed:@"检查更新"];
+            cell.title.text = @"检查更新";
+            break;
+        }
+        case 3:{
+            cell.icon.image = [UIImage imageNamed:@"分享应用"];
+            cell.title.text = @"分享应用";
+            break;
+        }
+        default:
+            break;
+    }
+    return cell;
+}
+
+
+
+
+
+#pragma mark - 静态tableView Delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case 0:{    //提供建议
+            JYViewController *jyVC = [[JYViewController alloc]init];
+            [self.navigationController pushViewController:jyVC animated:YES];
+            break;
+        }
+        case 1:{    //给个好评
+            NSString *urlStr = [self getReviewUrlByAppId:1];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr] options:@{} completionHandler:nil];
+            break;
+        }
+        case 2:{    //检查更新
+            NSString *urlStr = [self getReviewUrlByAppId:2];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr] options:@{} completionHandler:nil];
+            break;
+        }
+        case 3:{    //分享应用
+            [self showDialog];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void)showDialog {
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        //创建分享消息对象
+        UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+        
+        //创建网页内容对象
+        UIImage *logoImg = [UIImage imageNamed:@"logo"];
+        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"作业答案助手" descr:@"作业答案助手 k12学校作业辅导答案大全 海量作业答案任你搜索 一键同步书单" thumImage:logoImg];
+        //设置网页地址
+        shareObject.webpageUrl = @"http://abc.tatatimes.com/palmhomework.html";
+        
+        //分享消息对象设置分享内容对象
+        messageObject.shareObject = shareObject;
+        
+        //调用分享接口
+        [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+            if (error) {
+                UMSocialLogInfo(@"************Share fail with error %@*********",error);
+            }else{
+                if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                    UMSocialShareResponse *resp = data;
+                    //分享结果消息
+                    UMSocialLogInfo(@"response message is %@",resp.message);
+                    //第三方原始返回的数据
+                    UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                    
+                }else{
+                    UMSocialLogInfo(@"response data is %@",data);
+                }
+            }
+        }];
+    }];
+}
+
+// app页面 http://itunes.apple.com/cn/app/id1281806378?mt=8
+// app评论页面[[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1232138855&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"]];
+
+//跳转到appstore应用页面
+- (NSString *)getReviewUrlByAppId:(NSInteger)type{
+    // type = 1 为评论界面；type = 2 为更新界面
+    NSString *appId = @"1225090488";
+    NSString *templatePL = @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=APP_ID&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8";
+    NSString *templateGX = @"http://itunes.apple.com/cn/app/idAPP_ID?mt=8";
+    
+    if (type == 1) {
+        return [templatePL stringByReplacingOccurrencesOfString:@"APP_ID" withString:appId];
+    }
+    return [templateGX stringByReplacingOccurrencesOfString:@"APP_ID" withString:appId];
+    
+}
+
+
+@end

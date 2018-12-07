@@ -1,0 +1,24 @@
+//
+//  HomeworkAssistant.pch
+//  HomeworkAssistant
+//
+//  Created by 无敌帅枫 on 2018/11/12.
+//  Copyright © 2018 无敌帅枫. All rights reserved.
+//
+
+#ifndef HomeworkAssistant_pch
+#define HomeworkAssistant_pch
+
+#import "TTUserModel.h"
+#import "TTUserManager.h"
+#import "Masonry.h"
+#import "AFNetworking.h"
+#import "UIColor+ColorChange.h"
+#import "RDVTabBarController.h"
+#import "MBProgressHUD.h"
+#import "NSString+MD5.h"
+#import "CommonCategory.h"
+#import "CommonDefine.h"
+
+
+#endif /* HomeworkAssistant_pch */
