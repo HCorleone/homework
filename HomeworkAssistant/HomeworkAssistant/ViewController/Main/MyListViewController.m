@@ -77,9 +77,9 @@
 }
 
 - (void)manageCell {
-    if (self.myListView) {
-        [self.myListView setEditing:YES animated:YES];
-    }
+//    if (self.myListView) {
+//        [self.myListView setEditing:YES animated:YES];
+//    }
 }
 
 - (void)setupView {
@@ -156,7 +156,7 @@
     
     //分割线
     UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, screenWidth - 40, 0.5)];
-    [line setBackgroundColor:[UIColor colorWithHexString:@"#cccccc"]];
+    [line setBackgroundColor:[UIColor colorWithRed:224/255.0 green:224/255.0 blue:224/255.0 alpha:1.0]];
     line.layer.opacity = 0.3;
     [self.myListView.tableFooterView addSubview:line];
     
@@ -216,14 +216,20 @@
 
 #pragma 编辑方法
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        
+    }
+    else
+    {
+        
+    }
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"取消";
 }
-
 
 
 @end

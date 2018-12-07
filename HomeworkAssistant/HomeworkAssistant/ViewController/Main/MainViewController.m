@@ -255,6 +255,7 @@
     [scanLogo addGestureRecognizer:toScanGes];
     
 }
+
 - (void)setupView {
     
     UIScrollView *mainView = [[UIScrollView alloc]init];
