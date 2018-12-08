@@ -21,7 +21,7 @@
 /** 存储数组 */
 @property (nonatomic, strong) NSMutableArray *imgArray;
 /** 图片URL数组 */
-@property (nonatomic, strong) NSMutableArray *imgUrlArray;
+@property (nonatomic, strong) NSMutableArray *fileList;
 /** 添加封面还是答案 */
 @property (nonatomic, assign) BOOL isAnswer;
 
@@ -95,15 +95,13 @@
     return _imgArray;
 }
 
--(NSMutableArray *)imgUrlArray
+-(NSMutableArray *)fileList
 {
-    if(!_imgUrlArray)
+    if(!_fileList)
     {
-        _imgUrlArray = [[NSMutableArray alloc] initWithCapacity:1];
-        NSString *first = @"xxx";
-        [_imgUrlArray addObject:first];
+        _fileList = [[NSMutableArray alloc] initWithCapacity:1];
     }
-    return _imgUrlArray;
+    return _fileList;
 }
 
 #pragma mark - 添加Label和Btn
@@ -186,17 +184,53 @@
 -(void)clickTap {
     NSLog(@"添加封面");
     self.isAnswer = NO;
-    
-//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"相册", nil];
-//    //在哪个视图显示出来
-//    [actionSheet showInView:self.view];
     [self getCamera];
     
 }
 
 #pragma mark - 点击上传
 -(void)clickBtn{
+    //添加加载动画效果
+    MBProgressHUD *hud = [[MBProgressHUD alloc] init];
+    [self.view addSubview:hud];
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
+    
+    NSDictionary *dic = @{@"h":@"ZYUploadAnswerPicHandler",
+                          @"id":userValue(@"GetUpAnswerID"),
+                          @"fileList":self.fileList,
+                          @"av":@"_debug_"};
+    
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
+    //设置请求方式
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    //接收数据是json形式给出
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    __weak typeof(self) weakSelf = self;
+    [manager POST:UpLoadAnswer parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"----------------%@---------------", responseObject);
+        
+        if ([responseObject[@"code"] intValue] == 200) {
+            //取消加载动画效果
+            [hud hideAnimated:YES];
+            
+            //上传成功后回到主界面
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"上传成功" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            }];
+            [alert addAction:action];
+            [weakSelf presentViewController:alert animated:YES completion:nil];
+            
+        }
+        else {
+            [CommonAlterView showAlertView:@"上传失败"];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+        
+    }];
 }
 
 #pragma mark - UICollectionView----DelegateFlowLayout
@@ -242,11 +276,6 @@
     
     if (indexPath.row == self.imgArray.count - 1)
     {
-//        //打开相机相册
-//        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"相册", nil];
-//        //在哪个视图显示出来
-//        [actionSheet showInView:self.view];
-        
         [self getCamera];
     }
     else {
@@ -272,60 +301,27 @@
     return YES;
 }
 
-
 #pragma mark - 相机代理
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex)
-    {
-        case 0:
-        {
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-            {
-                UIImagePickerController *imgPicker = [[UIImagePickerController alloc] init];
-                imgPicker.delegate = self;
-                imgPicker.allowsEditing = YES;
-                imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            }
-            else
-            {   //警告
-                [CommonAlterView showAlertView:@"相机不能用"];
-            }
-        }
-            break;
-            
-        case 1:
-        {
-            UIImagePickerController *imgPicker = [[UIImagePickerController alloc]init];
-            imgPicker.delegate = self;
-            imgPicker.allowsEditing = YES;
-            //             imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            //跳到选择图片选择界面
-            [self presentViewController:imgPicker animated:YES completion:nil];
-        }
-            break;
-            
-    }
-}
-
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     NSLog(@"%@", info);
     
     if (_isAnswer) {
         UIImage *img = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-        NSString *strURL = [info objectForKey:@"UIImagePickerControllerImageURL"];
-        //插入数组中
+//        NSString *strURL = [info objectForKey:@"UIImagePickerControllerImageURL"];
+        //插入图片数组中
         [self.imgArray insertObject:img atIndex:_imgArray.count - 1];
-        [self.imgUrlArray addObject:strURL];
+        //插入列表中
+        [self.fileList addObject:img];
         [self.collectionView reloadData];
         //保存图片到本地内存
-        UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
+//        UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
     }
     else
     {
         //获取编辑后的图片
         _imgView.image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+        [self.fileList insertObject:_imgView.image atIndex:0];
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];

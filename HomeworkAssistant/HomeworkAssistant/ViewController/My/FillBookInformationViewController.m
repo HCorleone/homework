@@ -72,7 +72,7 @@
 //视图
 -(void)getView{
     
-    _fillView = [[FillBookInformationView alloc] initWithFrame:CGRectMake(0, 66, screenWidth, screenHeight - 66)];
+    _fillView = [[FillBookInformationView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
     __weak typeof(self) weakSelf = self;
     _fillView.clickBlock = ^(UIButton * _Nonnull btn) {
         
@@ -83,8 +83,9 @@
             {
                 arr = [NSArray arrayWithObjects:@"学前", @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级", @"七年级", @"八年级", @"九年级", @"高一", @"高二", @"高三", nil];
                 if(weakSelf.dropDown == nil) {
-                    CGFloat f = 200;
+                    CGFloat f = 400;
                     weakSelf.dropDown = [[NIDropDown alloc]showDropDown:weakSelf.fillView.chooseBtn1 theHeight:&f theArr:arr theImgArr:nil theDirection:@"down" withViewController:weakSelf];
+                    [weakSelf.dropDown setCellHeigth:37];
                     [weakSelf.dropDown setDropDownSelectionColor:[UIColor whiteColor]];
                     weakSelf.dropDown.delegate = weakSelf;
                 }
@@ -98,8 +99,9 @@
             {
                 arr = [NSArray arrayWithObjects:@"语文", @"数学", @"英语", @"物理", @"化学", @"生物", @"政治", @"历史", @"地理", @"科学", nil];
                 if(weakSelf.dropDown == nil) {
-                    CGFloat f = 200;
+                    CGFloat f = 300;
                     weakSelf.dropDown = [[NIDropDown alloc]showDropDown:weakSelf.fillView.chooseBtn2 theHeight:&f theArr:arr theImgArr:nil theDirection:@"down" withViewController:weakSelf];
+                    [weakSelf.dropDown setCellHeigth:37];
                     [weakSelf.dropDown setDropDownSelectionColor:[UIColor whiteColor]];
                     weakSelf.dropDown.delegate = weakSelf;
                 }
@@ -113,8 +115,9 @@
             {
                 arr = [NSArray arrayWithObjects:@"人教版", @"北师大版", @"苏教版", @"冀教版", @"外研版", @"沪科版", @"湘教版", @"青岛版", @"鲁教版", @"浙教版", @"教科版", @"华师大版", @"译林版", @"苏科版", @"语文版", @"西师大版", @"牛津版", @"沪粤版", @"北京课改版", @"鲁科版", @"河大版", @"长春版", @"语文S版", @"冀少版", @"商务星球版", @"济南版", @"鄂教版", @"江苏版", @"中华书局版", @"中科版", @"科粤版", @"川教版", @"陕旅版", @"语文A版", @"仁爱版", @"苏人版", @"其他", nil];
                 if(weakSelf.dropDown == nil) {
-                    CGFloat f = 200;
+                    CGFloat f = 300;
                     weakSelf.dropDown = [[NIDropDown alloc]showDropDown:weakSelf.fillView.chooseBtn3 theHeight:&f theArr:arr theImgArr:nil theDirection:@"down" withViewController:weakSelf];
+                    [weakSelf.dropDown setCellHeigth:37];
                     [weakSelf.dropDown setDropDownSelectionColor:[UIColor whiteColor]];
                     weakSelf.dropDown.delegate = weakSelf;
                 }
@@ -127,20 +130,22 @@
                 
             case 1004:
             {
-                [weakSelf.navigationController pushViewController:[[UpAnswerViewController alloc] init] animated:YES];
+//                [weakSelf.navigationController pushViewController:[[UpAnswerViewController alloc] init] animated:YES];
                 
-//                if ([weakSelf.fillView.chooseBtn1.titleLabel.text isEqualToString:@"请选择年级"] || [weakSelf.fillView.chooseBtn2.titleLabel.text isEqualToString:@"请选择学科"] ||[weakSelf.fillView.chooseBtn3.titleLabel.text isEqualToString:@"请选择版本"]) {
-//                    NSLog(@"信息不全");
-//                }
-//                else{
-//
-//                    if ([weakSelf.fillView.inputField.text isEqualToString:@""] || [weakSelf.fillView.codeLabel.text isEqualToString:@""]) {
-//                        NSLog(@"信息不全");
-//                    }
-//                    else{
-//                        [weakSelf.navigationController pushViewController:[[UpAnswerViewController alloc] init] animated:YES];
-//                    }
-//                }
+                if ([weakSelf.fillView.chooseBtn1.titleLabel.text isEqualToString:@"请选择年级"] || [weakSelf.fillView.chooseBtn2.titleLabel.text isEqualToString:@"请选择学科"] ||[weakSelf.fillView.chooseBtn3.titleLabel.text isEqualToString:@"请选择版本"]) {
+                    NSLog(@"信息不全");
+                }
+                else{
+
+                    if ([weakSelf.fillView.inputField.text isEqualToString:@""] || [weakSelf.fillView.codeLabel.text isEqualToString:@""]) {
+                        NSLog(@"信息不全");
+                    }
+                    else{
+                        
+                        //请求接口
+                        [weakSelf getManager];
+                    }
+                }
                 
             }
                 
@@ -153,7 +158,43 @@
     
 }
 
-#pragma mark - NIDropDownDelegate
+#pragma mark - 请求接口
+-(void)getManager {
+    
+    NSDictionary *dic = @{@"h":@"ZYUploadAnswerBaseInfoHandler",
+                          @"openID":userValue(@"openId"),
+                          @"userName":userValue(@"name"),
+                          @"title":self.fillView.inputField.text,
+                          @"grade":self.fillView.chooseBtn1.titleLabel.text,
+                          @"subject":self.fillView.chooseBtn2.titleLabel.text,
+                          @"bookVersion":self.fillView.chooseBtn3.titleLabel.text,
+                          @"code":userValue(@"InputBarCode"),
+                          @"av":@"_debug_"};
+    
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
+    //设置请求方式
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    //接收数据是json形式给出
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        __weak typeof(self) weakSelf = self;
+    [manager GET:GetUpAnswerID parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"------------------------------%@------------------------------", responseObject);
+        //返回成功
+        if ([responseObject[@"code"] intValue] == 200) {
+            //保存id
+            NSString *str = [responseObject[@"datas"] valueForKey:@"id"];
+            userDefaults(str, @"GetUpAnswerID");
+            
+            [weakSelf.navigationController pushViewController:[[UpAnswerViewController alloc] init] animated:YES];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+        
+    }];
+}
+
+#pragma mark - NIDropDownDelegate 下拉代理
 - (void) niDropDownDelegateMethod:(UIView *)sender withTitle:(NSString *)title {
 
     if (sender == self.fillView.chooseBtn1){
@@ -175,66 +216,4 @@
     _dropDown = nil;
 }
 
-
-
-
-/*
--(void)getView{
-    
-    _fillView = [[FillBookInformationView alloc] initWithFrame:CGRectMake(0, 66, screenWidth, screenHeight - 66)];
-    __weak typeof(self) weakSelf = self;
-    _fillView.clickBlock = ^(UIButton * _Nonnull btn) {
-        
-        NSLog(@"%ld", btn.tag);
-        NSArray * arr = [[NSArray alloc] init];
-        switch (btn.tag) {
-            case 1001:
-            {
-                arr = [NSArray arrayWithObjects:@"学前", @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级", @"七年级", @"八年级", @"九年级", @"高一", @"高二", @"高三", nil];
-                
-            }
-                
-                break;
-            case 1002:
-            {
-                arr = [NSArray arrayWithObjects:@"语文", @"数学", @"英语", @"物理", @"化学", @"生物", @"政治", @"历史", @"地理", @"科学", nil];
-                
-            }
-                
-                break;
-            case 1003:
-            {
-                arr = [NSArray arrayWithObjects:@"人教版", @"北师大版", @"苏教版", @"冀教版", @"外研版", @"沪科版", @"湘教版", @"青岛版", @"鲁教版", @"浙教版", @"教科版", @"华师大版", @"译林版", @"苏科版", @"语文版", @"西师大版", @"牛津版", @"沪粤版", @"北京课改版", @"鲁科版", @"河大版", @"长春版", @"语文S版", @"冀少版", @"商务星球版", @"济南版", @"鄂教版", @"江苏版", @"中华书局版", @"中科版", @"科粤版", @"川教版", @"陕旅版", @"语文A版", @"仁爱版", @"苏人版", @"其他", nil];
-                
-            }
-                
-                break;
-        }
-        
-        if(weakSelf.dropDown == nil) {
-            CGFloat f = 200;
-            weakSelf.dropDown = [[NIDropDown alloc]showDropDown:weakSelf.fillView.chooseBtn theHeight:&f theArr:arr theImgArr:nil theDirection:@"down" withViewController:weakSelf];
-            [weakSelf.dropDown setDropDownSelectionColor:[UIColor whiteColor]];
-            weakSelf.dropDown.delegate = weakSelf;
-        }
-        else {
-            [weakSelf.dropDown hideDropDown:weakSelf.fillView.chooseBtn];
-        }
-    };
-    [self.view addSubview:_fillView];
-    
-}
-
-#pragma mark - NIDropDownDelegate
-- (void) niDropDownDelegateMethod:(UIView *)sender withTitle:(NSString *)title {
-    
-        NSLog(@"%@", self.fillView.chooseBtn.titleLabel.text);
-        [self.fillView.chooseBtn setTitle:title forState:UIControlStateNormal];
-    
-}
-
-- (void)niDropDownHidden{
-    _dropDown = nil;
-}
-*/
 @end

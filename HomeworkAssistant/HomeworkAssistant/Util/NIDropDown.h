@@ -19,9 +19,14 @@
 {
     NSString *animationDirection;
     UIImageView *imgView;
+    /** 每个cell的高 */
+    NSInteger cellHeight;
 }
 @property (nonatomic, weak) id <NIDropDownDelegate> delegate;
 @property (nonatomic, retain) NSString *animationDirection;
+/** cell的高度必须设置 */
+-(void) setCellHeigth:(NSInteger )height;
+
 -(void)hideDropDown:(UIView *)b;
 - (id)showDropDown:(UIView *)b theHeight:(CGFloat *)height theArr:(NSArray *)arr theImgArr:(NSArray *)imgArr theDirection:(NSString *)direction withViewController:(UIViewController *)viewController;
 -(void) setDropDownItemTextAlignment:(NSTextAlignment)alignment;

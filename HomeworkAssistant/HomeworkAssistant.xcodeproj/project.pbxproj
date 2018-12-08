@@ -99,6 +99,10 @@
 		9FD90A1421B915D000EDF389 /* CommonAlterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A1321B915D000EDF389 /* CommonAlterView.m */; };
 		9FD90A2021B91FB000EDF389 /* SubmitCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A1E21B91FB000EDF389 /* SubmitCollectionViewCell.m */; };
 		9FD90A3221BA49C000EDF389 /* EditorNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A3121BA49C000EDF389 /* EditorNameView.m */; };
+		9FD90A3521BBA08A00EDF389 /* NSString+GetNowTimestamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A3421BBA08A00EDF389 /* NSString+GetNowTimestamp.m */; };
+		9FD90A3821BBCE2400EDF389 /* YTQGetUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A3721BBCE2400EDF389 /* YTQGetUserManager.m */; };
+		9FD90A3E21BBD20000EDF389 /* AssignToObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A3B21BBD20000EDF389 /* AssignToObject.m */; };
+		9FD90A4221BBD3F000EDF389 /* GetUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A4121BBD3F000EDF389 /* GetUserModel.m */; };
 		EB9AA2F1DEEC58D054515ADB /* libPods-HomeworkAssistant.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F857E4F36CA277C9BE2D06 /* libPods-HomeworkAssistant.a */; };
 /* End PBXBuildFile section */
 
@@ -248,6 +252,14 @@
 		9FD90A1F21B91FB000EDF389 /* SubmitCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitCollectionViewCell.h; sourceTree = "<group>"; };
 		9FD90A3021BA49C000EDF389 /* EditorNameView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorNameView.h; sourceTree = "<group>"; };
 		9FD90A3121BA49C000EDF389 /* EditorNameView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditorNameView.m; sourceTree = "<group>"; };
+		9FD90A3321BBA08A00EDF389 /* NSString+GetNowTimestamp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+GetNowTimestamp.h"; sourceTree = "<group>"; };
+		9FD90A3421BBA08A00EDF389 /* NSString+GetNowTimestamp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+GetNowTimestamp.m"; sourceTree = "<group>"; };
+		9FD90A3621BBCE2400EDF389 /* YTQGetUserManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YTQGetUserManager.h; sourceTree = "<group>"; };
+		9FD90A3721BBCE2400EDF389 /* YTQGetUserManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YTQGetUserManager.m; sourceTree = "<group>"; };
+		9FD90A3A21BBD20000EDF389 /* AssignToObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignToObject.h; sourceTree = "<group>"; };
+		9FD90A3B21BBD20000EDF389 /* AssignToObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignToObject.m; sourceTree = "<group>"; };
+		9FD90A4021BBD3F000EDF389 /* GetUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetUserModel.h; sourceTree = "<group>"; };
+		9FD90A4121BBD3F000EDF389 /* GetUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetUserModel.m; sourceTree = "<group>"; };
 		C8F857E4F36CA277C9BE2D06 /* libPods-HomeworkAssistant.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HomeworkAssistant.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E44170AF14A5B0A29A093372 /* Pods-HomeworkAssistant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkAssistant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeworkAssistant/Pods-HomeworkAssistant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -337,6 +349,10 @@
 				3D7D18EC21AE42E0006B9C8F /* TTUserModel.m */,
 				3D7D18EE21AE69E6006B9C8F /* TTUserManager.h */,
 				3D7D18EF21AE69E6006B9C8F /* TTUserManager.m */,
+				9FD90A3621BBCE2400EDF389 /* YTQGetUserManager.h */,
+				9FD90A3721BBCE2400EDF389 /* YTQGetUserManager.m */,
+				9FD90A4021BBD3F000EDF389 /* GetUserModel.h */,
+				9FD90A4121BBD3F000EDF389 /* GetUserModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -479,12 +495,15 @@
 		3D9EAF1021A3CBBF006AF423 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				9FD90A3921BBD20000EDF389 /* CHFFMDB */,
 				3D9EA94A219BBA19006AF423 /* UITextView+UITextView_Placeholder.h */,
 				3D9EA94B219BBA19006AF423 /* UITextView+UITextView_Placeholder.m */,
 				3D9EA91421995422006AF423 /* UIColor+ColorChange.h */,
 				3D9EA91521995422006AF423 /* UIColor+ColorChange.m */,
 				3D1C2BDC21A5430400725BD4 /* NSString+MD5.h */,
 				3D1C2BDD21A5430400725BD4 /* NSString+MD5.m */,
+				9FD90A3321BBA08A00EDF389 /* NSString+GetNowTimestamp.h */,
+				9FD90A3421BBA08A00EDF389 /* NSString+GetNowTimestamp.m */,
 				9F4D102621B7C65E00F4610A /* LTTextView.h */,
 				9F4D102721B7C65E00F4610A /* LTTextView.m */,
 				9F4D104B21B7F9A100F4610A /* NIDropDown.h */,
@@ -567,6 +586,15 @@
 				9F4D109D21B8037900F4610A /* UITextField+Category.m */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		9FD90A3921BBD20000EDF389 /* CHFFMDB */ = {
+			isa = PBXGroup;
+			children = (
+				9FD90A3A21BBD20000EDF389 /* AssignToObject.h */,
+				9FD90A3B21BBD20000EDF389 /* AssignToObject.m */,
+			);
+			path = CHFFMDB;
 			sourceTree = "<group>";
 		};
 		A35CC4704564C779F687B91E /* Frameworks */ = {
@@ -748,6 +776,7 @@
 				3D9EA91321994E35006AF423 /* MyViewStaticCell.m in Sources */,
 				3D9EAF0921A39968006AF423 /* RecommendTableView.m in Sources */,
 				9F4D103421B7C67A00F4610A /* ForgetPwdViewController.m in Sources */,
+				9FD90A3521BBA08A00EDF389 /* NSString+GetNowTimestamp.m in Sources */,
 				3D7D18E321AD24C7006B9C8F /* AnswerCell.m in Sources */,
 				9F4D102821B7C65E00F4610A /* LTTextView.m in Sources */,
 				9F4D109E21B8037900F4610A /* NSArray+SafeObjectArray.m in Sources */,
@@ -767,6 +796,7 @@
 				3D7D18FB21B0CEE4006B9C8F /* MyListView.m in Sources */,
 				3D9EA95E219D6024006AF423 /* LoginTextField.m in Sources */,
 				3D9EA94C219BBA19006AF423 /* UITextView+UITextView_Placeholder.m in Sources */,
+				9FD90A3E21BBD20000EDF389 /* AssignToObject.m in Sources */,
 				3D9EA8EF2195A787006AF423 /* AppDelegate.m in Sources */,
 				9FD90A2021B91FB000EDF389 /* SubmitCollectionViewCell.m in Sources */,
 				9F4D103A21B7CEB700F4610A /* InputBarCodeViewController.m in Sources */,
@@ -776,7 +806,9 @@
 				9F4D10A121B8037900F4610A /* UILabel+Category.m in Sources */,
 				9F4D103321B7C67A00F4610A /* SingUpView.m in Sources */,
 				3D7D18D921AB9BD0006B9C8F /* SearchResultViewController.m in Sources */,
+				9FD90A3821BBCE2400EDF389 /* YTQGetUserManager.m in Sources */,
 				9F4D10A221B8037900F4610A /* UITextField+Category.m in Sources */,
+				9FD90A4221BBD3F000EDF389 /* GetUserModel.m in Sources */,
 				9F4D10A021B8037900F4610A /* UIImageView+Category.m in Sources */,
 				3D9EA91A21998BC4006AF423 /* JYViewController.m in Sources */,
 			);

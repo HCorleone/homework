@@ -10,6 +10,12 @@
 
 @interface CommonAlterView : UIView
 
-+(void)showAlertView:(NSString *)alertMessage;
+//iOS 8-
++ (void)showAlertView:(NSString *)alertMessage;
 
+//iOS 8+
++ (void)showMessage:(NSString *)m andVC:(UIViewController *)uivc;
+
+//执行具体操作
++ (void)showMessages:(NSString *)m andVC:(UIViewController *)uivc handler:(void(^)(UIAlertAction *action))actions;
 @end

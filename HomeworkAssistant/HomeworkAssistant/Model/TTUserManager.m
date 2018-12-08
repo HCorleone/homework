@@ -29,6 +29,7 @@ static TTUserManager *manager = nil;
     [def setObject:self.currentUser.headImgUrl forKey:@"headImgUrl"];
     [def setObject:self.currentUser.name forKey:@"name"];
     [def setObject:self.currentUser.openId forKey:@"openId"];
+    [def setObject:self.currentUser.grade forKey:@"grade"];
 }
 
 - (void)saveLoginUserInfo {
@@ -37,6 +38,7 @@ static TTUserManager *manager = nil;
     [def setObject:self.currentUser.headImgUrl forKey:@"headImgUrl"];
     [def setObject:self.currentUser.name forKey:@"name"];
     [def setObject:self.currentUser.openId forKey:@"openId"];
+    [def setObject:self.currentUser.grade forKey:@"grade"];
 }
 
 - (void)loadCurrentUserInfo {

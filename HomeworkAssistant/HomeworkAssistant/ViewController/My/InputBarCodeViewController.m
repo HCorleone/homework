@@ -31,7 +31,8 @@
 
 //返回上一个界面
 - (void)backToVc {
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 

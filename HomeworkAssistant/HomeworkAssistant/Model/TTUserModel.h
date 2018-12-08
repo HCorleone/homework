@@ -15,5 +15,6 @@
 @property (nonatomic, strong) NSString *headImgUrl;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *openId;
+@property (nonatomic, strong) NSString *grade;//年级
 
 @end

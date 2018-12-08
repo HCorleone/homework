@@ -59,7 +59,7 @@
             case 1001:
             {
                 NSLog(@"获取验证码");
-                [weakSelf getVerificationCode];
+                [weakSelf getVerification];
             }
                 break;
             case 1002:
@@ -88,10 +88,22 @@
 }
 
 //获取验证码
--(void)getVerificationCode
+-(void)getVerification
 {
+    //时间戳
+    NSInteger timesTamp = [NSString getNowTimestamp];
+    NSString *timesStr = [NSString stringWithFormat:@"%ld", timesTamp];
+    
+    NSString *md5 = [NSString stringWithFormat:@"%@%@2017", timesStr, self.pwdView.phoneField.text];
+//    NSString *digest = [NSString md5:md5];
+//    NSString *digest = [NSString MD5ForUpper32Bate:md5];
+//    NSString *digest = [NSString MD5ForLower16Bate:md5];
+    NSString *digest = [NSString MD5ForUpper16Bate:md5];
+    
     NSDictionary *dic = @{@"h":@"SendValidCodeUpdateHandler",
                           @"mobile":self.pwdView.phoneField.text,
+                          @"digest":digest,
+                          @"salt":timesStr,
                           @"av":@"_debug_"};
     
     [self.manager GET:@"/tataeraapi/api.s?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

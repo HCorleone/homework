@@ -14,5 +14,6 @@
 #import "UILabel+Category.h"
 #import "UIImageView+Category.h"
 #import "UITextField+Category.h"
+#import "NSString+GetNowTimestamp.h"
 
 #endif /* CommonCategory_h */

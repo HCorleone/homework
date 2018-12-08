@@ -16,6 +16,8 @@
 #import "QRScanViewController.h"
 #import "EditorNameView.h"
 #import "NIDropDown.h"
+#import "YTQGetUserManager.h"
+#import "CommonAlterView.h"
 
 @interface MyViewController () <UITableViewDelegate, UITableViewDataSource, NIDropDownDelegate>
 
@@ -26,6 +28,8 @@
 @property (nonatomic, strong) EditorNameView *editor;
 /** 下拉菜单 */
 @property (nonatomic, strong) NIDropDown *dropDown;
+/** 年级 */
+@property (nonatomic, strong) UILabel *gradeLabel;
 
 @end
 
@@ -33,7 +37,24 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
+    
+    //判断是否有账号登陆
+    if (userValue(@"name")) {
+        
+        __weak typeof(self) weakSelf = self;
+        [[YTQGetUserManager alloc] getUserManager:^(NSMutableDictionary * _Nonnull dic) {
+            
+            weakSelf.gradeLabel.text = [dic valueForKey:@"grade"];
+        }];
+    }
+    
     
 }
 
@@ -101,15 +122,26 @@
         
     }];
     
+    //年级
+    _gradeLabel = [[UILabel alloc]init];
+    [sloginView addSubview:_gradeLabel];
+    _gradeLabel.textColor =  [UIColor colorWithRed:143/255.0 green:147/255.0 blue:148/255.0 alpha:1/1.0];
+    _gradeLabel.font = [UIFont systemFontOfSize:14];
+    [_gradeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(headImg.mas_right).with.offset(15);
+        make.top.mas_equalTo(sloginView).offset(65);
+        
+    }];
+    
     //编辑个人信息
     UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    editorBtn.backgroundColor = [UIColor grayColor];
-    [editorBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [editorBtn setImage:[UIImage imageNamed:@"修改信息"] forState:UIControlStateNormal];
     [editorBtn addTarget:self action:@selector(clickEditor) forControlEvents:UIControlEventTouchUpInside];
     [sloginView addSubview:editorBtn];
     [editorBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(sloginView).offset(-20);
         make.centerY.mas_equalTo(userName);
+        make.size.mas_equalTo(CGSizeMake(24, 24));
     }];
     
     //注销
@@ -166,12 +198,14 @@
         switch (btn.tag) {
             case 1001:
             {
-                NSLog(@"年级");
+                NSLog(@"选择年级");
                NSArray *arr = [NSArray arrayWithObjects:@"学前", @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级", @"七年级", @"八年级", @"九年级", @"高一", @"高二", @"高三", nil];
                 if(weakSelf.dropDown == nil) {
                     CGFloat f = 300;
                     weakSelf.dropDown = [[NIDropDown alloc]showDropDown:weakSelf.editor.downBtn theHeight:&f theArr:arr theImgArr:nil theDirection:@"down" withViewController:weakSelf];
+                    [weakSelf.dropDown setCellHeigth:30];
                     [weakSelf.dropDown setDropDownSelectionColor:[UIColor whiteColor]];
+                    [weakSelf.dropDown setDropDownItemBackgroundColor:[UIColor colorWithRed:244/255.0 green:244/255.0 blue:244/255.0 alpha:1/1.0]];
                     weakSelf.dropDown.delegate = weakSelf;
                 }
                 else {
@@ -189,6 +223,17 @@
             case 1003:
             {
                 NSLog(@"确认");
+                
+                if (![weakSelf.editor.downBtn.titleLabel.text isEqualToString:@"请选择年级"]) {
+                    [weakSelf getManager];
+                    
+                    weakSelf.gradeLabel.text = weakSelf.editor.downBtn.titleLabel.text;
+                }
+                else
+                {
+                    [CommonAlterView showAlertView:@"请选择年级"];
+                }
+                
             }
                 break;
             case 1004:
@@ -218,6 +263,7 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     //隐藏
     [self.dropDown hideDropDown:self.editor.downBtn];
+
 }
 
 - (void)setupLoginView {
@@ -287,6 +333,36 @@
     [self.navigationController pushViewController:loginVC animated:YES];
 }
 
+#pragma mark - 请求接口
+-(void)getManager {
+    
+    NSDictionary *dic = @{@"h":@"ZYUpsertUserExtHander",
+                          @"openID":userValue(@"openId"),
+                          @"grade":self.editor.downBtn.titleLabel.text,
+                          @"city":@"北京",
+                          @"av":@"_debug_"};
+    
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
+    //设置请求方式
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    //接收数据是json形式给出
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    __weak typeof(self) weakSelf = self;
+    [manager GET:upUserInform parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"------------------------------%@------------------------------", responseObject);
+        if ([responseObject[@"code"] intValue] == 200) {
+            
+            weakSelf.editor.hidden = YES;
+            [weakSelf.editor removeFromSuperview];
+            [[weakSelf rdv_tabBarController] setTabBarHidden:NO animated:NO];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+        
+    }];
+}
+
 
 #pragma mark - 静态tableView DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -325,9 +401,6 @@
     }
     return cell;
 }
-
-
-
 
 
 #pragma mark - 静态tableView Delegate
