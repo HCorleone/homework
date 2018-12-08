@@ -9,12 +9,17 @@
 #import "SearchResultViewController.h"
 #import "RecommendTableView.h"
 #import "Book.h"
+#import "YZPullDownMenu.h"
+#import "YZMenuButton.h"
+#import "GradeViewController.h"
+#import "SubjectViewController.h"
 
-@interface SearchResultViewController ()<UISearchBarDelegate>
+@interface SearchResultViewController ()<UISearchBarDelegate, YZPullDownMenuDataSource>
 
 @property (nonatomic, strong) UIView *navView;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) NSMutableArray *searchResult;
+@property (nonatomic, strong) NSArray *titles;
 
 @end
 
@@ -25,6 +30,7 @@
     self.view.backgroundColor =whitecolor;
     
     [self setupNav];
+    [self setupMenu];
     [self downloadData];
 }
 
@@ -125,24 +131,35 @@
 }
 
 - (void)setupViewWithList:(NSMutableArray *)array {
-    //为您推荐
+    
     RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 102, screenWidth,screenHeight - 102) style:UITableViewStylePlain withArray:array];
     [self.view addSubview:rTableView];
     rTableView.scrollEnabled = YES;
-
+    
 }
 
-- (void)setupView {
+- (void)setupMenu {
     
     //菜单栏
-    UIView *meunView = [[UIView alloc]init];
+    YZPullDownMenu *menu = [[YZPullDownMenu alloc] init];
+    menu.frame = CGRectMake(0, 66, screenWidth, 36);
+    [self.view addSubview:menu];
     
-    //搜索结果列表
+    menu.dataSource = self;
     
+    _titles = @[@"年级",@"科目",@"版本"];
     
+    [self setupAllChildViewController];
 }
 
-
+- (void)setupAllChildViewController {
+    GradeViewController *test1 =[[GradeViewController alloc] init];
+    SubjectViewController *test2 =[[SubjectViewController alloc] init];
+    UIViewController *test3 =[[UIViewController alloc] init];
+    [self addChildViewController:test1];
+    [self addChildViewController:test2];
+    [self addChildViewController:test3];
+}
 
 - (void)backToVc {
     [self.navigationController popViewControllerAnimated:YES];
@@ -168,10 +185,55 @@
     
 }
 
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
     self.navigationController.navigationBar.hidden = YES;
+    
+}
+
+#pragma mark - YZPullDownMenuDataSource
+// 返回下拉菜单多少列
+- (NSInteger)numberOfColsInMenu:(YZPullDownMenu *)pullDownMenu
+{
+    return 3;
+}
+
+// 返回下拉菜单每列按钮
+- (UIButton *)pullDownMenu:(YZPullDownMenu *)pullDownMenu buttonForColAtIndex:(NSInteger)index
+{
+    YZMenuButton *button = [YZMenuButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:_titles[index] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:25 /255.0 green:143/255.0 blue:238/255.0 alpha:1] forState:UIControlStateSelected];
+    [button setImage:[UIImage imageNamed:@"标签-向下箭头"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"标签-向上箭头"] forState:UIControlStateSelected];
+    
+    return button;
+}
+
+// 返回下拉菜单每列对应的控制器
+- (UIViewController *)pullDownMenu:(YZPullDownMenu *)pullDownMenu viewControllerForColAtIndex:(NSInteger)index
+{
+    return self.childViewControllers[index];
+}
+
+// 返回下拉菜单每列对应的高度
+- (CGFloat)pullDownMenu:(YZPullDownMenu *)pullDownMenu heightForColAtIndex:(NSInteger)index
+{
+    // 第1列 高度
+    if (index == 0) {
+        return 600;
+    }
+    
+    // 第2列 高度
+    if (index == 1) {
+        return 300;
+    }
+    
+    // 第3列 高度
+    return 400;
 }
 
 @end

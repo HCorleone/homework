@@ -89,8 +89,8 @@
         if ([responseObject[@"code"] integerValue] == 200) {
             if (responseObject[@"datas"] == [NSNull null]) {
                 NSLog(@"数组为空");
-                if (self.myListView) {
-                    self.myListView.hidden = YES;
+                if (self.myListContainer) {
+                    self.myListContainer.hidden = YES;
                 }
             }
             else {
