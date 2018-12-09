@@ -30,7 +30,6 @@
     
     [self setupNav];
     [self setupView];
-    [self downloadDataForMyList];
 }
 
 - (void)setupNav {
@@ -137,7 +136,7 @@
                 }
                 if (self.myListView) {
                     self.myListView.hidden = NO;
-//                    [self.myListView reloadDataWithList:self.myListViewData];
+                    [self.myListView reloadDataWithList:self.myListViewData];
                 }
                 else {
                     [self setupMyList:self.myListViewData];
@@ -161,8 +160,9 @@
     
     //分割线
     UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, screenWidth - 40, 0.5)];
-    [line setBackgroundColor:[UIColor colorWithRed:224/255.0 green:224/255.0 blue:224/255.0 alpha:1.0]];
-    line.layer.opacity = 0.3;
+//    [line setBackgroundColor:[UIColor colorWithRed:224/255.0 green:224/255.0 blue:224/255.0 alpha:1.0]];
+    [line setBackgroundColor:[UIColor grayColor]];
+    line.layer.opacity = 0.5;
     [self.myListView.tableFooterView addSubview:line];
     
     //添加按钮
@@ -197,9 +197,8 @@
     [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
     self.navigationController.navigationBar.hidden = YES;
     
-    if (self.myListView) {
-        [self downloadDataForMyList];
-    }
+    [self downloadDataForMyList];
+
 }
 
 #pragma 重写tableviewdatasource

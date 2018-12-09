@@ -32,6 +32,8 @@
 		3D4725B721BA7E5400C0E7CF /* 标签-向上箭头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4725B321BA7E5400C0E7CF /* 标签-向上箭头@2x.png */; };
 		3D4725B821BA7E5400C0E7CF /* 标签-向上箭头@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4725B421BA7E5400C0E7CF /* 标签-向上箭头@3x.png */; };
 		3D4725B921BA7E5400C0E7CF /* 标签-向下箭头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4725B521BA7E5400C0E7CF /* 标签-向下箭头@2x.png */; };
+		3D4725BF21BCC65F00C0E7CF /* 修改信息@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4725BD21BCC65F00C0E7CF /* 修改信息@3x.png */; };
+		3D4725C021BCC65F00C0E7CF /* 修改信息@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4725BE21BCC65F00C0E7CF /* 修改信息@2x.png */; };
 		3D7C713221A659DD008F9D52 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C713121A659DD008F9D52 /* SearchViewController.m */; };
 		3D7D18D921AB9BD0006B9C8F /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18D821AB9BD0006B9C8F /* SearchResultViewController.m */; };
 		3D7D18E021AC1997006B9C8F /* AnswerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18DF21AC1997006B9C8F /* AnswerDetailViewController.m */; };
@@ -160,6 +162,8 @@
 		3D4725B321BA7E5400C0E7CF /* 标签-向上箭头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签-向上箭头@2x.png"; sourceTree = "<group>"; };
 		3D4725B421BA7E5400C0E7CF /* 标签-向上箭头@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签-向上箭头@3x.png"; sourceTree = "<group>"; };
 		3D4725B521BA7E5400C0E7CF /* 标签-向下箭头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签-向下箭头@2x.png"; sourceTree = "<group>"; };
+		3D4725BD21BCC65F00C0E7CF /* 修改信息@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "修改信息@3x.png"; path = "HomeworkAssistant/Resource/切图/修改信息@3x.png"; sourceTree = SOURCE_ROOT; };
+		3D4725BE21BCC65F00C0E7CF /* 修改信息@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "修改信息@2x.png"; path = "HomeworkAssistant/Resource/切图/修改信息@2x.png"; sourceTree = SOURCE_ROOT; };
 		3D7C713021A659DD008F9D52 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		3D7C713121A659DD008F9D52 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		3D7D18D721AB9BD0006B9C8F /* SearchResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
@@ -193,8 +197,8 @@
 		3D9EA90F21992CFC006AF423 /* HomeworkAssistant.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeworkAssistant.pch; sourceTree = "<group>"; };
 		3D9EA91121994E35006AF423 /* MyViewStaticCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyViewStaticCell.h; sourceTree = "<group>"; };
 		3D9EA91221994E35006AF423 /* MyViewStaticCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyViewStaticCell.m; sourceTree = "<group>"; };
-		3D9EA91421995422006AF423 /* UIColor+ColorChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorChange.h"; sourceTree = "<group>"; };
-		3D9EA91521995422006AF423 /* UIColor+ColorChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorChange.m"; sourceTree = "<group>"; };
+		3D9EA91421995422006AF423 /* UIColor+ColorChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+ColorChange.h"; path = "../../Pods/RDVTabBarController/UIColor+ColorChange.h"; sourceTree = "<group>"; };
+		3D9EA91521995422006AF423 /* UIColor+ColorChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ColorChange.m"; path = "../../Pods/RDVTabBarController/UIColor+ColorChange.m"; sourceTree = "<group>"; };
 		3D9EA91821998BC4006AF423 /* JYViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYViewController.h; sourceTree = "<group>"; };
 		3D9EA91921998BC4006AF423 /* JYViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYViewController.m; sourceTree = "<group>"; };
 		3D9EA91C219A9B7A006AF423 /* 切图 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "切图"; sourceTree = "<group>"; };
@@ -335,10 +339,10 @@
 				3D7D18D821AB9BD0006B9C8F /* SearchResultViewController.m */,
 				3D4725A921BA63E600C0E7CF /* GradeViewController.h */,
 				3D4725AA21BA63E600C0E7CF /* GradeViewController.m */,
-				3D4725A021BA5F1600C0E7CF /* VersionViewController.h */,
-				3D4725A121BA5F1600C0E7CF /* VersionViewController.m */,
 				3D4725A321BA5F3F00C0E7CF /* SubjectViewController.h */,
 				3D4725A421BA5F3F00C0E7CF /* SubjectViewController.m */,
+				3D4725A021BA5F1600C0E7CF /* VersionViewController.h */,
+				3D4725A121BA5F1600C0E7CF /* VersionViewController.m */,
 				3D4725AF21BA78CA00C0E7CF /* CollectionHeaderView.h */,
 				3D4725B021BA78CA00C0E7CF /* CollectionHeaderView.m */,
 			);
@@ -491,6 +495,8 @@
 		3D9EA932219A9D88006AF423 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				3D4725BE21BCC65F00C0E7CF /* 修改信息@2x.png */,
+				3D4725BD21BCC65F00C0E7CF /* 修改信息@3x.png */,
 				3D4725B321BA7E5400C0E7CF /* 标签-向上箭头@2x.png */,
 				3D4725B421BA7E5400C0E7CF /* 标签-向上箭头@3x.png */,
 				3D4725B521BA7E5400C0E7CF /* 标签-向下箭头@2x.png */,
@@ -730,6 +736,7 @@
 				3D9EA93B219A9DBF006AF423 /* 我的-激活@2x.png in Resources */,
 				3D4725B721BA7E5400C0E7CF /* 标签-向上箭头@2x.png in Resources */,
 				3D9EA958219C26AF006AF423 /* 返回@3x.png in Resources */,
+				3D4725C021BCC65F00C0E7CF /* 修改信息@2x.png in Resources */,
 				3D4725B821BA7E5400C0E7CF /* 标签-向上箭头@3x.png in Resources */,
 				3D9EAEFD21A2D895006AF423 /* 首页头图@2x.png in Resources */,
 				3D9EA928219A9B9C006AF423 /* 分享应用@3x.png in Resources */,
@@ -763,6 +770,7 @@
 				3D9EAF1321A4F3C6006AF423 /* 空状态@2x.png in Resources */,
 				3D9EA92D219A9B9C006AF423 /* 用户反馈@2x.png in Resources */,
 				3D9EAEFC21A2D895006AF423 /* 首页头图@3x.png in Resources */,
+				3D4725BF21BCC65F00C0E7CF /* 修改信息@3x.png in Resources */,
 				3D9EA93D219A9DBF006AF423 /* 我的-激活@3x.png in Resources */,
 				3D47255D21B6160200C0E7CF /* 清除历史@3x.png in Resources */,
 			);
@@ -796,11 +804,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HomeworkAssistant/Pods-HomeworkAssistant-resources.sh",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/SGQRCode/SGQRCode/SGQRCode.bundle",
 				"${PODS_ROOT}/UMCShare/UMShare/UMSocialUI/UMSocialSDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SGQRCode.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKResources.bundle",
 			);
@@ -1008,7 +1018,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5855LWABM9;
+				DEVELOPMENT_TEAM = 7T7PP6R6DZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/QQLogin",
@@ -1040,7 +1050,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5855LWABM9;
+				DEVELOPMENT_TEAM = 7T7PP6R6DZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/QQLogin",

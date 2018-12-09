@@ -134,8 +134,9 @@ extern NSString * const YZUpdateMenuTitleNote;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     ClassificationCell *cell = (ClassificationCell *)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
     NSString *col = @"0";
-    [[NSNotificationCenter defaultCenter] postNotificationName:YZUpdateMenuTitleNote object:self userInfo:@{@"title":cell.title.text,@"col":col}];
     NSLog(@"%@",cell.title.text);
+    [[NSNotificationCenter defaultCenter] postNotificationName:YZUpdateMenuTitleNote object:self userInfo:@{@"title":cell.title.text,@"col":col}];
+    
 }
 
 @end

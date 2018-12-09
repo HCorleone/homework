@@ -13,6 +13,13 @@
 #import "YZMenuButton.h"
 #import "GradeViewController.h"
 #import "SubjectViewController.h"
+#import "VersionViewController.h"
+
+static NSString *grade = @"";
+static NSString *subject = @"";
+static NSString *version = @"";
+static NSString *volume = @"";
+static NSString *page = @"1";
 
 @interface SearchResultViewController ()<UISearchBarDelegate, YZPullDownMenuDataSource>
 
@@ -20,6 +27,7 @@
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) NSMutableArray *searchResult;
 @property (nonatomic, strong) NSArray *titles;
+@property (nonatomic, strong) RecommendTableView *searchResultView;
 
 @end
 
@@ -88,17 +96,15 @@
 }
 
 - (void)downloadData {
-    
-
     NSString *URL = @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?";
-    
+    page = @"1";
     NSDictionary *dict = @{
                            @"h":@"ZYSearchAnswerHandler",
                            @"keyword":self.searchContent,
-                           @"grade":@"",
-                           @"subject":@"",
-                           @"bookVersion":@"",
-                           @"volume":@"",
+                           @"grade":grade,
+                           @"subject":subject,
+                           @"bookVersion":version,
+                           @"volume":volume,
                            @"year":@"",
                            @"pageNo":@"",
                            @"pageSize":@"",
@@ -111,17 +117,26 @@
     NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {
-            NSArray *jsonDataArr = responseObject[@"datas"];
-            self.searchResult = [NSMutableArray array];
-            //建立模型数组
-            for (int i =0; i < jsonDataArr.count; i++) {
-                NSDictionary *aDic = jsonDataArr[i];
-                Book *aModel = [Book initWithDic:aDic];
-                [self.searchResult addObject:aModel];
+            if (responseObject[@"datas"] == [NSNull null]) {
+                NSLog(@"数组为空");
+            }
+            else {
+                NSArray *jsonDataArr = responseObject[@"datas"];
+                self.searchResult = [NSMutableArray array];
+                //建立模型数组
+                for (int i =0; i < jsonDataArr.count; i++) {
+                    NSDictionary *aDic = jsonDataArr[i];
+                    Book *aModel = [Book initWithDic:aDic];
+                    [self.searchResult addObject:aModel];
+                }
+                if (self.searchResultView) {
+                    [self.searchResultView reloadDataWithList:self.searchResult];
+                }
+                else {
+                    [self setupViewWithList:self.searchResult];
+                }
             }
         }
-        [self setupViewWithList:self.searchResult];
-        
         
     } failure:nil];
     [dataTask resume];
@@ -135,8 +150,66 @@
     RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 102, screenWidth,screenHeight - 102) style:UITableViewStylePlain withArray:array];
     [self.view addSubview:rTableView];
     rTableView.scrollEnabled = YES;
-    
+    rTableView.estimatedRowHeight = 0;
+    rTableView.estimatedSectionHeaderHeight = 0;
+    rTableView.estimatedSectionFooterHeight = 0;
+    self.searchResultView = rTableView;
+    self.searchResultView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(pullToRefresh)];
 }
+
+- (void)pullToRefresh {
+    //页数控制
+    NSInteger flag = [page integerValue];
+    flag += 1;
+    page = [[NSNumber numberWithInteger:flag]stringValue];
+    
+    NSString *URL = @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?";
+    NSDictionary *dict = @{
+                           @"h":@"ZYSearchAnswerHandler",
+                           @"keyword":self.searchContent,
+                           @"grade":grade,
+                           @"subject":subject,
+                           @"bookVersion":version,
+                           @"volume":volume,
+                           @"year":@"",
+                           @"pageNo":page,
+                           @"pageSize":@"",
+                           @"av":@"_debug_"
+                           };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if ([responseObject[@"code"] integerValue] == 200) {
+            if (responseObject[@"datas"] == [NSNull null]) {
+                NSLog(@"数组为空");
+            }
+            else {
+                NSArray *jsonDataArr = responseObject[@"datas"];
+                NSMutableArray *mArr = [NSMutableArray array];
+                //建立模型数组
+                for (int i =0; i < jsonDataArr.count; i++) {
+                    NSDictionary *aDic = jsonDataArr[i];
+                    Book *aModel = [Book initWithDic:aDic];
+                    [mArr addObject:aModel];
+                }
+                if (self.searchResultView) {
+                    [self.searchResult addObjectsFromArray:mArr];
+                    [self.searchResultView reloadDataWithList:self.searchResult];
+                }
+            }
+        }
+        
+    } failure:nil];
+    [dataTask resume];
+    
+    
+    [self.searchResultView.mj_footer endRefreshing];
+}
+
+
 
 - (void)setupMenu {
     
@@ -155,7 +228,7 @@
 - (void)setupAllChildViewController {
     GradeViewController *test1 =[[GradeViewController alloc] init];
     SubjectViewController *test2 =[[SubjectViewController alloc] init];
-    UIViewController *test3 =[[UIViewController alloc] init];
+    VersionViewController *test3 =[[VersionViewController alloc] init];
     [self addChildViewController:test1];
     [self addChildViewController:test2];
     [self addChildViewController:test3];
@@ -182,6 +255,47 @@
 
 #pragma SearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    self.searchContent = self.searchBar.text;
+    [self downloadData];
+}
+
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"YZUpdateMenuTitleNote" object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshSearchView:) name:@"YZUpdateMenuTitleNote" object:nil];
+}
+
+- (void)refreshSearchView:(NSNotification *)note {
+    NSDictionary *dic = [note userInfo];
+    if ([dic[@"col"] integerValue] == 0) {
+        grade = dic[@"title"];
+        if ([grade isEqualToString:@"全部年级"]) {
+            grade = @"";
+        }
+    }
+    else if ([dic[@"col"] integerValue] == 1) {
+        subject = dic[@"title"];
+        if ([subject isEqualToString:@"全部科目"]) {
+            subject = @"";
+        }
+    }
+    else if ([dic[@"col"] integerValue] == 2) {
+        if ([dic[@"section"] integerValue] == 0) {
+            volume = dic[@"volume"];
+        }
+        else if ([dic[@"section"] integerValue] == 1) {
+            version = dic[@"version"];
+            if ([version isEqualToString:@"全部版本"]) {
+                version = @"";
+            }
+        }
+    }
+    [self downloadData];
     
 }
 
@@ -224,7 +338,7 @@
 {
     // 第1列 高度
     if (index == 0) {
-        return 600;
+        return 450;
     }
     
     // 第2列 高度
@@ -233,7 +347,7 @@
     }
     
     // 第3列 高度
-    return 400;
+    return 500;
 }
 
 @end

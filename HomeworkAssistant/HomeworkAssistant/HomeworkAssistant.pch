@@ -19,6 +19,6 @@
 #import "NSString+MD5.h"
 #import "CommonCategory.h"
 #import "CommonDefine.h"
-
+#import "MJRefresh.h"
 
 #endif /* HomeworkAssistant_pch */

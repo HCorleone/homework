@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = whitecolor;
-    _titles = @[@"全部科目",@"语文",@"数学",@"英语",@"物理",@"化学",@"生物",@"政治",@"历史",@"地理",@"科学"];
+    _titles = @[@"上册",@"下册",@"全册",@"全部版本",@"人教版",@"北师大版",@"苏教版",@"翼教版",@"外研版",@"沪科版",@"湘教版",@"青岛版",@"鲁教版",@"浙教版",@"教科版",@"华师大版",@"译林版",@"苏科版",@"语文版"];
     [self setupView];
 }
 
@@ -31,8 +31,10 @@
     layout.minimumLineSpacing = 29.5;
     layout.headerReferenceSize = CGSizeMake(screenWidth, 20);
     
-    UICollectionView *collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 20, screenWidth, screenHeight) collectionViewLayout:layout];
+    UICollectionView *collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 500) collectionViewLayout:layout];
     [self.view addSubview:collectView];
+
+    collectView.showsVerticalScrollIndicator = NO;
     collectView.dataSource = self;
     collectView.delegate = self;
     collectView.backgroundColor = whitecolor;
@@ -43,7 +45,7 @@
 #pragma mark collectionView代理方法
 //返回section个数
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 4;
+    return 2;
     
 }
 
@@ -51,18 +53,12 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return 1;
+            return 3;
             break;
         case 1:
-            return 6;
+            return 16;
             break;
-        case 2:
-            return 3;
-            break;
-        case 3:
-            return 3;
-            break;
-            
+
         default:
             break;
     }
@@ -77,13 +73,7 @@
             cell.title.text = self.titles[indexPath.row];
             break;
         case 1:
-            cell.title.text = self.titles[indexPath.row + 1];
-            break;
-        case 2:
-            cell.title.text = self.titles[indexPath.row + 7];
-            break;
-        case 3:
-            cell.title.text = self.titles[indexPath.row + 10];
+            cell.title.text = self.titles[indexPath.row + 3];
             break;
         default:
             break;
@@ -99,21 +89,14 @@
     
     switch (indexPath.section) {
         case 0:
-            headerView.headerTitle.text = @"全部";
+            headerView.headerTitle.text = @"上下册";
             break;
         case 1:
-            headerView.headerTitle.text = @"小学";
-            break;
-        case 2:
-            headerView.headerTitle.text = @"初中";
-            break;
-        case 3:
-            headerView.headerTitle.text = @"高中";
+            headerView.headerTitle.text = @"版本";
             break;
         default:
             break;
     }
-    
     
     return headerView;
 }
@@ -133,6 +116,16 @@
 //    ClassificationCell *cell = (ClassificationCell *)[collectionView cellForItemAtIndexPath:indexPath];
 //    [[NSNotificationCenter defaultCenter] postNotificationName:@"YZUpdateMenuTitleNote" object:self userInfo:@{@"title":cell.title.text}];
 //    NSLog(@"%@",cell.title.text);
+    
+    ClassificationCell *cell = (ClassificationCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    NSString *col = @"2";
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"YZUpdateMenuTitleNote" object:self userInfo:@{@"title":cell.title.text,@"col":col}];
+    if (indexPath.section == 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"YZUpdateMenuTitleNote" object:self userInfo:@{@"title":cell.title.text,@"volume":cell.title.text,@"col":col,@"section":@"0"}];
+    }
+    else if (indexPath.section == 1) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"YZUpdateMenuTitleNote" object:self userInfo:@{@"title":cell.title.text,@"version":cell.title.text,@"col":col,@"section":@"1"}];
+    }
 }
 
 @end

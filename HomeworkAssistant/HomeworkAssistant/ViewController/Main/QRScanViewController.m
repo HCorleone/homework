@@ -90,7 +90,11 @@
     if ([self.lastVC isKindOfClass:[MainViewController class]]) {
         if (result.length >= 7) {
             if ([[result substringToIndex:7] isEqualToString: @"openId:"]) {
-                //            NSLog(@"%@",[result substringFromIndex:7]);
+                [self.scanView removeTimer];
+                [self.scanManager stopRunning];
+                NSLog(@"%@",[result substringFromIndex:7]);
+//                NSString *code = [result substringFromIndex:7];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"shareCode" object:nil userInfo:@{@"shareCode":code}];
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }

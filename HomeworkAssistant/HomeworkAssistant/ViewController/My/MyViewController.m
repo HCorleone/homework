@@ -103,13 +103,14 @@
     
     //编辑个人信息
     UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    editorBtn.backgroundColor = [UIColor grayColor];
-    [editorBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+//    editorBtn.backgroundColor = [UIColor grayColor];
+    [editorBtn setImage:[UIImage imageNamed:@"修改信息"] forState:UIControlStateNormal];
     [editorBtn addTarget:self action:@selector(clickEditor) forControlEvents:UIControlEventTouchUpInside];
     [sloginView addSubview:editorBtn];
     [editorBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(sloginView).offset(-20);
         make.centerY.mas_equalTo(userName);
+        make.size.mas_equalTo(CGSizeMake(24, 24));
     }];
     
     //注销

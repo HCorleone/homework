@@ -410,6 +410,13 @@
 }
 
 - (void)toScan {
+//    [[NSNotificationCenter defaultCenter] addObserverForName:@"shareCode" object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+//        NSDictionary *dic = [note userInfo];
+//        NSLog(@"%@",dic[@"shareCode"]);
+//        QRCodeView *testView = [[QRCodeView alloc]init];
+//        [testView showQRCode];
+//    }];
+    
     QRScanViewController *scanVC = [[QRScanViewController alloc]init];
     [self.navigationController pushViewController:scanVC animated:YES];
 }

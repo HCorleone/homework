@@ -18,4 +18,5 @@ target 'HomeworkAssistant' do
 	pod 'UMCShare/Social/ReducedQQ'
 	pod 'WechatOpenSDK'
 	pod 'SGQRCode'
+	pod 'MJRefresh'
 end
