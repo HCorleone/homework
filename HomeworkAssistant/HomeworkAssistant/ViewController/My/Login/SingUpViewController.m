@@ -63,7 +63,7 @@
             {
                 NSLog(@"获取验证码");
 //                [weakSelf showArtleMessage:@"请注意接收短信验证" jumpBlock:nil];
-                [weakSelf getVerificationCode];
+                [weakSelf getVerification];
             }
                 break;
             case 1002:
@@ -93,7 +93,7 @@
 }
 
 //获取验证码
--(void)getVerificationCode
+-(void)getVerification
 {
     NSDictionary *dic = @{@"h":@"SendValidCodeUpdateHandler",
                           @"mobile":self.singUpView.phoneField.text,

@@ -27,6 +27,7 @@
         
         _pwdField = [[LoginTextField alloc]init:@"请输入密码"];
         [_pwdField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+        _pwdField.secureTextEntry = YES;
         [self addSubview:_pwdField];
         [_pwdField mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.phoneField.mas_bottom).offset(16);

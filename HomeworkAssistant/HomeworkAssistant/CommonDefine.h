@@ -40,5 +40,22 @@
 #define userDefaults(object, key) [[NSUserDefaults standardUserDefaults] setObject:object forKey:key]
 #define userValue(key) [[NSUserDefaults standardUserDefaults] valueForKey:key]
 
+/** 上传答案-书籍基本信息 */
+#define GetUpAnswerID getURL
+/** 上传答案的封面图 */
+#define UpLoadAnswer @"/homeworkapi/upload.s?"
+/** 获取验证码 */
+#define getVerificationCode oldURl
+/** 上传或更新用户额外信息 */
+#define upUserInform getURL
+
+//域名
+#define OldIP @"http://ecomment.tatatimes.com"
+#define OnLineIP @"http://zuoyeapi.tatatimes.com"
+
+#define getURL @"/homeworkapi/api.s?"
+#define oldURl @"/tataeraapi/api.s?"
+
+
 
 #endif /* CommonDefine_h */
