@@ -135,10 +135,7 @@
     
     //编辑个人信息
     UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-<<<<<<< HEAD
 //    editorBtn.backgroundColor = [UIColor grayColor];
-=======
->>>>>>> 6873b22a0daab844226cf7c7f8a06c067e1eb639
     [editorBtn setImage:[UIImage imageNamed:@"修改信息"] forState:UIControlStateNormal];
     [editorBtn addTarget:self action:@selector(clickEditor) forControlEvents:UIControlEventTouchUpInside];
     [sloginView addSubview:editorBtn];
