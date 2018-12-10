@@ -127,6 +127,7 @@
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.itemSize = CGSizeMake(screenWidth / 3, 160);
     AnswerDetailCollectionView *adCV = [[AnswerDetailCollectionView alloc]initWithFrame:CGRectMake(0, 66, screenWidth, screenHeight - 66) collectionViewLayout:layout withArray:array];
+    adCV.isSelected = self.isSelected;
     [self.view addSubview:adCV];
 }
 

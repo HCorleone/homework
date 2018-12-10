@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout withArray:(NSMutableArray *)array;
 
 @property (nonatomic, strong) NSMutableArray *dataList;
+@property (nonatomic, assign) BOOL isSelected;
 
 @end
 

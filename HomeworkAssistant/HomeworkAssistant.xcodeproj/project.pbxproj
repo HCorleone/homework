@@ -1049,6 +1049,7 @@
 			baseConfigurationReference = E44170AF14A5B0A29A093372 /* Pods-HomeworkAssistant.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7T7PP6R6DZ;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1070,8 +1071,9 @@
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/umeng",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/weixin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Tata.HomeworkAssistant;
+				PRODUCT_BUNDLE_IDENTIFIER = enjoytime.palmhomework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1081,6 +1083,7 @@
 			baseConfigurationReference = 974F88E9F3024FEFD7D51BEA /* Pods-HomeworkAssistant.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7T7PP6R6DZ;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1102,8 +1105,9 @@
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/umeng",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/weixin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Tata.HomeworkAssistant;
+				PRODUCT_BUNDLE_IDENTIFIER = enjoytime.palmhomework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -17,7 +17,6 @@
 @property (nonatomic, strong) UIButton *shareBtn;
 @property (nonatomic, strong) UIButton *collectBtn;
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, assign) BOOL isSelected;
 
 @end
 
@@ -84,9 +83,16 @@
     
     UIButton *collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:collectBtn];
-    [collectBtn setBackgroundColor:maincolor];
-    [collectBtn setTitle:@"收藏到书单" forState:UIControlStateNormal];
-    [collectBtn setTitleColor:whitecolor forState:UIControlStateNormal];
+    if (!self.isSelected) {
+        [collectBtn setBackgroundColor:maincolor];
+        [collectBtn setTitle:@"收藏到书单" forState:UIControlStateNormal];
+        [collectBtn setTitleColor:whitecolor forState:UIControlStateNormal];
+    }
+    else {
+        [collectBtn setBackgroundColor:whitecolor];
+        [collectBtn setTitle:@"已收藏至书单" forState:UIControlStateNormal];
+        [collectBtn setTitleColor:[UIColor colorWithHexString:@"#D5D5D5"] forState:UIControlStateNormal];
+    }
     collectBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
     [collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.and.bottom.mas_equalTo(self.view);

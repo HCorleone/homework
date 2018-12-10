@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AnswerDetailCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) AnswerDetail *model;
+@property (nonatomic, assign) BOOL isSelected;
 
 @end
 

@@ -41,6 +41,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     AnswerDetailCollectionViewCell *cell = (AnswerDetailCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ADCVC" forIndexPath:indexPath];
+    cell.isSelected = self.isSelected;
     cell.model = self.dataList[indexPath.row];
     return cell;
     
@@ -69,9 +70,12 @@
 
 //点击item方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    AnswerDetailCollectionViewCell *cell = (AnswerDetailCollectionViewCell *)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    
     AnswerDetailViewController *answerDetailVC = [[AnswerDetailViewController alloc]init];
     answerDetailVC.answerModel = self.dataList[indexPath.row];
     answerDetailVC.dataList = self.dataList;
+    answerDetailVC.isSelected = cell.isSelected;
     [[self viewController].navigationController pushViewController:answerDetailVC animated:YES];
 }
 

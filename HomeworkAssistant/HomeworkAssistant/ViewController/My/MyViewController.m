@@ -37,13 +37,12 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+    [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
     
     //判断是否有账号登陆
     if (userValue(@"name")) {
