@@ -87,18 +87,28 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+//时间戳
+- (NSString *)currentTimeStr{
+    NSDate* date = [NSDate dateWithTimeIntervalSinceNow:0];//获取当前时间0秒后的时间
+    NSTimeInterval time=[date timeIntervalSince1970]*1000;// *1000 是精确到毫秒，不乘就是精确到秒
+    NSString *timeString = [NSString stringWithFormat:@"%.0f", time];
+    return timeString;
+}
+
 //获取验证码
 -(void)getVerification
 {
     //时间戳
-    NSInteger timesTamp = [NSString getNowTimestamp];
-    NSString *timesStr = [NSString stringWithFormat:@"%ld", timesTamp];
+//    NSInteger timesTamp = [NSString getNowTimestamp];
+//    NSString *timesStr = [NSString stringWithFormat:@"%ld", timesTamp];
+//    NSString *timesStr = [[NSNumber numberWithInteger:timesTamp]stringValue];
+    NSString *timesStr = [self currentTimeStr];
     
     NSString *md5 = [NSString stringWithFormat:@"%@%@2017", timesStr, self.pwdView.phoneField.text];
 //    NSString *digest = [NSString md5:md5];
-//    NSString *digest = [NSString MD5ForUpper32Bate:md5];
+    NSString *digest = [NSString MD5ForUpper32Bate:md5];
 //    NSString *digest = [NSString MD5ForLower16Bate:md5];
-    NSString *digest = [NSString MD5ForUpper16Bate:md5];
+//    NSString *digest = [NSString MD5ForUpper16Bate:md5];
     
     NSDictionary *dic = @{@"h":@"SendValidCodeUpdateHandler",
                           @"mobile":self.pwdView.phoneField.text,
