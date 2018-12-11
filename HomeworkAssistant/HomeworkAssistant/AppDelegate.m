@@ -98,7 +98,7 @@
     
     RDVTabBar *tabBar = [tabBarController tabBar];
     
-    [tabBar setFrame:CGRectMake(CGRectGetMinX(tabBar.frame), CGRectGetMinY(tabBar.frame), CGRectGetWidth(tabBar.frame), 48)];
+    [tabBar setFrame:CGRectMake(CGRectGetMinX(tabBar.frame), CGRectGetMinY(tabBar.frame), CGRectGetWidth(tabBar.frame), 48 + BOT_OFFSET)];
     
 //    tabBar.backgroundView.layer.backgroundColor = [UIColor clearColor].CGColor;
     
@@ -110,6 +110,7 @@
                                                       [tabBarItemImages objectAtIndex:index]]];
         UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-未激活",
                                                         [tabBarItemImages objectAtIndex:index]]];
+        item.imagePositionAdjustment = UIOffsetMake(0, -BOT_OFFSET/2);
         [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
         
         index++;

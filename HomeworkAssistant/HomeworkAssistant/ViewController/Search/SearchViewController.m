@@ -40,7 +40,7 @@
     [self.view addSubview:grayLine];
     [grayLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.view).offset(210);
+        make.top.mas_equalTo(self.view).offset(210 + TOP_OFFSET);
         make.height.mas_equalTo(8);
     }];
     
@@ -130,7 +130,7 @@
     UIView *hotWordsView = [[UIView alloc]init];
     [self.view addSubview:hotWordsView];
     [hotWordsView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.navView.mas_bottom).with.offset(25);
+        make.top.mas_equalTo(self.navView.mas_bottom).with.offset(20);
         make.centerX.mas_equalTo(self.view);
         make.size.mas_equalTo(CGSizeMake(screenWidth, 120));
     }];
@@ -161,7 +161,7 @@
         make.left.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view);
         make.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(66);
+        make.height.mas_equalTo(72 + TOP_OFFSET);
     }];
     self.navView = navView;
     //返回按钮
@@ -171,8 +171,8 @@
     [navView addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
-        make.left.mas_equalTo(self.navView).with.offset(20);
-        make.bottom.mas_equalTo(self.navView).with.offset(-10);
+        make.left.mas_equalTo(self.navView).offset(20);
+        make.bottom.mas_equalTo(self.navView).offset(-15);
     }];
     
     //搜索框

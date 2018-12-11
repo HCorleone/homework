@@ -47,7 +47,7 @@
         make.left.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view);
         make.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(66);
+        make.height.mas_equalTo(72);
     }];
     self.navView = navView;
     //返回按钮
@@ -57,8 +57,8 @@
     [navView addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
-        make.left.mas_equalTo(self.navView).with.offset(20);
-        make.bottom.mas_equalTo(self.navView).with.offset(-10);
+        make.left.mas_equalTo(self.navView).offset(20);
+        make.bottom.mas_equalTo(self.navView).offset(-10);
     }];
     //标题
     UILabel *title = [[UILabel alloc]init];
@@ -126,7 +126,7 @@
 - (void) setupViewWithList:(NSMutableArray *)array {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.itemSize = CGSizeMake(screenWidth / 3, 160);
-    AnswerDetailCollectionView *adCV = [[AnswerDetailCollectionView alloc]initWithFrame:CGRectMake(0, 66, screenWidth, screenHeight - 66) collectionViewLayout:layout withArray:array];
+    AnswerDetailCollectionView *adCV = [[AnswerDetailCollectionView alloc]initWithFrame:CGRectMake(0, 72, screenWidth, screenHeight - 66) collectionViewLayout:layout withArray:array];
     adCV.isSelected = self.isSelected;
     [self.view addSubview:adCV];
 }

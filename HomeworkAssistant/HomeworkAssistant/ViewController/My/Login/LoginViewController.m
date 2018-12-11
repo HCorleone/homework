@@ -198,6 +198,7 @@
     //密码框
     LoginTextField *passwordF = [[LoginTextField alloc]init:@"请输入密码"];
     [loginView addSubview:passwordF];
+    passwordF.secureTextEntry = YES;
     [passwordF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(250, 50));
         make.centerX.mas_equalTo(loginView);
@@ -287,7 +288,7 @@
     [[TTUserManager sharedInstance]saveLoginUserInfo];
     [[TTUserManager sharedInstance]loadCurrentUserInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
-//    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     NSLog(@"发送用户登陆成功的通知");
 //    [self backToVc];
     

@@ -22,6 +22,8 @@
     if (self) {
         
         self.topImage = [[UIImageView alloc]init];
+        self.topImage.layer.masksToBounds = YES;
+        self.topImage.layer.cornerRadius = 4;
         [self addSubview:self.topImage];
         [self.topImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.and.top.mas_equalTo(self);

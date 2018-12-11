@@ -94,7 +94,7 @@
     [sloginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view).offset(31.5);
         make.right.mas_equalTo(self.view).offset(-31.5);
-        make.top.mas_equalTo(self.view).offset(75);
+        make.top.mas_equalTo(self.view).offset(0.1 * screenHeight + TOP_OFFSET);
         make.height.mas_equalTo(0.3 * screenHeight);
     }];
     self.sloginView = sloginView;
@@ -271,40 +271,45 @@
     self.loginView = [[UIView alloc]init];
     [self.view addSubview:self.loginView];
     self.loginView.backgroundColor = [UIColor whiteColor];
-    self.loginView.layer.cornerRadius = 10;
-    self.loginView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.loginView.layer.shadowOffset = CGSizeMake(0, 2);
-    self.loginView.layer.shadowOpacity = 0.5;
-    self.loginView.layer.shadowRadius = 3;
+    
     [self.loginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view).offset(31.5);
         make.right.mas_equalTo(self.view).offset(-31.5);
-        make.top.mas_equalTo(self.view).offset(75);
+        make.top.mas_equalTo(self.view).offset(0.1 * screenHeight + TOP_OFFSET);
         make.height.mas_equalTo(0.3 * screenHeight);
     }];
+    
+//    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.loginView.bounds];
+//    self.loginView.layer.shadowPath = path.CGPath;
+    
+    self.loginView.layer.cornerRadius = 2;
+    self.loginView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.loginView.layer.shadowOffset = CGSizeMake(0, 2);
+    self.loginView.layer.shadowOpacity = 0.1;
+    
+    
     //logo
     UIImageView *headImg = [[UIImageView alloc]init];
     headImg.image = [UIImage imageNamed:@"logo"];
     [self.loginView addSubview:headImg];
     [headImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.loginView);
-        make.top.mas_equalTo(self.loginView.mas_top).with.offset(28.5);
-        make.size.mas_equalTo(CGSizeMake(70, 70));
+        make.centerY.mas_equalTo(self.loginView).offset(-0.1*screenHeight/2);
+        make.size.mas_equalTo(CGSizeMake(0.1*screenHeight, 0.1*screenHeight));
     }];
     //登陆注册按钮
     UIButton *logoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     logoBtn.backgroundColor = maincolor;
-    logoBtn.layer.cornerRadius = 15;
+    logoBtn.layer.cornerRadius = 0.054 * screenHeight/2;
     [logoBtn setTitle:@"登陆/注册" forState:UIControlStateNormal];
     logoBtn.titleLabel.textColor = whitecolor;
     logoBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
     [self.loginView addSubview:logoBtn];
     [logoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.loginView);
-        make.top.mas_equalTo(headImg.mas_bottom).with.offset(20);
-        make.left.mas_equalTo(self.loginView).offset(80);
-        make.right.mas_equalTo(self.loginView).offset(-80);
-        make.height.mas_equalTo(36);
+        make.centerY.mas_equalTo(self.loginView).offset(0.054 * screenHeight/2 + 20);
+        make.width.mas_equalTo(0.4 * screenWidth + BOT_OFFSET);
+        make.height.mas_equalTo(0.054 * screenHeight);
     }];
     [logoBtn addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     

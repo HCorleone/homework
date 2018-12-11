@@ -44,6 +44,7 @@
 		3D7D18F221AE83A6006B9C8F /* login in Resources */ = {isa = PBXBuildFile; fileRef = 3D7D18F121AE83A6006B9C8F /* login */; };
 		3D7D18F821B0CCCF006B9C8F /* MyListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18F721B0CCCF006B9C8F /* MyListViewCell.m */; };
 		3D7D18FB21B0CEE4006B9C8F /* MyListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18FA21B0CEE4006B9C8F /* MyListView.m */; };
+		3D97C68221BE96D900D9404E /* GetCurrentDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97C68121BE96D900D9404E /* GetCurrentDevice.m */; };
 		3D9EA8EF2195A787006AF423 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9EA8EE2195A787006AF423 /* AppDelegate.m */; };
 		3D9EA8F72195A788006AF423 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D9EA8F62195A788006AF423 /* Assets.xcassets */; };
 		3D9EA8FA2195A788006AF423 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D9EA8F82195A788006AF423 /* LaunchScreen.storyboard */; };
@@ -187,6 +188,8 @@
 		3D7D18F721B0CCCF006B9C8F /* MyListViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyListViewCell.m; sourceTree = "<group>"; };
 		3D7D18F921B0CEE4006B9C8F /* MyListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyListView.h; sourceTree = "<group>"; };
 		3D7D18FA21B0CEE4006B9C8F /* MyListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyListView.m; sourceTree = "<group>"; };
+		3D97C68021BE96D900D9404E /* GetCurrentDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetCurrentDevice.h; sourceTree = "<group>"; };
+		3D97C68121BE96D900D9404E /* GetCurrentDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetCurrentDevice.m; sourceTree = "<group>"; };
 		3D9EA8EA2195A787006AF423 /* HomeworkAssistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeworkAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9EA8ED2195A787006AF423 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3D9EA8EE2195A787006AF423 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -597,6 +600,8 @@
 				9F4D104A21B7F9A100F4610A /* NIDropDown.m */,
 				9FD90A1221B915D000EDF389 /* CommonAlterView.h */,
 				9FD90A1321B915D000EDF389 /* CommonAlterView.m */,
+				3D97C68021BE96D900D9404E /* GetCurrentDevice.h */,
+				3D97C68121BE96D900D9404E /* GetCurrentDevice.m */,
 				9F4D108E21B8037900F4610A /* Category */,
 			);
 			path = Util;
@@ -890,6 +895,7 @@
 				3D1C2BDB21A5311800725BD4 /* AnswerDetailCollectionViewCell.m in Sources */,
 				3D7D18F021AE69E6006B9C8F /* TTUserManager.m in Sources */,
 				3D9EAF1E21A5305C006AF423 /* AnswerDetailCollectionView.m in Sources */,
+				3D97C68221BE96D900D9404E /* GetCurrentDevice.m in Sources */,
 				3D9EAF1B21A53010006AF423 /* AnswerDetail.m in Sources */,
 				9FD90A3221BA49C000EDF389 /* EditorNameView.m in Sources */,
 				3D7D18E021AC1997006B9C8F /* AnswerDetailViewController.m in Sources */,
