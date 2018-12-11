@@ -301,6 +301,7 @@
         }
         else
         {
+            self.navigationController.interactivePopGestureRecognizer.enabled = NO;
             [weakSelf.navigationController pushViewController:[[FillOthersViewController alloc] init] animated:YES];
         }
         

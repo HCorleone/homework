@@ -121,11 +121,16 @@
     // Draw image and title
     
     if (![_title length]) {
+//        [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) +
+//                                     _imagePositionAdjustment.horizontal,
+//                                     roundf(frameSize.height / 2 - imageSize.height / 2) +
+//                                     _imagePositionAdjustment.vertical,
+//                                     imageSize.width, imageSize.height)];
         [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) +
                                      _imagePositionAdjustment.horizontal,
                                      roundf(frameSize.height / 2 - imageSize.height / 2) +
                                      _imagePositionAdjustment.vertical,
-                                     imageSize.width, imageSize.height)];
+                                     24, 36)];
     } else {
         
         if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {

@@ -23,7 +23,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    //判断是否有用户登陆
     TTUserManager *manager = [TTUserManager sharedInstance];
     if (manager.currentUser.name == nil) {
         manager.isLogin = NO;
@@ -48,6 +48,7 @@
     
     return YES;
 }
+
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
     
@@ -106,18 +107,19 @@
     for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
 //        [item setTitle:tabBarItemTitles[index]];
 //        [item setBackgroundSelectedImage:finishedImage withUnselectedImage:unfinishedImage];
-        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-激活",
+        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-选中",
                                                       [tabBarItemImages objectAtIndex:index]]];
-        UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-未激活",
+        UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-默认",
                                                         [tabBarItemImages objectAtIndex:index]]];
-        item.imagePositionAdjustment = UIOffsetMake(0, -BOT_OFFSET/2);
+        if (!BOT_OFFSET) {
+            item.imagePositionAdjustment = UIOffsetMake(0, BOT_OFFSET/2);
+        }
+        
         [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
         
         index++;
     }
 }
-
-
 
 
 
