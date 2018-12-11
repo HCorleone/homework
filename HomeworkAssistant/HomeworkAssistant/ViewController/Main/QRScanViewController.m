@@ -93,8 +93,8 @@
                 [self.scanView removeTimer];
                 [self.scanManager stopRunning];
                 NSLog(@"%@",[result substringFromIndex:7]);
-//                NSString *code = [result substringFromIndex:7];
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"shareCode" object:nil userInfo:@{@"shareCode":code}];
+                NSString *code = [result substringFromIndex:7];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"shareCode" object:nil userInfo:@{@"shareCode":code}];
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }

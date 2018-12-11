@@ -232,7 +232,7 @@
             
             [TTUserManager sharedInstance].currentUser.city = responseObject[@"city"];
             [TTUserManager sharedInstance].currentUser.grade = responseObject[@"grade"];
-            [TTUserManager sharedInstance].currentUser.openId = responseObject[@"schoolID"];
+            [TTUserManager sharedInstance].currentUser.schoolID = responseObject[@"schoolID"];
             
             [self.navigationController popToRootViewControllerAnimated:YES];
         }

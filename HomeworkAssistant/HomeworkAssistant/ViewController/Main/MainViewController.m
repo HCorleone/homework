@@ -142,6 +142,7 @@
 }
 
 - (void)shareMyList {
+    
     QRCodeView *testView = [[QRCodeView alloc]init];
     [testView showQRCode];
     self.testView = testView;
