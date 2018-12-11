@@ -10,6 +10,8 @@
 #import "LoginTextField.h"
 #import "SingUpViewController.h"
 #import "ForgetPwdViewController.h"
+#import "FillOthersViewController.h"
+#import "YTQGetUserManager.h"
 
 @interface LoginViewController ()
 
@@ -177,7 +179,7 @@
     loginView.layer.cornerRadius = 2;
     loginView.layer.opacity = 0.9;
     loginView.layer.masksToBounds = YES;
-    loginView.backgroundColor = [UIColor clearColor];
+    loginView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.1];
     [self.view addSubview:loginView];
     [loginView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(300, 300));
@@ -197,6 +199,7 @@
     
     //密码框
     LoginTextField *passwordF = [[LoginTextField alloc]init:@"请输入密码"];
+    passwordF.secureTextEntry = YES;//暗文
     [loginView addSubview:passwordF];
     passwordF.secureTextEntry = YES;
     [passwordF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -288,7 +291,18 @@
     [[TTUserManager sharedInstance]saveLoginUserInfo];
     [[TTUserManager sharedInstance]loadCurrentUserInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    __weak typeof(self) weakSelf = self;
+    [[YTQGetUserManager alloc] getUserManager:^(NSMutableDictionary * _Nonnull dic) {
+        if ([dic valueForKey:@"grade"]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            [weakSelf.navigationController pushViewController:[[FillOthersViewController alloc] init] animated:YES];
+        }
+        
+    }];
     NSLog(@"发送用户登陆成功的通知");
 //    [self backToVc];
     
