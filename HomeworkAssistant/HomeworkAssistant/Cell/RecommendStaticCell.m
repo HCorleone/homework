@@ -31,8 +31,10 @@
     if (self) {
         
         self.saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.saveBtn.layer.borderWidth = 1;
+        self.saveBtn.layer.borderWidth = 0.5;
+        self.saveBtn.layer.cornerRadius = 2;
         self.saveBtn.layer.borderColor = maincolor.CGColor;
+        self.saveBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
         [self.saveBtn setBackgroundColor:whitecolor];
         [self.saveBtn setTitle:@"收藏" forState:UIControlStateNormal];
         [self.saveBtn setTitleColor:maincolor forState:UIControlStateNormal];
@@ -46,6 +48,8 @@
         self.isSelected = NO;
         
         self.bookCover = [[UIImageView alloc]init];
+        self.bookCover.layer.masksToBounds = YES;
+        self.bookCover.layer.cornerRadius = 4;
         self.bookCover.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:self.bookCover];
         [self.bookCover mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -62,7 +66,7 @@
         [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self).offset(10);
             make.left.mas_equalTo(self.bookCover.mas_right).with.offset(15);
-            make.right.mas_equalTo(self).offset(-15);
+            make.right.mas_equalTo(self).offset(-25);
 //            make.height.mas_equalTo(34);
         }];
         

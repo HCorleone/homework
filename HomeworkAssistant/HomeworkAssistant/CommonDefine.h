@@ -9,6 +9,11 @@
 #ifndef CommonDefine_h
 #define CommonDefine_h
 
+//用于适配x及以上的设备
+#define TOP_OFFSET [GetCurrentDevice getTopOffset]
+#define BOT_OFFSET [GetCurrentDevice getBotOffset]
+
+
 //tabbarheight
 #define tabbarheight 48
 

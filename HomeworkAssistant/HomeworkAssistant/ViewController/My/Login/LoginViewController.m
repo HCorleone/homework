@@ -10,8 +10,6 @@
 #import "LoginTextField.h"
 #import "SingUpViewController.h"
 #import "ForgetPwdViewController.h"
-#import "FillOthersViewController.h"
-#import "YTQGetUserManager.h"
 
 @interface LoginViewController ()
 
@@ -92,13 +90,14 @@
 }
 
 
-#pragma QQ登陆
+#pragma mark - QQ登陆
 - (void)qqUser {
     
 }
 
-#pragma 微信登陆
+#pragma mark - 微信登陆
 - (void)wechatUser {
+    [[TTUserManager sharedInstance] clearCurrentUserInfo];
     SendAuthReq *req = [[SendAuthReq alloc] init];
     req.scope = @"snsapi_userinfo";
     req.state = @"HA_APP";
@@ -115,6 +114,30 @@
         SendAuthResp *temp = (SendAuthResp *)resp;
         if (temp.errCode == 0) {
             //用户同意授权
+            NSString *URL = @"https://api.weixin.qq.com/sns/oauth2/access_token?";
+            NSDictionary *dict = @{
+                                   @"appid":WX_APPID,
+                                   @"secret":WXAPPKEYSECRET,
+                                   @"code":temp.code,
+                                   @"grant_type":@"authorization_code"
+                                   };
+            
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+            
+            NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                
+                [TTUserManager sharedInstance].currentUser.accessToken = responseObject[@"access_token"];
+                [TTUserManager sharedInstance].currentUser.refreshToken = responseObject[@"refresh_token"];
+                [TTUserManager sharedInstance].currentUser.expires_in = responseObject[@"expires_in"];
+                [TTUserManager sharedInstance].currentUser.scope = responseObject[@"scope"];
+                [TTUserManager sharedInstance].currentUser.unionid = responseObject[@"unionid"];
+                [TTUserManager sharedInstance].currentUser.openid = responseObject[@"openid"];
+                [TTUserManager sharedInstance].currentUser.openId = responseObject[@"openid"];
+                
+                [self getUserInfoFromWechat];
+            } failure:nil];
+            [dataTask resume];
             
         }
         else {
@@ -123,9 +146,30 @@
     }
 }
 
+- (void)getUserInfoFromWechat {
+    
+    NSString *URL = @"https://api.weixin.qq.com/sns/userinfo?";
+    NSDictionary *dict = @{
+                           @"access_token":[TTUserManager sharedInstance].currentUser.accessToken,
+                           @"openid":[TTUserManager sharedInstance].currentUser.openid,
+                           };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    //            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [TTUserManager sharedInstance].currentUser.headImgUrl = responseObject[@"headimgurl"];
+        [TTUserManager sharedInstance].currentUser.name = responseObject[@"nickname"];
+        [self loginSuccess];
+        
+    } failure:nil];
+    [dataTask resume];
+    
+}
 
 #pragma functions
-- (void) setupLoginView {
+- (void)setupLoginView {
     //登陆框
     UIView *loginView = [[UIView alloc]init];
     loginView.layer.borderWidth = 1;
@@ -154,6 +198,7 @@
     //密码框
     LoginTextField *passwordF = [[LoginTextField alloc]init:@"请输入密码"];
     [loginView addSubview:passwordF];
+    passwordF.secureTextEntry = YES;
     [passwordF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(250, 50));
         make.centerX.mas_equalTo(loginView);
@@ -202,7 +247,9 @@
     [forgetBtn addTarget:self action:@selector(forget) forControlEvents:UIControlEventTouchUpInside];
     
 }
-//手机号登陆
+
+
+#pragma mark - 手机号登陆
 - (void)signin {
     [[TTUserManager sharedInstance] clearCurrentUserInfo];
     
@@ -225,6 +272,7 @@
             [TTUserManager sharedInstance].currentUser.name = responseObject[@"name"];
             [TTUserManager sharedInstance].currentUser.openId = responseObject[@"openId"];
             [self loginSuccess];
+            
         }
         else {
             //登陆失败
@@ -240,23 +288,9 @@
     [[TTUserManager sharedInstance]saveLoginUserInfo];
     [[TTUserManager sharedInstance]loadCurrentUserInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
+    [self.navigationController popViewControllerAnimated:YES];
     NSLog(@"发送用户登陆成功的通知");
-    
-    //判断是否填写年级和地区
-    [[YTQGetUserManager alloc] getUserManager:^(NSMutableDictionary * _Nonnull dic) {
-        if ([dic valueForKey:@"grade"]) {
-            //填写过直接回主界面
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        else
-        {
-            //没有填写跳转到填写界面
-            [self.navigationController pushViewController:[[FillOthersViewController alloc] init] animated:YES];
-        }
-        
-    }];
-    
-    
+//    [self backToVc];
     
 }
 

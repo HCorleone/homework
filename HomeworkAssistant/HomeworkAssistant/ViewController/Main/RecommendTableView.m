@@ -56,8 +56,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    RecommendStaticCell *cell = [self cellForRowAtIndexPath:indexPath];
+    
     AnswerViewController *answerVC = [[AnswerViewController alloc]init];
     answerVC.bookModel = self.dataList[indexPath.row];
+    answerVC.isSelected = cell.isSelected;
     [[self viewController].navigationController pushViewController:answerVC animated:YES];
 }
 

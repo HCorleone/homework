@@ -51,7 +51,7 @@ static NSString *page = @"1";
         make.left.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view);
         make.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(66);
+        make.height.mas_equalTo(72 + TOP_OFFSET);
     }];
     self.navView = navView;
     //返回按钮
@@ -61,8 +61,8 @@ static NSString *page = @"1";
     [navView addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
-        make.left.mas_equalTo(self.navView).with.offset(20);
-        make.bottom.mas_equalTo(self.navView).with.offset(-10);
+        make.left.mas_equalTo(self.navView).offset(20);
+        make.bottom.mas_equalTo(self.navView).offset(-15);
     }];
     
     //搜索框
@@ -147,7 +147,7 @@ static NSString *page = @"1";
 
 - (void)setupViewWithList:(NSMutableArray *)array {
     
-    RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 102, screenWidth,screenHeight - 102) style:UITableViewStylePlain withArray:array];
+    RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 108 + TOP_OFFSET, screenWidth,screenHeight - 108 - TOP_OFFSET) style:UITableViewStylePlain withArray:array];
     [self.view addSubview:rTableView];
     rTableView.scrollEnabled = YES;
     rTableView.estimatedRowHeight = 0;
@@ -215,7 +215,7 @@ static NSString *page = @"1";
     
     //菜单栏
     YZPullDownMenu *menu = [[YZPullDownMenu alloc] init];
-    menu.frame = CGRectMake(0, 66, screenWidth, 36);
+    menu.frame = CGRectMake(0, 72 + TOP_OFFSET, screenWidth, 36);
     [self.view addSubview:menu];
     
     menu.dataSource = self;

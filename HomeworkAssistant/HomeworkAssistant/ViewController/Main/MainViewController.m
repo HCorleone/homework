@@ -190,7 +190,7 @@
 
 - (void)setupViewWithData:(NSMutableArray *)array {
     //为您推荐
-    RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 456, screenWidth,array.count * 128) style:UITableViewStylePlain withArray:array];
+    RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 456, screenWidth,array.count * 128 ) style:UITableViewStylePlain withArray:array];
     [self.mainContentView addSubview:rTableView];
     //    self.mainView.contentSize = CGSizeMake(screenWidth, 456 + rTableView.frame.size.height);
 }
@@ -198,12 +198,17 @@
 //导航栏
 - (void)setupNavView {
     
+    UIView *topOffsetView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, TOP_OFFSET)];
+    topOffsetView.backgroundColor = maincolor;
+    [self.view addSubview:topOffsetView];
+    
     self.navView = [[UIView alloc]init];
     self.navView.hidden = YES;
     [self.view addSubview:self.navView];
     [self.navView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(self.view);
-        make.left.and.top.mas_equalTo(self.view);
+        make.left.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view).offset(TOP_OFFSET);
         make.height.mas_equalTo(72);
     }];
     self.navView.backgroundColor = maincolor;
@@ -257,14 +262,19 @@
 }
 
 - (void)setupView {
+    self.view.backgroundColor = whitecolor;
+    
+    UIView *topOffsetView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, TOP_OFFSET)];
+    topOffsetView.backgroundColor = maincolor;
+    [self.view addSubview:topOffsetView];
     
     UIScrollView *mainView = [[UIScrollView alloc]init];
     [self.view addSubview:mainView];
     [mainView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view).offset(TOP_OFFSET);
         make.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(screenHeight - tabbarheight);
+        make.height.mas_equalTo(screenHeight - tabbarheight - BOT_OFFSET - TOP_OFFSET);
     }];
     mainView.showsVerticalScrollIndicator = NO;
     mainView.bounces = NO;
@@ -273,15 +283,14 @@
     self.mainView =mainView;
     
     
-    self.mainView.contentSize = CGSizeMake(screenWidth, 30 * 128 + 456);
+    self.mainView.contentSize = CGSizeMake(screenWidth, 30*128 + 456);
     //    self.mainView.userInteractionEnabled = NO;
     
     UIView *mainContentView = [[UIView alloc]init];
     mainContentView.backgroundColor = whitecolor;
     [self.mainView addSubview:mainContentView];
     [mainContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        //        make.width.mas_equalTo(self.mainView);
-        //        make.height.mas_equalTo(1000);
+        make.top.and.left.mas_equalTo(self.mainView);
         make.size.mas_equalTo(self.mainView.contentSize);
     }];
     self.mainContentView = mainContentView;
@@ -334,7 +343,7 @@
     [self.view addSubview:scanLogo];
     [scanLogo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
-        make.top.mas_equalTo(self.view).offset(33);
+        make.top.mas_equalTo(self.view).offset(33 + TOP_OFFSET);
         make.right.mas_equalTo(self.view).offset(-20);
     }];
     scanLogo.userInteractionEnabled = YES;

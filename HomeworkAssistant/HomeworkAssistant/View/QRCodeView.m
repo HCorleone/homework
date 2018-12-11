@@ -26,9 +26,10 @@
     //白色框
     UIView *whiteView = [[UIView alloc]init];
     whiteView.backgroundColor = whitecolor;
+    whiteView.layer.cornerRadius = 4;
     [bgView addSubview:whiteView];
     [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(250, 250));
+        make.size.mas_equalTo(CGSizeMake(250, 235));
         make.center.mas_equalTo(bgView);
     }];
     
@@ -40,7 +41,22 @@
     [whiteView addSubview:codeView];
     [codeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(125, 125));
-        make.center.mas_equalTo(whiteView);
+        make.centerX.mas_equalTo(whiteView);
+        make.top.mas_equalTo(whiteView).offset(25);
+    }];
+    
+    //标题文字
+    UILabel *title = [[UILabel alloc] init];
+    title.text = @"使用作业答案助手扫二维码就可以轻松同步书单啦";
+    title.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
+    title.textAlignment = NSTextAlignmentCenter;
+    title.numberOfLines = 0;
+    title.lineBreakMode = UILineBreakModeCharacterWrap;
+    [whiteView addSubview:title];
+    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(whiteView);
+        make.top.mas_equalTo(codeView.mas_bottom).with.offset(8);
+        make.size.mas_equalTo(CGSizeMake(224, 60));
     }];
     
     UITapGestureRecognizer *cancelGesture = [[UITapGestureRecognizer alloc] init];

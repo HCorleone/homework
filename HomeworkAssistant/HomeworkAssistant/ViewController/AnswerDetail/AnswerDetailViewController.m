@@ -17,7 +17,6 @@
 @property (nonatomic, strong) UIButton *shareBtn;
 @property (nonatomic, strong) UIButton *collectBtn;
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, assign) BOOL isSelected;
 
 @end
 
@@ -42,7 +41,7 @@
         make.left.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view);
         make.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(66);
+        make.height.mas_equalTo(72);
     }];
     self.navView = navView;
     //返回按钮
@@ -52,8 +51,8 @@
     [navView addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
-        make.left.mas_equalTo(self.navView).with.offset(20);
-        make.bottom.mas_equalTo(self.navView).with.offset(-10);
+        make.left.mas_equalTo(self.navView).offset(20);
+        make.bottom.mas_equalTo(self.navView).offset(-10);
     }];
     //标题
     UILabel *title = [[UILabel alloc]init];
@@ -84,9 +83,16 @@
     
     UIButton *collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:collectBtn];
-    [collectBtn setBackgroundColor:maincolor];
-    [collectBtn setTitle:@"收藏到书单" forState:UIControlStateNormal];
-    [collectBtn setTitleColor:whitecolor forState:UIControlStateNormal];
+    if (!self.isSelected) {
+        [collectBtn setBackgroundColor:maincolor];
+        [collectBtn setTitle:@"收藏到书单" forState:UIControlStateNormal];
+        [collectBtn setTitleColor:whitecolor forState:UIControlStateNormal];
+    }
+    else {
+        [collectBtn setBackgroundColor:whitecolor];
+        [collectBtn setTitle:@"已收藏至书单" forState:UIControlStateNormal];
+        [collectBtn setTitleColor:[UIColor colorWithHexString:@"#D5D5D5"] forState:UIControlStateNormal];
+    }
     collectBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
     [collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.and.bottom.mas_equalTo(self.view);
@@ -155,11 +161,11 @@
 
 - (void)setupBrowser {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-    layout.itemSize = CGSizeMake(screenWidth, screenHeight - 48 - 66);
+    layout.itemSize = CGSizeMake(screenWidth, screenHeight - 48 - 72);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumLineSpacing = 0;
     
-    UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:self.view.frame collectionViewLayout:layout];
+    UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 72, screenWidth, screenHeight - 48 - 72) collectionViewLayout:layout];
     [self.view addSubview:collectionView];
 //    [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.right.mas_equalTo(self.view);
