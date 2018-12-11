@@ -32,7 +32,7 @@
     }];
     
     //信息名
-    NSArray *nameArr = @[@"昵称:", @"年级:", @""];
+    NSArray *nameArr = @[@"昵称:", @"年级:", @"地区:"];
     for (int i = 0 ; i < 3; i++) {
         _nameLabel = [UILabel labelWithContent:nameArr[i] SuperView:self TextColor:UIColorFromRGB(0x8F9394) Font:[UIFont systemFontOfSize:16.0] TextAlignment:NSTextAlignmentLeft NumberOfLines:1];
         _nameLabel.frame = CGRectMake(screenWidth * 0.18, screenHeight * 0.256 + screenHeight * 0.093 * i, screenWidth * 0.128, 16);
@@ -53,10 +53,10 @@
     _downBtn.frame = CGRectMake(screenWidth * 0.308, screenHeight * 0.339, screenWidth * 0.513, 30);
     
     //地区
-//    _cityBtn = [UIButton buttonWithText:@"请选择城市" TextColor:UIColorFromRGB(0x8F9394) TextSize:16 SuperView:self Tag:1002 Target:self Action:@selector(clickBtn:)];
-//    _cityBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-//    _cityBtn.backgroundColor = [UIColor colorWithRed:244/255.0 green:244/255.0 blue:244/255.0 alpha:1/1.0];
-//    _cityBtn.frame = CGRectMake(screenWidth * 0.308, screenHeight * 0.433, screenWidth * 0.513, 30);
+    _cityBtn = [UIButton buttonWithText:@"请选择城市" TextColor:UIColorFromRGB(0x8F9394) TextSize:16 SuperView:self Tag:1002 Target:self Action:@selector(clickBtn:)];
+    _cityBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    _cityBtn.backgroundColor = [UIColor colorWithRed:244/255.0 green:244/255.0 blue:244/255.0 alpha:1/1.0];
+    _cityBtn.frame = CGRectMake(screenWidth * 0.308, screenHeight * 0.433, screenWidth * 0.513, 30);
     
     //确认
     _okBtn = [UIButton buttonWithText:@"确认" TextColor:UIColorFromRGB(0x0BA7D4) TextSize:16 SuperView:whiteView Tag:1003 Target:self Action:@selector(clickBtn:)];

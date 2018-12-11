@@ -30,6 +30,12 @@ static TTUserManager *manager = nil;
     [def setObject:self.currentUser.name forKey:@"name"];
     [def setObject:self.currentUser.openId forKey:@"openId"];
     [def setObject:self.currentUser.grade forKey:@"grade"];
+    [def setObject:self.currentUser.city forKey:@"city"];
+    [def setObject:self.currentUser.schoolID forKey:@"schoolID"];
+    [def setObject:self.currentUser.schoolName forKey:@"schoolName"];
+    [def setObject:self.currentUser.longitude forKey:@"longitude"];
+    [def setObject:self.currentUser.latitude forKey:@"latitude"];
+    
 }
 
 - (void)saveLoginUserInfo {
@@ -39,6 +45,11 @@ static TTUserManager *manager = nil;
     [def setObject:self.currentUser.name forKey:@"name"];
     [def setObject:self.currentUser.openId forKey:@"openId"];
     [def setObject:self.currentUser.grade forKey:@"grade"];
+    [def setObject:self.currentUser.city forKey:@"city"];
+    [def setObject:self.currentUser.schoolID forKey:@"schoolID"];
+    [def setObject:self.currentUser.schoolName forKey:@"schoolName"];
+    [def setObject:self.currentUser.longitude forKey:@"longitude"];
+    [def setObject:self.currentUser.latitude forKey:@"latitude"];
 }
 
 - (void)loadCurrentUserInfo {
@@ -47,6 +58,11 @@ static TTUserManager *manager = nil;
     self.currentUser.headImgUrl = [def stringForKey:@"headImgUrl"];
     self.currentUser.name = [def stringForKey:@"name"];
     self.currentUser.openId = [def stringForKey:@"openId"];
+    self.currentUser.city  = [def stringForKey:@"city"];
+    self.currentUser.schoolID = [def stringForKey:@"schoolID"];
+    self.currentUser.schoolName = [def stringForKey:@"schoolName"];
+    self.currentUser.longitude = [def stringForKey:@"longitude"];
+    self.currentUser.latitude = [def stringForKey:@"latitude"];
 }
 
 - (void)clearCurrentUserInfo {

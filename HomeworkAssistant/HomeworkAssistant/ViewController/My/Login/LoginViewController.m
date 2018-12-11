@@ -10,6 +10,8 @@
 #import "LoginTextField.h"
 #import "SingUpViewController.h"
 #import "ForgetPwdViewController.h"
+#import "FillOthersViewController.h"
+#import "YTQGetUserManager.h"
 
 @interface LoginViewController ()
 
@@ -239,7 +241,22 @@
     [[TTUserManager sharedInstance]loadCurrentUserInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
     NSLog(@"发送用户登陆成功的通知");
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    //判断是否填写年级和地区
+    [[YTQGetUserManager alloc] getUserManager:^(NSMutableDictionary * _Nonnull dic) {
+        if ([dic valueForKey:@"grade"]) {
+            //填写过直接回主界面
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            //没有填写跳转到填写界面
+            [self.navigationController pushViewController:[[FillOthersViewController alloc] init] animated:YES];
+        }
+        
+    }];
+    
+    
     
 }
 
