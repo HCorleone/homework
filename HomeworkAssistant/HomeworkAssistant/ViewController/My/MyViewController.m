@@ -18,6 +18,7 @@
 #import "NIDropDown.h"
 #import "YTQGetUserManager.h"
 #import "CommonAlterView.h"
+#import "SHPlacePickerView.h"
 
 @interface MyViewController () <UITableViewDelegate, UITableViewDataSource, NIDropDownDelegate>
 
@@ -31,6 +32,8 @@
 @property (nonatomic, strong) NIDropDown *dropDown;
 /** 年级 */
 @property (nonatomic, strong) UILabel *gradeLabel;
+/** 地区选择器 */
+@property (nonatomic, strong) SHPlacePickerView *shplacePicker;
 
 @end
 
@@ -46,7 +49,7 @@
     [super viewWillAppear:animated];
     
     //判断是否有账号登陆
-    if (userValue(@"name")) {
+    if ([TTUserManager sharedInstance].isLogin) {
         
         __weak typeof(self) weakSelf = self;
         [[YTQGetUserManager alloc] getUserManager:^(NSMutableDictionary * _Nonnull dic) {
@@ -217,6 +220,7 @@
             case 1002:
             {
                 NSLog(@"地区");
+                [weakSelf selectCity];
             }
                 break;
                 
@@ -242,6 +246,8 @@
                 NSLog(@"取消");
                 weakSelf.editor.hidden = YES;
                 [weakSelf.editor removeFromSuperview];
+                weakSelf.shplacePicker.hidden = YES;
+                [weakSelf.shplacePicker removeFromSuperview];
                 [[weakSelf rdv_tabBarController] setTabBarHidden:NO animated:NO];
             }
                 break;
@@ -250,6 +256,20 @@
     };
     [self.view addSubview:_editor];
     
+}
+
+//选择城市
+-(void)selectCity {
+    
+    __weak __typeof(self)weakSelf = self;
+    self.shplacePicker = [[SHPlacePickerView alloc] initWithIsRecordLocation:YES SendPlaceArray:^(NSArray *placeArray) {
+        
+        NSLog(@"省:%@ 市:%@ 区:%@",placeArray[0],placeArray[1],placeArray[2]);
+        [weakSelf.editor.cityBtn setTitle:[NSString stringWithFormat:@"%@", placeArray[1]] forState:UIControlStateNormal];
+        
+    }];
+    self.shplacePicker.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.shplacePicker];
 }
 
 -(void)clickEditor {
@@ -344,7 +364,7 @@
     NSDictionary *dic = @{@"h":@"ZYUpsertUserExtHander",
                           @"openID":userValue(@"openId"),
                           @"grade":self.editor.downBtn.titleLabel.text,
-                          @"city":@"北京",
+                          @"city":self.editor.cityBtn.titleLabel.text,
                           @"av":@"_debug_"};
     
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];

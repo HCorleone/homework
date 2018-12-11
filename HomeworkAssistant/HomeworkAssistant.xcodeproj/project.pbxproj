@@ -111,6 +111,11 @@
 		9F4D10A021B8037900F4610A /* UIImageView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D109921B8037900F4610A /* UIImageView+Category.m */; };
 		9F4D10A121B8037900F4610A /* UILabel+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D109B21B8037900F4610A /* UILabel+Category.m */; };
 		9F4D10A221B8037900F4610A /* UITextField+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D109D21B8037900F4610A /* UITextField+Category.m */; };
+		9F629B7721BE425B002A79AC /* PlaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F629B7321BE425B002A79AC /* PlaceModel.m */; };
+		9F629B7921BE425B002A79AC /* SHPlacePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F629B7621BE425B002A79AC /* SHPlacePickerView.m */; };
+		9F629B7B21BE4902002A79AC /* Place.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F629B7A21BE4902002A79AC /* Place.plist */; };
+		9F629B7E21BE4B38002A79AC /* FillOthersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F629B7D21BE4B38002A79AC /* FillOthersViewController.m */; };
+		9F629B8121BE73C2002A79AC /* FillOthersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F629B8021BE73C2002A79AC /* FillOthersView.m */; };
 		9F740E6721B8F6C700EE9657 /* UpAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F740E6621B8F6C700EE9657 /* UpAnswerViewController.m */; };
 		9FD90A1421B915D000EDF389 /* CommonAlterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A1321B915D000EDF389 /* CommonAlterView.m */; };
 		9FD90A2021B91FB000EDF389 /* SubmitCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A1E21B91FB000EDF389 /* SubmitCollectionViewCell.m */; };
@@ -289,6 +294,15 @@
 		9F4D109B21B8037900F4610A /* UILabel+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Category.m"; sourceTree = "<group>"; };
 		9F4D109C21B8037900F4610A /* UITextField+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Category.h"; sourceTree = "<group>"; };
 		9F4D109D21B8037900F4610A /* UITextField+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Category.m"; sourceTree = "<group>"; };
+		9F629B7221BE425B002A79AC /* PlaceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceModel.h; sourceTree = "<group>"; };
+		9F629B7321BE425B002A79AC /* PlaceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceModel.m; sourceTree = "<group>"; };
+		9F629B7521BE425B002A79AC /* SHPlacePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHPlacePickerView.h; sourceTree = "<group>"; };
+		9F629B7621BE425B002A79AC /* SHPlacePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHPlacePickerView.m; sourceTree = "<group>"; };
+		9F629B7A21BE4902002A79AC /* Place.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Place.plist; sourceTree = "<group>"; };
+		9F629B7C21BE4B38002A79AC /* FillOthersViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FillOthersViewController.h; sourceTree = "<group>"; };
+		9F629B7D21BE4B38002A79AC /* FillOthersViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FillOthersViewController.m; sourceTree = "<group>"; };
+		9F629B7F21BE73C2002A79AC /* FillOthersView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FillOthersView.h; sourceTree = "<group>"; };
+		9F629B8021BE73C2002A79AC /* FillOthersView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FillOthersView.m; sourceTree = "<group>"; };
 		9F740E6521B8F6C700EE9657 /* UpAnswerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpAnswerViewController.h; sourceTree = "<group>"; };
 		9F740E6621B8F6C700EE9657 /* UpAnswerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpAnswerViewController.m; sourceTree = "<group>"; };
 		9F740E6821B9016F00EE9657 /* CommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonDefine.h; sourceTree = "<group>"; };
@@ -561,6 +575,8 @@
 				9F4D103021B7C67A00F4610A /* ForgetPwdViewController.m */,
 				9F4D102C21B7C67800F4610A /* SingUpViewController.h */,
 				9F4D102E21B7C67900F4610A /* SingUpViewController.m */,
+				9F629B7C21BE4B38002A79AC /* FillOthersViewController.h */,
+				9F629B7D21BE4B38002A79AC /* FillOthersViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -585,6 +601,7 @@
 		3D9EAF1021A3CBBF006AF423 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				9F629B7021BE425B002A79AC /* YTQPlacePickerView */,
 				9FD90A3921BBD20000EDF389 /* CHFFMDB */,
 				3D9EA94A219BBA19006AF423 /* UITextView+UITextView_Placeholder.h */,
 				3D9EA94B219BBA19006AF423 /* UITextView+UITextView_Placeholder.m */,
@@ -658,6 +675,8 @@
 				9F4D102F21B7C67900F4610A /* SingUpView.m */,
 				9F4D102921B7C67700F4610A /* ForgetPwdView.h */,
 				9F4D102A21B7C67800F4610A /* ForgetPwdView.m */,
+				9F629B7F21BE73C2002A79AC /* FillOthersView.h */,
+				9F629B8021BE73C2002A79AC /* FillOthersView.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -678,6 +697,27 @@
 				9F4D109D21B8037900F4610A /* UITextField+Category.m */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		9F629B7021BE425B002A79AC /* YTQPlacePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				9F629B7121BE425B002A79AC /* Model */,
+				9F629B7521BE425B002A79AC /* SHPlacePickerView.h */,
+				9F629B7621BE425B002A79AC /* SHPlacePickerView.m */,
+				9F629B7A21BE4902002A79AC /* Place.plist */,
+			);
+			name = YTQPlacePickerView;
+			path = YPlacePickerView;
+			sourceTree = "<group>";
+		};
+		9F629B7121BE425B002A79AC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9F629B7221BE425B002A79AC /* PlaceModel.h */,
+				9F629B7321BE425B002A79AC /* PlaceModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9FD90A3921BBD20000EDF389 /* CHFFMDB */ = {
@@ -795,6 +835,7 @@
 				3D9EA8F72195A788006AF423 /* Assets.xcassets in Resources */,
 				3D9EA91D219A9B7A006AF423 /* 切图 in Resources */,
 				3D9EAF0421A2E18E006AF423 /* 扫一扫@2x.png in Resources */,
+				9F629B7B21BE4902002A79AC /* Place.plist in Resources */,
 				3D9EAF1421A4F3C6006AF423 /* 空状态@3x.png in Resources */,
 				3D9EA969219D7405006AF423 /* 第三方登录-渐变分割线@2x.png in Resources */,
 				3D9EA929219A9B9C006AF423 /* 分享应用@2x.png in Resources */,
@@ -861,6 +902,7 @@
 			files = (
 				3D7D18F821B0CCCF006B9C8F /* MyListViewCell.m in Sources */,
 				3D4725B121BA78CA00C0E7CF /* CollectionHeaderView.m in Sources */,
+				9F629B8121BE73C2002A79AC /* FillOthersView.m in Sources */,
 				3D4725A221BA5F1600C0E7CF /* VersionViewController.m in Sources */,
 				9F740E6721B8F6C700EE9657 /* UpAnswerViewController.m in Sources */,
 				9F4D104621B7E83C00F4610A /* FillBookInformationView.m in Sources */,
@@ -874,6 +916,7 @@
 				9F4D104C21B7F9A100F4610A /* NIDropDown.m in Sources */,
 				3D9EA90921990802006AF423 /* MyViewController.m in Sources */,
 				3D47259021BA591C00C0E7CF /* YZPullDownMenu.m in Sources */,
+				9F629B7721BE425B002A79AC /* PlaceModel.m in Sources */,
 				3D1C2BDE21A5430400725BD4 /* NSString+MD5.m in Sources */,
 				3D7C713221A659DD008F9D52 /* SearchViewController.m in Sources */,
 				9F4D104321B7E5FC00F4610A /* FillBookInformationViewController.m in Sources */,
@@ -907,6 +950,7 @@
 				9FD90A3E21BBD20000EDF389 /* AssignToObject.m in Sources */,
 				3D9EA8EF2195A787006AF423 /* AppDelegate.m in Sources */,
 				9FD90A2021B91FB000EDF389 /* SubmitCollectionViewCell.m in Sources */,
+				9F629B7E21BE4B38002A79AC /* FillOthersViewController.m in Sources */,
 				9F4D103A21B7CEB700F4610A /* InputBarCodeViewController.m in Sources */,
 				3D47259121BA591C00C0E7CF /* YZCover.m in Sources */,
 				3D47259521BA5BA700C0E7CF /* YZMenuButton.m in Sources */,
@@ -916,6 +960,7 @@
 				9F4D10A121B8037900F4610A /* UILabel+Category.m in Sources */,
 				9F4D103321B7C67A00F4610A /* SingUpView.m in Sources */,
 				3D7D18D921AB9BD0006B9C8F /* SearchResultViewController.m in Sources */,
+				9F629B7921BE425B002A79AC /* SHPlacePickerView.m in Sources */,
 				9FD90A3821BBCE2400EDF389 /* YTQGetUserManager.m in Sources */,
 				9F4D10A221B8037900F4610A /* UITextField+Category.m in Sources */,
 				9FD90A4221BBD3F000EDF389 /* GetUserModel.m in Sources */,
@@ -1057,7 +1102,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7T7PP6R6DZ;
+				DEVELOPMENT_TEAM = 5855LWABM9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/QQLogin",
@@ -1091,7 +1136,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7T7PP6R6DZ;
+				DEVELOPMENT_TEAM = 5855LWABM9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/QQLogin",

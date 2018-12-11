@@ -16,7 +16,7 @@
     if (self) {
         
         self.layer.borderWidth = 1;
-        self.layer.borderColor = maincolor.CGColor;
+        self.layer.borderColor = UIColorFromRGB(0xD5D5D5).CGColor;
         
         _title = [[UILabel alloc]init];
         [self addSubview:_title];
