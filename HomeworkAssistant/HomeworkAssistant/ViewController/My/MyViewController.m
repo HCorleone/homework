@@ -25,6 +25,7 @@
 @property (nonatomic, strong) UIView *loginView;
 @property (nonatomic, strong) UITableView *menuView;
 @property (nonatomic, strong) UIView *sloginView;
+@property (nonatomic, strong) UIButton *logoutBtn;
 /** 视图 */
 @property (nonatomic, strong) EditorNameView *editor;
 /** 下拉菜单 */
@@ -90,10 +91,6 @@
     [self.view addSubview:sloginView];
     sloginView.backgroundColor = [UIColor whiteColor];
     sloginView.layer.cornerRadius = 10;
-    //    sloginView.layer.shadowColor = [UIColor blackColor].CGColor;
-    //    sloginView.layer.shadowOffset = CGSizeMake(0, 2);
-    //    sloginView.layer.shadowOpacity = 0.5;
-    //    sloginView.layer.shadowRadius = 3;
     [sloginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view).offset(31.5);
         make.right.mas_equalTo(self.view).offset(-31.5);
@@ -107,11 +104,11 @@
     [sloginView addSubview:headImg];
     [headImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(sloginView).offset(20);
-        make.top.mas_equalTo(sloginView).offset(20);
-        make.size.mas_equalTo(CGSizeMake(100, 100));
+        make.top.mas_equalTo(sloginView).offset(0.03 * screenHeight);
+        make.size.mas_equalTo(CGSizeMake(0.15 * screenHeight, 0.15 * screenHeight));
     }];
     headImg.layer.masksToBounds = YES;
-    headImg.layer.cornerRadius = 50;
+    headImg.layer.cornerRadius = 0.15 * screenHeight/2;
     
     //用户名
     UILabel *userName = [[UILabel alloc]init];
@@ -120,7 +117,7 @@
     userName.text = [TTUserManager sharedInstance].currentUser.name;
     [userName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(headImg.mas_right).with.offset(15);
-        make.top.mas_equalTo(sloginView).offset(35);
+        make.top.mas_equalTo(sloginView).offset(0.05 * screenHeight);
         
     }];
     
@@ -131,7 +128,7 @@
     _gradeLabel.font = [UIFont systemFontOfSize:14];
     [_gradeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(headImg.mas_right).with.offset(15);
-        make.top.mas_equalTo(sloginView).offset(65);
+        make.top.mas_equalTo(userName.mas_bottom).with.offset(10);
         
     }];
     
@@ -149,26 +146,27 @@
     
     //注销
     UIButton *logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [sloginView addSubview:logoutBtn];
+    [self.view addSubview:logoutBtn];
     [logoutBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(sloginView).offset(-20);
-        make.top.mas_equalTo(userName.mas_bottom).offset(50);
+        make.centerX.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view).offset(-50 - BOT_OFFSET);
     }];
     logoutBtn.backgroundColor = [UIColor clearColor];
     [logoutBtn setTitleColor:[UIColor colorWithHexString:@"#8F9394"] forState:UIControlStateNormal];
     [logoutBtn setTitle:@"注销" forState:UIControlStateNormal];
     [logoutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+    self.logoutBtn = logoutBtn;
     
     UIButton *uploadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [sloginView addSubview:uploadBtn];
     [uploadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(sloginView).offset(-20);
         make.left.mas_equalTo(sloginView).offset(20);
-        make.bottom.mas_equalTo(sloginView).offset(-20);
-        make.height.mas_equalTo(40);
+        make.top.mas_equalTo(headImg.mas_bottom).with.offset(0.05 * screenHeight);
+        make.height.mas_equalTo(0.05 * screenHeight);
     }];
     uploadBtn.layer.masksToBounds = YES;
-    uploadBtn.layer.cornerRadius = 20;
+    uploadBtn.layer.cornerRadius = 0.05 * screenHeight/2;
     uploadBtn.backgroundColor = maincolor;
     [uploadBtn setTitleColor:whitecolor forState:UIControlStateNormal];
     [uploadBtn setTitle:@"上传答案" forState:UIControlStateNormal];
@@ -187,6 +185,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"userLogout" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeView:) name:@"loginSuccess" object:nil];
     self.sloginView.hidden = YES;
+    self.logoutBtn.hidden = YES;
+    [self.logoutBtn removeFromSuperview];
     [self.sloginView removeFromSuperview];
     
 }
@@ -348,7 +348,7 @@
         make.left.mas_equalTo(self.view).offset(41.5);
         make.right.mas_equalTo(self.view).offset(-41.5);
         make.top.mas_equalTo(self.loginView.mas_bottom).with.offset(36);
-        make.bottom.mas_equalTo(self.view).offset(-55);
+        make.height.mas_equalTo( 4 * 0.08 * screenHeight);
     }];
 }
 
@@ -430,7 +430,7 @@
 
 #pragma mark - 静态tableView Delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    return 0.08 * screenHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
