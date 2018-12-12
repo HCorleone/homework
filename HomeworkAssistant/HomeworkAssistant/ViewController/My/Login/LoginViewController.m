@@ -297,7 +297,6 @@
     [[YTQGetUserManager alloc] getUserManager:^(NSMutableDictionary * _Nonnull dic) {
         //判断是否第一次登陆
         if ([dic valueForKey:@"grade"]) {
-            
             [self.navigationController popViewControllerAnimated:YES];
         }
         else

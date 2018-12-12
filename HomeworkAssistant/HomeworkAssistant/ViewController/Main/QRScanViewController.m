@@ -107,7 +107,7 @@
             if ([[result substringToIndex:7] isEqualToString: @"openId:"]) {
                 [self.scanView removeTimer];
                 [self.scanManager stopRunning];
-                NSLog(@"%@",[result substringFromIndex:7]);
+//                NSLog(@"%@",[result substringFromIndex:7]);
                 NSString *code = [result substringFromIndex:7];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"shareCode" object:nil userInfo:@{@"shareCode":code}];
                 [self.navigationController popViewControllerAnimated:YES];
@@ -149,6 +149,8 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self.scanManager stopRunning];
+    //移除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"shareCode" object:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
