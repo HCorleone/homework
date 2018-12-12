@@ -293,19 +293,19 @@
     [[TTUserManager sharedInstance]loadCurrentUserInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
     
-    __weak typeof(self) weakSelf = self;
-    [[YTQGetUserManager alloc] getUserManager:^(NSMutableDictionary * _Nonnull dic) {
-        //判断是否第一次登陆
-        if ([dic valueForKey:@"grade"]) {
+//    __weak typeof(self) weakSelf = self;
+//    [[YTQGetUserManager alloc] getUserManager:^(NSMutableDictionary * _Nonnull dic) {
+//        //判断是否第一次登陆
+        if (userValue(@"grade")) {
             [self.navigationController popViewControllerAnimated:YES];
         }
         else
         {
             self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-            [weakSelf.navigationController pushViewController:[[FillOthersViewController alloc] init] animated:YES];
+            [self.navigationController pushViewController:[[FillOthersViewController alloc] init] animated:YES];
         }
         
-    }];
+//    }];
     NSLog(@"发送用户登陆成功的通知");
     
 }

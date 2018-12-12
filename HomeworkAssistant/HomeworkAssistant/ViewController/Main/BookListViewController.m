@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSMutableArray *imgArray;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *idArray;
+/** 需要传入的id列表 */
 @property (nonatomic, strong) NSMutableString *addStr;
 
 @end
@@ -90,6 +91,7 @@
         NSLog(@"%@", weakSelf.idArray);
         weakSelf.addStr = [NSMutableString string];
         
+        //拼接id字符串
         for (NSString *str in weakSelf.idArray) {
             [weakSelf.addStr appendString:str];
             [weakSelf.addStr appendString:@","];

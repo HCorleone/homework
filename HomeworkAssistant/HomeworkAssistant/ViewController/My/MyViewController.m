@@ -124,6 +124,7 @@
     //年级
     _gradeLabel = [[UILabel alloc]init];
     [sloginView addSubview:_gradeLabel];
+    _gradeLabel.text = [TTUserManager sharedInstance].currentUser.grade;
     _gradeLabel.textColor =  [UIColor colorWithRed:143/255.0 green:147/255.0 blue:148/255.0 alpha:1/1.0];
     _gradeLabel.font = [UIFont systemFontOfSize:14];
     [_gradeLabel mas_makeConstraints:^(MASConstraintMaker *make) {

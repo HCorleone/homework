@@ -1204,7 +1204,7 @@
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/umeng",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/weixin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = enjoytime.palmhomework;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Tata.HomeworkAssistant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1238,7 +1238,7 @@
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/umeng",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/weixin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = enjoytime.palmhomework;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Tata.HomeworkAssistant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
