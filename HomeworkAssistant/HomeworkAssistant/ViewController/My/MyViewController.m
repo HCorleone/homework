@@ -44,23 +44,6 @@
     [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    //判断是否有账号登陆
-    if ([TTUserManager sharedInstance].isLogin) {
-        
-        __weak typeof(self) weakSelf = self;
-        [[YTQGetUserManager alloc] getUserManager:^(NSMutableDictionary * _Nonnull dic) {
-            
-            weakSelf.gradeLabel.text = [dic valueForKey:@"grade"];
-        }];
-    }
-    
-    
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden = YES;

@@ -47,7 +47,8 @@
         _manager.requestSerializer = [AFHTTPRequestSerializer serializer];
         //接收数据是json形式给出
         _manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
+        
+        [_manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     }
     return _manager;
 }
@@ -140,7 +141,7 @@
                           @"name":self.singUpView.nameField.text,
                           @"av":@"_debug_"};
 //    __weak typeof(self) weakSelf = self;
-    [self.manager GET:@"/tataeraapi/api.s?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager POST:@"/tataeraapi/api.s?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSLog(@"------------------------------%@", responseObject);
         if ([responseObject[@"code"] integerValue] == 200) {

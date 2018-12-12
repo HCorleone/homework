@@ -58,6 +58,7 @@ static TTUserManager *manager = nil;
     self.currentUser.headImgUrl = [def stringForKey:@"headImgUrl"];
     self.currentUser.name = [def stringForKey:@"name"];
     self.currentUser.openId = [def stringForKey:@"openId"];
+    self.currentUser.grade = [def stringForKey:@"grade"];
     self.currentUser.city  = [def stringForKey:@"city"];
     self.currentUser.schoolID = [def stringForKey:@"schoolID"];
     self.currentUser.schoolName = [def stringForKey:@"schoolName"];

@@ -263,7 +263,8 @@
     [self.searchBar resignFirstResponder];
     
     if ([TextCheckTool lc_checkingSpecialChar:self.searchBar.text]) {
-        NSLog(@"不能含有非法字符");
+//        NSLog(@"不能含有非法字符");
+        [CommonAlterView showAlertView:@"不能含有非法字符"];
         return;
     }
     

@@ -142,7 +142,8 @@
             [self userLike];
         }
         else {
-            NSLog(@"请先登录");
+//            NSLog(@"请先登录");
+            [CommonAlterView showAlertView:@"请先登录"];
         }
     }
 }
