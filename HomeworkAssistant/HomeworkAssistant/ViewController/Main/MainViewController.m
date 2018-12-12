@@ -15,6 +15,8 @@
 #import "MyListView.h"
 #import "QRCodeView.h"
 
+#import "BookListViewController.h"
+
 @interface MainViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *mainView;
@@ -27,6 +29,10 @@
 @property (nonatomic, strong) NSMutableArray *myListViewData;
 @property (nonatomic, strong) NSMutableArray *recommendListViewData;
 @property (nonatomic, strong) QRCodeView *testView;
+
+/** 扫码获取的信息 */
+@property (nonatomic, strong) NSString *code;
+@property (nonatomic, strong) NSString *codes;//存
 
 @end
 
@@ -427,8 +433,20 @@
 //        [testView showQRCode];
 //    }];
     
+    //注册通知：
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showBooKList:) name:@"shareCode" object:nil];
+    
     QRScanViewController *scanVC = [[QRScanViewController alloc]init];
     [self.navigationController pushViewController:scanVC animated:YES];
+}
+
+-(void)showBooKList:(NSNotification *)notification {
+    
+    _code = notification.userInfo[@"shareCode"];
+    _codes = notification.userInfo[@"shareCode"];
+    NSLog(@"%@", _code);
+    
+    
 }
 
 - (void)toSearch {
@@ -471,8 +489,22 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadDataForMyList) name:@"userLikeOrNot" object:nil];
         [self downloadDataForMyList];
     }
+    
+    if (self.code) {
+        self.code = nil;
+        BookListViewController *book = [[BookListViewController alloc] init];
+        book.idStr = self.codes;
+        book.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+        
+        [self presentViewController:book animated:NO completion:nil];
+    }
 }
 
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"===========");
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if ([TTUserManager sharedInstance].isLogin) {

@@ -117,6 +117,8 @@
 		9F629B7E21BE4B38002A79AC /* FillOthersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F629B7D21BE4B38002A79AC /* FillOthersViewController.m */; };
 		9F629B8121BE73C2002A79AC /* FillOthersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F629B8021BE73C2002A79AC /* FillOthersView.m */; };
 		9F740E6721B8F6C700EE9657 /* UpAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F740E6621B8F6C700EE9657 /* UpAnswerViewController.m */; };
+		9FD3795A21BFC63B005581BC /* BookListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3795921BFC63B005581BC /* BookListViewController.m */; };
+		9FD3795D21BFC90B005581BC /* BookListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3795C21BFC90B005581BC /* BookListView.m */; };
 		9FD90A1421B915D000EDF389 /* CommonAlterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A1321B915D000EDF389 /* CommonAlterView.m */; };
 		9FD90A2021B91FB000EDF389 /* SubmitCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A1E21B91FB000EDF389 /* SubmitCollectionViewCell.m */; };
 		9FD90A3221BA49C000EDF389 /* EditorNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A3121BA49C000EDF389 /* EditorNameView.m */; };
@@ -306,6 +308,10 @@
 		9F740E6521B8F6C700EE9657 /* UpAnswerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpAnswerViewController.h; sourceTree = "<group>"; };
 		9F740E6621B8F6C700EE9657 /* UpAnswerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpAnswerViewController.m; sourceTree = "<group>"; };
 		9F740E6821B9016F00EE9657 /* CommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonDefine.h; sourceTree = "<group>"; };
+		9FD3795821BFC63B005581BC /* BookListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookListViewController.h; sourceTree = "<group>"; };
+		9FD3795921BFC63B005581BC /* BookListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookListViewController.m; sourceTree = "<group>"; };
+		9FD3795B21BFC90B005581BC /* BookListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookListView.h; sourceTree = "<group>"; };
+		9FD3795C21BFC90B005581BC /* BookListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookListView.m; sourceTree = "<group>"; };
 		9FD90A1221B915D000EDF389 /* CommonAlterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAlterView.h; sourceTree = "<group>"; };
 		9FD90A1321B915D000EDF389 /* CommonAlterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAlterView.m; sourceTree = "<group>"; };
 		9FD90A1E21B91FB000EDF389 /* SubmitCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitCollectionViewCell.m; sourceTree = "<group>"; };
@@ -594,6 +600,8 @@
 				3D7D18FA21B0CEE4006B9C8F /* MyListView.m */,
 				3D47258821BA2A7F00C0E7CF /* MainViewController.h */,
 				3D47258921BA2A7F00C0E7CF /* MainViewController.m */,
+				9FD3795821BFC63B005581BC /* BookListViewController.h */,
+				9FD3795921BFC63B005581BC /* BookListViewController.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -653,6 +661,8 @@
 				3D47257421BA20C300C0E7CF /* QRCodeView.m */,
 				9FD90A3021BA49C000EDF389 /* EditorNameView.h */,
 				9FD90A3121BA49C000EDF389 /* EditorNameView.m */,
+				9FD3795B21BFC90B005581BC /* BookListView.h */,
+				9FD3795C21BFC90B005581BC /* BookListView.m */,
 				9F4D103C21B7D05E00F4610A /* My */,
 			);
 			path = View;
@@ -918,6 +928,7 @@
 				3D47259021BA591C00C0E7CF /* YZPullDownMenu.m in Sources */,
 				9F629B7721BE425B002A79AC /* PlaceModel.m in Sources */,
 				3D1C2BDE21A5430400725BD4 /* NSString+MD5.m in Sources */,
+				9FD3795A21BFC63B005581BC /* BookListViewController.m in Sources */,
 				3D7C713221A659DD008F9D52 /* SearchViewController.m in Sources */,
 				9F4D104321B7E5FC00F4610A /* FillBookInformationViewController.m in Sources */,
 				3D9EA91321994E35006AF423 /* MyViewStaticCell.m in Sources */,
@@ -954,6 +965,7 @@
 				9F4D103A21B7CEB700F4610A /* InputBarCodeViewController.m in Sources */,
 				3D47259121BA591C00C0E7CF /* YZCover.m in Sources */,
 				3D47259521BA5BA700C0E7CF /* YZMenuButton.m in Sources */,
+				9FD3795D21BFC90B005581BC /* BookListView.m in Sources */,
 				3D9EAF1821A52E49006AF423 /* AnswerViewController.m in Sources */,
 				3D47256421B7855800C0E7CF /* MyListViewController.m in Sources */,
 				9F4D109F21B8037900F4610A /* UIButton+Category.m in Sources */,
@@ -1102,7 +1114,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7T7PP6R6DZ;
+				DEVELOPMENT_TEAM = 5855LWABM9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/QQLogin",
@@ -1136,7 +1148,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7T7PP6R6DZ;
+				DEVELOPMENT_TEAM = 5855LWABM9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/QQLogin",
