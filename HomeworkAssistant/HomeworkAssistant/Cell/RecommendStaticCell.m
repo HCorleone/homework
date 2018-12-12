@@ -35,9 +35,9 @@
         self.saveBtn.layer.cornerRadius = 2;
         self.saveBtn.layer.borderColor = maincolor.CGColor;
         self.saveBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
-        [self.saveBtn setBackgroundColor:whitecolor];
         [self.saveBtn setTitle:@"收藏" forState:UIControlStateNormal];
-        [self.saveBtn setTitleColor:maincolor forState:UIControlStateNormal];
+        
+        
         [self addSubview:self.saveBtn];
         [self.saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self).offset(-20);
@@ -126,6 +126,9 @@
     self.grade.text = model.grade;
     self.uploaderName.text = model.uploaderName;
     self.bookID = model.answerID;
+    
+    
+   
 }
 
 
@@ -137,7 +140,6 @@
     else {
         if ([TTUserManager sharedInstance].isLogin) {
             [self userLike];
-            
         }
         else {
             NSLog(@"请先登录");

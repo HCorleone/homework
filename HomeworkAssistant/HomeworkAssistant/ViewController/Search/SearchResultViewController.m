@@ -21,7 +21,7 @@ static NSString *version = @"";
 static NSString *volume = @"";
 static NSString *page = @"1";
 
-@interface SearchResultViewController ()<UISearchBarDelegate, YZPullDownMenuDataSource>
+@interface SearchResultViewController ()<UISearchBarDelegate, YZPullDownMenuDataSource, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIView *navView;
 @property (nonatomic, strong) UISearchBar *searchBar;
@@ -255,6 +255,14 @@ static NSString *page = @"1";
 
 #pragma SearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    [self.searchBar resignFirstResponder];
+    
+    if ([TextCheckTool lc_checkingSpecialChar:self.searchBar.text]) {
+        NSLog(@"不能含有非法字符");
+        return;
+    }
+    
     self.searchContent = self.searchBar.text;
     [self downloadData];
 }
@@ -299,12 +307,21 @@ static NSString *page = @"1";
     
 }
 
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
     self.navigationController.navigationBar.hidden = YES;
     
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+}
+
+#pragma mark - ScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    [self.searchBar resignFirstResponder];
+    [self.view endEditing:YES];
 }
 
 #pragma mark - YZPullDownMenuDataSource

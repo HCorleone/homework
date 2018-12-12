@@ -61,27 +61,28 @@
         make.centerX.mas_equalTo(self.view);
         make.top.mas_equalTo(thirdPart.mas_bottom).with.offset(25);
     }];
-    //QQ登录
-    UIImageView *qqLogo = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"qq"]];
-    qqLogo.userInteractionEnabled = YES;
-    [self.view addSubview:qqLogo];
-    [qqLogo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view).offset(-50);
-        make.top.mas_equalTo(line.mas_bottom).with.offset(25);
-    }];
-    UIButton *qqBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    qqBtn.frame = qqLogo.frame;
-    qqBtn.backgroundColor = [UIColor clearColor];
-    [qqLogo addSubview:qqBtn];
-    [qqBtn addTarget:self action:@selector(qqUser) forControlEvents:UIControlEventTouchUpInside];
-    
+//    //QQ登录
+//    UIImageView *qqLogo = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"qq"]];
+//    qqLogo.userInteractionEnabled = YES;
+//    [self.view addSubview:qqLogo];
+//    [qqLogo mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.mas_equalTo(self.view).offset(-50);
+//        make.top.mas_equalTo(line.mas_bottom).with.offset(25);
+//    }];
+//    UIButton *qqBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    qqBtn.frame = qqLogo.frame;
+//    qqBtn.backgroundColor = [UIColor clearColor];
+//    [qqLogo addSubview:qqBtn];
+//    [qqBtn addTarget:self action:@selector(qqUser) forControlEvents:UIControlEventTouchUpInside];
+//
     
     //微信登录
     UIImageView *wechatLogo = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"微信"]];
     wechatLogo.userInteractionEnabled = YES;
     [self.view addSubview:wechatLogo];
     [wechatLogo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view).offset(50);
+//        make.centerX.mas_equalTo(self.view).offset(50);
+        make.centerX.mas_equalTo(self.view);
         make.top.mas_equalTo(line.mas_bottom).with.offset(25);
     }];
     UIButton *wechatBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -301,6 +302,7 @@
         }
         else
         {
+            self.navigationController.interactivePopGestureRecognizer.enabled = NO;
             [weakSelf.navigationController pushViewController:[[FillOthersViewController alloc] init] animated:YES];
         }
         
@@ -329,6 +331,11 @@
     [super viewWillAppear:animated];
     [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
     self.navigationController.navigationBar.hidden = YES;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 @end

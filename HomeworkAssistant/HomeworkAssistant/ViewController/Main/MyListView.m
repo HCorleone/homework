@@ -44,7 +44,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MyListViewCell *cell = (MyListViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"MyListCell" forIndexPath:indexPath];
     if (indexPath.row == self.dataList.count) {
-        cell.topImage.image = [UIImage imageNamed:@"搜索"];
+        cell.topImage.image = [UIImage imageNamed:@"添加书籍"];
         cell.title.text = @"添加书籍";
     }
     else {
@@ -79,6 +79,7 @@
     else {
         AnswerViewController *answerVC = [[AnswerViewController alloc]init];
         answerVC.bookModel = self.dataList[indexPath.row];
+        answerVC.isSelected = YES;
         [[self viewController].navigationController pushViewController:answerVC animated:YES];
     }
 }

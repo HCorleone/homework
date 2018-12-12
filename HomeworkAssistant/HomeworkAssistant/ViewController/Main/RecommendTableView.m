@@ -45,6 +45,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     RecommendStaticCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecommendStaticCell" forIndexPath:indexPath];
     cell.model = self.dataList[indexPath.row];
+    cell.isSelected = NO;
+    [cell.saveBtn setBackgroundColor:whitecolor];
+    [cell.saveBtn setTitleColor:maincolor forState:UIControlStateNormal];
     return cell;
 }
 
@@ -63,7 +66,10 @@
     answerVC.bookModel = self.dataList[indexPath.row];
     answerVC.isSelected = cell.isSelected;
     [[self viewController].navigationController pushViewController:answerVC animated:YES];
+        
 }
+
+
 
 // 获取当前View的控制器
 - (UIViewController*)viewController {

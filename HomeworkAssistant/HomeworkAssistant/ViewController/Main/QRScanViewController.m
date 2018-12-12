@@ -37,8 +37,21 @@
     [self.scanManager startRunning];
     
     SGQRCodeScanningView *scanView = [[SGQRCodeScanningView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    scanView.cornerColor = whitecolor;
+    scanView.backgroundAlpha = 0.4;
     [self.view addSubview:scanView];
     self.scanView = scanView;
+    
+    UILabel *scanTitle = [[UILabel alloc]init];
+    scanTitle.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:15];
+    [scanTitle setBackgroundColor:[UIColor clearColor]];
+    scanTitle.textColor = whitecolor;
+    scanTitle.text = @"扫描同学的二维码即可同步书单";
+    [self.view addSubview:scanTitle];
+    [scanTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view).offset(130 + TOP_OFFSET);
+        make.centerX.mas_equalTo(self.view);
+    }];
     
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [backBtn setImage:[UIImage imageNamed:@"返回"] forState:UIControlStateNormal];
@@ -47,7 +60,7 @@
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
         make.left.mas_equalTo(self.view).offset(20);
-        make.top.mas_equalTo(self.view).offset(35);
+        make.top.mas_equalTo(self.view).offset(35 + TOP_OFFSET);
     }];
     
     NSArray *vcArr = [self.navigationController viewControllers];
@@ -56,6 +69,8 @@
     self.lastVC = lastVc;
     
     if ([lastVc isKindOfClass:[MyViewController class]]) {
+        scanTitle.text = @"将图书背面的条码放到扫描框内";
+        
         UIButton *manualBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [manualBtn setTitle:@"手动输入条码" forState:UIControlStateNormal];
         [manualBtn setTitleColor:whitecolor forState:UIControlStateNormal];

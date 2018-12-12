@@ -21,5 +21,6 @@
 #import "CommonDefine.h"
 #import "MJRefresh.h"
 #import "GetCurrentDevice.h"
+#import "TextCheckTool.h"
 
 #endif /* HomeworkAssistant_pch */
