@@ -42,6 +42,87 @@
     [self setupLoginView];
     [self thirdPartLogin];
 }
+
+#pragma mark - 建立UI
+- (void)setupLoginView {
+    //登陆框
+    UIView *loginView = [[UIView alloc]init];
+    loginView.layer.borderWidth = 1;
+    loginView.layer.borderColor = whitecolor.CGColor;
+    loginView.layer.cornerRadius = 2;
+    loginView.layer.opacity = 0.9;
+    loginView.layer.masksToBounds = YES;
+    loginView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.1];
+    [self.view addSubview:loginView];
+    [loginView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(300, 300));
+        make.centerX.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view).with.offset(0.2 * screenHeight);
+    }];
+    self.loginView = loginView;
+    //帐号框
+    LoginTextField *acountF = [[LoginTextField alloc]init:@"请输入手机号"];
+    [loginView addSubview:acountF];
+    [acountF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(250, 50));
+        make.centerX.mas_equalTo(loginView);
+        make.top.mas_equalTo(loginView).with.offset(50);
+    }];
+    self.acountF = acountF;
+    
+    //密码框
+    LoginTextField *passwordF = [[LoginTextField alloc]init:@"请输入密码"];
+    passwordF.secureTextEntry = YES;//暗文
+    [loginView addSubview:passwordF];
+    passwordF.secureTextEntry = YES;
+    [passwordF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(250, 50));
+        make.centerX.mas_equalTo(loginView);
+        make.top.mas_equalTo(acountF.mas_bottom).with.offset(15);
+    }];
+    self.passwordF = passwordF;
+    
+    //登陆按钮
+    UIButton *signinBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    signinBtn.layer.cornerRadius = 10;
+    signinBtn.layer.shadowOffset =  CGSizeMake(0, 1);
+    signinBtn.layer.shadowOpacity = 1;
+    signinBtn.layer.shadowColor =  [UIColor colorWithHexString:@"#2983C8"].CGColor;
+    signinBtn.backgroundColor = [UIColor colorWithHexString:@"#6FDDFF"];
+    [loginView addSubview:signinBtn];
+    [signinBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(250, 50));
+        make.centerX.mas_equalTo(loginView);
+        make.top.mas_equalTo(passwordF.mas_bottom).with.offset(25);
+    }];
+    [signinBtn setTitle:@"登录" forState:UIControlStateNormal];
+    [signinBtn addTarget:self action:@selector(signin) forControlEvents:UIControlEventTouchUpInside];
+    
+    //注册账户
+    UIButton *signupBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.view addSubview:signupBtn];
+    [signupBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(signinBtn);
+        make.top.mas_equalTo(signinBtn.mas_bottom).with.offset(15);
+        make.size.mas_equalTo(CGSizeMake(100, 25));
+    }];
+    signupBtn.backgroundColor = [UIColor clearColor];
+    [signupBtn setTitle:@"注册帐号" forState:UIControlStateNormal];
+    [signupBtn addTarget:self action:@selector(signup) forControlEvents:UIControlEventTouchUpInside];
+    
+    //忘记密码
+    UIButton *forgetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.view addSubview:forgetBtn];
+    [forgetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(signinBtn);
+        make.top.mas_equalTo(signinBtn.mas_bottom).with.offset(15);
+        make.size.mas_equalTo(CGSizeMake(100, 25));
+    }];
+    forgetBtn.backgroundColor = [UIColor clearColor];
+    [forgetBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
+    [forgetBtn addTarget:self action:@selector(forget) forControlEvents:UIControlEventTouchUpInside];
+    
+}
 - (void)thirdPartLogin {
     //第三方登录标题
     UILabel *thirdPart = [[UILabel alloc]init];
@@ -164,91 +245,10 @@
         
         [TTUserManager sharedInstance].currentUser.headImgUrl = responseObject[@"headimgurl"];
         [TTUserManager sharedInstance].currentUser.name = responseObject[@"nickname"];
-        [self loginSuccess];
+        [self getExtraUserInfo];
         
     } failure:nil];
     [dataTask resume];
-    
-}
-
-#pragma functions
-- (void)setupLoginView {
-    //登陆框
-    UIView *loginView = [[UIView alloc]init];
-    loginView.layer.borderWidth = 1;
-    loginView.layer.borderColor = whitecolor.CGColor;
-    loginView.layer.cornerRadius = 2;
-    loginView.layer.opacity = 0.9;
-    loginView.layer.masksToBounds = YES;
-    loginView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.1];
-    [self.view addSubview:loginView];
-    [loginView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(300, 300));
-        make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.view).with.offset(0.2 * screenHeight);
-    }];
-    self.loginView = loginView;
-    //帐号框
-    LoginTextField *acountF = [[LoginTextField alloc]init:@"请输入手机号"];
-    [loginView addSubview:acountF];
-    [acountF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(250, 50));
-        make.centerX.mas_equalTo(loginView);
-        make.top.mas_equalTo(loginView).with.offset(50);
-    }];
-    self.acountF = acountF;
-    
-    //密码框
-    LoginTextField *passwordF = [[LoginTextField alloc]init:@"请输入密码"];
-    passwordF.secureTextEntry = YES;//暗文
-    [loginView addSubview:passwordF];
-    passwordF.secureTextEntry = YES;
-    [passwordF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(250, 50));
-        make.centerX.mas_equalTo(loginView);
-        make.top.mas_equalTo(acountF.mas_bottom).with.offset(15);
-    }];
-    self.passwordF = passwordF;
-    
-    //登陆按钮
-    UIButton *signinBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    signinBtn.layer.cornerRadius = 10;
-    signinBtn.layer.shadowOffset =  CGSizeMake(0, 1);
-    signinBtn.layer.shadowOpacity = 1;
-    signinBtn.layer.shadowColor =  [UIColor colorWithHexString:@"#2983C8"].CGColor;
-    signinBtn.backgroundColor = [UIColor colorWithHexString:@"#6FDDFF"];
-    [loginView addSubview:signinBtn];
-    [signinBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(250, 50));
-        make.centerX.mas_equalTo(loginView);
-        make.top.mas_equalTo(passwordF.mas_bottom).with.offset(25);
-    }];
-    [signinBtn setTitle:@"登录" forState:UIControlStateNormal];
-    [signinBtn addTarget:self action:@selector(signin) forControlEvents:UIControlEventTouchUpInside];
-    
-    //注册账户
-    UIButton *signupBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.view addSubview:signupBtn];
-    [signupBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(signinBtn);
-        make.top.mas_equalTo(signinBtn.mas_bottom).with.offset(15);
-        make.size.mas_equalTo(CGSizeMake(100, 25));
-    }];
-    signupBtn.backgroundColor = [UIColor clearColor];
-    [signupBtn setTitle:@"注册帐号" forState:UIControlStateNormal];
-    [signupBtn addTarget:self action:@selector(signup) forControlEvents:UIControlEventTouchUpInside];
-    
-    //忘记密码
-    UIButton *forgetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.view addSubview:forgetBtn];
-    [forgetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(signinBtn);
-        make.top.mas_equalTo(signinBtn.mas_bottom).with.offset(15);
-        make.size.mas_equalTo(CGSizeMake(100, 25));
-    }];
-    forgetBtn.backgroundColor = [UIColor clearColor];
-    [forgetBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
-    [forgetBtn addTarget:self action:@selector(forget) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -275,8 +275,45 @@
             [TTUserManager sharedInstance].currentUser.headImgUrl = responseObject[@"headImgUrl"];
             [TTUserManager sharedInstance].currentUser.name = responseObject[@"name"];
             [TTUserManager sharedInstance].currentUser.openId = responseObject[@"openId"];
-            [self loginSuccess];
+            [self getExtraUserInfo];
             
+        }
+        else {
+            [CommonAlterView showAlertView:@"用户名或密码错误"];
+        }
+        
+    } failure:nil];
+    [dataTask resume];
+    
+}
+
+#pragma mark - 最终登陆汇总
+- (void)getExtraUserInfo {
+    NSString *URL = @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?";
+    
+    NSDictionary *dict = @{
+                           @"h":@"ZYGetUserExtHander",
+                           @"openID":[TTUserManager sharedInstance].currentUser.openId,
+                           @"av":@"_debug_"
+                           };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if ([responseObject[@"code"] integerValue] == 200) {
+            if (responseObject[@"datas"] != [NSNull null]) {
+                [TTUserManager sharedInstance].currentUser.grade = [responseObject[@"datas"] valueForKey:@"grade"];
+                [TTUserManager sharedInstance].currentUser.bonusPoint = [responseObject[@"datas"] valueForKey:@"bonusPoint"];
+                [TTUserManager sharedInstance].currentUser.city = [responseObject[@"datas"] valueForKey:@"city"];
+                [TTUserManager sharedInstance].currentUser.createTime = [responseObject[@"datas"] valueForKey:@"creatTime"];
+                [TTUserManager sharedInstance].currentUser.level = [responseObject[@"datas"] valueForKey:@"level"];
+                [TTUserManager sharedInstance].currentUser.schoolName = [responseObject[@"datas"] valueForKey:@"schoolName"];
+                [TTUserManager sharedInstance].currentUser.qqkey = [responseObject[@"datas"] valueForKey:@"qqkey"];
+                [TTUserManager sharedInstance].currentUser.updateTime = [responseObject[@"datas"] valueForKey:@"updateTime"];
+            }
+            [self loginSuccess];
         }
         else {
             //登陆失败
@@ -284,7 +321,6 @@
         
     } failure:nil];
     [dataTask resume];
-    
 }
 
 - (void)loginSuccess {
@@ -293,23 +329,21 @@
     [[TTUserManager sharedInstance]loadCurrentUserInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
     
-    __weak typeof(self) weakSelf = self;
-    [[YTQGetUserManager alloc] getUserManager:^(NSMutableDictionary * _Nonnull dic) {
-        //判断是否第一次登陆
-        if ([dic valueForKey:@"grade"]) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        else
-        {
-            self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-            [weakSelf.navigationController pushViewController:[[FillOthersViewController alloc] init] animated:YES];
-        }
-        
-    }];
+    if ([TTUserManager sharedInstance].currentUser.grade) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+        [self.navigationController pushViewController:[[FillOthersViewController alloc] init] animated:YES];
+    }
+    
     NSLog(@"发送用户登陆成功的通知");
     
 }
 
+
+#pragma mark - 跳转页面
 //注册账号
 - (void)signup {
     SingUpViewController *singUp = [[SingUpViewController alloc] init];
@@ -321,7 +355,7 @@
     ForgetPwdViewController *forgetPwd = [[ForgetPwdViewController alloc] init];
     [self.navigationController pushViewController:forgetPwd animated:YES];
 }
-
+//返回按钮方法
 - (void)backToVc {
     [self.navigationController popViewControllerAnimated:YES];
 }

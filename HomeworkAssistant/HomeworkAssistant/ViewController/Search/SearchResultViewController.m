@@ -118,7 +118,8 @@ static NSString *page = @"1";
         
         if ([responseObject[@"code"] integerValue] == 200) {
             if (responseObject[@"datas"] == [NSNull null]) {
-                NSLog(@"数组为空");
+//                NSLog(@"数组为空");
+                [CommonAlterView showAlertView:@"无搜索结果"];
             }
             else {
                 NSArray *jsonDataArr = responseObject[@"datas"];
@@ -184,7 +185,8 @@ static NSString *page = @"1";
         
         if ([responseObject[@"code"] integerValue] == 200) {
             if (responseObject[@"datas"] == [NSNull null]) {
-                NSLog(@"数组为空");
+//                NSLog(@"数组为空");
+                [CommonAlterView showAlertView:@"无更多搜索结果"];
             }
             else {
                 NSArray *jsonDataArr = responseObject[@"datas"];
@@ -259,7 +261,8 @@ static NSString *page = @"1";
     [self.searchBar resignFirstResponder];
     
     if ([TextCheckTool lc_checkingSpecialChar:self.searchBar.text]) {
-        NSLog(@"不能含有非法字符");
+//        NSLog(@"不能含有非法字符");
+        [CommonAlterView showAlertView:@"不能含有非法字符"];
         return;
     }
     
@@ -271,11 +274,16 @@ static NSString *page = @"1";
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"YZUpdateMenuTitleNote" object:nil];
+    grade = @"";
+    subject = @"";
+    version = @"";
+    volume = @"";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshSearchView:) name:@"YZUpdateMenuTitleNote" object:nil];
+    
 }
 
 - (void)refreshSearchView:(NSNotification *)note {
@@ -306,6 +314,7 @@ static NSString *page = @"1";
     [self downloadData];
     
 }
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

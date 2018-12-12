@@ -421,7 +421,8 @@
         [self.navigationController pushViewController:mylistVC animated:YES];
     }
     else {
-        NSLog(@"请先登录");
+        [CommonAlterView showAlertView:@"请先登录"];
+//        NSLog(@"请先登录");
     }
 }
 
@@ -507,9 +508,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if ([TTUserManager sharedInstance].isLogin) {
-        [self downloadDataForMyList];
-    }
+
 }
 
 @end

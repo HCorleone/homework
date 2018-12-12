@@ -27,7 +27,7 @@
     [self addSubview:whiteView];
     [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(screenHeight * 0.185);
-        make.size.mas_equalTo(CGSizeMake(screenWidth * 0.797, 257));
+        make.size.mas_equalTo(CGSizeMake(screenWidth * 0.797, screenHeight * 0.385));
         make.centerX.mas_equalTo(self.mas_centerX);
     }];
     

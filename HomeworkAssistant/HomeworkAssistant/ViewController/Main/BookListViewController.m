@@ -99,7 +99,17 @@
         NSLog(@"%@", weakSelf.addStr);
         
         //添加到本地仓库
-        [weakSelf addBookList];
+        if (userValue(@"openId")) {
+            [weakSelf addBookList];
+        }
+        else {
+//            [CommonAlterView showMessages:@"请先登录" andVC:weakSelf handler:^(UIAlertAction *action) {
+//                [weakSelf dismissViewControllerAnimated:NO completion:nil];
+//            }];
+            [CommonAlterView showAlertView:@"请先登录"];
+            [weakSelf dismissViewControllerAnimated:NO completion:nil];
+            
+        }
         
     };
     [self.view addSubview:_bookView];

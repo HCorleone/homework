@@ -44,23 +44,6 @@
     [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    //判断是否有账号登陆
-    if ([TTUserManager sharedInstance].isLogin) {
-        
-        __weak typeof(self) weakSelf = self;
-        [[YTQGetUserManager alloc] getUserManager:^(NSMutableDictionary * _Nonnull dic) {
-            
-            weakSelf.gradeLabel.text = [dic valueForKey:@"grade"];
-        }];
-    }
-    
-    
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden = YES;
@@ -124,6 +107,7 @@
     //年级
     _gradeLabel = [[UILabel alloc]init];
     [sloginView addSubview:_gradeLabel];
+    _gradeLabel.text = [TTUserManager sharedInstance].currentUser.grade;
     _gradeLabel.textColor =  [UIColor colorWithRed:143/255.0 green:147/255.0 blue:148/255.0 alpha:1/1.0];
     _gradeLabel.font = [UIFont systemFontOfSize:14];
     [_gradeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
