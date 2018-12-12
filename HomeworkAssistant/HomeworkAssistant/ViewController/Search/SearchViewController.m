@@ -216,6 +216,7 @@
     [super viewWillAppear:animated];
     [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
     self.navigationController.navigationBar.hidden = YES;
+//    [self.searchBar resignFirstResponder];
     
     if (self.searchWordsArr == nil) {
         self.searchWordsArr = [NSMutableArray array];
@@ -256,8 +257,15 @@
     [self searchBarSearchButtonClicked:self.searchBar];
 }
 
-#pragma SearchBarDelegate
+#pragma mark - SearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    [self.searchBar resignFirstResponder];
+    
+    if ([TextCheckTool lc_checkingSpecialChar:self.searchBar.text]) {
+        NSLog(@"不能含有非法字符");
+        return;
+    }
     
     NSArray *arr = [[NSUserDefaults standardUserDefaults] objectForKey:@"historyWords"];
     self.searchWordsArr = [NSMutableArray arrayWithArray:arr];
@@ -273,7 +281,7 @@
     [self.navigationController pushViewController:searchResultVC animated:YES];
 }
 
-#pragma TableViewDataSource
+#pragma mark - TableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -296,6 +304,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.searchBar.text = self.searchWordsArr[indexPath.row];
     [self searchBarSearchButtonClicked:self.searchBar];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 @end

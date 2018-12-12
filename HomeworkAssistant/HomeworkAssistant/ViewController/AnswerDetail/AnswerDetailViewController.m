@@ -75,7 +75,8 @@
     [shareBtn setTitleColor:maincolor forState:UIControlStateNormal];
     shareBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
     [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.bottom.mas_equalTo(self.view);
+        make.left.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view).offset(-BOT_OFFSET);
         make.size.mas_equalTo(CGSizeMake(screenWidth/2, 48));
     }];
     self.shareBtn = shareBtn;
@@ -95,33 +96,98 @@
     }
     collectBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
     [collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.and.bottom.mas_equalTo(self.view);
-        make.size.mas_equalTo(CGSizeMake(screenWidth/2, 48));
+        make.right.mas_equalTo(self.view).offset(-0.064 * screenWidth);
+//        make.bottom.mas_equalTo(self.view).offset(-BOT_OFFSET);
+        make.centerY.mas_equalTo(shareBtn);
+        make.size.mas_equalTo(CGSizeMake(0.368 * screenWidth, 0.044 * screenHeight));
     }];
+    collectBtn.layer.cornerRadius = 0.044 * screenHeight/2;
     [collectBtn addTarget:self action:@selector(userLikeOrNot) forControlEvents:UIControlEventTouchUpInside];
     self.collectBtn = collectBtn;
 }
 
 - (void)userLikeOrNot {
+   
+    
     if (self.isSelected) {
-//        [self userDisLike];
-        self.isSelected = NO;
-        [self.collectBtn setBackgroundColor:maincolor];
-        [self.collectBtn setTitle:@"收藏到书单" forState:UIControlStateNormal];
-        [self.collectBtn setTitleColor:whitecolor forState:UIControlStateNormal];
+        [self userDisLike];
+        
     }
     else {
         if ([TTUserManager sharedInstance].isLogin) {
-//            [self userLike];
-            self.isSelected = YES;
-            [self.collectBtn setBackgroundColor:whitecolor];
-            [self.collectBtn setTitle:@"已收藏至书单" forState:UIControlStateNormal];
-            [self.collectBtn setTitleColor:[UIColor colorWithHexString:@"#D5D5D5"] forState:UIControlStateNormal];
+            [self userLike];
         }
         else {
             NSLog(@"请先登录");
         }
     }
+}
+
+//用户点击收藏按钮
+- (void)userLike {
+    NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
+    
+    NSString *URL = @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?";
+    NSDictionary *dict = @{
+                           @"h":@"ZYUserLikeHandler",
+                           @"openID":openId,
+                           @"answerID":self.answerID,
+                           @"pkn":@"com.enjoytime.palmhomework",
+                           @"sourceType":@"rec",
+                           @"av":@"_debug_"
+                           };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if ([responseObject[@"code"]integerValue] == 200) {
+            self.isSelected = YES;
+            [self.collectBtn setBackgroundColor:whitecolor];
+            [self.collectBtn setTitle:@"已收藏至书单" forState:UIControlStateNormal];
+            [self.collectBtn setTitleColor:[UIColor colorWithHexString:@"#D5D5D5"] forState:UIControlStateNormal];
+            NSLog(@"收藏成功");
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"cellTest" object:nil];
+        }
+        
+    } failure:nil];
+    [dataTask resume];
+    
+}
+
+//用户取消收藏
+- (void)userDisLike {
+    
+    NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
+    
+    NSString *URL = @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?";
+    NSDictionary *dict = @{
+                           @"h":@"ZYDelUserLikeHandler",
+                           @"openID":openId,
+                           @"answerIDs":self.answerID,
+                           @"pkn":@"com.enjoytime.palmhomework",
+                           @"sourceType":@"rec",
+                           @"av":@"_debug_"
+                           };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if ([responseObject[@"code"]integerValue] == 200) {
+            self.isSelected = NO;
+            [self.collectBtn setBackgroundColor:maincolor];
+            [self.collectBtn setTitle:@"收藏到书单" forState:UIControlStateNormal];
+            [self.collectBtn setTitleColor:whitecolor forState:UIControlStateNormal];
+            NSLog(@"取消收藏");
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"cellTest" object:nil];
+        }
+        
+    } failure:nil];
+    [dataTask resume];
+    
 }
 
 - (void)toShare {
@@ -165,7 +231,7 @@
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumLineSpacing = 0;
     
-    UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 72, screenWidth, screenHeight - 48 - 72) collectionViewLayout:layout];
+    UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 72, screenWidth, screenHeight - 48 - 72 - BOT_OFFSET) collectionViewLayout:layout];
     [self.view addSubview:collectionView];
 //    [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.right.mas_equalTo(self.view);

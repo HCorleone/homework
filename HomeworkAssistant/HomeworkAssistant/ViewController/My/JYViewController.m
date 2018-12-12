@@ -35,11 +35,10 @@
     self.loginView = [[UIView alloc]init];
     [self.view addSubview:self.loginView];
     self.loginView.backgroundColor = [UIColor whiteColor];
-    self.loginView.layer.cornerRadius = 5;
+    self.loginView.layer.cornerRadius = 2;
     self.loginView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.loginView.layer.shadowOffset = CGSizeMake(0, 2);
-    self.loginView.layer.shadowOpacity = 0.5;
-    self.loginView.layer.shadowRadius = 3;
+    self.loginView.layer.shadowOffset = CGSizeMake(0, 1.5);
+    self.loginView.layer.shadowOpacity = 0.2;
     [self.loginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
         make.top.mas_equalTo(self.navView.mas_bottom).with.offset(20);
@@ -60,11 +59,10 @@
     self.loginView = [[UIView alloc]init];
     [self.view addSubview:self.loginView];
     self.loginView.backgroundColor = [UIColor whiteColor];
-    self.loginView.layer.cornerRadius = 5;
+    self.loginView.layer.cornerRadius = 2;
     self.loginView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.loginView.layer.shadowOffset = CGSizeMake(0, 2);
-    self.loginView.layer.shadowOpacity = 0.5;
-    self.loginView.layer.shadowRadius = 3;
+    self.loginView.layer.shadowOffset = CGSizeMake(0, 1.5);
+    self.loginView.layer.shadowOpacity = 0.2;
     [self.loginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
         make.top.mas_equalTo(self.contentTextView.mas_bottom).with.offset(15);
@@ -122,7 +120,7 @@
         make.left.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view);
         make.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(66);
+        make.height.mas_equalTo(72);
     }];
     self.navView = navView;
     //返回按钮
@@ -132,8 +130,8 @@
     [navView addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
-        make.left.mas_equalTo(self.navView).with.offset(20);
-        make.bottom.mas_equalTo(self.navView).with.offset(-10);
+        make.left.mas_equalTo(self.navView).offset(20);
+        make.bottom.mas_equalTo(self.navView).offset(-10);
     }];
     //标题
     UILabel *title = [[UILabel alloc]init];

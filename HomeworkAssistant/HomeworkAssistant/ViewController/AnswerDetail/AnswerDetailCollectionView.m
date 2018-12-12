@@ -76,6 +76,7 @@
     answerDetailVC.answerModel = self.dataList[indexPath.row];
     answerDetailVC.dataList = self.dataList;
     answerDetailVC.isSelected = cell.isSelected;
+    answerDetailVC.answerID = self.answerID;
     [[self viewController].navigationController pushViewController:answerDetailVC animated:YES];
 }
 

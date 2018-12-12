@@ -29,7 +29,7 @@
         manager.isLogin = NO;
         [manager saveCurrentUserInfo];
     }
-    
+
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -112,7 +112,7 @@
         UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-默认",
                                                         [tabBarItemImages objectAtIndex:index]]];
         if (!BOT_OFFSET) {
-            item.imagePositionAdjustment = UIOffsetMake(0, BOT_OFFSET/2);
+            item.imagePositionAdjustment = UIOffsetMake(0, 15);//BOT_OFFSET的一半
         }
         
         [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];

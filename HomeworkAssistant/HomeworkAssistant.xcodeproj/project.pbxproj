@@ -111,6 +111,7 @@
 		3DF0B99B21BFE05E00AF682A /* 学习-默认@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B98F21BFE05D00AF682A /* 学习-默认@2x.png */; };
 		3DF0B99C21BFE05E00AF682A /* 我的-默认@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B99021BFE05E00AF682A /* 我的-默认@3x.png */; };
 		3DF0B99D21BFE05E00AF682A /* 学习-默认@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B99121BFE05E00AF682A /* 学习-默认@3x.png */; };
+		3DF0B9A021C0E94800AF682A /* TextCheckTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF0B99F21C0E94800AF682A /* TextCheckTool.m */; };
 		9F4D102821B7C65E00F4610A /* LTTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D102721B7C65E00F4610A /* LTTextView.m */; };
 		9F4D103121B7C67A00F4610A /* ForgetPwdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D102A21B7C67800F4610A /* ForgetPwdView.m */; };
 		9F4D103221B7C67A00F4610A /* SingUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D102E21B7C67900F4610A /* SingUpViewController.m */; };
@@ -292,6 +293,8 @@
 		3DF0B98F21BFE05D00AF682A /* 学习-默认@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "学习-默认@2x.png"; sourceTree = "<group>"; };
 		3DF0B99021BFE05E00AF682A /* 我的-默认@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的-默认@3x.png"; sourceTree = "<group>"; };
 		3DF0B99121BFE05E00AF682A /* 学习-默认@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "学习-默认@3x.png"; sourceTree = "<group>"; };
+		3DF0B99E21C0E94800AF682A /* TextCheckTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextCheckTool.h; sourceTree = "<group>"; };
+		3DF0B99F21C0E94800AF682A /* TextCheckTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextCheckTool.m; sourceTree = "<group>"; };
 		974F88E9F3024FEFD7D51BEA /* Pods-HomeworkAssistant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkAssistant.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeworkAssistant/Pods-HomeworkAssistant.release.xcconfig"; sourceTree = "<group>"; };
 		9F4D102621B7C65E00F4610A /* LTTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTTextView.h; sourceTree = "<group>"; };
 		9F4D102721B7C65E00F4610A /* LTTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTTextView.m; sourceTree = "<group>"; };
@@ -663,6 +666,8 @@
 				3D97C68021BE96D900D9404E /* GetCurrentDevice.h */,
 				3D97C68121BE96D900D9404E /* GetCurrentDevice.m */,
 				9F4D108E21B8037900F4610A /* Category */,
+				3DF0B99E21C0E94800AF682A /* TextCheckTool.h */,
+				3DF0B99F21C0E94800AF682A /* TextCheckTool.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -992,6 +997,7 @@
 				3D7D18E321AD24C7006B9C8F /* AnswerCell.m in Sources */,
 				9F4D102821B7C65E00F4610A /* LTTextView.m in Sources */,
 				9F4D109E21B8037900F4610A /* NSArray+SafeObjectArray.m in Sources */,
+				3DF0B9A021C0E94800AF682A /* TextCheckTool.m in Sources */,
 				3D4725AB21BA63E600C0E7CF /* GradeViewController.m in Sources */,
 				3D7D18E621AD66A2006B9C8F /* QRScanViewController.m in Sources */,
 				9F4D103121B7C67A00F4610A /* ForgetPwdView.m in Sources */,

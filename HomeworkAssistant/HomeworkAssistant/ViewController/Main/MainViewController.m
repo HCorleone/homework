@@ -194,6 +194,7 @@
     RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 456, screenWidth,array.count * 128 ) style:UITableViewStylePlain withArray:array];
     [self.mainContentView addSubview:rTableView];
     //    self.mainView.contentSize = CGSizeMake(screenWidth, 456 + rTableView.frame.size.height);
+    self.recommendListView = rTableView;
 }
 
 //导航栏
@@ -471,13 +472,14 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadDataForMyList) name:@"userLikeOrNot" object:nil];
         [self downloadDataForMyList];
     }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if ([TTUserManager sharedInstance].isLogin) {
-        [self downloadDataForMyList];
-    }
+//    if (self.recommendListView) {
+//        [self.recommendListView reloadData];
+//    }
 }
 
 @end

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) AnswerDetail *answerModel;
 @property (nonatomic, strong) NSMutableArray *dataList;
+@property (nonatomic, strong) NSString *answerID;
 @property (nonatomic, assign) BOOL isSelected;
 
 @end

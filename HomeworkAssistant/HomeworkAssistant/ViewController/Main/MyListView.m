@@ -79,6 +79,7 @@
     else {
         AnswerViewController *answerVC = [[AnswerViewController alloc]init];
         answerVC.bookModel = self.dataList[indexPath.row];
+        answerVC.isSelected = YES;
         [[self viewController].navigationController pushViewController:answerVC animated:YES];
     }
 }
