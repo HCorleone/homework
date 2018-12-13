@@ -134,6 +134,9 @@
 		9F740E6721B8F6C700EE9657 /* UpAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F740E6621B8F6C700EE9657 /* UpAnswerViewController.m */; };
 		9FD3795A21BFC63B005581BC /* BookListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3795921BFC63B005581BC /* BookListViewController.m */; };
 		9FD3795D21BFC90B005581BC /* BookListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3795C21BFC90B005581BC /* BookListView.m */; };
+		9FD3796521C24613005581BC /* 下拉@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD3796321C24612005581BC /* 下拉@3x.png */; };
+		9FD3796621C24613005581BC /* 下拉@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD3796421C24612005581BC /* 下拉@2x.png */; };
+		9FD3796921C253F9005581BC /* ImgScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3796721C253F9005581BC /* ImgScrollView.m */; };
 		9FD90A1421B915D000EDF389 /* CommonAlterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A1321B915D000EDF389 /* CommonAlterView.m */; };
 		9FD90A2021B91FB000EDF389 /* SubmitCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A1E21B91FB000EDF389 /* SubmitCollectionViewCell.m */; };
 		9FD90A3221BA49C000EDF389 /* EditorNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A3121BA49C000EDF389 /* EditorNameView.m */; };
@@ -226,8 +229,8 @@
 		3D9EA90F21992CFC006AF423 /* HomeworkAssistant.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeworkAssistant.pch; sourceTree = "<group>"; };
 		3D9EA91121994E35006AF423 /* MyViewStaticCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyViewStaticCell.h; sourceTree = "<group>"; };
 		3D9EA91221994E35006AF423 /* MyViewStaticCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyViewStaticCell.m; sourceTree = "<group>"; };
-		3D9EA91421995422006AF423 /* UIColor+ColorChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+ColorChange.h"; path = "../../Pods/RDVTabBarController/UIColor+ColorChange.h"; sourceTree = "<group>"; };
-		3D9EA91521995422006AF423 /* UIColor+ColorChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ColorChange.m"; path = "../../Pods/RDVTabBarController/UIColor+ColorChange.m"; sourceTree = "<group>"; };
+		3D9EA91421995422006AF423 /* UIColor+ColorChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+ColorChange.h"; path = "../../../Pods/RDVTabBarController/UIColor+ColorChange.h"; sourceTree = "<group>"; };
+		3D9EA91521995422006AF423 /* UIColor+ColorChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ColorChange.m"; path = "../../../Pods/RDVTabBarController/UIColor+ColorChange.m"; sourceTree = "<group>"; };
 		3D9EA91821998BC4006AF423 /* JYViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYViewController.h; sourceTree = "<group>"; };
 		3D9EA91921998BC4006AF423 /* JYViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYViewController.m; sourceTree = "<group>"; };
 		3D9EA91C219A9B7A006AF423 /* 切图 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "切图"; sourceTree = "<group>"; };
@@ -343,6 +346,10 @@
 		9FD3795921BFC63B005581BC /* BookListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookListViewController.m; sourceTree = "<group>"; };
 		9FD3795B21BFC90B005581BC /* BookListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookListView.h; sourceTree = "<group>"; };
 		9FD3795C21BFC90B005581BC /* BookListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookListView.m; sourceTree = "<group>"; };
+		9FD3796321C24612005581BC /* 下拉@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下拉@3x.png"; sourceTree = "<group>"; };
+		9FD3796421C24612005581BC /* 下拉@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下拉@2x.png"; sourceTree = "<group>"; };
+		9FD3796721C253F9005581BC /* ImgScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgScrollView.m; sourceTree = "<group>"; };
+		9FD3796821C253F9005581BC /* ImgScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImgScrollView.h; sourceTree = "<group>"; };
 		9FD90A1221B915D000EDF389 /* CommonAlterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonAlterView.h; sourceTree = "<group>"; };
 		9FD90A1321B915D000EDF389 /* CommonAlterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonAlterView.m; sourceTree = "<group>"; };
 		9FD90A1E21B91FB000EDF389 /* SubmitCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitCollectionViewCell.m; sourceTree = "<group>"; };
@@ -566,6 +573,8 @@
 		3D9EA932219A9D88006AF423 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				9FD3796421C24612005581BC /* 下拉@2x.png */,
+				9FD3796321C24612005581BC /* 下拉@3x.png */,
 				3DF0B98E21BFE05D00AF682A /* 我的-默认.png */,
 				3DF0B98D21BFE05D00AF682A /* 我的-默认@2x.png */,
 				3DF0B99021BFE05E00AF682A /* 我的-默认@3x.png */,
@@ -655,16 +664,6 @@
 		3D9EAF1021A3CBBF006AF423 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				9F629B7021BE425B002A79AC /* YTQPlacePickerView */,
-				9FD90A3921BBD20000EDF389 /* CHFFMDB */,
-				3D9EA94A219BBA19006AF423 /* UITextView+UITextView_Placeholder.h */,
-				3D9EA94B219BBA19006AF423 /* UITextView+UITextView_Placeholder.m */,
-				3D9EA91421995422006AF423 /* UIColor+ColorChange.h */,
-				3D9EA91521995422006AF423 /* UIColor+ColorChange.m */,
-				3D1C2BDC21A5430400725BD4 /* NSString+MD5.h */,
-				3D1C2BDD21A5430400725BD4 /* NSString+MD5.m */,
-				9FD90A3321BBA08A00EDF389 /* NSString+GetNowTimestamp.h */,
-				9FD90A3421BBA08A00EDF389 /* NSString+GetNowTimestamp.m */,
 				9F4D102621B7C65E00F4610A /* LTTextView.h */,
 				9F4D102721B7C65E00F4610A /* LTTextView.m */,
 				9F4D104B21B7F9A100F4610A /* NIDropDown.h */,
@@ -673,9 +672,13 @@
 				9FD90A1321B915D000EDF389 /* CommonAlterView.m */,
 				3D97C68021BE96D900D9404E /* GetCurrentDevice.h */,
 				3D97C68121BE96D900D9404E /* GetCurrentDevice.m */,
-				9F4D108E21B8037900F4610A /* Category */,
 				3DF0B99E21C0E94800AF682A /* TextCheckTool.h */,
 				3DF0B99F21C0E94800AF682A /* TextCheckTool.m */,
+				9FD3796821C253F9005581BC /* ImgScrollView.h */,
+				9FD3796721C253F9005581BC /* ImgScrollView.m */,
+				9F629B7021BE425B002A79AC /* YTQPlacePickerView */,
+				9FD90A3921BBD20000EDF389 /* CHFFMDB */,
+				9F4D108E21B8037900F4610A /* Category */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -750,6 +753,14 @@
 			isa = PBXGroup;
 			children = (
 				9F4D108F21B8037900F4610A /* CommonCategory.h */,
+				3D9EA91421995422006AF423 /* UIColor+ColorChange.h */,
+				3D9EA91521995422006AF423 /* UIColor+ColorChange.m */,
+				3D1C2BDC21A5430400725BD4 /* NSString+MD5.h */,
+				3D1C2BDD21A5430400725BD4 /* NSString+MD5.m */,
+				9FD90A3321BBA08A00EDF389 /* NSString+GetNowTimestamp.h */,
+				9FD90A3421BBA08A00EDF389 /* NSString+GetNowTimestamp.m */,
+				3D9EA94A219BBA19006AF423 /* UITextView+UITextView_Placeholder.h */,
+				3D9EA94B219BBA19006AF423 /* UITextView+UITextView_Placeholder.m */,
 				9F4D109021B8037900F4610A /* NSArray+SafeObjectArray.h */,
 				9F4D109121B8037900F4610A /* NSArray+SafeObjectArray.m */,
 				9F4D109221B8037900F4610A /* UIButton+Category.h */,
@@ -870,6 +881,7 @@
 				3D9EA92A219A9B9C006AF423 /* 用户好评@2x.png in Resources */,
 				3D9EAF0021A2DD42006AF423 /* 搜索@2x.png in Resources */,
 				3D9EA93C219A9DBF006AF423 /* 学习-未激活@3x.png in Resources */,
+				9FD3796521C24613005581BC /* 下拉@3x.png in Resources */,
 				3D47258621BA228C00C0E7CF /* 分享给同学@2x.png in Resources */,
 				3DF0B99521BFE05E00AF682A /* 学习-选中.png in Resources */,
 				3D9EA96A219D7405006AF423 /* qq@3x.png in Resources */,
@@ -890,6 +902,7 @@
 				3D9EA927219A9B9C006AF423 /* 检查更新@2x.png in Resources */,
 				3D47258721BA228C00C0E7CF /* 分享给同学@3x.png in Resources */,
 				3DF0B99621BFE05E00AF682A /* 我的-选中.png in Resources */,
+				9FD3796621C24613005581BC /* 下拉@2x.png in Resources */,
 				3D9EA968219D7405006AF423 /* 微信@2x.png in Resources */,
 				3D9EA8FA2195A788006AF423 /* LaunchScreen.storyboard in Resources */,
 				3D47256821B79CD500C0E7CF /* 管理@2x.png in Resources */,
@@ -1002,6 +1015,7 @@
 				9F4D104321B7E5FC00F4610A /* FillBookInformationViewController.m in Sources */,
 				3D9EA91321994E35006AF423 /* MyViewStaticCell.m in Sources */,
 				3D4725AE21BA67C700C0E7CF /* ClassificationCell.m in Sources */,
+				9FD3796921C253F9005581BC /* ImgScrollView.m in Sources */,
 				3D9EAF0921A39968006AF423 /* RecommendTableView.m in Sources */,
 				9F4D103421B7C67A00F4610A /* ForgetPwdViewController.m in Sources */,
 				9FD90A3521BBA08A00EDF389 /* NSString+GetNowTimestamp.m in Sources */,
@@ -1204,7 +1218,7 @@
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/umeng",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/weixin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Tata.HomeworkAssistant;
+				PRODUCT_BUNDLE_IDENTIFIER = enjoytime.palmhomework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1238,7 +1252,7 @@
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/umeng",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/weixin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Tata.HomeworkAssistant;
+				PRODUCT_BUNDLE_IDENTIFIER = enjoytime.palmhomework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

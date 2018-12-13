@@ -87,7 +87,7 @@
     if(!_imgArray)
     {
         _imgArray = [[NSMutableArray alloc] initWithCapacity:1];
-        UIImage *img = [UIImage imageNamed:@"AddPhoto"];
+        UIImage *img = [UIImage imageNamed:@"添加书籍"];
         [_imgArray addObject:img];
         
         
@@ -134,7 +134,7 @@
     [nextBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:nextBtn];
     [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(-200);
+        make.bottom.mas_equalTo(-screenHeight * 0.157);
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.width.mas_equalTo(152);
         make.height.mas_equalTo(35);
@@ -145,7 +145,7 @@
 -(void)getPictureImage {
     
     _imgView = [[UIImageView alloc] init];
-    _imgView.image = [UIImage imageNamed:@"AddPhoto"];
+    _imgView.image = [UIImage imageNamed:@"添加书籍"];
     _imgView.userInteractionEnabled = YES;
     [self.view addSubview:_imgView];
     [_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -163,9 +163,15 @@
 #pragma mark - 添加答案
 -(void)getAnswer {
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(20, 307, SCREENWIDTH * 5, 112) collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
-    /// 设置此属性为yes 不满一屏幕 也能滚动
-    _collectionView.alwaysBounceHorizontal = YES;
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 307, SCREENWIDTH, 112) collectionViewLayout:flowLayout];
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    // 每一行cell之间的间距
+    flowLayout.minimumLineSpacing = 10;
+    // 设置此属性为yes 不满一屏幕 也能滚动
+//    _collectionView.alwaysBounceHorizontal = YES;
+    flowLayout.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20);
     //隐藏滚动条
     _collectionView.showsHorizontalScrollIndicator = NO;
     //隐藏背景色
@@ -241,16 +247,16 @@
 }
 
 //定义每个UICollectionViewCell 横向的间距(上下)
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 0;
-}
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+//{
+//    return 0;
+//}
 
 //定义每个UICollectionViewCell 纵向的间距(左右)
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 5;
-}
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+//{
+//    return 5;
+//}
 
 
 #pragma mark - UICollectionView------DataSource
@@ -264,6 +270,8 @@
     SubmitCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"itemCell" forIndexPath:indexPath];
     //    cell.imgView.image = [UIImage imageNamed:self.imgArray[indexPath.item]];
     cell.imgView.image = self.imgArray[indexPath.item];
+    cell.imgView.layer.masksToBounds = YES;
+    cell.imgView.layer.cornerRadius = 3;
     return cell;
 }
 

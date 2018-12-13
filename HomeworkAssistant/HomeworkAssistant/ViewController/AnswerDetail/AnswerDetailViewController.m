@@ -9,6 +9,7 @@
 #import "AnswerDetailViewController.h"
 #import "AnswerCell.h"
 #import <UShareUI/UShareUI.h>
+#import "AnswerDetail.h"
 
 @interface AnswerDetailViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -128,7 +129,6 @@
 - (void)userLike {
     NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
     
-    NSString *URL = @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?";
     NSDictionary *dict = @{
                            @"h":@"ZYUserLikeHandler",
                            @"openID":openId,
@@ -141,7 +141,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"]integerValue] == 200) {
             self.isSelected = YES;
@@ -163,7 +163,6 @@
     
     NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
     
-    NSString *URL = @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?";
     NSDictionary *dict = @{
                            @"h":@"ZYDelUserLikeHandler",
                            @"openID":openId,
@@ -176,7 +175,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"]integerValue] == 200) {
             self.isSelected = NO;
@@ -233,7 +232,8 @@
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumLineSpacing = 0;
     
-    UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 72, screenWidth, screenHeight - 48 - 72 - BOT_OFFSET) collectionViewLayout:layout];
+//    UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 72, screenWidth, screenHeight - 48 - 72 - BOT_OFFSET) collectionViewLayout:layout];
+    UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) collectionViewLayout:layout];
     [self.view addSubview:collectionView];
 //    [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.right.mas_equalTo(self.view);

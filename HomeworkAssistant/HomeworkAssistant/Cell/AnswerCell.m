@@ -15,6 +15,7 @@
 
 @end
 
+#define H screenHeight - 48 - 72 - BOT_OFFSET
 
 @implementation AnswerCell
 
@@ -22,18 +23,20 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.topImage = [[UIImageView alloc]init];
-        [self addSubview:self.topImage];
-        [self.topImage mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.and.right.and.top.and.bottom.mas_equalTo(self);
-        }];
+//        self.topImage = [[UIImageView alloc]init];
+//        [self addSubview:self.topImage];
+//        [self.topImage mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.and.right.and.top.and.bottom.mas_equalTo(self);
+//        }];
+        _imgScrollView = [[ImgScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, H) andImageViewFrame:CGRectMake(0, 0, screenWidth, H)];
+        [self addSubview:_imgScrollView];
     }
     return self;
 }
 
 - (void)setModel:(AnswerDetail *)model {
     _model = model;
-    [self.topImage sd_setImageWithURL:[NSURL URLWithString:model.detailAnswerURL]];
+    [_imgScrollView.imgView sd_setImageWithURL:[NSURL URLWithString:model.detailAnswerURL]];
 }
 
 

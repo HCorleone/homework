@@ -40,7 +40,7 @@
 {
     if(!_manager)
     {
-        _manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://ecomment.tatatimes.com"]];
+        _manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OldIP]];
         //设置请求方式
         _manager.requestSerializer = [AFHTTPRequestSerializer serializer];
         //接收数据是json形式给出

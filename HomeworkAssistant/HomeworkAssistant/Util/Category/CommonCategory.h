@@ -15,5 +15,7 @@
 #import "UIImageView+Category.h"
 #import "UITextField+Category.h"
 #import "NSString+GetNowTimestamp.h"
+#import "UITextView+UITextView_Placeholder.h"
+#import "NSString+MD5.h"
 
 #endif /* CommonCategory_h */

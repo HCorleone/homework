@@ -23,9 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self setupNav];
-    
     [self getView];
+    [self setupNav];
 }
 
 //返回上一个界面
@@ -83,7 +82,7 @@
             {
                 arr = [NSArray arrayWithObjects:@"学前", @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级", @"七年级", @"八年级", @"九年级", @"高一", @"高二", @"高三", nil];
                 if(weakSelf.dropDown == nil) {
-                    CGFloat f = 400;
+                    CGFloat f = screenHeight * 0.6;
                     weakSelf.dropDown = [[NIDropDown alloc]showDropDown:weakSelf.fillView.chooseBtn1 theHeight:&f theArr:arr theImgArr:nil theDirection:@"down" withViewController:weakSelf];
                     [weakSelf.dropDown setCellHeigth:37];
                     [weakSelf.dropDown setDropDownSelectionColor:[UIColor whiteColor]];
@@ -99,7 +98,7 @@
             {
                 arr = [NSArray arrayWithObjects:@"语文", @"数学", @"英语", @"物理", @"化学", @"生物", @"政治", @"历史", @"地理", @"科学", nil];
                 if(weakSelf.dropDown == nil) {
-                    CGFloat f = 300;
+                    CGFloat f = screenHeight * 0.5;
                     weakSelf.dropDown = [[NIDropDown alloc]showDropDown:weakSelf.fillView.chooseBtn2 theHeight:&f theArr:arr theImgArr:nil theDirection:@"down" withViewController:weakSelf];
                     [weakSelf.dropDown setCellHeigth:37];
                     [weakSelf.dropDown setDropDownSelectionColor:[UIColor whiteColor]];
@@ -115,7 +114,7 @@
             {
                 arr = [NSArray arrayWithObjects:@"人教版", @"北师大版", @"苏教版", @"冀教版", @"外研版", @"沪科版", @"湘教版", @"青岛版", @"鲁教版", @"浙教版", @"教科版", @"华师大版", @"译林版", @"苏科版", @"语文版", @"西师大版", @"牛津版", @"沪粤版", @"北京课改版", @"鲁科版", @"河大版", @"长春版", @"语文S版", @"冀少版", @"商务星球版", @"济南版", @"鄂教版", @"江苏版", @"中华书局版", @"中科版", @"科粤版", @"川教版", @"陕旅版", @"语文A版", @"仁爱版", @"苏人版", @"其他", nil];
                 if(weakSelf.dropDown == nil) {
-                    CGFloat f = 300;
+                    CGFloat f = screenHeight * 0.3;
                     weakSelf.dropDown = [[NIDropDown alloc]showDropDown:weakSelf.fillView.chooseBtn3 theHeight:&f theArr:arr theImgArr:nil theDirection:@"down" withViewController:weakSelf];
                     [weakSelf.dropDown setCellHeigth:37];
                     [weakSelf.dropDown setDropDownSelectionColor:[UIColor whiteColor]];
@@ -134,11 +133,13 @@
                 
                 if ([weakSelf.fillView.chooseBtn1.titleLabel.text isEqualToString:@"请选择年级"] || [weakSelf.fillView.chooseBtn2.titleLabel.text isEqualToString:@"请选择学科"] ||[weakSelf.fillView.chooseBtn3.titleLabel.text isEqualToString:@"请选择版本"]) {
                     NSLog(@"信息不全");
+                    [CommonAlterView showAlertView:@"信息不完整"];
                 }
                 else{
 
                     if ([weakSelf.fillView.inputField.text isEqualToString:@""] || [weakSelf.fillView.codeLabel.text isEqualToString:@""]) {
                         NSLog(@"信息不全");
+                        [CommonAlterView showAlertView:@"未输入条码"];
                     }
                     else{
                         
@@ -219,6 +220,9 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
     [self.view endEditing:YES];
+    [self.dropDown hideDropDown:self.fillView.chooseBtn1];
+    [self.dropDown hideDropDown:self.fillView.chooseBtn2];
+    [self.dropDown hideDropDown:self.fillView.chooseBtn3];
 }
 
 @end

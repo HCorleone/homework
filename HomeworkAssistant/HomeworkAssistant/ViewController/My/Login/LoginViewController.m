@@ -257,7 +257,6 @@
 - (void)signin {
     [[TTUserManager sharedInstance] clearCurrentUserInfo];
     
-    NSString *URL = @"http://ecomment.tatatimes.com/tataeraapi/api.s?";
     
     NSDictionary *dict = @{
                            @"h":@"LoginTataUserHandler",
@@ -269,7 +268,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:tataURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {
             [TTUserManager sharedInstance].currentUser.headImgUrl = responseObject[@"headImgUrl"];
@@ -289,7 +288,6 @@
 
 #pragma mark - 最终登陆汇总
 - (void)getExtraUserInfo {
-    NSString *URL = @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?";
     
     NSDictionary *dict = @{
                            @"h":@"ZYGetUserExtHander",
@@ -300,7 +298,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {
             if (responseObject[@"datas"] != [NSNull null]) {

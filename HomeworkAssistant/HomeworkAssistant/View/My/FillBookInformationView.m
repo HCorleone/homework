@@ -18,7 +18,7 @@
         NSArray *nameArr = @[@"书名 :", @"年级 :", @"学科 :", @"版本 :", @"条码 :"];
         for (int i = 0; i < 5; i ++) {
             _nameLabel = [UILabel labelWithContent:nameArr[i] SuperView:self TextColor:UIColorFromRGB(0x353B3C) Font:[UIFont systemFontOfSize:14] TextAlignment:NSTextAlignmentLeft NumberOfLines:1];
-            _nameLabel.frame = CGRectMake(screenWidth * 0.084, screenHeight * 0.155 + screenHeight * 0.077 * i, screenWidth * 0.112, 14);
+            _nameLabel.frame = CGRectMake(screenWidth * 0.084, screenHeight * 0.155 + screenHeight * 0.077 * i, 50, 14);
         }
         
         //背景图
@@ -48,7 +48,7 @@
         [_chooseBtn1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(screenHeight * 0.214);
             make.right.mas_equalTo(-screenWidth * 0.084);
-            make.width.mas_equalTo(260);
+            make.width.mas_equalTo(screenWidth * 0.693);
             make.height.mas_equalTo(37);
         }];
         
@@ -57,7 +57,7 @@
         [_chooseBtn2 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(screenHeight * 0.291);
             make.right.mas_equalTo(-screenWidth * 0.084);
-            make.width.mas_equalTo(260);
+            make.width.mas_equalTo(screenWidth * 0.693);
             make.height.mas_equalTo(37);
         }];
         
@@ -66,10 +66,32 @@
         [_chooseBtn3 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(screenHeight * 0.367);
             make.right.mas_equalTo(-screenWidth * 0.084);
-            make.width.mas_equalTo(260);
+            make.width.mas_equalTo(screenWidth * 0.693);
             make.height.mas_equalTo(37);
         }];
         /*----------三个按钮--- end-----------*/
+        
+        _downImgView = [UIImageView imageViewWithName:@"下拉" SuperView:self.chooseBtn1];
+        [_downImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.chooseBtn1.mas_centerY);
+            make.right.mas_equalTo(-15);
+            make.width.mas_equalTo(17);
+            make.height.mas_equalTo(17);
+        }];
+        _downImgView = [UIImageView imageViewWithName:@"下拉" SuperView:self.chooseBtn2];
+        [_downImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.chooseBtn2.mas_centerY);
+            make.right.mas_equalTo(-15);
+            make.width.mas_equalTo(17);
+            make.height.mas_equalTo(17);
+        }];
+        _downImgView = [UIImageView imageViewWithName:@"下拉" SuperView:self.chooseBtn3];
+        [_downImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.chooseBtn3.mas_centerY);
+            make.right.mas_equalTo(-15);
+            make.width.mas_equalTo(17);
+            make.height.mas_equalTo(17);
+        }];
         
         //条码背景
         UIView *bgc2 = [[UIView alloc] init];
@@ -78,7 +100,7 @@
         [bgc2 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(screenHeight * 0.443);
             make.right.mas_equalTo(-screenWidth * 0.084);
-            make.width.mas_equalTo(260);
+            make.width.mas_equalTo(screenWidth * 0.693);
             make.height.mas_equalTo(37);
         }];
         //条码
@@ -106,7 +128,7 @@
         [_nextBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_nextBtn];
         [_nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(-200);
+            make.bottom.mas_equalTo(-screenHeight * 0.157);
             make.centerX.mas_equalTo(self.mas_centerX);
             make.width.mas_equalTo(152);
             make.height.mas_equalTo(35);

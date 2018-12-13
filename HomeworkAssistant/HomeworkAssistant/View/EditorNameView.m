@@ -52,6 +52,14 @@
     _downBtn.backgroundColor = [UIColor colorWithRed:244/255.0 green:244/255.0 blue:244/255.0 alpha:1/1.0];
     _downBtn.frame = CGRectMake(screenWidth * 0.308, screenHeight * 0.339, screenWidth * 0.513, 30);
     
+    UIImageView *downImgView = [UIImageView imageViewWithName:@"下拉" SuperView:self.downBtn];
+    [downImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.downBtn.mas_centerY);
+        make.right.mas_equalTo(-15);
+        make.width.mas_equalTo(17);
+        make.height.mas_equalTo(17);
+    }];
+    
     //地区
     _cityBtn = [UIButton buttonWithText:@"请选择城市" TextColor:UIColorFromRGB(0x8F9394) TextSize:16 SuperView:self Tag:1002 Target:self Action:@selector(clickBtn:)];
     _cityBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;

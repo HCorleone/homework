@@ -61,6 +61,8 @@
 #define getURL @"/homeworkapi/api.s?"
 #define oldURl @"/tataeraapi/api.s?"
 
+#define zuoyeURL @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?"
 
+#define tataURL @"http://ecomment.tatatimes.com/tataeraapi/api.s?"
 
 #endif /* CommonDefine_h */

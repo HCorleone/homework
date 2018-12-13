@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "AnswerDetail.h"
+#import "ImgScrollView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AnswerCell : UICollectionViewCell
 
 @property (nonatomic, strong) AnswerDetail *model;
+@property (nonatomic, strong) ImgScrollView *imgScrollView;
+
 
 @end
 

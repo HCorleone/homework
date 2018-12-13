@@ -153,7 +153,7 @@
     
     NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
     
-    NSString *URL = @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?";
+    NSString *URL = zuoyeURL;
     NSDictionary *dict = @{
                            @"h":@"ZYDelUserLikeHandler",
                            @"openID":openId,
@@ -185,7 +185,6 @@
 - (void)userLike {
     NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
     
-    NSString *URL = @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?";
     NSDictionary *dict = @{
                            @"h":@"ZYUserLikeHandler",
                            @"openID":openId,
@@ -198,7 +197,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"]integerValue] == 200) {
             [self.saveBtn setBackgroundColor:maincolor];

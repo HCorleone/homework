@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIButton *chooseBtn2;
 @property (nonatomic, strong) UIButton *chooseBtn3;
 @property (nonatomic, strong) UIButton *nextBtn;
+@property (nonatomic, strong) UIImageView *downImgView;
 
 @property (nonatomic, strong) UITextField *inputField;
 @property (nonatomic, strong) UILabel *codeLabel;

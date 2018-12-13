@@ -20,6 +20,8 @@
 #import "CommonAlterView.h"
 #import "SHPlacePickerView.h"
 
+#import "UpAnswerViewController.h"
+
 @interface MyViewController () <UITableViewDelegate, UITableViewDataSource, NIDropDownDelegate>
 
 @property (nonatomic, strong) UIView *loginView;
@@ -159,7 +161,9 @@
 
 //上传答案
 - (void)toUpLoad {
-    [self.navigationController pushViewController:[[QRScanViewController alloc] init] animated:YES];
+//    [self.navigationController pushViewController:[[QRScanViewController alloc] init] animated:YES];
+    
+    [self.navigationController pushViewController:[[UpAnswerViewController alloc] init] animated:YES];
 }
 
 - (void)logout {
