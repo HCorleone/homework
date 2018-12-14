@@ -55,8 +55,13 @@
             case 1002:
             {
                 NSLog(@"下一步");
-                //请求接口
-                [weakSelf getManager];
+                if (!self.cell.title.text && !self.otherView.areaBtn.titleLabel.text) {
+                    [CommonAlterView showAlertView:@"请选择年级和地区"];
+                }
+                else {
+                    //请求接口
+                    [weakSelf getManager];
+                }
             }
                 break;
         }
