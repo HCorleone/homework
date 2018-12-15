@@ -27,7 +27,7 @@
     self.dataSource = self;
     self.scrollEnabled = NO;
     [self setSeparatorInset:UIEdgeInsetsMake(0, 20, 0, 20)];
-//    [self setSeparatorColor:[UIColor colorWithWhite:1 alpha:0.1]];
+    [self setSeparatorColor:[[UIColor blackColor] colorWithAlphaComponent:0.1]];
     
     return self;
 }
