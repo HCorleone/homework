@@ -71,6 +71,7 @@ static NSString *page = @"1";
     searchBar.layer.borderColor = [[UIColor clearColor] CGColor];
     searchBar.placeHolderStringFont = [UIFont systemFontOfSize:14.0];
     searchBar.cornerRadius = 4;
+    searchBar.text = self.searchContent;
     searchBar.tintColor = ClickColor;//光标颜色
     UIImage* searchBarBg = [self GetImageWithColor:[UIColor clearColor] andHeight:32.0f];
     [searchBar setBackgroundImage:searchBarBg];

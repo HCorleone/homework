@@ -56,7 +56,7 @@
         make.left.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view);
         make.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(66);
+        make.height.mas_equalTo(72 + TOP_OFFSET);
     }];
     self.navView = navView;
     //返回按钮
@@ -67,7 +67,7 @@
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
         make.left.mas_equalTo(self.navView).with.offset(20);
-        make.bottom.mas_equalTo(self.navView).with.offset(-10);
+        make.bottom.mas_equalTo(self.navView).with.offset(-15);
     }];
     //标题
     UILabel *title = [[UILabel alloc]init];
@@ -122,23 +122,36 @@
         make.height.mas_equalTo(14);
     }];
     
+    
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 0, 0.40 * screenWidth, 0.40 * screenWidth * 0.24);
+    [gradientLayer setColors:[NSArray arrayWithObjects:
+                              (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
+                              nil
+                              ]];
+    
+    
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0, 1);
+    gradientLayer.locations = @[@0,@1];
+    
     UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextBtn setTitleColor:UIColorFromRGB(0xFFFFFF) forState:UIControlStateNormal];
-    [nextBtn setTitle:@"确认上传" forState:UIControlStateNormal];
-    nextBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    nextBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    nextBtn.backgroundColor = UIColorFromRGB(0x3FBCF4);
+    [nextBtn.layer addSublayer:gradientLayer];
     nextBtn.layer.masksToBounds = YES;
-    nextBtn.layer.cornerRadius = 15;
+    nextBtn.layer.cornerRadius = 0.40 * screenWidth * 0.24/2;
     nextBtn.tag = 1004;
     [nextBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:nextBtn];
     [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(-screenHeight * 0.157);
         make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.width.mas_equalTo(152);
-        make.height.mas_equalTo(35);
+        make.size.mas_equalTo(CGSizeMake(0.40 * screenWidth, 0.40 * screenWidth * 0.24));
     }];
+    [nextBtn setTitleColor:UIColorFromRGB(0xFFFFFF) forState:UIControlStateNormal];
+    [nextBtn setTitle:@"确认上传" forState:UIControlStateNormal];
+    nextBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    nextBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
 }
 
 #pragma mark - 添加封面
