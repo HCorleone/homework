@@ -17,7 +17,7 @@
         _lingView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
         [self addSubview:_lingView];
         [_lingView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(screenHeight * 0.06);
+            make.top.mas_equalTo(screenWidth * 0.106);
             make.centerX.mas_equalTo(self.mas_centerX);
             make.width.mas_equalTo(screenWidth * 0.725);
             make.height.mas_equalTo(1);
@@ -27,18 +27,30 @@
         _lingView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
         [self addSubview:_lingView];
         [_lingView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(-screenHeight * 0.109);
+            make.bottom.mas_equalTo(-screenWidth * 0.194);
             make.centerX.mas_equalTo(self.mas_centerX);
             make.width.mas_equalTo(screenWidth * 0.725);
             make.height.mas_equalTo(1);
         }];
         
+        
+        CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+        gradientLayer.frame = CGRectMake(0, 0, 0.379 * screenWidth, 0.379 * 0.218 * screenWidth);
+        [gradientLayer setColors:[NSArray arrayWithObjects:
+                                  (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
+                                  (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
+                                  nil
+                                  ]];
+        gradientLayer.startPoint = CGPointMake(0, 0);
+        gradientLayer.endPoint = CGPointMake(0, 1);
+        gradientLayer.locations = @[@0,@1];
+        
         _insertBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_insertBtn.layer addSublayer:gradientLayer];
         [_insertBtn setTitleColor:UIColorFromRGB(0xFFFFFF) forState:UIControlStateNormal];
         [_insertBtn setTitle:@"导入书单" forState:UIControlStateNormal];
         _insertBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         _insertBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-        _insertBtn.backgroundColor = UIColorFromRGB(0x3FBCF4);
         _insertBtn.layer.masksToBounds = YES;
         _insertBtn.layer.cornerRadius = 15;
         _insertBtn.tag = 1004;
@@ -47,8 +59,8 @@
         [_insertBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(-30);
             make.centerX.mas_equalTo(self.mas_centerX);
-            make.width.mas_equalTo(152);
-            make.height.mas_equalTo(36);
+            make.width.mas_equalTo(0.379 * screenWidth);
+            make.height.mas_equalTo(0.379 * 0.218 * screenWidth);
         }];
         
         

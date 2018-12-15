@@ -132,6 +132,13 @@
 		9F629B7E21BE4B38002A79AC /* FillOthersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F629B7D21BE4B38002A79AC /* FillOthersViewController.m */; };
 		9F629B8121BE73C2002A79AC /* FillOthersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F629B8021BE73C2002A79AC /* FillOthersView.m */; };
 		9F740E6721B8F6C700EE9657 /* UpAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F740E6621B8F6C700EE9657 /* UpAnswerViewController.m */; };
+		9F7690FA21C4D6B400A4AA5D /* FLJSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7690F621C4D6B400A4AA5D /* FLJSearchBar.m */; };
+		9F7690FB21C4D6B400A4AA5D /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7690F821C4D6B400A4AA5D /* UIImage+Extension.m */; };
+		9FAB956D21C49A9C00859BBB /* 下拉icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FAB956921C49A9C00859BBB /* 下拉icon@2x.png */; };
+		9FAB956E21C49A9C00859BBB /* 下拉icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FAB956A21C49A9C00859BBB /* 下拉icon@3x.png */; };
+		9FAB957221C49C8B00859BBB /* 上拉icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FAB957021C49C8B00859BBB /* 上拉icon@2x.png */; };
+		9FAB957321C49C8B00859BBB /* 上拉icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FAB957121C49C8B00859BBB /* 上拉icon@3x.png */; };
+		9FAB957621C4AF1100859BBB /* ButtonLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FAB957521C4AF1000859BBB /* ButtonLinks.m */; };
 		9FD3795A21BFC63B005581BC /* BookListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3795921BFC63B005581BC /* BookListViewController.m */; };
 		9FD3795D21BFC90B005581BC /* BookListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3795C21BFC90B005581BC /* BookListView.m */; };
 		9FD3796521C24613005581BC /* 下拉@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD3796321C24612005581BC /* 下拉@3x.png */; };
@@ -172,10 +179,6 @@
 		3D47258F21BA591C00C0E7CF /* YZPullDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZPullDownMenu.h; sourceTree = "<group>"; };
 		3D47259321BA5BA600C0E7CF /* YZMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZMenuButton.h; sourceTree = "<group>"; };
 		3D47259421BA5BA700C0E7CF /* YZMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZMenuButton.m; sourceTree = "<group>"; };
-		3D47259621BA5C1C00C0E7CF /* 上拉icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上拉icon@3x.png"; sourceTree = "<group>"; };
-		3D47259721BA5C1D00C0E7CF /* 下拉icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下拉icon@3x.png"; sourceTree = "<group>"; };
-		3D47259821BA5C1D00C0E7CF /* 上拉icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上拉icon@2x.png"; sourceTree = "<group>"; };
-		3D47259921BA5C1D00C0E7CF /* 下拉icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下拉icon@2x.png"; sourceTree = "<group>"; };
 		3D47259A21BA5C5300C0E7CF /* UIView+YZCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YZCategory.h"; sourceTree = "<group>"; };
 		3D47259B21BA5C5300C0E7CF /* UIView+YZCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YZCategory.m"; sourceTree = "<group>"; };
 		3D4725A021BA5F1600C0E7CF /* VersionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionViewController.h; sourceTree = "<group>"; };
@@ -342,6 +345,16 @@
 		9F740E6521B8F6C700EE9657 /* UpAnswerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpAnswerViewController.h; sourceTree = "<group>"; };
 		9F740E6621B8F6C700EE9657 /* UpAnswerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpAnswerViewController.m; sourceTree = "<group>"; };
 		9F740E6821B9016F00EE9657 /* CommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonDefine.h; sourceTree = "<group>"; };
+		9F7690F621C4D6B400A4AA5D /* FLJSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLJSearchBar.m; sourceTree = "<group>"; };
+		9F7690F721C4D6B400A4AA5D /* FLJSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLJSearchBar.h; sourceTree = "<group>"; };
+		9F7690F821C4D6B400A4AA5D /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
+		9F7690F921C4D6B400A4AA5D /* UIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extension.h"; sourceTree = "<group>"; };
+		9FAB956921C49A9C00859BBB /* 下拉icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下拉icon@2x.png"; sourceTree = "<group>"; };
+		9FAB956A21C49A9C00859BBB /* 下拉icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下拉icon@3x.png"; sourceTree = "<group>"; };
+		9FAB957021C49C8B00859BBB /* 上拉icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上拉icon@2x.png"; sourceTree = "<group>"; };
+		9FAB957121C49C8B00859BBB /* 上拉icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上拉icon@3x.png"; sourceTree = "<group>"; };
+		9FAB957421C4AF1000859BBB /* ButtonLinks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ButtonLinks.h; sourceTree = "<group>"; };
+		9FAB957521C4AF1000859BBB /* ButtonLinks.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ButtonLinks.m; sourceTree = "<group>"; };
 		9FD3795821BFC63B005581BC /* BookListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookListViewController.h; sourceTree = "<group>"; };
 		9FD3795921BFC63B005581BC /* BookListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookListViewController.m; sourceTree = "<group>"; };
 		9FD3795B21BFC90B005581BC /* BookListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookListView.h; sourceTree = "<group>"; };
@@ -573,6 +586,10 @@
 		3D9EA932219A9D88006AF423 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				9FAB957021C49C8B00859BBB /* 上拉icon@2x.png */,
+				9FAB957121C49C8B00859BBB /* 上拉icon@3x.png */,
+				9FAB956921C49A9C00859BBB /* 下拉icon@2x.png */,
+				9FAB956A21C49A9C00859BBB /* 下拉icon@3x.png */,
 				9FD3796421C24612005581BC /* 下拉@2x.png */,
 				9FD3796321C24612005581BC /* 下拉@3x.png */,
 				3DF0B98E21BFE05D00AF682A /* 我的-默认.png */,
@@ -595,10 +612,6 @@
 				3D4725B421BA7E5400C0E7CF /* 标签-向上箭头@3x.png */,
 				3D4725B521BA7E5400C0E7CF /* 标签-向下箭头@2x.png */,
 				3D4725B221BA7E5400C0E7CF /* 标签-向下箭头@3x.png */,
-				3D47259821BA5C1D00C0E7CF /* 上拉icon@2x.png */,
-				3D47259621BA5C1C00C0E7CF /* 上拉icon@3x.png */,
-				3D47259921BA5C1D00C0E7CF /* 下拉icon@2x.png */,
-				3D47259721BA5C1D00C0E7CF /* 下拉icon@3x.png */,
 				3D47258421BA228C00C0E7CF /* 分享给同学@2x.png */,
 				3D47258521BA228C00C0E7CF /* 分享给同学@3x.png */,
 				3D47256621B79CD500C0E7CF /* 管理@2x.png */,
@@ -676,6 +689,9 @@
 				3DF0B99F21C0E94800AF682A /* TextCheckTool.m */,
 				9FD3796821C253F9005581BC /* ImgScrollView.h */,
 				9FD3796721C253F9005581BC /* ImgScrollView.m */,
+				9FAB957421C4AF1000859BBB /* ButtonLinks.h */,
+				9FAB957521C4AF1000859BBB /* ButtonLinks.m */,
+				9F7690F521C4D69E00A4AA5D /* YTQsearcBar */,
 				9F629B7021BE425B002A79AC /* YTQPlacePickerView */,
 				9FD90A3921BBD20000EDF389 /* CHFFMDB */,
 				9F4D108E21B8037900F4610A /* Category */,
@@ -794,6 +810,17 @@
 				9F629B7321BE425B002A79AC /* PlaceModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		9F7690F521C4D69E00A4AA5D /* YTQsearcBar */ = {
+			isa = PBXGroup;
+			children = (
+				9F7690F721C4D6B400A4AA5D /* FLJSearchBar.h */,
+				9F7690F621C4D6B400A4AA5D /* FLJSearchBar.m */,
+				9F7690F921C4D6B400A4AA5D /* UIImage+Extension.h */,
+				9F7690F821C4D6B400A4AA5D /* UIImage+Extension.m */,
+			);
+			path = YTQsearcBar;
 			sourceTree = "<group>";
 		};
 		9FD90A3921BBD20000EDF389 /* CHFFMDB */ = {
@@ -920,9 +947,11 @@
 				3D9EA93E219A9DBF006AF423 /* 学习-未激活@2x.png in Resources */,
 				3D9EA941219A9DBF006AF423 /* 我的-未激活@2x.png in Resources */,
 				3DF0B99821BFE05E00AF682A /* 学习-选中@2x.png in Resources */,
+				9FAB956D21C49A9C00859BBB /* 下拉icon@2x.png in Resources */,
 				3D9EA8F72195A788006AF423 /* Assets.xcassets in Resources */,
 				3D9EA91D219A9B7A006AF423 /* 切图 in Resources */,
 				3DF0B99D21BFE05E00AF682A /* 学习-默认@3x.png in Resources */,
+				9FAB957221C49C8B00859BBB /* 上拉icon@2x.png in Resources */,
 				3D9EAF0421A2E18E006AF423 /* 扫一扫@2x.png in Resources */,
 				9F629B7B21BE4902002A79AC /* Place.plist in Resources */,
 				3D9EAF1421A4F3C6006AF423 /* 空状态@3x.png in Resources */,
@@ -932,8 +961,10 @@
 				3DF0B99321BFE05E00AF682A /* 我的-选中@2x.png in Resources */,
 				3D9EA92C219A9B9C006AF423 /* 用户好评@3x.png in Resources */,
 				3D9EAF1321A4F3C6006AF423 /* 空状态@2x.png in Resources */,
+				9FAB957321C49C8B00859BBB /* 上拉icon@3x.png in Resources */,
 				3D9EA92D219A9B9C006AF423 /* 用户反馈@2x.png in Resources */,
 				3DF0B96621BFDC4D00AF682A /* 添加书籍.png in Resources */,
+				9FAB956E21C49A9C00859BBB /* 下拉icon@3x.png in Resources */,
 				3D9EAEFC21A2D895006AF423 /* 首页头图@3x.png in Resources */,
 				3D4725BF21BCC65F00C0E7CF /* 修改信息@3x.png in Resources */,
 				3D9EA93D219A9DBF006AF423 /* 我的-激活@3x.png in Resources */,
@@ -992,10 +1023,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F7690FA21C4D6B400A4AA5D /* FLJSearchBar.m in Sources */,
 				3D7D18F821B0CCCF006B9C8F /* MyListViewCell.m in Sources */,
 				3D4725B121BA78CA00C0E7CF /* CollectionHeaderView.m in Sources */,
 				9F629B8121BE73C2002A79AC /* FillOthersView.m in Sources */,
 				3D4725A221BA5F1600C0E7CF /* VersionViewController.m in Sources */,
+				9FAB957621C4AF1100859BBB /* ButtonLinks.m in Sources */,
 				9F740E6721B8F6C700EE9657 /* UpAnswerViewController.m in Sources */,
 				9F4D104621B7E83C00F4610A /* FillBookInformationView.m in Sources */,
 				3D47259C21BA5C5300C0E7CF /* UIView+YZCategory.m in Sources */,
@@ -1003,6 +1036,7 @@
 				3D47256121B6482200C0E7CF /* SearchHistoryCell.m in Sources */,
 				3D9EA90D219916F6006AF423 /* Book.m in Sources */,
 				3D9EA8FD2195A788006AF423 /* main.m in Sources */,
+				9F7690FB21C4D6B400A4AA5D /* UIImage+Extension.m in Sources */,
 				9F4D103221B7C67A00F4610A /* SingUpViewController.m in Sources */,
 				3D9EAF0F21A39BF0006AF423 /* RecommendStaticCell.m in Sources */,
 				9F4D104C21B7F9A100F4610A /* NIDropDown.m in Sources */,
@@ -1218,7 +1252,7 @@
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/umeng",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/weixin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = enjoytime.palmhomework;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Tata.HomeworkAssistant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1252,7 +1286,7 @@
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/umeng",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/weixin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = enjoytime.palmhomework;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Tata.HomeworkAssistant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

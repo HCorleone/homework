@@ -52,10 +52,10 @@
     [_collectionView registerClass:[SubmitCollectionViewCell class] forCellWithReuseIdentifier:@"itemCell"];
     [self.bookView addSubview:_collectionView];
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(screenHeight * 0.084);
+        make.top.mas_equalTo(screenWidth * 0.106 + 1);
         make.centerX.mas_equalTo(self.bookView.mas_centerX);
         make.width.mas_equalTo(screenWidth * 0.697);
-        make.height.mas_equalTo(screenHeight * 0.288);
+        make.height.mas_equalTo(screenWidth * 0.648);
     }];
 }
 
@@ -119,7 +119,7 @@
         make.top.mas_equalTo(screenHeight * 0.211);
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.width.mas_equalTo(screenWidth * 0.827);
-        make.height.mas_equalTo(screenHeight * 0.535);
+        make.height.mas_equalTo(screenWidth * 0.827 / 310 * 357);
     }];
     
     
@@ -215,6 +215,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SubmitCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"itemCell" forIndexPath:indexPath];
+    cell.layer.borderWidth = 0.5;
+    cell.layer.borderColor = [UIColor grayColor].CGColor;
     [cell.imgView sd_setImageWithURL:self.imgArray[indexPath.item]];
     return cell;
 }

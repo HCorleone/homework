@@ -17,9 +17,9 @@
     
     if (self.imageView.x < self.titleLabel.x) {
         
-        self.titleLabel.x = self.imageView.x;
+        self.titleLabel.x = self.imageView.x + screenWidth * 0.05;
         
-        self.imageView.x = self.titleLabel.maxX + 10;
+        self.imageView.x = self.titleLabel.maxX + 2;
     }
     
     

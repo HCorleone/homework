@@ -20,6 +20,8 @@
 //color
 #define whitecolor [UIColor whiteColor]
 #define maincolor [UIColor colorWithHexString:@"#3DC5F2"]
+/** 选中年级，科目，版本 */
+#define ClickColor [UIColor colorWithRed:85/255.0 green:195/255.0 blue:242/255.0 alpha:1/1.0]
 
 //screensize
 #define screenWidth [[UIScreen mainScreen]bounds].size.width

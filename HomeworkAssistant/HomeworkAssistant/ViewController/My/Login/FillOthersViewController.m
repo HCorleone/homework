@@ -177,13 +177,16 @@
 -  (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
     _cell = (ClassificationCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    [_cell setBackgroundColor:maincolor];
-    
+    [_cell setBackgroundColor:ClickColor];
+    _cell.layer.borderColor = ClickColor.CGColor;
+    _cell.title.textColor = whitecolor;
     
     if (_oldIndexPath != indexPath) {
         //改变旧的cell恢复颜色
-        UICollectionViewCell *oldCell = [collectionView cellForItemAtIndexPath:_oldIndexPath];
+        ClassificationCell *oldCell = (ClassificationCell *)[collectionView cellForItemAtIndexPath:_oldIndexPath];
         oldCell.backgroundColor  = [UIColor whiteColor];
+        oldCell.layer.borderColor = UIColorFromRGB(0xD5D5D5).CGColor;
+        oldCell.title.textColor = UIColorFromRGB(0x353B3C);
     }
     _oldIndexPath = indexPath;
 }

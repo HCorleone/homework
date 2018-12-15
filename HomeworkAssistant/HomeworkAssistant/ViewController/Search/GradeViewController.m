@@ -15,6 +15,8 @@ extern NSString * const YZUpdateMenuTitleNote;
 @interface GradeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSArray *titles;
+/** 旧cell */
+@property (nonatomic, strong) NSIndexPath *oldIndexPath;
 
 @end
 
@@ -137,6 +139,30 @@ extern NSString * const YZUpdateMenuTitleNote;
     NSLog(@"%@",cell.title.text);
     [[NSNotificationCenter defaultCenter] postNotificationName:YZUpdateMenuTitleNote object:self userInfo:@{@"title":cell.title.text,@"col":col}];
     
+}
+
+//设置点击高亮和非高亮效果！
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+-  (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    ClassificationCell *cell = (ClassificationCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell setBackgroundColor:ClickColor];
+    cell.layer.borderColor = ClickColor.CGColor;
+    cell.title.textColor = whitecolor;
+    
+    if (_oldIndexPath != indexPath) {
+        //改变旧的cell恢复颜色
+        ClassificationCell *oldCell = (ClassificationCell *)[collectionView cellForItemAtIndexPath:_oldIndexPath];
+        oldCell.backgroundColor  = [UIColor whiteColor];
+        oldCell.layer.borderColor = UIColorFromRGB(0xD5D5D5).CGColor;
+        oldCell.title.textColor = UIColorFromRGB(0x353B3C);
+    }
+    _oldIndexPath = indexPath;
 }
 
 @end
