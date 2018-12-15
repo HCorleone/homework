@@ -25,7 +25,7 @@
 @implementation BookListViewController
 
 #define IMAGEX [UIScreen mainScreen].bounds.size.width * 0.176
-#define IMAGEY [UIScreen mainScreen].bounds.size.height * 0.132
+#define IMAGEY IMAGEX * 1.33
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,8 +34,6 @@
     
     [self getManager];
     [self getBookView];
-    
-    
     
 }
 
@@ -198,7 +196,7 @@
 //定义每个UICollectionViewCell 横向的间距(上下)
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return screenHeight * 0.024;
+    return screenWidth * 0.085;
 }
 
 
