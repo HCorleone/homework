@@ -55,22 +55,35 @@
     }];
     
     //下一步按钮
+    
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 0, 0.40 * screenWidth, 0.40 * screenWidth * 0.24);
+    [gradientLayer setColors:[NSArray arrayWithObjects:
+                              (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
+                              nil
+                              ]];
+    
+    
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0, 1);
+    gradientLayer.locations = @[@0,@1];
+    
     _nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_nextBtn setTitleColor:UIColorFromRGB(0xFFFFFF) forState:UIControlStateNormal];
-    [_nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
-    _nextBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    _nextBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    _nextBtn.backgroundColor = UIColorFromRGB(0x3FBCF4);
+    [_nextBtn.layer addSublayer:gradientLayer];
     _nextBtn.layer.masksToBounds = YES;
-    _nextBtn.layer.cornerRadius = 15;
+    _nextBtn.layer.cornerRadius = 0.40 * screenWidth * 0.24/2;
     [_nextBtn addTarget:self action:@selector(pressBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_nextBtn];
     [_nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.inputField.mas_bottom).offset(107);
         make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.width.mas_equalTo(152);
-        make.height.mas_equalTo(36);
+        make.size.mas_equalTo(CGSizeMake(0.40 * screenWidth, 0.40 * screenWidth * 0.24));
     }];
+    [_nextBtn setTitleColor:UIColorFromRGB(0xFFFFFF) forState:UIControlStateNormal];
+    [_nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
+    _nextBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    _nextBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
 }
 
 //点击下一步
@@ -113,7 +126,7 @@
         make.left.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view);
         make.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(66);
+        make.height.mas_equalTo(72 + TOP_OFFSET);
     }];
     self.navView = navView;
     //返回按钮
@@ -124,7 +137,7 @@
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
         make.left.mas_equalTo(self.navView).with.offset(20);
-        make.bottom.mas_equalTo(self.navView).with.offset(-10);
+        make.bottom.mas_equalTo(self.navView).with.offset(-15);
     }];
     //标题
     UILabel *title = [[UILabel alloc]init];

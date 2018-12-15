@@ -112,6 +112,13 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"shareCode" object:nil userInfo:@{@"shareCode":code}];
                 [self.navigationController popViewControllerAnimated:YES];
             }
+            else {
+                [self.scanView removeTimer];
+                [self.scanManager stopRunning];
+                SearchResultViewController *searchResultVC = [[SearchResultViewController alloc]init];
+                searchResultVC.searchContent = result;
+                [self.navigationController pushViewController:searchResultVC animated:YES];
+            }
         }
         else {
             [self.scanView removeTimer];

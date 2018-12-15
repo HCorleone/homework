@@ -154,7 +154,6 @@
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.navView);
         make.centerY.mas_equalTo(backBtn);
-        
     }];
 }
 
