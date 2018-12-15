@@ -159,8 +159,7 @@
     
     //分割线
     UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, screenWidth - 40, 0.5)];
-//    [line setBackgroundColor:[UIColor colorWithRed:224/255.0 green:224/255.0 blue:224/255.0 alpha:1.0]];
-    [line setBackgroundColor:[UIColor grayColor]];
+    [line setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.1]];
     line.layer.opacity = 0.5;
     [self.myListView.tableFooterView addSubview:line];
     

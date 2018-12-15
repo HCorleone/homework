@@ -115,10 +115,10 @@
         UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-默认",
                                                         [tabBarItemImages objectAtIndex:index]]];
         if (!BOT_OFFSET) {
-            item.imagePositionAdjustment = UIOffsetMake(15, 18);//BOT_OFFSET的一半
+            item.imagePositionAdjustment = UIOffsetMake(10, 18);//BOT_OFFSET的一半
         }
         else {
-            item.imagePositionAdjustment = UIOffsetMake(15, 5);
+            item.imagePositionAdjustment = UIOffsetMake(10, 5);
         }
         
         [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];

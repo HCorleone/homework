@@ -515,7 +515,7 @@
 //跳转到appstore应用页面
 - (NSString *)getReviewUrlByAppId:(NSInteger)type{
     // type = 1 为评论界面；type = 2 为更新界面
-    NSString *appId = @"1225090488";
+    NSString *appId = @"1446237904";
     NSString *templatePL = @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=APP_ID&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8";
     NSString *templateGX = @"http://itunes.apple.com/cn/app/idAPP_ID?mt=8";
     
