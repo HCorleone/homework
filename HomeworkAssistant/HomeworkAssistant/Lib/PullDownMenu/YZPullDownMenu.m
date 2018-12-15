@@ -190,10 +190,10 @@ NSString * const YZUpdateMenuTitleNote = @"YZUpdateMenuTitleNote";
         btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
 
         // 设置分割线位置
-        if (i < count - 1) {
-            UIView *separateLine = self.separateLines[i];
-            separateLine.frame = CGRectMake(CGRectGetMaxX(btn.frame), _separateLineTopMargin, 1, btnH - 2 * _separateLineTopMargin);
-        }
+//        if (i < count - 1) {
+//            UIView *separateLine = self.separateLines[i];
+//            separateLine.frame = CGRectMake(CGRectGetMaxX(btn.frame), _separateLineTopMargin, 1, btnH - 2 * _separateLineTopMargin);
+//        }
     }
     
     // 设置底部View位置
@@ -295,13 +295,13 @@ NSString * const YZUpdateMenuTitleNote = @"YZUpdateMenuTitleNote";
     }
     
     // 添加分割线
-    NSInteger count = cols - 1;
-    for (NSInteger i = 0; i < count; i++) {
-        UIView *separateLine = [[UIView alloc] init];
-        separateLine.backgroundColor = _separateLineColor;
-        [self addSubview:separateLine];
-        [self.separateLines addObject:separateLine];
-    }
+//    NSInteger count = cols - 1;
+//    for (NSInteger i = 0; i < count; i++) {
+//        UIView *separateLine = [[UIView alloc] init];
+//        separateLine.backgroundColor = _separateLineColor;
+//        [self addSubview:separateLine];
+//        [self.separateLines addObject:separateLine];
+//    }
     
     // 添加底部View
     UIView *bottomView = [[UIView alloc] init];

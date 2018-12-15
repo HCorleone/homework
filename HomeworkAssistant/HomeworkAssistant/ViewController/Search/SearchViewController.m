@@ -9,6 +9,8 @@
 #import "SearchViewController.h"
 #import "SearchResultViewController.h"
 #import "SearchHistoryCell.h"
+#import "ButtonLinks.h"
+#import "FLJSearchBar.h"
 
 @interface SearchViewController ()<UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -137,12 +139,14 @@
     
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
-            UIButton *hotWordsBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            ButtonLinks *hotWordsBtn = [ButtonLinks buttonWithType:UIButtonTypeCustom];
             [hotWordsView addSubview:hotWordsBtn];
             [hotWordsBtn setTitle:(NSString *)array[flag] forState:UIControlStateNormal];
             flag++;
-            [hotWordsBtn setTitleColor:maincolor forState:UIControlStateNormal];
+            [hotWordsBtn setTitleColor:UIColorFromRGB(0x169ED9) forState:UIControlStateNormal];
             hotWordsBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+            //设置下划线
+            [hotWordsBtn setLinkColor:UIColorFromRGB(0x169ED9)];
             hotWordsBtn.frame = CGRectMake(j * screenWidth/3, i * 40, screenWidth/3, 40);
             [hotWordsBtn addTarget:self action:@selector(toSearch:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -175,8 +179,11 @@
     }];
     
     //搜索框
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 32)];
+    FLJSearchBar *searchBar = [[FLJSearchBar alloc] initWithFrame:CGRectMake(0, 0, screenWidth * 0.787, 34)];
     searchBar.layer.borderColor = [[UIColor clearColor] CGColor];
+    searchBar.placeHolderStringFont = [UIFont systemFontOfSize:14.0];
+    searchBar.cornerRadius = 4;
+    searchBar.tintColor = ClickColor;//光标颜色
     UIImage* searchBarBg = [self GetImageWithColor:[UIColor clearColor] andHeight:32.0f];
     [searchBar setBackgroundImage:searchBarBg];
     searchBar.placeholder = @"搜书名找答案";

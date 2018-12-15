@@ -14,6 +14,7 @@
 #import "GradeViewController.h"
 #import "SubjectViewController.h"
 #import "VersionViewController.h"
+#import "FLJSearchBar.h"
 
 static NSString *grade = @"";
 static NSString *subject = @"";
@@ -66,12 +67,14 @@ static NSString *page = @"1";
     }];
     
     //搜索框
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 32)];
+    FLJSearchBar *searchBar = [[FLJSearchBar alloc] initWithFrame:CGRectMake(0, 0, screenWidth * 0.787, 34)];
     searchBar.layer.borderColor = [[UIColor clearColor] CGColor];
+    searchBar.placeHolderStringFont = [UIFont systemFontOfSize:14.0];
+    searchBar.cornerRadius = 4;
+    searchBar.tintColor = ClickColor;//光标颜色
     UIImage* searchBarBg = [self GetImageWithColor:[UIColor clearColor] andHeight:32.0f];
     [searchBar setBackgroundImage:searchBarBg];
     searchBar.placeholder = @"搜书名找答案";
-    searchBar.text = self.searchContent;
     [self.navView addSubview:searchBar];
     [searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.navView).with.offset(48);
@@ -343,10 +346,11 @@ static NSString *page = @"1";
 {
     YZMenuButton *button = [YZMenuButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:_titles[index] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor colorWithRed:25 /255.0 green:143/255.0 blue:238/255.0 alpha:1] forState:UIControlStateSelected];
-    [button setImage:[UIImage imageNamed:@"标签-向下箭头"] forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:@"标签-向上箭头"] forState:UIControlStateSelected];
+    button.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:14];
+    [button setTitleColor:[UIColor colorWithRed:53/255.0 green:59/255.0 blue:60/255.0 alpha:1/1.0] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:22/255.0 green:152/255.0 blue:217/255.0 alpha:1/1.0] forState:UIControlStateSelected];
+    [button setImage:[UIImage imageNamed:@"下拉icon"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"上拉icon"] forState:UIControlStateSelected];
     
     return button;
 }
