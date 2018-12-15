@@ -97,6 +97,8 @@
 		3D9EAF1821A52E49006AF423 /* AnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9EAF1721A52E49006AF423 /* AnswerViewController.m */; };
 		3D9EAF1B21A53010006AF423 /* AnswerDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9EAF1A21A53010006AF423 /* AnswerDetail.m */; };
 		3D9EAF1E21A5305C006AF423 /* AnswerDetailCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9EAF1D21A5305C006AF423 /* AnswerDetailCollectionView.m */; };
+		3DBF9D5A21C496F60025612F /* server.cer in Resources */ = {isa = PBXBuildFile; fileRef = 3DBF9D5921C496F50025612F /* server.cer */; };
+		3DBF9D5C21C497A90025612F /* tomcat.keystore in Resources */ = {isa = PBXBuildFile; fileRef = 3DBF9D5B21C497A90025612F /* tomcat.keystore */; };
 		3DF0B96621BFDC4D00AF682A /* 添加书籍.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B95821BFDC4C00AF682A /* 添加书籍.png */; };
 		3DF0B96721BFDC4D00AF682A /* 添加书籍@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B95921BFDC4C00AF682A /* 添加书籍@2x.png */; };
 		3DF0B99221BFE05E00AF682A /* 学习-选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B98621BFE05C00AF682A /* 学习-选中@3x.png */; };
@@ -284,6 +286,8 @@
 		3D9EAF1A21A53010006AF423 /* AnswerDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnswerDetail.m; sourceTree = "<group>"; };
 		3D9EAF1C21A5305C006AF423 /* AnswerDetailCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnswerDetailCollectionView.h; sourceTree = "<group>"; };
 		3D9EAF1D21A5305C006AF423 /* AnswerDetailCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnswerDetailCollectionView.m; sourceTree = "<group>"; };
+		3DBF9D5921C496F50025612F /* server.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = server.cer; sourceTree = "<group>"; };
+		3DBF9D5B21C497A90025612F /* tomcat.keystore */ = {isa = PBXFileReference; lastKnownFileType = file; path = tomcat.keystore; sourceTree = "<group>"; };
 		3DF0B95821BFDC4C00AF682A /* 添加书籍.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加书籍.png"; sourceTree = "<group>"; };
 		3DF0B95921BFDC4C00AF682A /* 添加书籍@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加书籍@2x.png"; sourceTree = "<group>"; };
 		3DF0B98621BFE05C00AF682A /* 学习-选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "学习-选中@3x.png"; sourceTree = "<group>"; };
@@ -443,6 +447,7 @@
 		3D9EA8EC2195A787006AF423 /* HomeworkAssistant */ = {
 			isa = PBXGroup;
 			children = (
+				3DBF9D5621C3C3220025612F /* Cer */,
 				3D7D18F121AE83A6006B9C8F /* login */,
 				3D9EA91021994A16006AF423 /* Resource */,
 				3D47258B21BA58F800C0E7CF /* Lib */,
@@ -630,14 +635,14 @@
 			children = (
 				3D9EA92E219A9CA0006AF423 /* LoginViewController.h */,
 				3D9EA92F219A9CA0006AF423 /* LoginViewController.m */,
-				3D9EA95C219D6024006AF423 /* LoginTextField.h */,
-				3D9EA95D219D6024006AF423 /* LoginTextField.m */,
 				9F4D102D21B7C67800F4610A /* ForgetPwdViewController.h */,
 				9F4D103021B7C67A00F4610A /* ForgetPwdViewController.m */,
 				9F4D102C21B7C67800F4610A /* SingUpViewController.h */,
 				9F4D102E21B7C67900F4610A /* SingUpViewController.m */,
 				9F629B7C21BE4B38002A79AC /* FillOthersViewController.h */,
 				9F629B7D21BE4B38002A79AC /* FillOthersViewController.m */,
+				3D9EA95C219D6024006AF423 /* LoginTextField.h */,
+				3D9EA95D219D6024006AF423 /* LoginTextField.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -694,6 +699,15 @@
 				3D7D18DF21AC1997006B9C8F /* AnswerDetailViewController.m */,
 			);
 			path = AnswerDetail;
+			sourceTree = "<group>";
+		};
+		3DBF9D5621C3C3220025612F /* Cer */ = {
+			isa = PBXGroup;
+			children = (
+				3DBF9D5B21C497A90025612F /* tomcat.keystore */,
+				3DBF9D5921C496F50025612F /* server.cer */,
+			);
+			path = Cer;
 			sourceTree = "<group>";
 		};
 		3DF0B96D21BFDF2A00AF682A /* temp */ = {
@@ -888,6 +902,7 @@
 				3D9EA92B219A9B9C006AF423 /* 检查更新@3x.png in Resources */,
 				3D9EA93B219A9DBF006AF423 /* 我的-激活@2x.png in Resources */,
 				3D4725B721BA7E5400C0E7CF /* 标签-向上箭头@2x.png in Resources */,
+				3DBF9D5C21C497A90025612F /* tomcat.keystore in Resources */,
 				3DF0B99B21BFE05E00AF682A /* 学习-默认@2x.png in Resources */,
 				3D9EA958219C26AF006AF423 /* 返回@3x.png in Resources */,
 				3D4725C021BCC65F00C0E7CF /* 修改信息@2x.png in Resources */,
@@ -909,6 +924,7 @@
 				3DF0B99721BFE05E00AF682A /* 学习-默认.png in Resources */,
 				3D9EA926219A9B9C006AF423 /* 用户反馈@3x.png in Resources */,
 				3D4725B921BA7E5400C0E7CF /* 标签-向下箭头@2x.png in Resources */,
+				3DBF9D5A21C496F60025612F /* server.cer in Resources */,
 				3DF0B96721BFDC4D00AF682A /* 添加书籍@2x.png in Resources */,
 				3D9EAF0521A2E18E006AF423 /* 扫一扫@3x.png in Resources */,
 				3D9EA966219D7405006AF423 /* 微信@3x.png in Resources */,
@@ -1198,7 +1214,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5855LWABM9;
+				DEVELOPMENT_TEAM = 7T7PP6R6DZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/QQLogin",
@@ -1232,7 +1248,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5855LWABM9;
+				DEVELOPMENT_TEAM = 7T7PP6R6DZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/QQLogin",

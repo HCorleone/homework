@@ -15,7 +15,7 @@
 
 @interface AppDelegate ()
 
-
+@property (nonatomic, strong)  LoginViewController *loginVC;
 
 @end
 
@@ -52,12 +52,15 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
     
-    LoginViewController *loginVC = [[LoginViewController alloc]init];
-        return [WXApi handleOpenURL:url delegate:loginVC];
-
+    return [WXApi handleOpenURL:url delegate:self.loginVC];
+    
 }
 
-
+- (void)test:(NSNotification *)note {
+    if ([note.object isKindOfClass:[LoginViewController class]]) {
+        self.loginVC = note.object;
+    }
+}
 
 - (void)configUSharePlatforms {
     /* 设置微信的appKey和appSecret */
@@ -112,7 +115,10 @@
         UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-默认",
                                                         [tabBarItemImages objectAtIndex:index]]];
         if (!BOT_OFFSET) {
-            item.imagePositionAdjustment = UIOffsetMake(0, 15);//BOT_OFFSET的一半
+            item.imagePositionAdjustment = UIOffsetMake(15, 18);//BOT_OFFSET的一半
+        }
+        else {
+            item.imagePositionAdjustment = UIOffsetMake(15, 5);
         }
         
         [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
@@ -156,12 +162,13 @@
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"wechatLogin" object:nil];
 }
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

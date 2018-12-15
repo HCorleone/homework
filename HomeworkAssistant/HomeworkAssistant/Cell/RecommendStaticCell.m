@@ -60,8 +60,8 @@
         
         self.title = [[UILabel alloc]init];
         self.title.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
-        self.title.numberOfLines = 0;
-        self.title.lineBreakMode = UILineBreakModeWordWrap;
+        self.title.numberOfLines = 2;
+//        self.title.lineBreakMode = UILineBreakModeWordWrap;
         [self addSubview:self.title];
         [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self).offset(10);
@@ -136,10 +136,18 @@
 - (void)test {
     if (self.isSelected) {
         [self userDisLike];
+        [self.saveBtn setBackgroundColor:whitecolor];
+        [self.saveBtn setTitleColor:maincolor forState:UIControlStateNormal];
+        self.isSelected = NO;
+        
     }
     else {
         if ([TTUserManager sharedInstance].isLogin) {
             [self userLike];
+            [self.saveBtn setBackgroundColor:maincolor];
+            [self.saveBtn setTitleColor:whitecolor forState:UIControlStateNormal];
+            self.isSelected = YES;
+            
         }
         else {
 //            NSLog(@"请先登录");
@@ -169,9 +177,7 @@
     NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"]integerValue] == 200) {
-            [self.saveBtn setBackgroundColor:whitecolor];
-            [self.saveBtn setTitleColor:maincolor forState:UIControlStateNormal];
-            self.isSelected = NO;
+            
             NSLog(@"取消收藏");
             [[NSNotificationCenter defaultCenter] postNotificationName:@"userLikeOrNot" object:nil];
         }
@@ -200,10 +206,9 @@
     NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"]integerValue] == 200) {
-            [self.saveBtn setBackgroundColor:maincolor];
-            [self.saveBtn setTitleColor:whitecolor forState:UIControlStateNormal];
-            self.isSelected = YES;
+            
             NSLog(@"收藏成功");
+            [CommonAlterView showAlertView:@"收藏成功"];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"userLikeOrNot" object:nil];
         }
         

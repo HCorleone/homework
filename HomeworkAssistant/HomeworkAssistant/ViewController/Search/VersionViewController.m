@@ -31,12 +31,11 @@
     layout.minimumLineSpacing = 29.5;
     layout.headerReferenceSize = CGSizeMake(screenWidth, 20);
     
-    UICollectionView *collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 500) collectionViewLayout:layout];
+    UICollectionView *collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 450) collectionViewLayout:layout];
     [self.view addSubview:collectView];
-
-    collectView.showsVerticalScrollIndicator = NO;
     collectView.dataSource = self;
     collectView.delegate = self;
+    collectView.showsVerticalScrollIndicator = NO;
     collectView.backgroundColor = whitecolor;
     [collectView registerClass:[ClassificationCell class] forCellWithReuseIdentifier:@"grade"];
     [collectView registerClass:[CollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerview"];
@@ -103,7 +102,17 @@
 
 //设置每个item的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(90, 30);
+    return CGSizeMake(0.245 * screenWidth, 28);
+}
+
+//设置每个item水平间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 0.048 * screenWidth;
+}
+
+//设置每个item垂直间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 25;
 }
 
 //设置每个item的UIEdgeInsets

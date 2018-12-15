@@ -371,7 +371,7 @@ static NSString *page = @"1";
     }
     
     // 第3列 高度
-    return 500;
+    return 450;
 }
 
 @end

@@ -149,7 +149,7 @@
             [self.collectBtn setTitle:@"已收藏至书单" forState:UIControlStateNormal];
             [self.collectBtn setTitleColor:[UIColor colorWithHexString:@"#D5D5D5"] forState:UIControlStateNormal];
 //            NSLog(@"收藏成功");
-//            [CommonAlterView showAlertView:@"收藏成功"];
+            [CommonAlterView showAlertView:@"收藏成功"];
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"cellTest" object:nil];
         }
         

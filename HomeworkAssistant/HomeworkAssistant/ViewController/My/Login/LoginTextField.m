@@ -12,14 +12,13 @@
 
 - (instancetype)init:(NSString *)placeholder {
     self = [super init];
-    self.layer.borderWidth = 1;
-    self.layer.borderColor = whitecolor.CGColor;
+    self.layer.borderWidth = 0.5;
+    self.layer.borderColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9].CGColor;
     self.layer.cornerRadius = 2;
-    self.layer.opacity = 0.9;
     self.layer.masksToBounds = YES;
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.15];
     self.textColor = whitecolor;
-    self.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:7];
+    self.font = [UIFont systemFontOfSize:14];
     self.placeholder = placeholder;
     [self setValue:whitecolor forKeyPath:@"_placeholderLabel.textColor"];
     

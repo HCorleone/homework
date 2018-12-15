@@ -21,7 +21,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#6FDDFF"];
+    
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = self.view.bounds;
+    [gradientLayer setColors:[NSArray arrayWithObjects:
+                              (id)[UIColor colorWithHexString:@"#55CEF2"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#3DB6F2"].CGColor,
+                              nil
+                              ]];
+    
+    
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0, 1);
+    gradientLayer.locations = @[@0,@1];
+    
+    self.view.layer.masksToBounds = YES;
+    [self.view.layer addSublayer:gradientLayer];
     
     //返回按钮
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -31,7 +46,7 @@
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
         make.left.mas_equalTo(self.view).with.offset(20);
-        make.top.mas_equalTo(self.view).with.offset(35);
+        make.top.mas_equalTo(self.view).with.offset(35 + TOP_OFFSET);
     }];
     
     
@@ -75,14 +90,14 @@
                 break;
         }
     };
-    _singUpView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.1];
-    _singUpView.layer.borderWidth = 1;
-    _singUpView.layer.borderColor = [UIColor whiteColor].CGColor;
+    _singUpView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.05];
+    _singUpView.layer.borderWidth = 0.5;
+    _singUpView.layer.borderColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9].CGColor;
+    _singUpView.layer.cornerRadius = 4;
     [self.view addSubview:_singUpView];
     [_singUpView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(129);
-        make.width.mas_equalTo(288);
-        make.height.mas_equalTo(328);
+        make.top.mas_equalTo(0.4 * screenWidth);
+        make.size.mas_equalTo(CGSizeMake(0.8 * screenWidth, 1.14 * 0.8 * screenWidth) );
         make.centerX.mas_equalTo(self.view.mas_centerX);
     }];
     
@@ -113,7 +128,9 @@
                           @"mobile":self.singUpView.phoneField.text,
                           @"digest":digest,
                           @"salt":timesStr,
-                          @"av":@"_debug_"};
+                          @"av":@"_debug_"
+                          
+                          };
     
     [self.manager GET:@"/tataeraapi/api.s?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"------------------------------%@", responseObject);
@@ -139,7 +156,9 @@
                           @"passwd":self.singUpView.pwdField.text,
                           @"validCode":self.singUpView.codeField.text,
                           @"name":self.singUpView.nameField.text,
-                          @"av":@"_debug_"};
+                          @"av":@"_debug_"
+                          
+                          };
 //    __weak typeof(self) weakSelf = self;
     [self.manager POST:@"/tataeraapi/api.s?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         

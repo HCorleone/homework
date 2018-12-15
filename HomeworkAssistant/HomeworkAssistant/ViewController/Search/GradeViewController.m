@@ -37,6 +37,7 @@ extern NSString * const YZUpdateMenuTitleNote;
     [self.view addSubview:collectView];
     collectView.dataSource = self;
     collectView.delegate = self;
+    collectView.showsVerticalScrollIndicator = NO;
     collectView.backgroundColor = whitecolor;
     [collectView registerClass:[ClassificationCell class] forCellWithReuseIdentifier:@"grade"];
     [collectView registerClass:[CollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerview"];
@@ -122,7 +123,12 @@ extern NSString * const YZUpdateMenuTitleNote;
 
 //设置每个item的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(90, 30);
+    return CGSizeMake(0.245 * screenWidth, 30);
+}
+
+//设置每个item水平间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 0.048 * screenWidth;
 }
 
 //设置每个item的UIEdgeInsets

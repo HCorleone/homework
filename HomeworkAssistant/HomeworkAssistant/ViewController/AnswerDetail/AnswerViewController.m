@@ -89,6 +89,7 @@
                            @"openID":@"123",
                            @"answerID":self.bookModel.answerID,
                            @"sourceType":@"rec",
+                           @"pkn":@"com.enjoytime.palmhomework",
                            @"t":tTime,
                            @"k":kMD5,
                            @"av":@"_debug_"

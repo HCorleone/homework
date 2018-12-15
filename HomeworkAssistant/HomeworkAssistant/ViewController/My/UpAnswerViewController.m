@@ -205,7 +205,9 @@
     NSDictionary *dic = @{@"h":@"ZYUploadAnswerPicHandler",
                           @"id":userValue(@"GetUpAnswerID"),
                           @"fileList":self.fileList,
-                          @"av":@"_debug_"};
+                          @"av":@"_debug_"
+                          
+                          };
     
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
     //设置请求方式

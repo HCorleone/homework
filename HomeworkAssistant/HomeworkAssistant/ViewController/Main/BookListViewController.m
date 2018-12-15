@@ -137,7 +137,8 @@
     NSDictionary *dic = @{@"h":@"ZYListUserLikeHandler",
                           @"openID":self.idStr,
                           @"pkn":@"com.enjoytime.palmhomework",
-                          @"av":@"_debug_"};
+                          @"av":@"_debug_"
+                          };
     
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
     //设置请求方式
@@ -165,7 +166,9 @@
                           @"openID":userValue(@"openId"),
                           @"pkn":@"com.enjoytime.palmhomework",
                           @"answerIDs":self.addStr,
-                          @"av":@"_debug_"};
+                          @"av":@"_debug_"
+                          
+                          };
     
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
     //设置请求方式

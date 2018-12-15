@@ -20,13 +20,30 @@
 @property (nonatomic, strong) UITextField *acountF;
 @property (nonatomic, strong) UITextField *passwordF;
 
+
 @end
 
 @implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#6FDDFF"];
+    
+    
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = self.view.bounds;
+    [gradientLayer setColors:[NSArray arrayWithObjects:
+                              (id)[UIColor colorWithHexString:@"#55CEF2"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#3DB6F2"].CGColor,
+                               nil
+                              ]];
+     
+
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0, 1);
+    gradientLayer.locations = @[@0,@1];
+    
+    self.view.layer.masksToBounds = YES;
+    [self.view.layer addSublayer:gradientLayer];
     
     //返回按钮
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -36,7 +53,7 @@
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
         make.left.mas_equalTo(self.view).with.offset(20);
-        make.top.mas_equalTo(self.view).with.offset(35);
+        make.top.mas_equalTo(self.view).with.offset(35 + TOP_OFFSET);
     }];
     
     [self setupLoginView];
@@ -47,26 +64,26 @@
 - (void)setupLoginView {
     //登陆框
     UIView *loginView = [[UIView alloc]init];
-    loginView.layer.borderWidth = 1;
-    loginView.layer.borderColor = whitecolor.CGColor;
-    loginView.layer.cornerRadius = 2;
-    loginView.layer.opacity = 0.9;
+    loginView.layer.borderWidth = 0.5;
+    loginView.layer.borderColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9].CGColor;
+    loginView.layer.cornerRadius = 4;
+//    loginView.layer.opacity = 0.9;
     loginView.layer.masksToBounds = YES;
-    loginView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.1];
+    loginView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.05];
     [self.view addSubview:loginView];
     [loginView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(300, 300));
+        make.size.mas_equalTo(CGSizeMake(0.8 * screenWidth, 0.909 * 0.8 * screenWidth));
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.view).with.offset(0.2 * screenHeight);
+        make.top.mas_equalTo(self.view).with.offset(0.42 * screenWidth);
     }];
     self.loginView = loginView;
     //帐号框
     LoginTextField *acountF = [[LoginTextField alloc]init:@"请输入手机号"];
     [loginView addSubview:acountF];
     [acountF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(250, 50));
+        make.size.mas_equalTo(CGSizeMake(0.689 * screenWidth, 0.15 * 0.689 * screenWidth));
         make.centerX.mas_equalTo(loginView);
-        make.top.mas_equalTo(loginView).with.offset(50);
+        make.top.mas_equalTo(loginView).offset(0.10 * screenWidth);
     }];
     self.acountF = acountF;
     
@@ -76,38 +93,73 @@
     [loginView addSubview:passwordF];
     passwordF.secureTextEntry = YES;
     [passwordF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(250, 50));
+        make.size.mas_equalTo(CGSizeMake(0.689 * screenWidth, 0.15 * 0.689 * screenWidth));
         make.centerX.mas_equalTo(loginView);
-        make.top.mas_equalTo(acountF.mas_bottom).with.offset(15);
+        make.top.mas_equalTo(acountF.mas_bottom).with.offset(0.04 * screenWidth);
     }];
     self.passwordF = passwordF;
     
     //登陆按钮
+    //渐变色
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 0, 0.689 * screenWidth, 0.15 * 0.689 * screenWidth);
+    [gradientLayer setColors:[NSArray arrayWithObjects:
+                              (id)[UIColor colorWithHexString:@"#6FDDFF"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#33C2FF"].CGColor,
+                              nil
+                              ]];
+    
+    
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0, 1);
+    gradientLayer.locations = @[@0,@1];
+    gradientLayer.cornerRadius = 8;
+    gradientLayer.masksToBounds = NO;
+    
+    
+    //阴影
+    CALayer *shadowLayer = [[CALayer alloc] init];
+    shadowLayer.frame = CGRectMake(0, 0, 0.689 * screenWidth, 0.15 * 0.689 * screenWidth);
+    shadowLayer.shadowOffset = CGSizeMake(0, 1);
+    shadowLayer.backgroundColor = [UIColor colorWithHexString:@"#2983C8"].CGColor;
+    shadowLayer.shadowColor = [UIColor colorWithHexString:@"#2983C8"].CGColor;
+    shadowLayer.shadowOpacity = 1;
+    shadowLayer.cornerRadius = 8;
+    
     UIButton *signinBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    signinBtn.layer.cornerRadius = 10;
-    signinBtn.layer.shadowOffset =  CGSizeMake(0, 1);
-    signinBtn.layer.shadowOpacity = 1;
-    signinBtn.layer.shadowColor =  [UIColor colorWithHexString:@"#2983C8"].CGColor;
-    signinBtn.backgroundColor = [UIColor colorWithHexString:@"#6FDDFF"];
+    [signinBtn.layer addSublayer:shadowLayer];
+    [signinBtn.layer addSublayer:gradientLayer];
+    signinBtn.layer.cornerRadius = 8;
+    
     [loginView addSubview:signinBtn];
     [signinBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(250, 50));
+        make.size.mas_equalTo(CGSizeMake(0.689 * screenWidth, 0.15 * 0.689 * screenWidth));
         make.centerX.mas_equalTo(loginView);
-        make.top.mas_equalTo(passwordF.mas_bottom).with.offset(25);
+        make.top.mas_equalTo(passwordF.mas_bottom).with.offset(0.07 * screenWidth);
     }];
     [signinBtn setTitle:@"登录" forState:UIControlStateNormal];
+    signinBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [signinBtn addTarget:self action:@selector(signin) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    
     
     //注册账户
     UIButton *signupBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:signupBtn];
     [signupBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(signinBtn);
-        make.top.mas_equalTo(signinBtn.mas_bottom).with.offset(15);
-        make.size.mas_equalTo(CGSizeMake(100, 25));
+        make.bottom.mas_equalTo(loginView).offset(-0.06 * screenWidth);
+        make.size.mas_equalTo(CGSizeMake(0.16 * screenWidth, 0.25 * 0.16 * screenWidth));
     }];
     signupBtn.backgroundColor = [UIColor clearColor];
-    [signupBtn setTitle:@"注册帐号" forState:UIControlStateNormal];
+    NSString *textStr = @"注册账号";
+    NSDictionary *attribtDic = @{NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:textStr attributes:attribtDic];
+    signupBtn.titleLabel.attributedText = attribtStr;
+    [signupBtn setTitle:textStr forState:UIControlStateNormal];
+    signupBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [signupBtn addTarget:self action:@selector(signup) forControlEvents:UIControlEventTouchUpInside];
     
     //忘记密码
@@ -115,11 +167,12 @@
     [self.view addSubview:forgetBtn];
     [forgetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(signinBtn);
-        make.top.mas_equalTo(signinBtn.mas_bottom).with.offset(15);
-        make.size.mas_equalTo(CGSizeMake(100, 25));
+        make.bottom.mas_equalTo(loginView).offset(-0.06 * screenWidth);
+        make.size.mas_equalTo(CGSizeMake(0.16 * screenWidth, 0.25 * 0.16 * screenWidth));
     }];
     forgetBtn.backgroundColor = [UIColor clearColor];
     [forgetBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
+    forgetBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [forgetBtn addTarget:self action:@selector(forget) forControlEvents:UIControlEventTouchUpInside];
     
 }
@@ -127,20 +180,21 @@
     //第三方登录标题
     UILabel *thirdPart = [[UILabel alloc]init];
     thirdPart.text = @"第三方登录";
+    thirdPart.font = [UIFont systemFontOfSize:14];
     thirdPart.textColor = whitecolor;
     thirdPart.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:thirdPart];
     [thirdPart mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(100, 10));
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.loginView.mas_bottom).with.offset(25);
+        make.top.mas_equalTo(self.loginView.mas_bottom).with.offset(0.13 * screenWidth);
     }];
     //横线
     UIImageView *line = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"第三方登录-渐变分割线"]];
     [self.view addSubview:line];
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(thirdPart.mas_bottom).with.offset(25);
+        make.top.mas_equalTo(thirdPart.mas_bottom).with.offset(0.04 * screenWidth);
     }];
 //    //QQ登录
 //    UIImageView *qqLogo = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"qq"]];
@@ -164,7 +218,8 @@
     [wechatLogo mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.centerX.mas_equalTo(self.view).offset(50);
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(line.mas_bottom).with.offset(25);
+        make.size.mas_equalTo(CGSizeMake(0.12 * screenWidth, 0.12 * screenWidth));
+        make.top.mas_equalTo(line.mas_bottom).with.offset(0.04 * screenWidth);
     }];
     UIButton *wechatBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     wechatBtn.frame = wechatLogo.frame;
@@ -181,12 +236,18 @@
 
 #pragma mark - 微信登陆
 - (void)wechatUser {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"wechatLogin" object:self];
+    
+    
+    NSLog(@"当前线程：%@",[NSThread currentThread]);
+    
     [[TTUserManager sharedInstance] clearCurrentUserInfo];
     SendAuthReq *req = [[SendAuthReq alloc] init];
     req.scope = @"snsapi_userinfo";
     req.state = @"HA_APP";
     if ([WXApi isWXAppInstalled]) {
-        [WXApi sendReq:req];
+        [WXApi sendReq:req];//发送三方登陆授权请求
     }
     else {
         //未安装微信处理
@@ -194,6 +255,7 @@
 }
 
 - (void)onResp:(BaseResp *)resp {
+    
     if ([resp isKindOfClass:[SendAuthResp class]]) {
         SendAuthResp *temp = (SendAuthResp *)resp;
         if (temp.errCode == 0) {
@@ -274,6 +336,7 @@
             [TTUserManager sharedInstance].currentUser.headImgUrl = responseObject[@"headImgUrl"];
             [TTUserManager sharedInstance].currentUser.name = responseObject[@"name"];
             [TTUserManager sharedInstance].currentUser.openId = responseObject[@"openId"];
+            NSLog(@"当前线程：%@",[NSThread currentThread]);
             [self getExtraUserInfo];
             
         }
@@ -311,7 +374,7 @@
                 [TTUserManager sharedInstance].currentUser.qqkey = [responseObject[@"datas"] valueForKey:@"qqkey"];
                 [TTUserManager sharedInstance].currentUser.updateTime = [responseObject[@"datas"] valueForKey:@"updateTime"];
             }
-            [self loginSuccess];
+                [self loginSuccess];
         }
         else {
             //登陆失败
@@ -335,8 +398,8 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
         [self.navigationController pushViewController:[[FillOthersViewController alloc] init] animated:YES];
     }
-    
-    NSLog(@"发送用户登陆成功的通知");
+
+//    NSLog(@"发送用户登陆成功的通知");
     
 }
 

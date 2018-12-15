@@ -216,7 +216,9 @@
                           @"schoolName":@"4",
                           @"longitude":@"1.000000",
                           @"latitude":@"2.000000",
-                          @"av":@"_debug_"};
+                          @"av":@"_debug_"
+                          
+                          };
     
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
     //设置请求方式

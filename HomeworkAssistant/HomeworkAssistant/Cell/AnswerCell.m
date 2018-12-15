@@ -29,6 +29,7 @@
 //            make.left.and.right.and.top.and.bottom.mas_equalTo(self);
 //        }];
         _imgScrollView = [[ImgScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, H) andImageViewFrame:CGRectMake(0, 0, screenWidth, H)];
+        _imgScrollView.imgView.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:_imgScrollView];
     }
     return self;

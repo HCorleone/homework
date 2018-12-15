@@ -77,10 +77,10 @@
     sloginView.backgroundColor = [UIColor whiteColor];
     sloginView.layer.cornerRadius = 10;
     [sloginView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view).offset(31.5);
-        make.right.mas_equalTo(self.view).offset(-31.5);
+        make.centerX.mas_equalTo(self.view);
+        make.width.mas_equalTo(0.832 * screenWidth);
         make.top.mas_equalTo(self.view).offset(0.1 * screenHeight + TOP_OFFSET);
-        make.height.mas_equalTo(0.3 * screenHeight);
+        make.height.mas_equalTo(0.6 * 0.832 * screenWidth);
     }];
     self.sloginView = sloginView;
     
@@ -89,21 +89,22 @@
     [sloginView addSubview:headImg];
     [headImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(sloginView).offset(20);
-        make.top.mas_equalTo(sloginView).offset(0.03 * screenHeight);
-        make.size.mas_equalTo(CGSizeMake(0.15 * screenHeight, 0.15 * screenHeight));
+        make.top.mas_equalTo(sloginView).offset(0.053 * screenWidth);
+        make.size.mas_equalTo(CGSizeMake(0.187 * screenWidth, 0.187 * screenWidth));
     }];
     headImg.layer.masksToBounds = YES;
-    headImg.layer.cornerRadius = 0.15 * screenHeight/2;
+    headImg.layer.cornerRadius = 0.187 * screenWidth/2;
     
     //用户名
     UILabel *userName = [[UILabel alloc]init];
     [sloginView addSubview:userName];
-    userName.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:20];
+    userName.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:18];
     userName.text = [TTUserManager sharedInstance].currentUser.name;
+    userName.numberOfLines = 2;
     [userName mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(headImg.mas_right).with.offset(15);
-        make.top.mas_equalTo(sloginView).offset(0.05 * screenHeight);
-        
+        make.centerX.mas_equalTo(self.view);
+        make.top.mas_equalTo(sloginView).offset(0.09 * screenWidth);
+        make.width.mas_equalTo(0.288 * screenWidth);
     }];
     
     //年级
@@ -113,9 +114,8 @@
     _gradeLabel.textColor =  [UIColor colorWithRed:143/255.0 green:147/255.0 blue:148/255.0 alpha:1/1.0];
     _gradeLabel.font = [UIFont systemFontOfSize:14];
     [_gradeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(headImg.mas_right).with.offset(15);
-        make.top.mas_equalTo(userName.mas_bottom).with.offset(10);
-        
+        make.left.mas_equalTo(userName);
+        make.top.mas_equalTo(userName.mas_bottom).with.offset(0.02 * screenWidth);
     }];
     
     //编辑个人信息
@@ -143,17 +143,31 @@
     [logoutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     self.logoutBtn = logoutBtn;
     
+    //上传按钮
+    
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 0, 0.725 * screenWidth, 0.13 * 0.725 * screenWidth);
+    [gradientLayer setColors:[NSArray arrayWithObjects:
+                              (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
+                              nil
+                              ]];
+    
+    
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0, 1);
+    gradientLayer.locations = @[@0,@1];
+    
     UIButton *uploadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [sloginView addSubview:uploadBtn];
     [uploadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(sloginView).offset(-20);
-        make.left.mas_equalTo(sloginView).offset(20);
-        make.top.mas_equalTo(headImg.mas_bottom).with.offset(0.05 * screenHeight);
-        make.height.mas_equalTo(0.05 * screenHeight);
+        make.centerX.mas_equalTo(sloginView);
+        make.size.mas_equalTo(CGSizeMake(0.725 * screenWidth, 0.13 * 0.725 * screenWidth));
+        make.bottom.mas_equalTo(sloginView).offset(-0.07 * screenWidth);
     }];
     uploadBtn.layer.masksToBounds = YES;
-    uploadBtn.layer.cornerRadius = 0.05 * screenHeight/2;
-    uploadBtn.backgroundColor = maincolor;
+    [uploadBtn.layer addSublayer:gradientLayer];
+    uploadBtn.layer.cornerRadius = 0.13 * 0.725 * screenWidth/2;
     [uploadBtn setTitleColor:whitecolor forState:UIControlStateNormal];
     [uploadBtn setTitle:@"上传答案" forState:UIControlStateNormal];
     [uploadBtn addTarget:self action:@selector(toUpLoad) forControlEvents:UIControlEventTouchUpInside];
@@ -281,10 +295,10 @@
     self.loginView.backgroundColor = [UIColor whiteColor];
     
     [self.loginView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view).offset(31.5);
-        make.right.mas_equalTo(self.view).offset(-31.5);
+        make.centerX.mas_equalTo(self.view);
+        make.width.mas_equalTo(0.832 * screenWidth);
         make.top.mas_equalTo(self.view).offset(0.1 * screenHeight + TOP_OFFSET);
-        make.height.mas_equalTo(0.3 * screenHeight);
+        make.height.mas_equalTo(0.6 * 0.832 * screenWidth);
     }];
     
 //    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.loginView.bounds];
@@ -302,13 +316,29 @@
     [self.loginView addSubview:headImg];
     [headImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.loginView);
-        make.centerY.mas_equalTo(self.loginView).offset(-0.1*screenHeight/2);
-        make.size.mas_equalTo(CGSizeMake(0.1*screenHeight, 0.1*screenHeight));
+        make.top.mas_equalTo(self.loginView).offset(0.076 * screenWidth);
+        make.size.mas_equalTo(CGSizeMake(0.187 * screenWidth, 0.187 * screenWidth));
     }];
+    
     //登陆注册按钮
+    
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 0, 0.405 * screenWidth, 0.236 * 0.405 * screenWidth);
+    [gradientLayer setColors:[NSArray arrayWithObjects:
+                              (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
+                              nil
+                              ]];
+    
+    
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0, 1);
+    gradientLayer.locations = @[@0,@1];
+    
     UIButton *logoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    logoBtn.backgroundColor = maincolor;
-    logoBtn.layer.cornerRadius = 0.054 * screenHeight/2;
+    [logoBtn.layer addSublayer:gradientLayer];
+    logoBtn.layer.masksToBounds = YES;
+    logoBtn.layer.cornerRadius = 0.236 * 0.405 * screenWidth/2;
     [logoBtn setTitle:@"登陆/注册" forState:UIControlStateNormal];
     logoBtn.titleLabel.textColor = whitecolor;
     logoBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
@@ -316,8 +346,7 @@
     [logoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.loginView);
         make.centerY.mas_equalTo(self.loginView).offset(0.054 * screenHeight/2 + 20);
-        make.width.mas_equalTo(0.4 * screenWidth + BOT_OFFSET);
-        make.height.mas_equalTo(0.054 * screenHeight);
+        make.size.mas_equalTo(CGSizeMake(0.405 * screenWidth, 0.236 * 0.405 * screenWidth));
     }];
     [logoBtn addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -353,7 +382,9 @@
                           @"openID":userValue(@"openId"),
                           @"grade":self.editor.downBtn.titleLabel.text,
                           @"city":self.editor.cityBtn.titleLabel.text,
-                          @"av":@"_debug_"};
+                          @"av":@"_debug_"
+                          
+                          };
     
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
     //设置请求方式

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LoginViewController : UIViewController<UITextFieldDelegate, WXApiDelegate>
 
+
 @end
 
 NS_ASSUME_NONNULL_END

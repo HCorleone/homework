@@ -170,7 +170,9 @@
                           @"subject":self.fillView.chooseBtn2.titleLabel.text,
                           @"bookVersion":self.fillView.chooseBtn3.titleLabel.text,
                           @"code":userValue(@"InputBarCode"),
-                          @"av":@"_debug_"};
+                          @"av":@"_debug_"
+                          
+                          };
     
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
     //设置请求方式

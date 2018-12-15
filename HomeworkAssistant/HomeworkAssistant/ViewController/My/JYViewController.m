@@ -35,14 +35,14 @@
     self.loginView = [[UIView alloc]init];
     [self.view addSubview:self.loginView];
     self.loginView.backgroundColor = [UIColor whiteColor];
-    self.loginView.layer.cornerRadius = 2;
-    self.loginView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.loginView.layer.shadowOffset = CGSizeMake(0, 1.5);
-    self.loginView.layer.shadowOpacity = 0.2;
+    self.loginView.layer.cornerRadius = 4;
+    self.loginView.layer.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.2].CGColor;
+    self.loginView.layer.shadowOffset = CGSizeMake(0, 3);
+    self.loginView.layer.shadowOpacity = 0.7;
     [self.loginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.navView.mas_bottom).with.offset(20);
-        make.size.mas_equalTo(CGSizeMake(322, 225));
+        make.top.mas_equalTo(self.navView.mas_bottom).with.offset(0.05 * screenWidth);
+        make.size.mas_equalTo(CGSizeMake(0.86 * screenWidth, 0.7 * 0.86 * screenWidth));
     }];
     //建议文本
     LTTextView  *textView = [[LTTextView alloc] init];
@@ -51,22 +51,22 @@
     self.contentTextView = textView;
     [textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.navView.mas_bottom).with.offset(25);
-        make.size.mas_equalTo(CGSizeMake(298, 220));
+        make.top.mas_equalTo(self.navView.mas_bottom).with.offset(0.05 * screenWidth);
+        make.size.mas_equalTo(CGSizeMake(0.86 * screenWidth, 0.7 * 0.86 * screenWidth));
     }];
     
     //联系方式框背景
     self.loginView = [[UIView alloc]init];
     [self.view addSubview:self.loginView];
     self.loginView.backgroundColor = [UIColor whiteColor];
-    self.loginView.layer.cornerRadius = 2;
-    self.loginView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.loginView.layer.shadowOffset = CGSizeMake(0, 1.5);
-    self.loginView.layer.shadowOpacity = 0.2;
+    self.loginView.layer.cornerRadius = 4;
+    self.loginView.layer.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.2].CGColor;
+    self.loginView.layer.shadowOffset = CGSizeMake(0, 3);
+    self.loginView.layer.shadowOpacity = 0.7;
     [self.loginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.contentTextView.mas_bottom).with.offset(15);
-        make.size.mas_equalTo(CGSizeMake(322, 46));
+        make.top.mas_equalTo(self.contentTextView.mas_bottom).with.offset(0.03 * screenWidth);
+        make.size.mas_equalTo(CGSizeMake(0.86 * screenWidth, 0.86 * screenWidth * 0.14));
     }];
     //联系方式文本
     UITextField *lianxiField = [[UITextField alloc]init];
@@ -77,25 +77,37 @@
     [self.view addSubview:lianxiField];
     self.lianxiField = lianxiField;
     [lianxiField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.loginView.mas_left).offset(16);
-        make.top.mas_equalTo(self.contentTextView.mas_bottom).with.offset(15);
-        make.size.mas_equalTo(CGSizeMake(306, 46));
+//        make.left.mas_equalTo(self.loginView).offset(0.04 * screenWidth);
+        make.centerX.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.contentTextView.mas_bottom).with.offset(0.03 * screenWidth);
+        make.size.mas_equalTo(CGSizeMake(0.86 * screenWidth, 0.86 * screenWidth * 0.14));
     }];
     
     
     //提交按钮
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 0, 0.83 * screenWidth, 0.83 * screenWidth * 0.12);
+    [gradientLayer setColors:[NSArray arrayWithObjects:
+                              (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
+                              nil
+                              ]];
+    
+    
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0, 1);
+    gradientLayer.locations = @[@0,@1];
+    
     UIButton *summitBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    summitBtn.layer.cornerRadius = 10;
-    summitBtn.layer.shadowOffset =  CGSizeMake(0, 1);
-    summitBtn.layer.shadowOpacity = 1;
-    summitBtn.layer.shadowColor =  [UIColor colorWithHexString:@"#2983C8"].CGColor;
-    summitBtn.backgroundColor = [UIColor colorWithHexString:@"#6FDDFF"];
+    summitBtn.layer.cornerRadius = 0.83 * screenWidth * 0.12/2;
+    summitBtn.layer.masksToBounds = YES;
+    [summitBtn.layer addSublayer:gradientLayer];
     [self.view addSubview:summitBtn];
     [summitBtn addTarget:self action:@selector(toSend:) forControlEvents:UIControlEventTouchUpInside];
     [summitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.lianxiField.mas_bottom).with.offset(36);
-        make.size.mas_equalTo(CGSizeMake(312, 36));
+        make.top.mas_equalTo(self.lianxiField.mas_bottom).with.offset(0.1 * screenWidth);
+        make.size.mas_equalTo(CGSizeMake(0.83 * screenWidth, 0.83 * screenWidth * 0.12));
     }];
     summitBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
     [summitBtn setTitle:@"提交建议" forState:UIControlStateNormal];

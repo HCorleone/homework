@@ -17,7 +17,8 @@
     
     NSDictionary *dic = @{@"h":@"ZYGetUserExtHander",
                           @"openID":userValue(@"openId"),
-                          @"av":@"_debug_"};
+                          @"av":@"_debug_"
+                          };
     
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
     //设置请求方式
