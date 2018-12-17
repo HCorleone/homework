@@ -11,6 +11,7 @@
 
 @implementation NSString (MD5)
 
+//MD5加密
 + (NSString *) md5:(NSString *) str
 {
     const char *cStr = [str UTF8String];
@@ -26,7 +27,7 @@
 }
 
 #pragma mark - 32位 小写
-+(NSString *)MD5ForLower32Bate:(NSString *)str{
++ (NSString *)MD5ForLower32Bate:(NSString *)str{
     
     //要进行UTF8的转码
     const char* input = [str UTF8String];
@@ -42,7 +43,7 @@
 }
 
 #pragma mark - 32位 大写
-+(NSString *)MD5ForUpper32Bate:(NSString *)str{
++ (NSString *)MD5ForUpper32Bate:(NSString *)str{
     
     //要进行UTF8的转码
     const char* input = [str UTF8String];
@@ -58,7 +59,7 @@
 }
 
 #pragma mark - 16位 大写
-+(NSString *)MD5ForUpper16Bate:(NSString *)str{
++ (NSString *)MD5ForUpper16Bate:(NSString *)str{
     
     NSString *md5Str = [self MD5ForUpper32Bate:str];
     
@@ -71,7 +72,7 @@
 
 
 #pragma mark - 16位 小写
-+(NSString *)MD5ForLower16Bate:(NSString *)str{
++ (NSString *)MD5ForLower16Bate:(NSString *)str{
     
     NSString *md5Str = [self MD5ForLower32Bate:str];
     

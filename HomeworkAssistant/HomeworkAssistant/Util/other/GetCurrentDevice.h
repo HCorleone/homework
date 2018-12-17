@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GetCurrentDevice : NSObject
 
-//判断当前设备是否为刘海屏设备
+//判断当前设备是否为刘海屏设备而获取适配使用的上下边距
 + (CGFloat)getTopOffset;
 + (CGFloat)getBotOffset;
 

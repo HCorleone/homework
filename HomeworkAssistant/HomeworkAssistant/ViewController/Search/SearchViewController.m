@@ -101,8 +101,7 @@
 }
 
 - (void)loadHotWords {
-    
-    //    NSString *URL = @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?h=ZYRecHandler&openID=123&av=_debug_";
+
     
     NSDictionary *dict = @{
                            @"h":@"ZYSearchHotWordsHandler",

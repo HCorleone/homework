@@ -57,7 +57,7 @@
     
 }
 
-
+#pragma mark - 通知处理
 - (void)changeView:(id)sender {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"loginSuccess" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"userLogout" object:nil];
@@ -75,20 +75,118 @@
     //    [self.myListView removeFromSuperview];
 }
 
+#pragma mark - 下载数据
+//- (AFSecurityPolicy*)customSecurityPolicy
+//
+//{
+//    //先导入证书
+//    //在这加证书，一般情况适用于单项认证
+//    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"server" ofType:@"cer"];//证书的路径
+//
+//    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
+//    if (certData==nil) {
+//        return nil;
+//    }
+//    // AFSSLPinningModeCertificate 使用证书验证模式
+//
+//    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+//
+//    // allowInvalidCertificates 是否允许无效证书（也就是自建的证书），默认为NO
+//
+//    // 如果是需要验证自建证书，需要设置为YES
+//
+//    securityPolicy.allowInvalidCertificates = YES;
+//
+//    //validatesDomainName 是否需要验证域名，默认为YES；
+//
+//    //假如证书的域名与你请求的域名不一致，需把该项设置为NO；如设成NO的话，即服务器使用其他可信任机构颁发的证书，也可以建立连接，这个非常危险，建议打开。
+//
+//    //置为NO，主要用于这种情况：客户端请求的是子域名，而证书上的是另外一个域名。因为SSL证书上的域名是独立的，假如证书上注册的域名是www.google.com，那么mail.google.com是无法验证通过的；当然，有钱可以注册通配符的域名*.google.com，但这个还是比较贵的。
+//
+//    //如置为NO，建议自己添加对应域名的校验逻辑。
+//
+//    securityPolicy.validatesDomainName = NO;
+//
+//    securityPolicy.pinnedCertificates = [[NSSet alloc] initWithObjects:certData, nil ,nil];
+//
+//    return securityPolicy;
+//
+//}
+
+- (void)downloadDataForRec {
+    
+    NSString *openId = @"123";
+    if ([TTUserManager sharedInstance].isLogin) {
+        openId = [TTUserManager sharedInstance].currentUser.openId;
+    }
+    
+    NSString *sign = [HMACSHA1 HMACSHA1:@"openID=123"];
+    NSDictionary *dict = @{
+                           @"openID":openId,
+                           @"sign":sign
+                           };
+    
+    //    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"server" ofType:@"cer"];
+    //    NSData *cerData = [NSData dataWithContentsOfFile:cerPath];
+    //    NSSet *cerSet = [[NSSet alloc] initWithObjects:cerData, nil];
+    //    AFSecurityPolicy *security = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
+    //    security.allowInvalidCertificates = YES;
+    //    security.validatesDomainName = NO;
+    //    [security setPinnedCertificates:cerSet];
+    
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    manager.requestSerializer.timeoutInterval = 20.0f;
+    //    manager.securityPolicy = security;
+    
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForRecommend] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if ([responseObject[@"code"] integerValue] == 200) {
+            NSArray *jsonDataArr = responseObject[@"datas"];
+            self.recommendListViewData = [NSMutableArray array];
+            //建立模型数组
+            for (int i =0; i < jsonDataArr.count; i++) {
+                NSDictionary *aDic = jsonDataArr[i];
+                Book *aModel = [Book initWithDic:aDic];
+                [self.recommendListViewData addObject:aModel];
+            }
+        }
+        if (self.recommendListView) {
+            [self.recommendListView reloadDataWithList:self.recommendListViewData];
+        }
+        else {
+            [self setupViewWithData:self.recommendListViewData];
+        }
+        
+    } failure:nil];
+    [dataTask resume];
+    
+}
+
+- (void)setupViewWithData:(NSMutableArray *)array {
+    //为您推荐
+    RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 456, screenWidth,array.count * 128 ) style:UITableViewStylePlain withArray:array];
+    [self.mainContentView addSubview:rTableView];
+    //    self.mainView.contentSize = CGSizeMake(screenWidth, 456 + rTableView.frame.size.height);
+}
+
+
 - (void)downloadDataForMyList {
     NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
     
+    NSString *strToSign = [NSString stringWithFormat:@"openID=%@&pkn=com.enjoytime.palmhomework",openId];
+    NSString *sign = [HMACSHA1 HMACSHA1:strToSign];
     NSDictionary *dict = @{
-                           @"h":@"ZYListUserLikeHandler",
                            @"openID":openId,
                            @"pkn":@"com.enjoytime.palmhomework",
-                           @"av":@"_debug_"
+                           @"sign":sign
                            };
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForMyCollections] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         
         if ([responseObject[@"code"] integerValue] == 200) {
@@ -146,6 +244,8 @@
     self.myListView = myListView;
 }
 
+
+#pragma mark - 分享书单二维码
 - (void)shareMyList {
     
     QRCodeView *testView = [[QRCodeView alloc]init];
@@ -153,90 +253,9 @@
     self.testView = testView;
 }
 
-//- (AFSecurityPolicy*)customSecurityPolicy
-//
-//{
-//    //先导入证书
-//    //在这加证书，一般情况适用于单项认证
-//    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"server" ofType:@"cer"];//证书的路径
-//
-//    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
-//    if (certData==nil) {
-//        return nil;
-//    }
-//    // AFSSLPinningModeCertificate 使用证书验证模式
-//
-//    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
-//
-//    // allowInvalidCertificates 是否允许无效证书（也就是自建的证书），默认为NO
-//
-//    // 如果是需要验证自建证书，需要设置为YES
-//
-//    securityPolicy.allowInvalidCertificates = YES;
-//
-//    //validatesDomainName 是否需要验证域名，默认为YES；
-//
-//    //假如证书的域名与你请求的域名不一致，需把该项设置为NO；如设成NO的话，即服务器使用其他可信任机构颁发的证书，也可以建立连接，这个非常危险，建议打开。
-//
-//    //置为NO，主要用于这种情况：客户端请求的是子域名，而证书上的是另外一个域名。因为SSL证书上的域名是独立的，假如证书上注册的域名是www.google.com，那么mail.google.com是无法验证通过的；当然，有钱可以注册通配符的域名*.google.com，但这个还是比较贵的。
-//
-//    //如置为NO，建议自己添加对应域名的校验逻辑。
-//
-//    securityPolicy.validatesDomainName = YES;
-//
-//    securityPolicy.pinnedCertificates = [[NSSet alloc] initWithObjects:certData, nil ,nil];
-//
-//    return securityPolicy;
-//
-//}
 
-- (void)downloadDataForRec {
-    
-    NSString *openId = @"";
-    if ([TTUserManager sharedInstance].isLogin) {
-        openId = [TTUserManager sharedInstance].currentUser.openId;
-    }
-    
-    NSDictionary *dict = @{
-                           @"h":@"ZYRecHandler",
-                           @"openID":openId,
-                           @"av":@"_debug_"
-                           };
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
-    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        if ([responseObject[@"code"] integerValue] == 200) {
-            NSArray *jsonDataArr = responseObject[@"datas"];
-            self.recommendListViewData = [NSMutableArray array];
-            //建立模型数组
-            for (int i =0; i < jsonDataArr.count; i++) {
-                NSDictionary *aDic = jsonDataArr[i];
-                Book *aModel = [Book initWithDic:aDic];
-                [self.recommendListViewData addObject:aModel];
-            }
-        }
-        if (self.recommendListView) {
-            [self.recommendListView reloadDataWithList:self.recommendListViewData];
-        }
-        else {
-            [self setupViewWithData:self.recommendListViewData];
-        }
-        
-    } failure:nil];
-    [dataTask resume];
-    
-}
 
-- (void)setupViewWithData:(NSMutableArray *)array {
-    //为您推荐
-    RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 456, screenWidth,array.count * 128 ) style:UITableViewStylePlain withArray:array];
-    [self.mainContentView addSubview:rTableView];
-    //    self.mainView.contentSize = CGSizeMake(screenWidth, 456 + rTableView.frame.size.height);
-}
-
+#pragma mark - 建立UI
 //导航栏
 - (void)setupNavView {
     
@@ -450,6 +469,8 @@
     
 }
 
+#pragma mark - 跳转
+//前往我的列表
 - (void)toMyList {
     if ([TTUserManager sharedInstance].isLogin) {
         MyListViewController *mylistVC = [[MyListViewController alloc]init];
@@ -460,14 +481,9 @@
 //        NSLog(@"请先登录");
     }
 }
-
+//前往扫描
 - (void)toScan {
-//    [[NSNotificationCenter defaultCenter] addObserverForName:@"shareCode" object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-//        NSDictionary *dic = [note userInfo];
-//        NSLog(@"%@",dic[@"shareCode"]);
-//        QRCodeView *testView = [[QRCodeView alloc]init];
-//        [testView showQRCode];
-//    }];
+
     
     //注册通知：
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showBooKList:) name:@"shareCode" object:nil];
@@ -482,9 +498,8 @@
     _codes = notification.userInfo[@"shareCode"];
     NSLog(@"%@", _code);
     
-    
 }
-
+//前往搜索界面
 - (void)toSearch {
     SearchViewController *searchVC = [[SearchViewController alloc]init];
     [self.navigationController pushViewController:searchVC animated:YES];
@@ -492,6 +507,8 @@
 
 
 
+
+#pragma mark - 其他
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = scrollView.contentOffset.y + 20;
     CGFloat searchViewWidth = screenWidth - 40;

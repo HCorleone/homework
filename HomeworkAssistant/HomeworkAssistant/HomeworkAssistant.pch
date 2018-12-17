@@ -23,5 +23,6 @@
 #import "GetCurrentDevice.h"
 #import "TextCheckTool.h"
 #import "CommonAlterView.h"
+#import "CommonToolClass.h"
 
 #endif /* HomeworkAssistant_pch */
