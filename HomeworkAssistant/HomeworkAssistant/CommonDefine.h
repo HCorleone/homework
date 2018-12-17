@@ -24,8 +24,8 @@
 #define ClickColor [UIColor colorWithRed:85/255.0 green:195/255.0 blue:242/255.0 alpha:1/1.0]
 
 //screensize
-#define screenWidth [[UIScreen mainScreen]bounds].size.width
-#define screenHeight [[UIScreen mainScreen]bounds].size.height
+#define SCREEN_WIDTH [[UIScreen mainScreen]bounds].size.width
+#define SCREEN_HEIGHT [[UIScreen mainScreen]bounds].size.height
 
 //umeng appkey:5bed3ff1b465f50e1200008e
 #import <UMShare/UMShare.h>

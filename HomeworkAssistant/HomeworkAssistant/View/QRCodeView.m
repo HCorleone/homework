@@ -9,7 +9,9 @@
 #import "QRCodeView.h"
 #import "SGQRCode.h"
 
+@interface QRCodeView()<UIGestureRecognizerDelegate>
 
+@end
 
 @implementation QRCodeView
 
@@ -32,6 +34,7 @@
         make.size.mas_equalTo(CGSizeMake(250, 235));
         make.center.mas_equalTo(bgView);
     }];
+    self.whiteView = whiteView;
     
     //二维码
     NSString *temp = @"openId:";
@@ -62,13 +65,22 @@
     UITapGestureRecognizer *cancelGesture = [[UITapGestureRecognizer alloc] init];
     [cancelGesture addTarget:self action:@selector(remove)];
     [bgView addGestureRecognizer:cancelGesture];
-
+    cancelGesture.delegate = self;
 
 }
 
 - (void)remove {
     self.bgView.hidden = YES;
     [self.bgView removeFromSuperview];
+}
+
+//使用代理让用户只有点击周围黑背景的时候才消失
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    
+    if ([touch.view isDescendantOfView:self.whiteView]) {
+        return NO;
+    }
+    return YES;
 }
 
 @end

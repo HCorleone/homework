@@ -21,7 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#define BOT_OFFSET [self getBotOffset]
+
 #import "RDVTabBarItem.h"
+#import <sys/utsname.h>
 
 @interface RDVTabBarItem () {
     NSString *_title;
@@ -88,6 +91,22 @@
     _badgePositionAdjustment = UIOffsetZero;
 }
 
+- (CGFloat)getBotOffset {
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    NSString *deviceModel = [NSString stringWithCString:systemInfo.machine encoding:NSASCIIStringEncoding];
+    
+    if ([deviceModel isEqualToString:@"iPhone10,3"])   return 30;
+    if ([deviceModel isEqualToString:@"iPhone10,6"])   return 30;
+    if ([deviceModel isEqualToString:@"iPhone11,8"])   return 30;
+    if ([deviceModel isEqualToString:@"iPhone11,2"])   return 30;
+    if ([deviceModel isEqualToString:@"iPhone11,6"])   return 30;
+    if ([deviceModel isEqualToString:@"iPhone11,4"])   return 30;
+    if ([deviceModel isEqualToString:@"i386"] || [deviceModel isEqualToString:@"x86_64"]) return 30;
+    return 0;
+}
+
 - (void)drawRect:(CGRect)rect {
     CGSize frameSize = self.frame.size;
     CGSize imageSize = CGSizeZero;
@@ -121,16 +140,14 @@
     // Draw image and title
     
     if (![_title length]) {
-//        [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) +
-//                                     _imagePositionAdjustment.horizontal,
-//                                     roundf(frameSize.height / 2 - imageSize.height / 2) +
-//                                     _imagePositionAdjustment.vertical,
-//                                     imageSize.width, imageSize.height)];
         [image drawInRect:CGRectMake(roundf(frameSize.width / 2 - imageSize.width / 2) +
                                      _imagePositionAdjustment.horizontal,
                                      roundf(frameSize.height / 2 - imageSize.height / 2) +
-                                     _imagePositionAdjustment.vertical,
-                                     24, 36)];
+                                     _imagePositionAdjustment.vertical - BOT_OFFSET/2,
+                                     imageSize.width, imageSize.height)];
+//        [image drawInRect:CGRectMake(50,
+//                                     0,
+//                                     24, 36)];
     } else {
         
         if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {

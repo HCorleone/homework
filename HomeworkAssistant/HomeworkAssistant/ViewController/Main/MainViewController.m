@@ -18,16 +18,26 @@
 #import "BookListViewController.h"
 
 @interface MainViewController ()<UIScrollViewDelegate>
-
+//主页滚动视图
 @property (nonatomic, strong) UIScrollView *mainView;
+@property (nonatomic, strong) UIView *mainContentView;
+//导航栏及搜索框
 @property (nonatomic, strong) UIView *navView;
 @property (nonatomic, strong) UIView *searchView;
-@property (nonatomic, strong) UIView *mainContentView;
-@property (nonatomic, strong) RecommendTableView *recommendListView;
+//作文模块
+@property (nonatomic, strong) UIView *articleView;
+//我的书单模块
+@property (nonatomic, strong) UIView *myCollectionsView;
 @property (nonatomic, strong) MyListView *myListView;
-@property (nonatomic, strong) UIView *myListContainer;
 @property (nonatomic, strong) NSMutableArray *myListViewData;
+//为您推荐模块
+@property (nonatomic, strong) UIView *recommendView;
+@property (nonatomic, strong) RecommendTableView *recommendListView;
 @property (nonatomic, strong) NSMutableArray *recommendListViewData;
+
+@property (nonatomic, strong) UIView *myListContainer;
+
+//二维码弹窗
 @property (nonatomic, strong) QRCodeView *testView;
 
 /** 扫码获取的信息 */
@@ -52,7 +62,6 @@
     }
     else {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeView:) name:@"loginSuccess" object:nil];
-        
     }
     
 }
@@ -120,7 +129,8 @@
         openId = [TTUserManager sharedInstance].currentUser.openId;
     }
     
-    NSString *sign = [HMACSHA1 HMACSHA1:@"openID=123"];
+    NSString *strToSign = [NSString stringWithFormat:@"openID=%@",openId];
+    NSString *sign = [HMACSHA1 dataToBeEncrypted:strToSign];
     NSDictionary *dict = @{
                            @"openID":openId,
                            @"sign":sign
@@ -176,7 +186,7 @@
     NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
     
     NSString *strToSign = [NSString stringWithFormat:@"openID=%@&pkn=com.enjoytime.palmhomework",openId];
-    NSString *sign = [HMACSHA1 HMACSHA1:strToSign];
+    NSString *sign = [HMACSHA1 dataToBeEncrypted:strToSign];
     NSDictionary *dict = @{
                            @"openID":openId,
                            @"pkn":@"com.enjoytime.palmhomework",
@@ -325,10 +335,12 @@
 - (void)setupView {
     self.view.backgroundColor = whitecolor;
     
+    //适配所用的view
     UIView *topOffsetView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, TOP_OFFSET)];
     topOffsetView.backgroundColor = maincolor;
     [self.view addSubview:topOffsetView];
     
+    //主页视图滚动的view
     UIScrollView *mainView = [[UIScrollView alloc]init];
     [self.view addSubview:mainView];
     [mainView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -529,6 +541,7 @@
     }
 }
 
+#pragma mark - view生命周期
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"userLikeOrNot" object:nil];
@@ -553,14 +566,15 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+}
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"===========");
 }
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
 
-}
 
 @end

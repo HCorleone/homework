@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HMACSHA1 : NSObject
 
 //将所有参数排序后加密后再上传
-+(NSString *)HMACSHA1:(NSString *)data;
++(NSString *)dataToBeEncrypted:(NSString *)data;
 
 @end
 

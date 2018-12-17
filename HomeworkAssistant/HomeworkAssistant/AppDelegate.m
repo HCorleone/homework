@@ -12,6 +12,7 @@
 #import "RDVTabBarController.h"
 #import "RDVTabBarItem.h"
 #import "LoginViewController.h"
+#import "QRScanViewController.h"
 
 @interface AppDelegate ()
 
@@ -80,47 +81,54 @@
 
 - (void)setupViewControllers{
     
-    
-    UIViewController *firstVC = [[MainViewController alloc]init];
+    MainViewController *firstVC = [[MainViewController alloc]init];
     UIViewController *firstNC = [[UINavigationController alloc]initWithRootViewController:firstVC];
     
-    UIViewController *secondVC = [[MyViewController alloc]init];
+    QRScanViewController *secondVC = [[QRScanViewController alloc]init];
     UIViewController *secondNC = [[UINavigationController alloc]initWithRootViewController:secondVC];
     
+    MyViewController *thirdVC = [[MyViewController alloc]init];
+    UIViewController *thirdNC = [[UINavigationController alloc]initWithRootViewController:thirdVC];
+    
     RDVTabBarController *tabBarController = [[RDVTabBarController alloc]init];
-    [tabBarController setViewControllers:@[firstNC, secondNC]];
+    [tabBarController setViewControllers:@[firstNC, secondNC, thirdNC]];
     
     self.viewController = tabBarController;
     
     [self customizeTabBarForController:tabBarController];
 }
 
+
+//为了制作凸起tarbartitem的效果，修改了rdvtabbar的一些东西，加了边线和修改了图像的位置
 - (void)customizeTabBarForController:(RDVTabBarController *)tabBarController {
 //    UIImage *finishedImage = [UIImage imageNamed:@"tabbar_selected_background"];
 //    UIImage *unfinishedImage = [UIImage imageNamed:@"tabbar_normal_background"];
-    NSArray *tabBarItemImages = @[@"学习", @"我的"];
-//    NSArray *tabBarItemTitles = @[@"学习", @"我的"];
+    NSArray *tabBarItemImages = @[@"学习", @"扫一扫v2", @"我的"];
+//    NSArray *tabBarItemTitles = @[@"", @"", @""];
     
     RDVTabBar *tabBar = [tabBarController tabBar];
     
-    [tabBar setFrame:CGRectMake(CGRectGetMinX(tabBar.frame), CGRectGetMinY(tabBar.frame), CGRectGetWidth(tabBar.frame), 48 + BOT_OFFSET)];
-    
-//    tabBar.backgroundView.layer.backgroundColor = [UIColor clearColor].CGColor;
+    [tabBar setFrame:CGRectMake(0, 0, screenWidth, 66 + BOT_OFFSET)];
+    tabBar.backgroundColor = [UIColor clearColor];
     
     NSInteger index = 0;
     for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
-//        [item setTitle:tabBarItemTitles[index]];
-//        [item setBackgroundSelectedImage:finishedImage withUnselectedImage:unfinishedImage];
-        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-选中",
-                                                      [tabBarItemImages objectAtIndex:index]]];
-        UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-默认",
-                                                        [tabBarItemImages objectAtIndex:index]]];
-        if (!BOT_OFFSET) {
-            item.imagePositionAdjustment = UIOffsetMake(10, 18);//BOT_OFFSET的一半
+        UIImage *selectedimage;
+        UIImage *unselectedimage;
+        if (index == 1) {
+            selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@",
+                                                          [tabBarItemImages objectAtIndex:index]]];
+            unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@",
+                                                            [tabBarItemImages objectAtIndex:index]]];
         }
         else {
-            item.imagePositionAdjustment = UIOffsetMake(10, 5);
+            selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-选中v2",
+                                                      [tabBarItemImages objectAtIndex:index]]];
+            unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@-默认v2",
+                                                        [tabBarItemImages objectAtIndex:index]]];
+            item.itemHeight = 48 + BOT_OFFSET;
         }
+
         
         [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
         

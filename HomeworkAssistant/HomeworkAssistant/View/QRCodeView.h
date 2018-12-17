@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showQRCode;
 @property (nonatomic, strong) UIView *bgView;
+@property (nonatomic, strong) UIView *whiteView;
 
 @end
 

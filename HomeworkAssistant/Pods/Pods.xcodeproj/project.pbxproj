@@ -54,6 +54,7 @@
 		38AB11BF86636E4B7AC0486C7520DB89 /* SDImageCacheConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 425A425691FCDD28188A3616037EE45C /* SDImageCacheConfig.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		3A69EA5A8257BB121ED82B88F393D3F0 /* UIButton+WebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 6550F03FE4F175DFFE6D6B33F819E084 /* UIButton+WebCache.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		3AADD9E7D1295CD56EA502BC96F01D7F /* NSBundle+MJRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A27EE23F6F53EEB752B0E01203603B3 /* NSBundle+MJRefresh.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		3D958B7121C79BD600AF7F3F /* UIColor+ColorChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D958B7021C79BD500AF7F3F /* UIColor+ColorChange.m */; };
 		3E8E6916C563B9CB12AA417275FC6EB3 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 64A69FC403CD7FC52D207CBA27EEFF96 /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		4008D398A2802F2936BFC77BC87D264A /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C6B4F11F8B3CC9CD07B7085E4FA0894E /* AFNetworking.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		403E134342DBC8665EFBB78573E5B419 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 601511DB87F41D65874EBAF2E91C88DE /* NSData+ImageContentType.m */; };
@@ -145,7 +146,6 @@
 		9BFAE06AC2F3B426C64EEDBF8C99A69E /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = E035C66A6CF99F0849C24C519C01A164 /* NSArray+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		9F06B13BAA0376EAD4E125DA78456B3B /* MJRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8268132C1B9884E894806327F369930F /* MJRefreshHeader.m */; };
 		9F7CCDC59DE910D03FE5A4DDE7831516 /* UIView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 66591CC28067E779BB5DF3DBE54C98FE /* UIView+WebCache.m */; };
-		9FD3796F21C25BAC005581BC /* UIColor+ColorChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3796E21C25BAB005581BC /* UIColor+ColorChange.m */; };
 		A05D30990ADAFACAD87CA38F87C56D11 /* SGQRCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 29B1BFB12A79329D755557BBBAD6FDD0 /* SGQRCode.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A1FA046FDFC42676D17FEC387B10D24A /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DDD92E69CDC389A912E628F33DCD66D /* View+MASAdditions.m */; };
 		A468F7F60D6AE160688211582D103047 /* SDWebImageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B850C7794C28057B884B7293BC9D2A0C /* SDWebImageManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -323,6 +323,8 @@
 		3AD121A39737735D9882A79C18A4BF8D /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "ViewController+MASAdditions.h"; path = "Masonry/ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		3B0E95D597B625365903024DC6F97AA2 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASCompositeConstraint.m; path = Masonry/MASCompositeConstraint.m; sourceTree = "<group>"; };
 		3B85076C3336754F81A789EEE367F726 /* SDWebImageFrame.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageFrame.m; path = SDWebImage/SDWebImageFrame.m; sourceTree = "<group>"; };
+		3D958B6F21C79BD500AF7F3F /* UIColor+ColorChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorChange.h"; sourceTree = "<group>"; };
+		3D958B7021C79BD500AF7F3F /* UIColor+ColorChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorChange.m"; sourceTree = "<group>"; };
 		3F80ECEDD5BFA20BAB48B587343FD4C8 /* SDWebImagePrefetcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImagePrefetcher.m; path = SDWebImage/SDWebImagePrefetcher.m; sourceTree = "<group>"; };
 		425A425691FCDD28188A3616037EE45C /* SDImageCacheConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageCacheConfig.h; path = SDWebImage/SDImageCacheConfig.h; sourceTree = "<group>"; };
 		43CCF19922B8922007D474F35B6B9547 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+AFNetworking.m"; path = "UIKit+AFNetworking/UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
@@ -405,8 +407,6 @@
 		9A4F339A14CAD2FD463FBBA71F9A9302 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		9CE129BF613F8001CBAC6D8C1BDC6852 /* Pods-HomeworkAssistant-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-HomeworkAssistant-acknowledgements.markdown"; sourceTree = "<group>"; };
 		9D3197B9CAF98B0B2CD235D546322D2E /* MASConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraint.m; path = Masonry/MASConstraint.m; sourceTree = "<group>"; };
-		9FD3796D21C25BAB005581BC /* UIColor+ColorChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorChange.h"; sourceTree = "<group>"; };
-		9FD3796E21C25BAB005581BC /* UIColor+ColorChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorChange.m"; sourceTree = "<group>"; };
 		A1DDAF6CBE1DD1031B0A9D36CFF3EB94 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIProgressView+AFNetworking.m"; path = "UIKit+AFNetworking/UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
 		A375262AB5C77C29C8AC43606242F8C7 /* MJRefreshAutoNormalFooter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshAutoNormalFooter.m; path = MJRefresh/Custom/Footer/Auto/MJRefreshAutoNormalFooter.m; sourceTree = "<group>"; };
 		A3A5A7ADA45A0FE6AA3FA527D5DE6D4B /* MJRefreshBackFooter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshBackFooter.m; path = MJRefresh/Base/MJRefreshBackFooter.m; sourceTree = "<group>"; };
@@ -978,8 +978,8 @@
 		97B7DDBD970C08842E4EA781D28875E8 /* RDVTabBarController */ = {
 			isa = PBXGroup;
 			children = (
-				9FD3796D21C25BAB005581BC /* UIColor+ColorChange.h */,
-				9FD3796E21C25BAB005581BC /* UIColor+ColorChange.m */,
+				3D958B6F21C79BD500AF7F3F /* UIColor+ColorChange.h */,
+				3D958B7021C79BD500AF7F3F /* UIColor+ColorChange.m */,
 				0483316E11C62530D2B69F34F48F6B6B /* RDVTabBar.h */,
 				63DA0421D8A36142BFFEB8DCD32CC4D4 /* RDVTabBar.m */,
 				4CBE4B9ADCAB13B85CF420B1895A08DD /* RDVTabBarController.h */,
@@ -1547,7 +1547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				80A70565101AA249CE52EA52F0ED1483 /* RDVTabBar.m in Sources */,
-				9FD3796F21C25BAC005581BC /* UIColor+ColorChange.m in Sources */,
+				3D958B7121C79BD600AF7F3F /* UIColor+ColorChange.m in Sources */,
 				12D59C7979143CE761F53268701FF784 /* RDVTabBarController-dummy.m in Sources */,
 				CCFA07CBC57EEC15AFB030876F9E0645 /* RDVTabBarController.m in Sources */,
 				32CA96B7F6C03AE45907A90B8D1DD3BD /* RDVTabBarItem.m in Sources */,

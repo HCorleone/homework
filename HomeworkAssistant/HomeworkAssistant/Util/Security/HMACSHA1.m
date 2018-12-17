@@ -15,7 +15,7 @@
 @implementation HMACSHA1
 
 //HmacSHA1加密
-+(NSString *)HMACSHA1:(NSString *)data{
++(NSString *)dataToBeEncrypted:(NSString *)data{
     const char *cKey  = [HMACSHA1_KEY cStringUsingEncoding:NSASCIIStringEncoding];
     const char *cData = [data cStringUsingEncoding:NSASCIIStringEncoding];
     
