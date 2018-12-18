@@ -149,16 +149,16 @@
 }
 
 - (void)setupMyList:(NSMutableArray *)array {
-    self.myListView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 72, screenWidth,screenHeight - 66) style:UITableViewStylePlain withArray:array];
+    self.myListView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 72, SCREEN_WIDTH,SCREEN_HEIGHT - 66) style:UITableViewStylePlain withArray:array];
     [self.view addSubview:self.myListView];
     self.myListView.dataSource = self;
     self.myListView.delegate = self;
     self.myListView.scrollEnabled = YES;
-    self.myListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 76)];
+    self.myListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 76)];
     self.myListView.tableFooterView.backgroundColor = whitecolor;
     
     //分割线
-    UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, screenWidth - 40, 0.5)];
+    UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH - 40, 0.5)];
     [line setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.1]];
     line.layer.opacity = 0.5;
     [self.myListView.tableFooterView addSubview:line];

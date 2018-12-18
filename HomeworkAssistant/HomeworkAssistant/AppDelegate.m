@@ -108,7 +108,7 @@
     
     RDVTabBar *tabBar = [tabBarController tabBar];
     
-    [tabBar setFrame:CGRectMake(0, 0, screenWidth, 66 + BOT_OFFSET)];
+    [tabBar setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 66 + BOT_OFFSET)];
     tabBar.backgroundColor = [UIColor clearColor];
     
     NSInteger index = 0;

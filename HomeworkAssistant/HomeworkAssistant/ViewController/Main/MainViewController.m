@@ -14,6 +14,7 @@
 #import "MyListViewController.h"
 #import "MyListView.h"
 #import "QRCodeView.h"
+#import "SearchResultViewController.h"
 
 #import "BookListViewController.h"
 
@@ -27,7 +28,8 @@
 //作文模块
 @property (nonatomic, strong) UIView *articleView;
 //我的书单模块
-@property (nonatomic, strong) UIView *myCollectionsView;
+@property (nonatomic, strong) UIView *myCollectionsView;//这个是用户没有收藏或未登录显示的view
+@property (nonatomic, strong) UIView *myListContainer;//这个是用户有收藏时显示的view
 @property (nonatomic, strong) MyListView *myListView;
 @property (nonatomic, strong) NSMutableArray *myListViewData;
 //为您推荐模块
@@ -35,7 +37,7 @@
 @property (nonatomic, strong) RecommendTableView *recommendListView;
 @property (nonatomic, strong) NSMutableArray *recommendListViewData;
 
-@property (nonatomic, strong) UIView *myListContainer;
+
 
 //二维码弹窗
 @property (nonatomic, strong) QRCodeView *testView;
@@ -50,7 +52,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.hidden = YES;
+    
     
     [self setupView];
     [self setupNavView];
@@ -176,9 +178,9 @@
 
 - (void)setupViewWithData:(NSMutableArray *)array {
     //为您推荐
-    RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 456, screenWidth,array.count * 128 ) style:UITableViewStylePlain withArray:array];
-    [self.mainContentView addSubview:rTableView];
-    //    self.mainView.contentSize = CGSizeMake(screenWidth, 456 + rTableView.frame.size.height);
+    RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 0.12 * SCREEN_WIDTH, SCREEN_WIDTH, array.count * 128 ) style:UITableViewStylePlain withArray:array];
+    [self.recommendView addSubview:rTableView];
+        self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, 456 + rTableView.frame.size.height);
 }
 
 
@@ -232,24 +234,58 @@
 
 - (void) setupMyListViewWithData:(NSMutableArray *)array {
     
-    UIView *myListContainer = [[UIView alloc]initWithFrame:CGRectMake(0, 220, screenWidth, 200)];
+    UIView *myListContainer = [[UIView alloc]initWithFrame:CGRectMake(0, 0.68 * SCREEN_WIDTH, SCREEN_WIDTH, SCREEN_WIDTH * 0.69)];
+    myListContainer.backgroundColor = whitecolor;
     [self.mainContentView addSubview:myListContainer];
     self.myListContainer = myListContainer;
+    
+    UILabel *myListTitle = [[UILabel alloc]init];
+    [myListContainer addSubview:myListTitle];
+    myListTitle.text = @"我的书单";
+    myListTitle.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
+    [myListTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(myListContainer).offset(20);
+        make.top.mas_equalTo(myListContainer).offset(0.04 * SCREEN_WIDTH);
+    }];
+    
+    //蓝色小标记1
+    UILabel *blueSign_one = [[UILabel alloc]init];
+    blueSign_one.backgroundColor = [UIColor colorWithHexString:@"#49ACF2"];
+    [myListContainer addSubview:blueSign_one];
+    [blueSign_one mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(myListContainer);
+        make.centerY.mas_equalTo(myListTitle);
+        make.size.mas_equalTo(CGSizeMake(3, 18));
+    }];
+    
+    //查看全部按钮
+    UIButton *checkMyList = [UIButton buttonWithType:UIButtonTypeCustom];
+    [myListContainer addSubview:checkMyList];
+    [checkMyList setTitle:@"查看全部" forState:UIControlStateNormal];
+    [checkMyList setTitleColor:[UIColor colorWithHexString:@"#C4C8CC"] forState:UIControlStateNormal];
+    checkMyList.titleLabel.font = [UIFont systemFontOfSize:12];
+    [checkMyList setBackgroundColor:[UIColor clearColor]];
+    [checkMyList mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(myListContainer).offset(-20);
+        make.centerY.mas_equalTo(myListTitle);
+//        make.size.mas_equalTo(CGSizeMake(60, 12));
+    }];
+    [checkMyList addTarget:self action:@selector(toMyList) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [shareBtn setImage:[UIImage imageNamed:@"分享给同学"] forState:UIControlStateNormal];
     [myListContainer addSubview:shareBtn];
     [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(myListContainer);
-        make.bottom.mas_equalTo(myListContainer).offset(-5);
-        make.size.mas_equalTo(CGSizeMake(80, 16.5));
+        make.bottom.mas_equalTo(myListContainer).offset(-0.066 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(80, 18));
     }];
     [shareBtn addTarget:self action:@selector(shareMyList) forControlEvents:UIControlEventTouchUpInside];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.itemSize = CGSizeMake(83.5, 150);
-    MyListView *myListView = [[MyListView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, 175) collectionViewLayout:layout withArray:array];
+    MyListView *myListView = [[MyListView alloc]initWithFrame:CGRectMake(0, 0.125 * SCREEN_WIDTH, SCREEN_WIDTH, 0.41 * SCREEN_WIDTH) collectionViewLayout:layout withArray:array];
     [myListContainer addSubview:myListView];
     self.myListView = myListView;
 }
@@ -269,7 +305,7 @@
 //导航栏
 - (void)setupNavView {
     
-    UIView *topOffsetView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, TOP_OFFSET)];
+    UIView *topOffsetView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, TOP_OFFSET)];
     topOffsetView.backgroundColor = maincolor;
     [self.view addSubview:topOffsetView];
     
@@ -318,17 +354,17 @@
     UITapGestureRecognizer *toSearchGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toSearch)];
     [searchView addGestureRecognizer:toSearchGes];
     
-    //二维码扫描
-    UIImageView *scanLogo = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"扫一扫"]];
-    [self.navView addSubview:scanLogo];
-    [scanLogo mas_makeConstraints:^(MASConstraintMaker *make) {
+    //浏览记录
+    UIImageView *historyLogo = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"更新时间v2"]];
+    [self.navView addSubview:historyLogo];
+    [historyLogo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
         make.top.mas_equalTo(self.navView).offset(33);
         make.right.mas_equalTo(self.navView).offset(-20);
     }];
-    scanLogo.userInteractionEnabled = YES;
-    UITapGestureRecognizer *toScanGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toScan)];
-    [scanLogo addGestureRecognizer:toScanGes];
+    historyLogo.userInteractionEnabled = YES;
+    UITapGestureRecognizer *toHistoryGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toHistory)];
+    [historyLogo addGestureRecognizer:toHistoryGes];
     
 }
 
@@ -336,67 +372,85 @@
     self.view.backgroundColor = whitecolor;
     
     //适配所用的view
-    UIView *topOffsetView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, TOP_OFFSET)];
+    UIView *topOffsetView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 2 * TOP_OFFSET)];
     topOffsetView.backgroundColor = maincolor;
     [self.view addSubview:topOffsetView];
     
     //主页视图滚动的view
-    UIScrollView *mainView = [[UIScrollView alloc]init];
+    UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, TOP_OFFSET, SCREEN_WIDTH, SCREEN_HEIGHT - TABBAR_HEIGHT - BOT_OFFSET - TOP_OFFSET)];
     [self.view addSubview:mainView];
-    [mainView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.view).offset(TOP_OFFSET);
-        make.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(screenHeight - tabbarheight - BOT_OFFSET - TOP_OFFSET);
-    }];
     mainView.showsVerticalScrollIndicator = NO;
     mainView.bounces = NO;
     mainView.backgroundColor = maincolor;
     mainView.delegate = self;
-    self.mainView =mainView;
+    self.mainView = mainView;
+    self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT + 500);
     
-    
-    self.mainView.contentSize = CGSizeMake(screenWidth, 30*128 + 456);
-    //    self.mainView.userInteractionEnabled = NO;
-    
-    UIView *mainContentView = [[UIView alloc]init];
+    UIView *mainContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     mainContentView.backgroundColor = whitecolor;
-    [self.mainView addSubview:mainContentView];
-    [mainContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.and.left.mas_equalTo(self.mainView);
-        make.size.mas_equalTo(self.mainView.contentSize);
-    }];
+    [mainView addSubview:mainContentView];
     self.mainContentView = mainContentView;
     
-    UIImageView *headerView = [UIImageView new];
+    //头部视图
+    UIImageView *headerView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.34 * SCREEN_WIDTH)];
     headerView.image = [UIImage imageNamed:@"首页头图"];
     [mainContentView addSubview:headerView];
-    [headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.and.top.mas_equalTo(mainContentView);
-        make.height.mas_equalTo(132);
-    }];
     
+    //浏览记录
+    UIImageView *historyLogo = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"更新时间v2"]];
+    [self.view addSubview:historyLogo];
+    [historyLogo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(24, 24));
+        make.top.mas_equalTo(self.view).offset(33 + TOP_OFFSET);
+        make.right.mas_equalTo(self.view).offset(-20);
+    }];
+    historyLogo.userInteractionEnabled = YES;
+    UITapGestureRecognizer *toHistoryGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toHistory)];
+    [historyLogo addGestureRecognizer:toHistoryGes];
+    
+    //作文模块
+    UIView *articleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0.34 * SCREEN_WIDTH, SCREEN_WIDTH, 0.32 * SCREEN_WIDTH)];
+    articleView.backgroundColor = whitecolor;
+    [mainContentView addSubview:articleView];
+    self.articleView = articleView;
+    
+    UIImageView *chineseArticleLogo = [[UIImageView alloc]init];
+    chineseArticleLogo.image = [UIImage imageNamed:@"中文作文v2"];
+    chineseArticleLogo.frame = CGRectMake(0.1 * SCREEN_WIDTH, 0.13 * SCREEN_WIDTH, 0.3 * SCREEN_WIDTH, 0.12 * SCREEN_WIDTH);
+    [articleView addSubview:chineseArticleLogo];
+    
+    UIImageView *englishArticleLogo = [[UIImageView alloc]init];
+    englishArticleLogo.image = [UIImage imageNamed:@"英文作文v2"];
+    englishArticleLogo.frame = CGRectMake(0.6 * SCREEN_WIDTH, 0.13 * SCREEN_WIDTH, 0.3 * SCREEN_WIDTH, 0.12 * SCREEN_WIDTH);
+    [articleView addSubview:englishArticleLogo];
+    
+    chineseArticleLogo.userInteractionEnabled = YES;
+    englishArticleLogo.userInteractionEnabled = YES;
+    UITapGestureRecognizer *toArticleGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toArticle)];
+    [chineseArticleLogo addGestureRecognizer:toArticleGes];
+    [englishArticleLogo addGestureRecognizer:toArticleGes];
+    
+    //搜索框
     UIView *searchView = [[UIView alloc]init];
     searchView.backgroundColor = whitecolor;
-    searchView.layer.cornerRadius = 4;
-    searchView.layer.shadowColor = [UIColor blackColor].CGColor;
-    searchView.layer.shadowOffset = CGSizeMake(0, 1);
-    searchView.layer.shadowOpacity = 0.3;
+    searchView.layer.cornerRadius = 3;
+    searchView.layer.shadowColor = [UIColor colorWithHexString:@"#DFE2E6"].CGColor;
+    searchView.layer.shadowOffset = CGSizeMake(0, 2);
+    searchView.layer.shadowOpacity = 1;
     [mainContentView addSubview:searchView];
     [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(headerView.mas_left).with.offset(20);
-        make.right.mas_equalTo(headerView.mas_right).with.offset(-20);
-        make.height.mas_equalTo(48);
-        make.centerY.mas_equalTo(headerView.mas_bottom);
+        make.centerX.mas_equalTo(mainContentView);
+        make.size.mas_equalTo(CGSizeMake(0.89 * SCREEN_WIDTH, 0.89 * SCREEN_WIDTH * 0.14));
+        make.top.mas_equalTo(mainContentView).offset(0.277 * SCREEN_WIDTH);
     }];
     self.searchView = searchView;
     
     UIImageView *searchLogo = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"搜索"]];
     [searchView addSubview:searchLogo];
     [searchLogo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(24, 24));
+        make.size.mas_equalTo(CGSizeMake(0.075 * SCREEN_WIDTH, 0.075 * SCREEN_WIDTH));
         make.centerY.mas_equalTo(searchView);
-        make.left.mas_equalTo(searchView).offset(14);
+        make.left.mas_equalTo(searchView).offset(0.044 * SCREEN_WIDTH);
     }];
     
     UILabel *placeHolder = [[UILabel alloc]init];
@@ -411,73 +465,87 @@
     UITapGestureRecognizer *toSearchGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toSearch)];
     [searchView addGestureRecognizer:toSearchGes];
     
-    //二维码扫描
-    UIImageView *scanLogo = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"扫一扫"]];
-    [self.view addSubview:scanLogo];
-    [scanLogo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(24, 24));
-        make.top.mas_equalTo(self.view).offset(33 + TOP_OFFSET);
-        make.right.mas_equalTo(self.view).offset(-20);
-    }];
-    scanLogo.userInteractionEnabled = YES;
-    UITapGestureRecognizer *toScanGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toScan)];
-    [scanLogo addGestureRecognizer:toScanGes];
+    
+    //分割线
+    UILabel *line_one = [[UILabel alloc]initWithFrame:CGRectMake(0, 0.66 * SCREEN_WIDTH, SCREEN_WIDTH, 0.02 * SCREEN_WIDTH)];
+    line_one.backgroundColor = [[UIColor colorWithHexString:@"#F7F9FA"] colorWithAlphaComponent:0.8];
+    [mainContentView addSubview:line_one];
     
     //我的书单
-    UILabel *mylist = [[UILabel alloc]init];
-    [self.mainContentView addSubview:mylist];
-    mylist.text = @"我的书单";
-    mylist.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
-    [mylist mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.mainContentView).offset(20);
-        make.top.mas_equalTo(self.mainContentView).offset(185);
-        make.size.mas_equalTo(CGSizeMake(72, 25));
+    UIView *myCollectionsView = [[UIView alloc]initWithFrame:CGRectMake(0, 0.68 * SCREEN_WIDTH, SCREEN_WIDTH, SCREEN_WIDTH * 0.69)];
+    myCollectionsView.backgroundColor = whitecolor;
+    [mainContentView addSubview:myCollectionsView];
+    self.myCollectionsView = myCollectionsView;
+    
+    UILabel *myListTitle = [[UILabel alloc]init];
+    [myCollectionsView addSubview:myListTitle];
+    myListTitle.text = @"我的书单";
+    myListTitle.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
+    [myListTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(myCollectionsView).offset(20);
+        make.top.mas_equalTo(myCollectionsView).offset(0.04 * SCREEN_WIDTH);
     }];
     
-    UIImageView *blankStatus = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"空状态"]];
-    [self.mainContentView addSubview:blankStatus];
-    [blankStatus mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.mainContentView).offset(225);
-        make.centerX.mas_equalTo(self.mainContentView);
-        make.size.mas_equalTo(CGSizeMake(137, 137));
+    //蓝色小标记1
+    UILabel *blueSign_one = [[UILabel alloc]init];
+    blueSign_one.backgroundColor = [UIColor colorWithHexString:@"#49ACF2"];
+    [myCollectionsView addSubview:blueSign_one];
+    [blueSign_one mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(myCollectionsView);
+        make.centerY.mas_equalTo(myListTitle);
+        make.size.mas_equalTo(CGSizeMake(3, 18));
     }];
     
-    UILabel *blankLable = [[UILabel alloc]init];
-    blankLable.text = @"书单是空的，快去搜索试试吧";
-    blankLable.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:6];
-    blankLable.textColor = [UIColor colorWithHexString:@"#C4C8CC"];
-    [self.mainContentView addSubview:blankLable];
-    [blankLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(blankStatus.mas_bottom).with.offset(2);
-        make.centerX.mas_equalTo(self.mainContentView);
+    
+    UIImageView *blankStatusLogo = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"空状态"]];
+    [myCollectionsView addSubview:blankStatusLogo];
+    [blankStatusLogo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(myListTitle.mas_bottom).offset(0.04 * SCREEN_WIDTH);
+        make.centerX.mas_equalTo(myCollectionsView);
+        make.size.mas_equalTo(CGSizeMake(0.37 * SCREEN_WIDTH, 0.37 * SCREEN_WIDTH));
+    }];
+    
+    UILabel *blankStatusTitle = [[UILabel alloc]init];
+    blankStatusTitle.text = @"书单是空的，快去搜索试试吧";
+    blankStatusTitle.font = [UIFont systemFontOfSize:12];
+    blankStatusTitle.textColor = [UIColor colorWithHexString:@"#C4C8CC"];
+    [myCollectionsView addSubview:blankStatusTitle];
+    [blankStatusTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(blankStatusLogo.mas_bottom).with.offset(2);
+        make.centerX.mas_equalTo(myCollectionsView);
         make.height.mas_equalTo(12);
     }];
     
-    //查看全部按钮
-    UIButton *checkMyList = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.mainContentView addSubview:checkMyList];
-    [checkMyList setTitle:@"查看全部" forState:UIControlStateNormal];
-    [checkMyList setTitleColor:[UIColor colorWithHexString:@"#909499"] forState:UIControlStateNormal];
-    checkMyList.titleLabel.font = [UIFont systemFontOfSize:12];
-    [checkMyList setBackgroundColor:[UIColor clearColor]];
-    [checkMyList mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.mainContentView).offset(-20);
-        make.top.mas_equalTo(self.mainContentView).offset(192);
-        make.size.mas_equalTo(CGSizeMake(60, 12));
-    }];
-    [checkMyList addTarget:self action:@selector(toMyList) forControlEvents:UIControlEventTouchUpInside];
+    //分割线
+    UILabel *line_two = [[UILabel alloc]initWithFrame:CGRectMake(0, 1.37 * SCREEN_WIDTH, SCREEN_WIDTH, 0.02 * SCREEN_WIDTH)];
+    line_two.backgroundColor = [[UIColor colorWithHexString:@"#F7F9FA"] colorWithAlphaComponent:0.8];
+    [mainContentView addSubview:line_two];
+    
+    //推荐模块
+    UIView *recommendView = [[UIView alloc]initWithFrame:CGRectMake(0, 1.39 * SCREEN_WIDTH, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    recommendView.backgroundColor = whitecolor;
+    [mainContentView addSubview:recommendView];
+    self.recommendView = recommendView;
     
     //为您推荐
-    UILabel *recommend = [[UILabel alloc]init];
-    [self.mainContentView addSubview:recommend];
-    recommend.text = @"为您推荐";
-    recommend.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
-    [recommend mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.mainContentView).offset(20);
-        make.top.mas_equalTo(self.mainContentView).offset(420.5);
-        make.size.mas_equalTo(CGSizeMake(72, 25));
+    UILabel *recommendTitle = [[UILabel alloc]init];
+    [recommendView addSubview:recommendTitle];
+    recommendTitle.text = @"为您推荐";
+    recommendTitle.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
+    [recommendTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(recommendView).offset(20);
+        make.top.mas_equalTo(recommendView).offset(0.04 * SCREEN_WIDTH);
     }];
     
+    //蓝色小标记2
+    UILabel *blueSign_two = [[UILabel alloc]init];
+    blueSign_two.backgroundColor = [UIColor colorWithHexString:@"#49ACF2"];
+    [recommendView addSubview:blueSign_two];
+    [blueSign_two mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(recommendView);
+        make.centerY.mas_equalTo(recommendTitle);
+        make.size.mas_equalTo(CGSizeMake(3, 18));
+    }];
     
 }
 
@@ -493,6 +561,16 @@
 //        NSLog(@"请先登录");
     }
 }
+
+//前往作文页面
+- (void)toArticle {
+    NSLog(@"前往作文view");
+}
+//前往浏览记录
+- (void)toHistory {
+    NSLog(@"前往浏览记录");
+}
+
 //前往扫描
 - (void)toScan {
 
@@ -513,6 +591,7 @@
 }
 //前往搜索界面
 - (void)toSearch {
+
     SearchViewController *searchVC = [[SearchViewController alloc]init];
     [self.navigationController pushViewController:searchVC animated:YES];
 }
@@ -523,16 +602,16 @@
 #pragma mark - 其他
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = scrollView.contentOffset.y + 20;
-    CGFloat searchViewWidth = screenWidth - 40;
+    CGFloat searchViewWidth = SCREEN_WIDTH - 40;
     CGFloat searchViewHeight = self.searchView.frame.size.height;
     CGFloat xPosi = self.searchView.frame.origin.x;
     CGFloat yPosi = 109;
-    
+
     if (offsetY >= 0 && offsetY <= 80) {
         self.searchView.frame = CGRectMake(xPosi, yPosi - (offsetY/2.963), searchViewWidth - (offsetY/2), searchViewHeight);
-        
+
     }
-    
+
     if (offsetY >= 80) {
         self.navView.hidden = NO;
     }
@@ -568,7 +647,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    self.navigationController.navigationBar.hidden = YES;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

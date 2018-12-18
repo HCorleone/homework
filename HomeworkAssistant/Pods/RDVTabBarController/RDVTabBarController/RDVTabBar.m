@@ -75,8 +75,6 @@
     [[self backgroundView] setFrame:CGRectMake(0, frameSize.height - minimumContentHeight,
                                             frameSize.width, frameSize.height)];
     
-//    [[self spacingLabel] setFrame:CGRectMake(0, frameSize.height - minimumContentHeight,
-//                                             frameSize.width, 0.5)];
     
     [[self spacingLabel] setFrame:CGRectMake(0, frameSize.height - minimumContentHeight,
                                              frameSize.width, 0.5)];

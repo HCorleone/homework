@@ -29,8 +29,8 @@
 
 @implementation UpAnswerViewController
 
-#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
-#define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -124,7 +124,7 @@
     
     
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = CGRectMake(0, 0, 0.40 * screenWidth, 0.40 * screenWidth * 0.24);
+    gradientLayer.frame = CGRectMake(0, 0, 0.40 * SCREEN_WIDTH, 0.40 * SCREEN_WIDTH * 0.24);
     [gradientLayer setColors:[NSArray arrayWithObjects:
                               (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
                               (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
@@ -139,14 +139,14 @@
     UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [nextBtn.layer addSublayer:gradientLayer];
     nextBtn.layer.masksToBounds = YES;
-    nextBtn.layer.cornerRadius = 0.40 * screenWidth * 0.24/2;
+    nextBtn.layer.cornerRadius = 0.40 * SCREEN_WIDTH * 0.24/2;
     nextBtn.tag = 1004;
     [nextBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:nextBtn];
     [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(-screenHeight * 0.157);
+        make.bottom.mas_equalTo(-SCREEN_HEIGHT * 0.157);
         make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(0.40 * screenWidth, 0.40 * screenWidth * 0.24));
+        make.size.mas_equalTo(CGSizeMake(0.40 * SCREEN_WIDTH, 0.40 * SCREEN_WIDTH * 0.24));
     }];
     [nextBtn setTitleColor:UIColorFromRGB(0xFFFFFF) forState:UIControlStateNormal];
     [nextBtn setTitle:@"确认上传" forState:UIControlStateNormal];
@@ -178,7 +178,7 @@
     
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 307, SCREENWIDTH, 112) collectionViewLayout:flowLayout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 307, SCREEN_WIDTH, 112) collectionViewLayout:flowLayout];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     // 每一行cell之间的间距
     flowLayout.minimumLineSpacing = 10;

@@ -75,11 +75,11 @@
 - (void)setupView {
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake(screenWidth/3, 30);
+    layout.itemSize = CGSizeMake(SCREEN_WIDTH/3, 30);
     layout.minimumLineSpacing = 29.5;
-    layout.headerReferenceSize = CGSizeMake(screenWidth, 20);
+    layout.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 20);
     
-    _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, 320) collectionViewLayout:layout];
+    _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 80, SCREEN_WIDTH, 320) collectionViewLayout:layout];
     [self.view addSubview:_collectView];
     _collectView.dataSource = self;
     _collectView.delegate = self;

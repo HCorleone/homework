@@ -91,8 +91,8 @@
     _pwdView.layer.cornerRadius = 4;
     [self.view addSubview:_pwdView];
     [_pwdView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(0.4 * screenWidth);
-        make.size.mas_equalTo(CGSizeMake(0.8 * screenWidth, 0.96 * 0.8 * screenWidth) );
+        make.top.mas_equalTo(0.4 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.8 * SCREEN_WIDTH, 0.96 * 0.8 * SCREEN_WIDTH) );
         make.centerX.mas_equalTo(self.view);
     }];
 }

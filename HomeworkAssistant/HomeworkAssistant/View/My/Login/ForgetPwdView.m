@@ -18,17 +18,17 @@
         
         [self addSubview:self.codeField];
         [self.codeField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.pwdField.mas_bottom).offset(0.04 * screenWidth);
+            make.top.mas_equalTo(self.pwdField.mas_bottom).offset(0.04 * SCREEN_WIDTH);
         }];
 //        //验证码
         [self addSubview:self.getBtn];
         [self.getBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.pwdField.mas_bottom).offset(0.04 * screenWidth);
+            make.top.mas_equalTo(self.pwdField.mas_bottom).offset(0.04 * SCREEN_WIDTH);
         }];
         //注册
         [self addSubview:self.registered];
         [self.registered mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(self).offset(-0.09 * screenWidth);
+            make.bottom.mas_equalTo(self).offset(-0.09 * SCREEN_WIDTH);
         }];
         [self.registered setTitle:@"确认修改" forState:UIControlStateNormal];
     }

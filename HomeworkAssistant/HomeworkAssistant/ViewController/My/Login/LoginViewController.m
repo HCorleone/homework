@@ -72,18 +72,18 @@
     loginView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.05];
     [self.view addSubview:loginView];
     [loginView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(0.8 * screenWidth, 0.909 * 0.8 * screenWidth));
+        make.size.mas_equalTo(CGSizeMake(0.8 * SCREEN_WIDTH, 0.909 * 0.8 * SCREEN_WIDTH));
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.view).with.offset(0.42 * screenWidth);
+        make.top.mas_equalTo(self.view).with.offset(0.42 * SCREEN_WIDTH);
     }];
     self.loginView = loginView;
     //帐号框
     LoginTextField *acountF = [[LoginTextField alloc]init:@"请输入手机号"];
     [loginView addSubview:acountF];
     [acountF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(0.689 * screenWidth, 0.15 * 0.689 * screenWidth));
+        make.size.mas_equalTo(CGSizeMake(0.689 * SCREEN_WIDTH, 0.15 * 0.689 * SCREEN_WIDTH));
         make.centerX.mas_equalTo(loginView);
-        make.top.mas_equalTo(loginView).offset(0.10 * screenWidth);
+        make.top.mas_equalTo(loginView).offset(0.10 * SCREEN_WIDTH);
     }];
     self.acountF = acountF;
     
@@ -93,16 +93,16 @@
     [loginView addSubview:passwordF];
     passwordF.secureTextEntry = YES;
     [passwordF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(0.689 * screenWidth, 0.15 * 0.689 * screenWidth));
+        make.size.mas_equalTo(CGSizeMake(0.689 * SCREEN_WIDTH, 0.15 * 0.689 * SCREEN_WIDTH));
         make.centerX.mas_equalTo(loginView);
-        make.top.mas_equalTo(acountF.mas_bottom).with.offset(0.04 * screenWidth);
+        make.top.mas_equalTo(acountF.mas_bottom).with.offset(0.04 * SCREEN_WIDTH);
     }];
     self.passwordF = passwordF;
     
     //登陆按钮
     //渐变色
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = CGRectMake(0, 0, 0.689 * screenWidth, 0.15 * 0.689 * screenWidth);
+    gradientLayer.frame = CGRectMake(0, 0, 0.689 * SCREEN_WIDTH, 0.15 * 0.689 * SCREEN_WIDTH);
     [gradientLayer setColors:[NSArray arrayWithObjects:
                               (id)[UIColor colorWithHexString:@"#6FDDFF"].CGColor,
                               (id)[UIColor colorWithHexString:@"#33C2FF"].CGColor,
@@ -119,7 +119,7 @@
     
     //阴影
     CALayer *shadowLayer = [[CALayer alloc] init];
-    shadowLayer.frame = CGRectMake(0, 0, 0.689 * screenWidth, 0.15 * 0.689 * screenWidth);
+    shadowLayer.frame = CGRectMake(0, 0, 0.689 * SCREEN_WIDTH, 0.15 * 0.689 * SCREEN_WIDTH);
     shadowLayer.shadowOffset = CGSizeMake(0, 1);
     shadowLayer.backgroundColor = [UIColor colorWithHexString:@"#2983C8"].CGColor;
     shadowLayer.shadowColor = [UIColor colorWithHexString:@"#2983C8"].CGColor;
@@ -133,9 +133,9 @@
     
     [loginView addSubview:signinBtn];
     [signinBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(0.689 * screenWidth, 0.15 * 0.689 * screenWidth));
+        make.size.mas_equalTo(CGSizeMake(0.689 * SCREEN_WIDTH, 0.15 * 0.689 * SCREEN_WIDTH));
         make.centerX.mas_equalTo(loginView);
-        make.top.mas_equalTo(passwordF.mas_bottom).with.offset(0.07 * screenWidth);
+        make.top.mas_equalTo(passwordF.mas_bottom).with.offset(0.07 * SCREEN_WIDTH);
     }];
     [signinBtn setTitle:@"登录" forState:UIControlStateNormal];
     signinBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -150,8 +150,8 @@
     [self.view addSubview:signupBtn];
     [signupBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(signinBtn);
-        make.bottom.mas_equalTo(loginView).offset(-0.06 * screenWidth);
-        make.size.mas_equalTo(CGSizeMake(0.16 * screenWidth, 0.25 * 0.16 * screenWidth));
+        make.bottom.mas_equalTo(loginView).offset(-0.06 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.16 * SCREEN_WIDTH, 0.25 * 0.16 * SCREEN_WIDTH));
     }];
     signupBtn.backgroundColor = [UIColor clearColor];
     NSString *textStr = @"注册账号";
@@ -167,8 +167,8 @@
     [self.view addSubview:forgetBtn];
     [forgetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(signinBtn);
-        make.bottom.mas_equalTo(loginView).offset(-0.06 * screenWidth);
-        make.size.mas_equalTo(CGSizeMake(0.16 * screenWidth, 0.25 * 0.16 * screenWidth));
+        make.bottom.mas_equalTo(loginView).offset(-0.06 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.16 * SCREEN_WIDTH, 0.25 * 0.16 * SCREEN_WIDTH));
     }];
     forgetBtn.backgroundColor = [UIColor clearColor];
     [forgetBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
@@ -187,14 +187,14 @@
     [thirdPart mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(100, 10));
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.loginView.mas_bottom).with.offset(0.13 * screenWidth);
+        make.top.mas_equalTo(self.loginView.mas_bottom).with.offset(0.13 * SCREEN_WIDTH);
     }];
     //横线
     UIImageView *line = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"第三方登录-渐变分割线"]];
     [self.view addSubview:line];
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(thirdPart.mas_bottom).with.offset(0.04 * screenWidth);
+        make.top.mas_equalTo(thirdPart.mas_bottom).with.offset(0.04 * SCREEN_WIDTH);
     }];
 //    //QQ登录
 //    UIImageView *qqLogo = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"qq"]];
@@ -218,8 +218,8 @@
     [wechatLogo mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.centerX.mas_equalTo(self.view).offset(50);
         make.centerX.mas_equalTo(self.view);
-        make.size.mas_equalTo(CGSizeMake(0.12 * screenWidth, 0.12 * screenWidth));
-        make.top.mas_equalTo(line.mas_bottom).with.offset(0.04 * screenWidth);
+        make.size.mas_equalTo(CGSizeMake(0.12 * SCREEN_WIDTH, 0.12 * SCREEN_WIDTH));
+        make.top.mas_equalTo(line.mas_bottom).with.offset(0.04 * SCREEN_WIDTH);
     }];
     UIButton *wechatBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     wechatBtn.frame = wechatLogo.frame;

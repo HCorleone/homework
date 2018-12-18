@@ -57,7 +57,7 @@
     //下一步按钮
     
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = CGRectMake(0, 0, 0.40 * screenWidth, 0.40 * screenWidth * 0.24);
+    gradientLayer.frame = CGRectMake(0, 0, 0.40 * SCREEN_WIDTH, 0.40 * SCREEN_WIDTH * 0.24);
     [gradientLayer setColors:[NSArray arrayWithObjects:
                               (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
                               (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
@@ -72,13 +72,13 @@
     _nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_nextBtn.layer addSublayer:gradientLayer];
     _nextBtn.layer.masksToBounds = YES;
-    _nextBtn.layer.cornerRadius = 0.40 * screenWidth * 0.24/2;
+    _nextBtn.layer.cornerRadius = 0.40 * SCREEN_WIDTH * 0.24/2;
     [_nextBtn addTarget:self action:@selector(pressBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_nextBtn];
     [_nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.inputField.mas_bottom).offset(107);
         make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(0.40 * screenWidth, 0.40 * screenWidth * 0.24));
+        make.size.mas_equalTo(CGSizeMake(0.40 * SCREEN_WIDTH, 0.40 * SCREEN_WIDTH * 0.24));
     }];
     [_nextBtn setTitleColor:UIColorFromRGB(0xFFFFFF) forState:UIControlStateNormal];
     [_nextBtn setTitle:@"下一步" forState:UIControlStateNormal];

@@ -14,8 +14,8 @@
 #define BOT_OFFSET [GetCurrentDevice getBotOffset]
 
 
-//tabbarheight
-#define tabbarheight 48
+//TABBAR_HEIGHT
+#define TABBAR_HEIGHT 48
 
 //color
 #define whitecolor [UIColor whiteColor]

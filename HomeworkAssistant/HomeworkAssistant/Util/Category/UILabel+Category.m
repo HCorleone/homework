@@ -7,8 +7,8 @@
 //
 
 #import "UILabel+Category.h"
-#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
-#define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
 
 @implementation UILabel (Category)
@@ -74,7 +74,7 @@
      4、上下文
      MAXFLOAT 是一个大数,因为高度能高不能低
      */
-    CGSize contentSize = [content boundingRectWithSize:CGSizeMake(SCREENWIDTH - widthSize, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+    CGSize contentSize = [content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - widthSize, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                                         attributes:@{NSFontAttributeName :[UIFont systemFontOfSize:12.0]} context:nil].size;
     //contentSize 去自适应_contentLabel
     CGSize size = [label sizeThatFits:contentSize];

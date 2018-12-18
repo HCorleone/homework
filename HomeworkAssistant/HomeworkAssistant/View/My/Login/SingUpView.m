@@ -19,9 +19,9 @@
         [_phoneField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
         [self addSubview:_phoneField];
         [_phoneField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(0.69 * screenWidth, 0.15 * 0.69 * screenWidth));
+            make.size.mas_equalTo(CGSizeMake(0.69 * SCREEN_WIDTH, 0.15 * 0.69 * SCREEN_WIDTH));
             make.centerX.mas_equalTo(self);
-            make.top.mas_equalTo(self).offset(0.09 * screenWidth);
+            make.top.mas_equalTo(self).offset(0.09 * SCREEN_WIDTH);
         }];
         
         _pwdField = [[LoginTextField alloc]init:@"请输入密码"];
@@ -29,8 +29,8 @@
         _pwdField.secureTextEntry = YES;
         [self addSubview:_pwdField];
         [_pwdField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.phoneField.mas_bottom).with.offset(0.04 * screenWidth);
-            make.size.mas_equalTo(CGSizeMake(0.69 * screenWidth, 0.15 * 0.69 * screenWidth));
+            make.top.mas_equalTo(self.phoneField.mas_bottom).with.offset(0.04 * SCREEN_WIDTH);
+            make.size.mas_equalTo(CGSizeMake(0.69 * SCREEN_WIDTH, 0.15 * 0.69 * SCREEN_WIDTH));
             make.centerX.mas_equalTo(self);
         }];
         
@@ -38,8 +38,8 @@
         [_nameField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
         [self addSubview:_nameField];
         [_nameField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.pwdField.mas_bottom).with.offset(0.04 * screenWidth);
-            make.size.mas_equalTo(CGSizeMake(0.69 * screenWidth, 0.15 * 0.69 * screenWidth));
+            make.top.mas_equalTo(self.pwdField.mas_bottom).with.offset(0.04 * SCREEN_WIDTH);
+            make.size.mas_equalTo(CGSizeMake(0.69 * SCREEN_WIDTH, 0.15 * 0.69 * SCREEN_WIDTH));
             make.centerX.mas_equalTo(self);
         }];
         
@@ -47,14 +47,14 @@
         [_codeField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
         [self addSubview:_codeField];
         [_codeField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.nameField.mas_bottom).with.offset(0.04 * screenWidth);
-            make.size.mas_equalTo(CGSizeMake(0.38 * screenWidth, 0.26 * 0.38 * screenWidth));
+            make.top.mas_equalTo(self.nameField.mas_bottom).with.offset(0.04 * SCREEN_WIDTH);
+            make.size.mas_equalTo(CGSizeMake(0.38 * SCREEN_WIDTH, 0.26 * 0.38 * SCREEN_WIDTH));
             make.left.mas_equalTo(self.nameField);
         }];
         
         //渐变色
         CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-        gradientLayer.frame = CGRectMake(0, 0, 0.29 * screenWidth, 0.29 * screenWidth * 0.365);
+        gradientLayer.frame = CGRectMake(0, 0, 0.29 * SCREEN_WIDTH, 0.29 * SCREEN_WIDTH * 0.365);
         [gradientLayer setColors:[NSArray arrayWithObjects:
                                   (id)[UIColor colorWithHexString:@"#6FDDFF"].CGColor,
                                   (id)[UIColor colorWithHexString:@"#33C2FF"].CGColor,
@@ -71,7 +71,7 @@
         
         //阴影
         CALayer *shadowLayer = [[CALayer alloc] init];
-        shadowLayer.frame = CGRectMake(0, 0, 0.29 * screenWidth, 0.29 * screenWidth * 0.365);
+        shadowLayer.frame = CGRectMake(0, 0, 0.29 * SCREEN_WIDTH, 0.29 * SCREEN_WIDTH * 0.365);
         shadowLayer.shadowOffset = CGSizeMake(0, 1);
         shadowLayer.backgroundColor = [UIColor colorWithHexString:@"#2983C8"].CGColor;
         shadowLayer.shadowColor = [UIColor colorWithHexString:@"#2983C8"].CGColor;
@@ -88,7 +88,7 @@
         [self addSubview:_getBtn];
         [_getBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.codeField);
-            make.size.mas_equalTo(CGSizeMake(0.29 * screenWidth, 0.29 * screenWidth * 0.365));
+            make.size.mas_equalTo(CGSizeMake(0.29 * SCREEN_WIDTH, 0.29 * SCREEN_WIDTH * 0.365));
             make.right.mas_equalTo(self.nameField.mas_right);
         }];
         [_getBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
@@ -97,7 +97,7 @@
         
         //渐变色
         CAGradientLayer *gradientLayer2 = [CAGradientLayer layer];
-//        gradientLayer.frame = CGRectMake(0, 0, 0.29 * screenWidth, 0.29 * screenWidth * 0.365);
+//        gradientLayer.frame = CGRectMake(0, 0, 0.29 * SCREEN_WIDTH, 0.29 * SCREEN_WIDTH * 0.365);
         [gradientLayer2 setColors:[NSArray arrayWithObjects:
                                   (id)[UIColor colorWithHexString:@"#6FDDFF"].CGColor,
                                   (id)[UIColor colorWithHexString:@"#33C2FF"].CGColor,
@@ -113,7 +113,7 @@
         
         //阴影
         CALayer *shadowLayer2 = [[CALayer alloc] init];
-//        shadowLayer.frame = CGRectMake(0, 0, 0.29 * screenWidth, 0.29 * screenWidth * 0.365);
+//        shadowLayer.frame = CGRectMake(0, 0, 0.29 * SCREEN_WIDTH, 0.29 * SCREEN_WIDTH * 0.365);
         shadowLayer2.shadowOffset = CGSizeMake(0, 1);
         shadowLayer2.backgroundColor = [UIColor colorWithHexString:@"#2983C8"].CGColor;
         shadowLayer2.shadowColor = [UIColor colorWithHexString:@"#2983C8"].CGColor;
@@ -125,14 +125,14 @@
         _registered.tag = 1002;
         _registered.layer.cornerRadius = 8;
         
-        shadowLayer2.frame = CGRectMake(0, 0, 0.69 * screenWidth, 0.69 * screenWidth * 0.15);
-        gradientLayer2.frame = CGRectMake(0, 0, 0.69 * screenWidth, 0.69 * screenWidth * 0.15);
+        shadowLayer2.frame = CGRectMake(0, 0, 0.69 * SCREEN_WIDTH, 0.69 * SCREEN_WIDTH * 0.15);
+        gradientLayer2.frame = CGRectMake(0, 0, 0.69 * SCREEN_WIDTH, 0.69 * SCREEN_WIDTH * 0.15);
         [_registered.layer addSublayer:shadowLayer2];
         [_registered.layer addSublayer:gradientLayer2];
         [self addSubview:_registered];
         [_registered mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(self).offset(-0.09 * screenWidth);
-            make.size.mas_equalTo(CGSizeMake(0.69 * screenWidth, 0.69 * screenWidth * 0.15));
+            make.bottom.mas_equalTo(self).offset(-0.09 * SCREEN_WIDTH);
+            make.size.mas_equalTo(CGSizeMake(0.69 * SCREEN_WIDTH, 0.69 * SCREEN_WIDTH * 0.15));
             make.centerX.mas_equalTo(self);
         }];
         [_registered setTitle:@"注册" forState:UIControlStateNormal];

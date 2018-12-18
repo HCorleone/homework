@@ -67,7 +67,7 @@ static NSString *page = @"1";
     }];
     
     //搜索框
-    FLJSearchBar *searchBar = [[FLJSearchBar alloc] initWithFrame:CGRectMake(0, 0, screenWidth * 0.787, 34)];
+    FLJSearchBar *searchBar = [[FLJSearchBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.787, 34)];
     searchBar.layer.borderColor = [[UIColor clearColor] CGColor];
     searchBar.placeHolderStringFont = [UIFont systemFontOfSize:14.0];
     searchBar.cornerRadius = 4;
@@ -151,7 +151,7 @@ static NSString *page = @"1";
 
 - (void)setupViewWithList:(NSMutableArray *)array {
     
-    RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 108 + TOP_OFFSET, screenWidth,screenHeight - 108 - TOP_OFFSET) style:UITableViewStylePlain withArray:array];
+    RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 108 + TOP_OFFSET, SCREEN_WIDTH,SCREEN_HEIGHT - 108 - TOP_OFFSET) style:UITableViewStylePlain withArray:array];
     [self.view addSubview:rTableView];
     rTableView.scrollEnabled = YES;
     rTableView.estimatedRowHeight = 0;
@@ -219,7 +219,7 @@ static NSString *page = @"1";
     
     //菜单栏
     YZPullDownMenu *menu = [[YZPullDownMenu alloc] init];
-    menu.frame = CGRectMake(0, 72 + TOP_OFFSET, screenWidth, 36);
+    menu.frame = CGRectMake(0, 72 + TOP_OFFSET, SCREEN_WIDTH, 36);
     [self.view addSubview:menu];
     
     menu.dataSource = self;

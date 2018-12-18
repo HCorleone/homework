@@ -36,7 +36,7 @@
             make.top.mas_equalTo(500);
             make.right.mas_equalTo(-31.5);
             make.height.mas_equalTo(37);
-            make.width.mas_equalTo(screenWidth * 0.693);
+            make.width.mas_equalTo(SCREEN_WIDTH * 0.693);
         }];
         
         //地区

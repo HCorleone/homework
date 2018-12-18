@@ -31,11 +31,11 @@ extern NSString * const YZUpdateMenuTitleNote;
 
 - (void)setupView {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake(screenWidth/3, 30);
+    layout.itemSize = CGSizeMake(SCREEN_WIDTH/3, 30);
     layout.minimumLineSpacing = 29.5;
-    layout.headerReferenceSize = CGSizeMake(screenWidth, 20);
+    layout.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 20);
     
-    UICollectionView *collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) collectionViewLayout:layout];
+    UICollectionView *collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:layout];
     [self.view addSubview:collectView];
     collectView.dataSource = self;
     collectView.delegate = self;
@@ -65,12 +65,12 @@ extern NSString * const YZUpdateMenuTitleNote;
 
 //设置每个item的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(0.245 * screenWidth, 30);
+    return CGSizeMake(0.245 * SCREEN_WIDTH, 30);
 }
 
 //设置每个item水平间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.048 * screenWidth;
+    return 0.048 * SCREEN_WIDTH;
 }
 
 //设置每个item的UIEdgeInsets

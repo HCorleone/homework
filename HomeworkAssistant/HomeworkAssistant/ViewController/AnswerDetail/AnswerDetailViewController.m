@@ -78,7 +78,7 @@
     [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.view).offset(-BOT_OFFSET);
-        make.size.mas_equalTo(CGSizeMake(screenWidth/2, 48));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/2, 48));
     }];
     self.shareBtn = shareBtn;
     [self.shareBtn addTarget:self action:@selector(toShare) forControlEvents:UIControlEventTouchUpInside];
@@ -97,12 +97,12 @@
     }
     collectBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
     [collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.view).offset(-0.064 * screenWidth);
+        make.right.mas_equalTo(self.view).offset(-0.064 * SCREEN_WIDTH);
 //        make.bottom.mas_equalTo(self.view).offset(-BOT_OFFSET);
         make.centerY.mas_equalTo(shareBtn);
-        make.size.mas_equalTo(CGSizeMake(0.368 * screenWidth, 0.044 * screenHeight));
+        make.size.mas_equalTo(CGSizeMake(0.368 * SCREEN_WIDTH, 0.044 * SCREEN_HEIGHT));
     }];
-    collectBtn.layer.cornerRadius = 0.044 * screenHeight/2;
+    collectBtn.layer.cornerRadius = 0.044 * SCREEN_HEIGHT/2;
     [collectBtn addTarget:self action:@selector(userLikeOrNot) forControlEvents:UIControlEventTouchUpInside];
     self.collectBtn = collectBtn;
 }
@@ -228,12 +228,12 @@
 
 - (void)setupBrowser {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-    layout.itemSize = CGSizeMake(screenWidth, screenHeight - 48 - 72);
+    layout.itemSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - 48 - 72);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumLineSpacing = 0;
     
-//    UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 72, screenWidth, screenHeight - 48 - 72 - BOT_OFFSET) collectionViewLayout:layout];
-    UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) collectionViewLayout:layout];
+//    UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 72, SCREEN_WIDTH, SCREEN_HEIGHT - 48 - 72 - BOT_OFFSET) collectionViewLayout:layout];
+    UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:layout];
     [self.view addSubview:collectionView];
 //    [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.right.mas_equalTo(self.view);
@@ -252,7 +252,7 @@
     self.collectionView = collectionView;
     
     NSInteger flag = [self.answerModel.idx1 integerValue];
-    self.collectionView.contentOffset = CGPointMake((flag - 1) * screenWidth, 0);
+    self.collectionView.contentOffset = CGPointMake((flag - 1) * SCREEN_WIDTH, 0);
     
 }
 
@@ -278,7 +278,7 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    NSInteger page = self.collectionView.contentOffset.x/screenWidth;
+    NSInteger page = self.collectionView.contentOffset.x/SCREEN_WIDTH;
     page = page + 1;
     NSString *temp = [[NSNumber numberWithInteger:page]stringValue];
     self.page.text = [[temp stringByAppendingString:@"/"] stringByAppendingString:self.answerModel.answerCount];

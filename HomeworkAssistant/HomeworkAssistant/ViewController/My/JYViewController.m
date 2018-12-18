@@ -41,8 +41,8 @@
     self.loginView.layer.shadowOpacity = 0.7;
     [self.loginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.navView.mas_bottom).with.offset(0.05 * screenWidth);
-        make.size.mas_equalTo(CGSizeMake(0.86 * screenWidth, 0.7 * 0.86 * screenWidth));
+        make.top.mas_equalTo(self.navView.mas_bottom).with.offset(0.05 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.86 * SCREEN_WIDTH, 0.7 * 0.86 * SCREEN_WIDTH));
     }];
     //建议文本
     LTTextView  *textView = [[LTTextView alloc] init];
@@ -51,8 +51,8 @@
     self.contentTextView = textView;
     [textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.navView.mas_bottom).with.offset(0.05 * screenWidth);
-        make.size.mas_equalTo(CGSizeMake(0.86 * screenWidth, 0.7 * 0.86 * screenWidth));
+        make.top.mas_equalTo(self.navView.mas_bottom).with.offset(0.05 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.86 * SCREEN_WIDTH, 0.7 * 0.86 * SCREEN_WIDTH));
     }];
     
     //联系方式框背景
@@ -65,8 +65,8 @@
     self.loginView.layer.shadowOpacity = 0.7;
     [self.loginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.contentTextView.mas_bottom).with.offset(0.03 * screenWidth);
-        make.size.mas_equalTo(CGSizeMake(0.86 * screenWidth, 0.86 * screenWidth * 0.14));
+        make.top.mas_equalTo(self.contentTextView.mas_bottom).with.offset(0.03 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.86 * SCREEN_WIDTH, 0.86 * SCREEN_WIDTH * 0.14));
     }];
     //联系方式文本
     UITextField *lianxiField = [[UITextField alloc]init];
@@ -77,16 +77,16 @@
     [self.view addSubview:lianxiField];
     self.lianxiField = lianxiField;
     [lianxiField mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(self.loginView).offset(0.04 * screenWidth);
+//        make.left.mas_equalTo(self.loginView).offset(0.04 * SCREEN_WIDTH);
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.contentTextView.mas_bottom).with.offset(0.03 * screenWidth);
-        make.size.mas_equalTo(CGSizeMake(0.86 * screenWidth, 0.86 * screenWidth * 0.14));
+        make.top.mas_equalTo(self.contentTextView.mas_bottom).with.offset(0.03 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.86 * SCREEN_WIDTH, 0.86 * SCREEN_WIDTH * 0.14));
     }];
     
     
     //提交按钮
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = CGRectMake(0, 0, 0.83 * screenWidth, 0.83 * screenWidth * 0.12);
+    gradientLayer.frame = CGRectMake(0, 0, 0.83 * SCREEN_WIDTH, 0.83 * SCREEN_WIDTH * 0.12);
     [gradientLayer setColors:[NSArray arrayWithObjects:
                               (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
                               (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
@@ -99,15 +99,15 @@
     gradientLayer.locations = @[@0,@1];
     
     UIButton *summitBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    summitBtn.layer.cornerRadius = 0.83 * screenWidth * 0.12/2;
+    summitBtn.layer.cornerRadius = 0.83 * SCREEN_WIDTH * 0.12/2;
     summitBtn.layer.masksToBounds = YES;
     [summitBtn.layer addSublayer:gradientLayer];
     [self.view addSubview:summitBtn];
     [summitBtn addTarget:self action:@selector(toSend:) forControlEvents:UIControlEventTouchUpInside];
     [summitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.lianxiField.mas_bottom).with.offset(0.1 * screenWidth);
-        make.size.mas_equalTo(CGSizeMake(0.83 * screenWidth, 0.83 * screenWidth * 0.12));
+        make.top.mas_equalTo(self.lianxiField.mas_bottom).with.offset(0.1 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.83 * SCREEN_WIDTH, 0.83 * SCREEN_WIDTH * 0.12));
     }];
     summitBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
     [summitBtn setTitle:@"提交建议" forState:UIControlStateNormal];

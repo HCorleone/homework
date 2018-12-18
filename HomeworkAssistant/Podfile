@@ -19,4 +19,5 @@ target 'HomeworkAssistant' do
 	pod 'WechatOpenSDK'
 	pod 'SGQRCode'
 	pod 'MJRefresh'
+	pod 'PYSearch'
 end

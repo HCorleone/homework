@@ -50,10 +50,10 @@
     [_collectionView registerClass:[SubmitCollectionViewCell class] forCellWithReuseIdentifier:@"itemCell"];
     [self.bookView addSubview:_collectionView];
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(screenWidth * 0.106 + 1);
+        make.top.mas_equalTo(SCREEN_WIDTH * 0.106 + 1);
         make.centerX.mas_equalTo(self.bookView.mas_centerX);
-        make.width.mas_equalTo(screenWidth * 0.697);
-        make.height.mas_equalTo(screenWidth * 0.648);
+        make.width.mas_equalTo(SCREEN_WIDTH * 0.697);
+        make.height.mas_equalTo(SCREEN_WIDTH * 0.648);
     }];
 }
 
@@ -72,10 +72,10 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:btn];
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(screenHeight * 0.211);
+        make.top.mas_equalTo(SCREEN_HEIGHT * 0.211);
         make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.width.mas_equalTo(screenWidth * 0.827);
-        make.height.mas_equalTo(screenHeight * 0.535);
+        make.width.mas_equalTo(SCREEN_WIDTH * 0.827);
+        make.height.mas_equalTo(SCREEN_HEIGHT * 0.535);
     }];
     
     //界面显示
@@ -114,10 +114,10 @@
     };
     [self.view addSubview:_bookView];
     [_bookView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(screenHeight * 0.211);
+        make.top.mas_equalTo(SCREEN_HEIGHT * 0.211);
         make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.width.mas_equalTo(screenWidth * 0.827);
-        make.height.mas_equalTo(screenWidth * 0.827 / 310 * 357);
+        make.width.mas_equalTo(SCREEN_WIDTH * 0.827);
+        make.height.mas_equalTo(SCREEN_WIDTH * 0.827 / 310 * 357);
     }];
     
     
@@ -196,7 +196,7 @@
 //定义每个UICollectionViewCell 横向的间距(上下)
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return screenWidth * 0.085;
+    return SCREEN_WIDTH * 0.085;
 }
 
 

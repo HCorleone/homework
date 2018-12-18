@@ -77,9 +77,9 @@
     sloginView.layer.cornerRadius = 10;
     [sloginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.width.mas_equalTo(0.832 * screenWidth);
-        make.top.mas_equalTo(self.view).offset(0.1 * screenHeight + TOP_OFFSET);
-        make.height.mas_equalTo(0.6 * 0.832 * screenWidth);
+        make.width.mas_equalTo(0.832 * SCREEN_WIDTH);
+        make.top.mas_equalTo(self.view).offset(0.1 * SCREEN_HEIGHT + TOP_OFFSET);
+        make.height.mas_equalTo(0.6 * 0.832 * SCREEN_WIDTH);
     }];
     self.sloginView = sloginView;
     
@@ -88,11 +88,11 @@
     [sloginView addSubview:headImg];
     [headImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(sloginView).offset(20);
-        make.top.mas_equalTo(sloginView).offset(0.053 * screenWidth);
-        make.size.mas_equalTo(CGSizeMake(0.187 * screenWidth, 0.187 * screenWidth));
+        make.top.mas_equalTo(sloginView).offset(0.053 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.187 * SCREEN_WIDTH, 0.187 * SCREEN_WIDTH));
     }];
     headImg.layer.masksToBounds = YES;
-    headImg.layer.cornerRadius = 0.187 * screenWidth/2;
+    headImg.layer.cornerRadius = 0.187 * SCREEN_WIDTH/2;
     
     //用户名
     UILabel *userName = [[UILabel alloc]init];
@@ -102,8 +102,8 @@
     userName.numberOfLines = 2;
     [userName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(sloginView).offset(0.09 * screenWidth);
-        make.width.mas_equalTo(0.288 * screenWidth);
+        make.top.mas_equalTo(sloginView).offset(0.09 * SCREEN_WIDTH);
+        make.width.mas_equalTo(0.288 * SCREEN_WIDTH);
     }];
     
     //年级
@@ -114,7 +114,7 @@
     _gradeLabel.font = [UIFont systemFontOfSize:14];
     [_gradeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(userName);
-        make.top.mas_equalTo(userName.mas_bottom).with.offset(0.02 * screenWidth);
+        make.top.mas_equalTo(userName.mas_bottom).with.offset(0.02 * SCREEN_WIDTH);
     }];
     
     //编辑个人信息
@@ -145,7 +145,7 @@
     //上传按钮
     
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = CGRectMake(0, 0, 0.725 * screenWidth, 0.13 * 0.725 * screenWidth);
+    gradientLayer.frame = CGRectMake(0, 0, 0.725 * SCREEN_WIDTH, 0.13 * 0.725 * SCREEN_WIDTH);
     [gradientLayer setColors:[NSArray arrayWithObjects:
                               (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
                               (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
@@ -161,12 +161,12 @@
     [sloginView addSubview:uploadBtn];
     [uploadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(sloginView);
-        make.size.mas_equalTo(CGSizeMake(0.725 * screenWidth, 0.13 * 0.725 * screenWidth));
-        make.bottom.mas_equalTo(sloginView).offset(-0.07 * screenWidth);
+        make.size.mas_equalTo(CGSizeMake(0.725 * SCREEN_WIDTH, 0.13 * 0.725 * SCREEN_WIDTH));
+        make.bottom.mas_equalTo(sloginView).offset(-0.07 * SCREEN_WIDTH);
     }];
     uploadBtn.layer.masksToBounds = YES;
     [uploadBtn.layer addSublayer:gradientLayer];
-    uploadBtn.layer.cornerRadius = 0.13 * 0.725 * screenWidth/2;
+    uploadBtn.layer.cornerRadius = 0.13 * 0.725 * SCREEN_WIDTH/2;
     [uploadBtn setTitleColor:whitecolor forState:UIControlStateNormal];
     [uploadBtn setTitle:@"上传答案" forState:UIControlStateNormal];
     [uploadBtn addTarget:self action:@selector(toUpLoad) forControlEvents:UIControlEventTouchUpInside];
@@ -193,7 +193,7 @@
 //编辑界面
 -(void)getEditorView {
     
-    _editor = [[EditorNameView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    _editor = [[EditorNameView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     _editor.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
     __weak typeof(self) weakSelf = self;
     _editor.clickBlock = ^(UIButton * _Nonnull btn) {
@@ -293,9 +293,9 @@
     
     [self.loginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.width.mas_equalTo(0.832 * screenWidth);
-        make.top.mas_equalTo(self.view).offset(0.1 * screenHeight + TOP_OFFSET);
-        make.height.mas_equalTo(0.6 * 0.832 * screenWidth);
+        make.width.mas_equalTo(0.832 * SCREEN_WIDTH);
+        make.top.mas_equalTo(self.view).offset(0.1 * SCREEN_HEIGHT + TOP_OFFSET);
+        make.height.mas_equalTo(0.6 * 0.832 * SCREEN_WIDTH);
     }];
     
 //    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.loginView.bounds];
@@ -313,14 +313,14 @@
     [self.loginView addSubview:headImg];
     [headImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.loginView);
-        make.top.mas_equalTo(self.loginView).offset(0.076 * screenWidth);
-        make.size.mas_equalTo(CGSizeMake(0.187 * screenWidth, 0.187 * screenWidth));
+        make.top.mas_equalTo(self.loginView).offset(0.076 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.187 * SCREEN_WIDTH, 0.187 * SCREEN_WIDTH));
     }];
     
     //登陆注册按钮
     
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = CGRectMake(0, 0, 0.405 * screenWidth, 0.236 * 0.405 * screenWidth);
+    gradientLayer.frame = CGRectMake(0, 0, 0.405 * SCREEN_WIDTH, 0.236 * 0.405 * SCREEN_WIDTH);
     [gradientLayer setColors:[NSArray arrayWithObjects:
                               (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
                               (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
@@ -335,15 +335,15 @@
     UIButton *logoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [logoBtn.layer addSublayer:gradientLayer];
     logoBtn.layer.masksToBounds = YES;
-    logoBtn.layer.cornerRadius = 0.236 * 0.405 * screenWidth/2;
+    logoBtn.layer.cornerRadius = 0.236 * 0.405 * SCREEN_WIDTH/2;
     [logoBtn setTitle:@"登陆/注册" forState:UIControlStateNormal];
     logoBtn.titleLabel.textColor = whitecolor;
     logoBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
     [self.loginView addSubview:logoBtn];
     [logoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.loginView);
-        make.centerY.mas_equalTo(self.loginView).offset(0.054 * screenHeight/2 + 20);
-        make.size.mas_equalTo(CGSizeMake(0.405 * screenWidth, 0.236 * 0.405 * screenWidth));
+        make.centerY.mas_equalTo(self.loginView).offset(0.054 * SCREEN_HEIGHT/2 + 20);
+        make.size.mas_equalTo(CGSizeMake(0.405 * SCREEN_WIDTH, 0.236 * 0.405 * SCREEN_WIDTH));
     }];
     [logoBtn addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -362,7 +362,7 @@
         make.left.mas_equalTo(self.view).offset(41.5);
         make.right.mas_equalTo(self.view).offset(-41.5);
         make.top.mas_equalTo(self.loginView.mas_bottom).with.offset(36);
-        make.height.mas_equalTo( 4 * 0.08 * screenHeight);
+        make.height.mas_equalTo( 4 * 0.08 * SCREEN_HEIGHT);
     }];
 }
 
@@ -446,7 +446,7 @@
 
 #pragma mark - 静态tableView Delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 0.08 * screenHeight;
+    return 0.08 * SCREEN_HEIGHT;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

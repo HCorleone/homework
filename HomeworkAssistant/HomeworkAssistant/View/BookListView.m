@@ -17,9 +17,9 @@
         _lingView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
         [self addSubview:_lingView];
         [_lingView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(screenWidth * 0.106);
+            make.top.mas_equalTo(SCREEN_WIDTH * 0.106);
             make.centerX.mas_equalTo(self.mas_centerX);
-            make.width.mas_equalTo(screenWidth * 0.725);
+            make.width.mas_equalTo(SCREEN_WIDTH * 0.725);
             make.height.mas_equalTo(1);
         }];
         
@@ -27,15 +27,15 @@
         _lingView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
         [self addSubview:_lingView];
         [_lingView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(-screenWidth * 0.194);
+            make.bottom.mas_equalTo(-SCREEN_WIDTH * 0.194);
             make.centerX.mas_equalTo(self.mas_centerX);
-            make.width.mas_equalTo(screenWidth * 0.725);
+            make.width.mas_equalTo(SCREEN_WIDTH * 0.725);
             make.height.mas_equalTo(1);
         }];
         
         
         CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-        gradientLayer.frame = CGRectMake(0, 0, 0.379 * screenWidth, 0.379 * 0.218 * screenWidth);
+        gradientLayer.frame = CGRectMake(0, 0, 0.379 * SCREEN_WIDTH, 0.379 * 0.218 * SCREEN_WIDTH);
         [gradientLayer setColors:[NSArray arrayWithObjects:
                                   (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
                                   (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
@@ -59,8 +59,8 @@
         [_insertBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(-30);
             make.centerX.mas_equalTo(self.mas_centerX);
-            make.width.mas_equalTo(0.379 * screenWidth);
-            make.height.mas_equalTo(0.379 * 0.218 * screenWidth);
+            make.width.mas_equalTo(0.379 * SCREEN_WIDTH);
+            make.height.mas_equalTo(0.379 * 0.218 * SCREEN_WIDTH);
         }];
         
         

@@ -12,7 +12,7 @@
 #import "ButtonLinks.h"
 #import "FLJSearchBar.h"
 
-@interface SearchViewController ()<UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface SearchViewController ()<PYSearchViewControllerDelegate>
 
 @property (nonatomic, strong) UIView *navView;
 @property (nonatomic, strong) UIView *hotWordsView;
@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UITableView *historyTableView;
 @property (nonatomic, strong) NSMutableArray *hotwordsList;
 @property (nonatomic, strong) NSMutableArray *searchWordsArr;
+@property (nonatomic, strong) PYSearchViewController *searchViewController;
 
 @end
 
@@ -28,9 +29,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = whitecolor;
+    
+    
+//    [self loadHotWords];
+//    [self setupHistory];
+    
+    [self setupSearchView];
     [self setupNav];
-    [self loadHotWords];
-    [self setupHistory];
+}
+
+- (void)setupSearchView {
+    NSArray *hotSeaches = @[@"数学课本", @"全品作业本", @"名校课堂", @"能力培养与测试", @"同步导学案课时练", @"同步测控优化设计", @"优翼学练优", @"基础训练", @"全品学练考", @"同步指导训练", @"同步解析与测评"];
+    // 2. Create searchViewController
+    PYSearchViewController *searchViewController = [PYSearchViewController searchViewControllerWithHotSearches:hotSeaches searchBarPlaceholder:@"搜索"];
+    
+    [self addChildViewController:searchViewController];
+    searchViewController.view.frame = CGRectMake(0, 72 + TOP_OFFSET, SCREEN_WIDTH, SCREEN_HEIGHT - 72 - TOP_OFFSET);
+    [self.view addSubview:searchViewController.view];
+    self.searchViewController = searchViewController;
+    self.searchViewController.delegate = self;
     
     
 }
@@ -71,7 +88,7 @@
     [clearHistory addGestureRecognizer:clearBtn];
     
     //分割线
-    UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(20, 50, screenWidth - 40, 0.5)];
+    UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(20, 50, SCREEN_WIDTH - 40, 0.5)];
     [line setBackgroundColor:[UIColor colorWithHexString:@"#cccccc"]];
     line.layer.opacity = 0.3;
     [historyView addSubview:line];
@@ -132,7 +149,7 @@
     [hotWordsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.navView.mas_bottom).with.offset(20);
         make.centerX.mas_equalTo(self.view);
-        make.size.mas_equalTo(CGSizeMake(screenWidth, 120));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 120));
     }];
     self.hotWordsView = hotWordsView;
     
@@ -146,7 +163,7 @@
             hotWordsBtn.titleLabel.font = [UIFont systemFontOfSize:14];
             //设置下划线
             [hotWordsBtn setLinkColor:UIColorFromRGB(0x169ED9)];
-            hotWordsBtn.frame = CGRectMake(j * screenWidth/3, i * 40, screenWidth/3, 40);
+            hotWordsBtn.frame = CGRectMake(j * SCREEN_WIDTH/3, i * 40, SCREEN_WIDTH/3, 40);
             [hotWordsBtn addTarget:self action:@selector(toSearch:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
@@ -177,23 +194,27 @@
         make.bottom.mas_equalTo(self.navView).offset(-15);
     }];
     
-    //搜索框
-    FLJSearchBar *searchBar = [[FLJSearchBar alloc] initWithFrame:CGRectMake(0, 0, screenWidth * 0.787, 34)];
-    searchBar.layer.borderColor = [[UIColor clearColor] CGColor];
-    searchBar.placeHolderStringFont = [UIFont systemFontOfSize:14.0];
-    searchBar.cornerRadius = 4;
-    searchBar.tintColor = ClickColor;//光标颜色
-    UIImage* searchBarBg = [self GetImageWithColor:[UIColor clearColor] andHeight:32.0f];
-    [searchBar setBackgroundImage:searchBarBg];
-    searchBar.placeholder = @"搜书名找答案";
-    [self.navView addSubview:searchBar];
-    [searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.navView).with.offset(48);
-        make.centerY.mas_equalTo(backBtn);
-        make.right.mas_equalTo(self.navView).with.offset(-68);
-    }];
-    self.searchBar = searchBar;
-    self.searchBar.delegate = self;
+//    //搜索框
+//    FLJSearchBar *searchBar = [[FLJSearchBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.787, 34)];
+//    searchBar.layer.borderColor = [[UIColor clearColor] CGColor];
+//    searchBar.placeHolderStringFont = [UIFont systemFontOfSize:14.0];
+//    searchBar.cornerRadius = 4;
+//    searchBar.tintColor = ClickColor;//光标颜色
+//    UIImage* searchBarBg = [self GetImageWithColor:[UIColor clearColor] andHeight:32.0f];
+//    [searchBar setBackgroundImage:searchBarBg];
+//    searchBar.placeholder = @"搜书名找答案";
+//    [self.navView addSubview:searchBar];
+//    [searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(self.navView).with.offset(48);
+//        make.centerY.mas_equalTo(backBtn);
+//        make.right.mas_equalTo(self.navView).with.offset(-68);
+//    }];
+//    self.searchBar = searchBar;
+//    self.searchBar.delegate = self;
+    
+    UISearchBar *testSearchBar = self.searchViewController.searchBar;
+    testSearchBar.frame = CGRectMake(SCREEN_WIDTH/2 - 120, 50, 240, 30);
+    [self.navView addSubview:testSearchBar];
     
     //搜索按钮
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -317,4 +338,8 @@
     [self.view endEditing:YES];
 }
 
+#pragma mark - PYSearchViewControllerDelegate
+- (void)searchViewController:(PYSearchViewController *)searchViewController didSearchWithSearchBar: (UISearchBar *)searchBar searchText:(NSString *)searchText {
+    NSLog(@"test:%@",searchText);
+}
 @end

@@ -24,5 +24,6 @@
 #import "TextCheckTool.h"
 #import "CommonAlterView.h"
 #import "CommonToolClass.h"
+#import "PYSearch.h"
 
 #endif /* HomeworkAssistant_pch */
