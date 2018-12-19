@@ -32,12 +32,10 @@
         
         self.saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.saveBtn.layer.borderWidth = 0.5;
-        self.saveBtn.layer.cornerRadius = 2;
-        self.saveBtn.layer.borderColor = maincolor.CGColor;
+        self.saveBtn.layer.cornerRadius = 3;
+        self.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#1698D9"].CGColor;
         self.saveBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
         [self.saveBtn setTitle:@"收藏" forState:UIControlStateNormal];
-        
-        
         [self addSubview:self.saveBtn];
         [self.saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self).offset(-20);
@@ -127,8 +125,6 @@
     self.uploaderName.text = model.uploaderName;
     self.bookID = model.answerID;
     
-    
-   
 }
 
 
@@ -136,16 +132,16 @@
 - (void)test {
     if (self.isSelected) {
         [self userDisLike];
-        [self.saveBtn setBackgroundColor:whitecolor];
-        [self.saveBtn setTitleColor:maincolor forState:UIControlStateNormal];
+        self.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#1698D9"].CGColor;
+        [self.saveBtn setTitleColor:[UIColor colorWithHexString:@"#1698D9"] forState:UIControlStateNormal];
         self.isSelected = NO;
         
     }
     else {
         if ([TTUserManager sharedInstance].isLogin) {
             [self userLike];
-            [self.saveBtn setBackgroundColor:maincolor];
-            [self.saveBtn setTitleColor:whitecolor forState:UIControlStateNormal];
+            self.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#C4C8CC"].CGColor;
+            [self.saveBtn setTitleColor:[UIColor colorWithHexString:@"#C4C8CC"] forState:UIControlStateNormal];
             self.isSelected = YES;
             
         }

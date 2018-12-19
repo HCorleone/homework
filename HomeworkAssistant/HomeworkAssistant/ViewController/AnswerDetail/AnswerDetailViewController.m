@@ -59,7 +59,7 @@
     UILabel *title = [[UILabel alloc]init];
     [title setTextColor: [UIColor whiteColor]];
     title.text = [[self.answerModel.idx1 stringByAppendingString:@"/"] stringByAppendingString:self.answerModel.answerCount];
-    title.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
+    title.font = [UIFont systemFontOfSize:16];
     [self.navView addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.navView).offset(-20);
@@ -74,7 +74,7 @@
     [shareBtn setBackgroundColor:whitecolor];
     [shareBtn setTitle:@"分享给同学" forState:UIControlStateNormal];
     [shareBtn setTitleColor:maincolor forState:UIControlStateNormal];
-    shareBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
+    shareBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.view).offset(-BOT_OFFSET);
@@ -95,7 +95,7 @@
         [collectBtn setTitle:@"已收藏至书单" forState:UIControlStateNormal];
         [collectBtn setTitleColor:[UIColor colorWithHexString:@"#D5D5D5"] forState:UIControlStateNormal];
     }
-    collectBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
+    collectBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.view).offset(-0.064 * SCREEN_WIDTH);
 //        make.bottom.mas_equalTo(self.view).offset(-BOT_OFFSET);

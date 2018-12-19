@@ -35,7 +35,7 @@ extern NSString * const YZUpdateMenuTitleNote;
     layout.minimumLineSpacing = 29.5;
     layout.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 20);
     
-    UICollectionView *collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:layout];
+    UICollectionView *collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:layout];
     [self.view addSubview:collectView];
     collectView.dataSource = self;
     collectView.delegate = self;
@@ -98,10 +98,16 @@ extern NSString * const YZUpdateMenuTitleNote;
     
 }
 
+//headerheight
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    
+    return CGSizeMake(SCREEN_WIDTH, 40);
+    
+}
+
 //header
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     CollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerview" forIndexPath:indexPath];
-    
     switch (indexPath.section) {
         case 0:
             headerView.headerTitle.text = @"全部";
@@ -125,7 +131,7 @@ extern NSString * const YZUpdateMenuTitleNote;
 
 //设置每个item的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(0.245 * SCREEN_WIDTH, 30);
+    return CGSizeMake(0.245 * SCREEN_WIDTH, 0.27 * 0.245 * SCREEN_WIDTH);
 }
 
 //设置每个item水平间距
@@ -133,9 +139,14 @@ extern NSString * const YZUpdateMenuTitleNote;
     return 0.048 * SCREEN_WIDTH;
 }
 
+//设置每个item垂直间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 16;
+}
+
 //设置每个item的UIEdgeInsets
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(20, 20, 20, 20);
+    return UIEdgeInsetsMake(20, 20, 1, 20);
 }
 
 //点击item方法
@@ -166,7 +177,7 @@ extern NSString * const YZUpdateMenuTitleNote;
         ClassificationCell *oldCell = (ClassificationCell *)[collectionView cellForItemAtIndexPath:_oldIndexPath];
         oldCell.backgroundColor  = [UIColor whiteColor];
         oldCell.layer.borderColor = UIColorFromRGB(0xD5D5D5).CGColor;
-        oldCell.title.textColor = UIColorFromRGB(0x353B3C);
+        oldCell.title.textColor = [UIColor colorWithHexString:@"#7A7D80"];
     }
     _oldIndexPath = indexPath;
 }

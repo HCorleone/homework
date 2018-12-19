@@ -51,7 +51,7 @@
     //标题文字
     UILabel *title = [[UILabel alloc] init];
     title.text = @"使用作业答案助手扫二维码就可以轻松同步书单啦";
-    title.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
+    title.font = [UIFont systemFontOfSize:16];
     title.textAlignment = NSTextAlignmentCenter;
     title.numberOfLines = 0;
     title.lineBreakMode = UILineBreakModeCharacterWrap;

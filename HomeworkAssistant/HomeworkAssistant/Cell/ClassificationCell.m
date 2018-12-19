@@ -22,8 +22,8 @@
         
         _title = [[UILabel alloc]init];
         [self addSubview:_title];
-        _title.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:14];
-        _title.textColor = UIColorFromRGB(0x353B3C);
+        _title.font = [UIFont systemFontOfSize:14];
+        _title.textColor = [UIColor colorWithHexString:@"#7A7D80"];
         [_title mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.mas_equalTo(self);
         }];

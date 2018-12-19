@@ -30,7 +30,7 @@
         [self addSubview:self.botLabel];
 //        self.botLabel.text = [self.idx stringByAppendingString:@"/"];
         self.botLabel.textColor = [UIColor colorWithHexString:@"#353B3C"];
-        self.botLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:12];
+        self.botLabel.font = [UIFont systemFontOfSize:12];
         [self.botLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self);
             make.top.mas_equalTo(self.topImage.mas_bottom).with.offset(6);

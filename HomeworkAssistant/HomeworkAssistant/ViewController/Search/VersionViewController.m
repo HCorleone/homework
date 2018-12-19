@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = whitecolor;
-    _titles = @[@"上册",@"下册",@"全册",@"全部版本",@"人教版",@"北师大版",@"苏教版",@"翼教版",@"外研版",@"沪科版",@"湘教版",@"青岛版",@"鲁教版",@"浙教版",@"教科版",@"华师大版",@"译林版",@"苏科版",@"语文版"];
+    _titles = @[@"上册",@"下册",@"全册",@"全部版本",@"人教版",@"北师大版",@"苏教版",@"翼教版",@"外研版",@"沪科版",@"湘教版",@"青岛版",@"鲁教版",@"浙教版",@"教科版",@"华师大版",@"译林版",@"苏科版",@"语文版",@"西师大版",@"牛津版",@"沪粤版",@"北京课改版",@"鲁科版",@"沪教版",@"岳麓版",@"人民版",@"粤教版",@"河大版",@"长春版",@"语文S版",@"冀少版",@"商务星球版",@"济南版",@"鄂教版",@"江苏版",@"中华书局版",@"中图版",@"科粤版",@"川教版",@"晋教版",@"粤人民版",@"冀人民版",@"陕旅版",@"语文A版",@"仁爱版",@"苏人版",@"其他"];
     [self setupView];
 }
 
@@ -57,7 +57,7 @@
             return 3;
             break;
         case 1:
-            return 16;
+            return 45;
             break;
 
         default:
@@ -84,10 +84,17 @@
     
 }
 
+
+//headerheight
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    
+    return CGSizeMake(SCREEN_WIDTH, 40);
+    
+}
+
 //header
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     CollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerview" forIndexPath:indexPath];
-    
     switch (indexPath.section) {
         case 0:
             headerView.headerTitle.text = @"上下册";
@@ -104,7 +111,7 @@
 
 //设置每个item的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(0.245 * SCREEN_WIDTH, 28);
+    return CGSizeMake(0.245 * SCREEN_WIDTH, 0.27 * 0.245 * SCREEN_WIDTH);
 }
 
 //设置每个item水平间距
@@ -114,12 +121,12 @@
 
 //设置每个item垂直间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 25;
+    return 16;
 }
 
 //设置每个item的UIEdgeInsets
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(20, 20, 20, 20);
+    return UIEdgeInsetsMake(20, 20, 1, 20);
 }
 
 //点击item方法
@@ -158,7 +165,7 @@
         ClassificationCell *oldCell = (ClassificationCell *)[collectionView cellForItemAtIndexPath:_oldIndexPath];
         oldCell.backgroundColor  = [UIColor whiteColor];
         oldCell.layer.borderColor = UIColorFromRGB(0xD5D5D5).CGColor;
-        oldCell.title.textColor = UIColorFromRGB(0x353B3C);
+        oldCell.title.textColor = [UIColor colorWithHexString:@"#7A7D80"];
     }
     _oldIndexPath = indexPath;
 }

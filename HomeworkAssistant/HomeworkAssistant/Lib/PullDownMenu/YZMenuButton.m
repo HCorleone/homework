@@ -20,6 +20,10 @@
         self.titleLabel.x = self.imageView.x;
         
         self.imageView.x = self.titleLabel.maxX + 2;
+        
+        self.imageView.size = CGSizeMake(12, 12);
+        
+        self.imageView.y = self.height/2 - 6;
     }
     
     

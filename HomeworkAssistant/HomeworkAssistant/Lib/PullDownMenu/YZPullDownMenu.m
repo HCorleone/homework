@@ -133,7 +133,7 @@ NSString * const YZUpdateMenuTitleNote = @"YZUpdateMenuTitleNote";
     
     _separateLineColor =  [UIColor colorWithRed:221 / 255.0 green:221 / 255.0 blue:221 / 255.0 alpha:1];
     
-    _coverColor = [UIColor colorWithRed:221 / 255.0 green:221 / 255.0 blue:221 / 255.0 alpha:.7];
+    _coverColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     
     
 
@@ -197,9 +197,10 @@ NSString * const YZUpdateMenuTitleNote = @"YZUpdateMenuTitleNote";
     }
     
     // 设置底部View位置
-    CGFloat bottomH = 1;
+    CGFloat bottomH = 0.5;
     CGFloat bottomY = btnH - bottomH;
     _bottomLine.frame = CGRectMake(0, bottomY, self.bounds.size.width, bottomH);
+    _bottomLine.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.12];
 }
 
 #pragma mark - 即将进入窗口

@@ -63,13 +63,96 @@
     
 }
 
+#pragma mark - 用户登录或注销
+//发出用户注销通知，并改变界面
+- (void)logout {
+    NSLog(@"用户登出，发出通知，并更改myview界面");
+    [TTUserManager sharedInstance].isLogin = NO;
+    [[TTUserManager sharedInstance]clearCurrentUserInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"userLogout" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeView:) name:@"loginSuccess" object:nil];
+    self.sloginView.hidden = YES;
+    self.logoutBtn.hidden = YES;
+    [self.logoutBtn removeFromSuperview];
+    [self.sloginView removeFromSuperview];
+    
+}
+
+//接收登录成功的通知来改变界面
 - (void)changeView:(id)sender {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"loginSuccess" object:nil];
     NSLog(@"接到用户登陆成功通知，更改MyView的界面");
     [self setupSLoginView];
 }
 
+#pragma mark - 顶部登录框
 
+//未登录状态下的框
+- (void)setupLoginView {
+    //登陆框
+    self.loginView = [[UIView alloc]init];
+    [self.view addSubview:self.loginView];
+    self.loginView.backgroundColor = [UIColor whiteColor];
+    
+    [self.loginView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view);
+        make.width.mas_equalTo(0.832 * SCREEN_WIDTH);
+        make.top.mas_equalTo(self.view).offset(0.1 * SCREEN_HEIGHT + TOP_OFFSET);
+        make.height.mas_equalTo(0.6 * 0.832 * SCREEN_WIDTH);
+    }];
+    
+    //    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.loginView.bounds];
+    //    self.loginView.layer.shadowPath = path.CGPath;
+    
+    self.loginView.layer.cornerRadius = 2;
+    self.loginView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.loginView.layer.shadowOffset = CGSizeMake(0, 2);
+    self.loginView.layer.shadowOpacity = 0.1;
+    
+    
+    //logo
+    UIImageView *headImg = [[UIImageView alloc]init];
+    headImg.image = [UIImage imageNamed:@"logo"];
+    [self.loginView addSubview:headImg];
+    [headImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.loginView);
+        make.top.mas_equalTo(self.loginView).offset(0.076 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.187 * SCREEN_WIDTH, 0.187 * SCREEN_WIDTH));
+    }];
+    
+    //登陆注册按钮
+    
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 0, 0.405 * SCREEN_WIDTH, 0.236 * 0.405 * SCREEN_WIDTH);
+    [gradientLayer setColors:[NSArray arrayWithObjects:
+                              (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
+                              nil
+                              ]];
+    
+    
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0, 1);
+    gradientLayer.locations = @[@0,@1];
+    
+    UIButton *logoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [logoBtn.layer addSublayer:gradientLayer];
+    logoBtn.layer.masksToBounds = YES;
+    logoBtn.layer.cornerRadius = 0.236 * 0.405 * SCREEN_WIDTH/2;
+    [logoBtn setTitle:@"登陆/注册" forState:UIControlStateNormal];
+    logoBtn.titleLabel.textColor = whitecolor;
+    logoBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    [self.loginView addSubview:logoBtn];
+    [logoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.loginView);
+        make.centerY.mas_equalTo(self.loginView).offset(0.054 * SCREEN_HEIGHT/2 + 20);
+        make.size.mas_equalTo(CGSizeMake(0.405 * SCREEN_WIDTH, 0.236 * 0.405 * SCREEN_WIDTH));
+    }];
+    [logoBtn addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+//登陆成功的框
 - (void)setupSLoginView {
     UIView *sloginView = [[UIView alloc]init];
     [self.view addSubview:sloginView];
@@ -97,7 +180,7 @@
     //用户名
     UILabel *userName = [[UILabel alloc]init];
     [sloginView addSubview:userName];
-    userName.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:18];
+    userName.font = [UIFont systemFontOfSize:18];
     userName.text = [TTUserManager sharedInstance].currentUser.name;
     userName.numberOfLines = 2;
     [userName mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -172,23 +255,6 @@
     [uploadBtn addTarget:self action:@selector(toUpLoad) forControlEvents:UIControlEventTouchUpInside];
 }
 
-//上传答案
-- (void)toUpLoad {
-    [self.navigationController pushViewController:[[QRScanViewController alloc] init] animated:YES];
-}
-
-- (void)logout {
-    NSLog(@"用户登出，发出通知，并更改myview界面");
-    [TTUserManager sharedInstance].isLogin = NO;
-    [[TTUserManager sharedInstance]clearCurrentUserInfo];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"userLogout" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeView:) name:@"loginSuccess" object:nil];
-    self.sloginView.hidden = YES;
-    self.logoutBtn.hidden = YES;
-    [self.logoutBtn removeFromSuperview];
-    [self.sloginView removeFromSuperview];
-    
-}
 
 //编辑界面
 -(void)getEditorView {
@@ -285,86 +351,8 @@
 
 }
 
-- (void)setupLoginView {
-    //登陆框
-    self.loginView = [[UIView alloc]init];
-    [self.view addSubview:self.loginView];
-    self.loginView.backgroundColor = [UIColor whiteColor];
-    
-    [self.loginView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view);
-        make.width.mas_equalTo(0.832 * SCREEN_WIDTH);
-        make.top.mas_equalTo(self.view).offset(0.1 * SCREEN_HEIGHT + TOP_OFFSET);
-        make.height.mas_equalTo(0.6 * 0.832 * SCREEN_WIDTH);
-    }];
-    
-//    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.loginView.bounds];
-//    self.loginView.layer.shadowPath = path.CGPath;
-    
-    self.loginView.layer.cornerRadius = 2;
-    self.loginView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.loginView.layer.shadowOffset = CGSizeMake(0, 2);
-    self.loginView.layer.shadowOpacity = 0.1;
-    
-    
-    //logo
-    UIImageView *headImg = [[UIImageView alloc]init];
-    headImg.image = [UIImage imageNamed:@"logo"];
-    [self.loginView addSubview:headImg];
-    [headImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.loginView);
-        make.top.mas_equalTo(self.loginView).offset(0.076 * SCREEN_WIDTH);
-        make.size.mas_equalTo(CGSizeMake(0.187 * SCREEN_WIDTH, 0.187 * SCREEN_WIDTH));
-    }];
-    
-    //登陆注册按钮
-    
-    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = CGRectMake(0, 0, 0.405 * SCREEN_WIDTH, 0.236 * 0.405 * SCREEN_WIDTH);
-    [gradientLayer setColors:[NSArray arrayWithObjects:
-                              (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
-                              (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
-                              nil
-                              ]];
-    
-    
-    gradientLayer.startPoint = CGPointMake(0, 0);
-    gradientLayer.endPoint = CGPointMake(0, 1);
-    gradientLayer.locations = @[@0,@1];
-    
-    UIButton *logoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [logoBtn.layer addSublayer:gradientLayer];
-    logoBtn.layer.masksToBounds = YES;
-    logoBtn.layer.cornerRadius = 0.236 * 0.405 * SCREEN_WIDTH/2;
-    [logoBtn setTitle:@"登陆/注册" forState:UIControlStateNormal];
-    logoBtn.titleLabel.textColor = whitecolor;
-    logoBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
-    [self.loginView addSubview:logoBtn];
-    [logoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.loginView);
-        make.centerY.mas_equalTo(self.loginView).offset(0.054 * SCREEN_HEIGHT/2 + 20);
-        make.size.mas_equalTo(CGSizeMake(0.405 * SCREEN_WIDTH, 0.236 * 0.405 * SCREEN_WIDTH));
-    }];
-    [logoBtn addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
-    
-}
 
-- (void)setupMenu {
-    //菜单选项
-    self.menuView = [[UITableView alloc]init];
-    [self.view addSubview:self.menuView];
-    self.menuView.delegate = self;
-    self.menuView.dataSource = self;
-    self.menuView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.menuView.backgroundColor = [UIColor whiteColor];
-    self.menuView.scrollEnabled = NO;
-    [self.menuView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view).offset(41.5);
-        make.right.mas_equalTo(self.view).offset(-41.5);
-        make.top.mas_equalTo(self.loginView.mas_bottom).with.offset(36);
-        make.height.mas_equalTo( 4 * 0.08 * SCREEN_HEIGHT);
-    }];
-}
+
 
 
 - (void)login:(id)sender {
@@ -404,6 +392,23 @@
     }];
 }
 
+#pragma mark - 菜单列表
+- (void)setupMenu {
+    //菜单选项
+    self.menuView = [[UITableView alloc]init];
+    [self.view addSubview:self.menuView];
+    self.menuView.delegate = self;
+    self.menuView.dataSource = self;
+    self.menuView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.menuView.backgroundColor = [UIColor whiteColor];
+    self.menuView.scrollEnabled = NO;
+    [self.menuView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view).offset(41.5);
+        make.right.mas_equalTo(self.view).offset(-41.5);
+        make.top.mas_equalTo(self.loginView.mas_bottom).with.offset(36);
+        make.height.mas_equalTo( 6 * 0.07 * SCREEN_HEIGHT);
+    }];
+}
 
 #pragma mark - 静态tableView DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -411,28 +416,38 @@
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MyViewStaticCell *cell = [MyViewStaticCell cellWithTableView:tableView];
     switch (indexPath.row) {
         case 0:{
-            cell.icon.image = [UIImage imageNamed:@"用户反馈"];
-            cell.title.text = @"提供建议";
+            cell.icon.image = [UIImage imageNamed:@"上传答案v2"];
+            cell.title.text = @"上传答案";
             break;
         }
         case 1:{
-            cell.icon.image = [UIImage imageNamed:@"用户好评"];
-            cell.title.text = @"给个好评";
+            cell.icon.image = [UIImage imageNamed:@"我要反馈v2"];
+            cell.title.text = @"我要反馈";
             break;
         }
         case 2:{
             cell.icon.image = [UIImage imageNamed:@"检查更新"];
-            cell.title.text = @"检查更新";
+            cell.title.text = @"提供建议";
             break;
         }
         case 3:{
+            cell.icon.image = [UIImage imageNamed:@"分享应用"];
+            cell.title.text = @"给个好评";
+            break;
+        }
+        case 4:{
+            cell.icon.image = [UIImage imageNamed:@"分享应用"];
+            cell.title.text = @"检查更新";
+            break;
+        }
+        case 5:{
             cell.icon.image = [UIImage imageNamed:@"分享应用"];
             cell.title.text = @"分享应用";
             break;
@@ -446,27 +461,35 @@
 
 #pragma mark - 静态tableView Delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 0.08 * SCREEN_HEIGHT;
+    return 0.07 * SCREEN_HEIGHT;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case 0:{    //提供建议
+        case 0:{    //上传答案
+            [self.navigationController pushViewController:[[QRScanViewController alloc] init] animated:YES];
+            break;
+        }
+        case 1:{    //我要反馈
+            [self.navigationController pushViewController:[[QRScanViewController alloc] init] animated:YES];
+            break;
+        }
+        case 2:{    //提供建议
             JYViewController *jyVC = [[JYViewController alloc]init];
             [self.navigationController pushViewController:jyVC animated:YES];
             break;
         }
-        case 1:{    //给个好评
+        case 3:{    //给个好评
             NSString *urlStr = [self getReviewUrlByAppId:1];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr] options:@{} completionHandler:nil];
             break;
         }
-        case 2:{    //检查更新
+        case 4:{    //检查更新
             NSString *urlStr = [self getReviewUrlByAppId:2];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr] options:@{} completionHandler:nil];
             break;
         }
-        case 3:{    //分享应用
+        case 5:{    //分享应用
             [self showDialog];
             break;
         }
@@ -509,9 +532,6 @@
     }];
 }
 
-// app页面 http://itunes.apple.com/cn/app/id1281806378?mt=8
-// app评论页面[[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1232138855&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"]];
-
 //跳转到appstore应用页面
 - (NSString *)getReviewUrlByAppId:(NSInteger)type{
     // type = 1 为评论界面；type = 2 为更新界面
@@ -528,11 +548,9 @@
 
 #pragma mark - NIDropDownDelegate 代理
 - (void) niDropDownDelegateMethod:(UIView *)sender withTitle:(NSString *)title {
-    
-    
+
     NSLog(@"%@", self.editor.downBtn.titleLabel.text);
     [self.editor.downBtn setTitle:title forState:UIControlStateNormal];
-    
     
 }
 

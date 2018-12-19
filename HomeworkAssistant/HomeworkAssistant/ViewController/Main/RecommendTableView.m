@@ -47,8 +47,8 @@
     RecommendStaticCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecommendStaticCell" forIndexPath:indexPath];
     cell.model = self.dataList[indexPath.row];
     cell.isSelected = NO;
-    [cell.saveBtn setBackgroundColor:whitecolor];
-    [cell.saveBtn setTitleColor:maincolor forState:UIControlStateNormal];
+    cell.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#1698D9"].CGColor;
+    [cell.saveBtn setTitleColor:[UIColor colorWithHexString:@"#1698D9"] forState:UIControlStateNormal];
     return cell;
 }
 
@@ -67,7 +67,6 @@
     answerVC.bookModel = self.dataList[indexPath.row];
     answerVC.isSelected = cell.isSelected;
     [[self viewController].navigationController pushViewController:answerVC animated:YES];
-        
 }
 
 

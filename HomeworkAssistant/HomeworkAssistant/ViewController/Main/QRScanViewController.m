@@ -43,7 +43,7 @@
     self.scanView = scanView;
     
     UILabel *scanTitle = [[UILabel alloc]init];
-    scanTitle.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:15];
+    scanTitle.font = [UIFont systemFontOfSize:15];
     [scanTitle setBackgroundColor:[UIColor clearColor]];
     scanTitle.textColor = whitecolor;
     scanTitle.text = @"扫描同学的二维码即可同步书单";
@@ -75,7 +75,7 @@
         [manualBtn setTitle:@"手动输入条码" forState:UIControlStateNormal];
         [manualBtn setTitleColor:whitecolor forState:UIControlStateNormal];
         [manualBtn setBackgroundColor:[UIColor clearColor]];
-        manualBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:14];
+        manualBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [self.view addSubview:manualBtn];
         [manualBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(backBtn);

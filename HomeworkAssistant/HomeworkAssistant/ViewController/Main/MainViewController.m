@@ -37,7 +37,9 @@
 @property (nonatomic, strong) RecommendTableView *recommendListView;
 @property (nonatomic, strong) NSMutableArray *recommendListViewData;
 
-
+//需要调整frame的控件
+@property (nonatomic, strong) UIImageView *searchLogo;
+@property (nonatomic, strong) UILabel *placeHolder;
 
 //二维码弹窗
 @property (nonatomic, strong) QRCodeView *testView;
@@ -322,10 +324,10 @@
     
     UIView *searchView = [[UIView alloc]init];
     searchView.backgroundColor = whitecolor;
-    searchView.layer.cornerRadius = 4;
-    //    searchView.layer.shadowColor = [UIColor blackColor].CGColor;
-    //    searchView.layer.shadowOffset = CGSizeMake(0, 1);
-    //    searchView.layer.shadowOpacity = 0.3;
+    searchView.layer.cornerRadius = 3;
+    searchView.layer.shadowColor = [UIColor colorWithHexString:@"#DFE2E6"].CGColor;
+    searchView.layer.shadowOffset = CGSizeMake(0, 2);
+    searchView.layer.shadowOpacity = 1;
     [self.navView addSubview:searchView];
     [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.navView).offset(20);
@@ -446,25 +448,26 @@
     self.searchView = searchView;
     
     UIImageView *searchLogo = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"搜索"]];
-    [searchView addSubview:searchLogo];
+    [mainContentView addSubview:searchLogo];
     [searchLogo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(0.075 * SCREEN_WIDTH, 0.075 * SCREEN_WIDTH));
+        make.size.mas_equalTo(CGSizeMake(24, 24));
         make.centerY.mas_equalTo(searchView);
-        make.left.mas_equalTo(searchView).offset(0.044 * SCREEN_WIDTH);
+        make.left.mas_equalTo(searchView).offset(14);
     }];
+    self.searchLogo = searchLogo;
     
     UILabel *placeHolder = [[UILabel alloc]init];
     placeHolder.text = @"搜书名找答案";
     placeHolder.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
     placeHolder.textColor = [UIColor colorWithHexString:@"#909499"];
-    [searchView addSubview:placeHolder];
+    [mainContentView addSubview:placeHolder];
     [placeHolder mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(searchView);
         make.left.mas_equalTo(searchLogo.mas_right).with.offset(10);
     }];
     UITapGestureRecognizer *toSearchGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toSearch)];
     [searchView addGestureRecognizer:toSearchGes];
-    
+    self.placeHolder = placeHolder;
     
     //分割线
     UILabel *line_one = [[UILabel alloc]initWithFrame:CGRectMake(0, 0.66 * SCREEN_WIDTH, SCREEN_WIDTH, 0.02 * SCREEN_WIDTH)];
@@ -602,17 +605,19 @@
 #pragma mark - 其他
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = scrollView.contentOffset.y + 20;
-    CGFloat searchViewWidth = SCREEN_WIDTH - 40;
-    CGFloat searchViewHeight = self.searchView.frame.size.height;
-    CGFloat xPosi = self.searchView.frame.origin.x;
-    CGFloat yPosi = 109;
+    //0.79 0.1 * screenwidth = offsety/x
+    CGFloat searchViewWidth = 0.89 * SCREEN_WIDTH;
+    CGFloat searchViewHeight = 0.89 * SCREEN_WIDTH * 0.14;
+    CGFloat xPosi = 0.055 * SCREEN_WIDTH;
+    CGFloat yPosi = 0.277 * SCREEN_WIDTH;
 
-    if (offsetY >= 0 && offsetY <= 80) {
-        self.searchView.frame = CGRectMake(xPosi, yPosi - (offsetY/2.963), searchViewWidth - (offsetY/2), searchViewHeight);
-
+    if (offsetY >= 0 && offsetY <= 0.34 * SCREEN_WIDTH - 52) {
+        self.searchView.frame = CGRectMake(xPosi, yPosi - (offsetY/2.963) + (offsetY/11.6), searchViewWidth - (offsetY/2.02), searchViewHeight - (offsetY/5.81));
+        self.searchLogo.y = yPosi - (offsetY/2.963) + (offsetY/11.6) + 11 - (offsetY/12.6);
+        self.placeHolder.y = yPosi - (offsetY/2.963) + (offsetY/11.6) + 13 - (offsetY/12.6);
     }
 
-    if (offsetY >= 80) {
+    if (offsetY >= 0.34 * SCREEN_WIDTH - 52) {
         self.navView.hidden = NO;
     }
     else {
@@ -648,11 +653,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    NSLog(@"===========");
 }
 
 

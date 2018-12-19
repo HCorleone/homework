@@ -140,28 +140,28 @@
     
     // Adapt the search bar layout problem in the navigation bar on iOS 11
     // More details : https://github.com/iphone5solo/PYSearch/issues/108
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0) { // iOS 11
-        UINavigationBar *navBar = self.navigationController.navigationBar;
-        if (self.navigationItem.rightBarButtonItem) { // Cancel button
-            CGFloat space = 8;
-            navBar.layoutMargins = UIEdgeInsetsZero;
-            for (UIView *subview in navBar.subviews) {
-                if ([NSStringFromClass(subview.class) containsString:@"ContentView"]) {
-                    subview.layoutMargins = UIEdgeInsetsMake(0, space, 0, space); // Fix cancel button width is modified
-                    break;
-                }
-            }
-        }
-        _searchBar.py_width = self.view.py_width - adaptWidth - PYSEARCH_MARGIN * 3 - 8;
-        _searchBar.py_height = self.view.py_width > self.view.py_height ? 24 : 30;
-        _searchTextField.frame = _searchBar.bounds;
-    } else {
-        UIView *titleView = self.navigationItem.titleView;
-        titleView.py_x = PYSEARCH_MARGIN * 1.5;
-        titleView.py_y = self.view.py_width > self.view.py_height ? 3 : 7;
-        titleView.py_width = self.view.py_width - self.cancelButtonWidth - titleView.py_x * 2 - 3;
-        titleView.py_height = self.view.py_width > self.view.py_height ? 24 : 30;
-    }
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0) { // iOS 11
+//        UINavigationBar *navBar = self.navigationController.navigationBar;
+//        if (self.navigationItem.rightBarButtonItem) { // Cancel button
+//            CGFloat space = 8;
+//            navBar.layoutMargins = UIEdgeInsetsZero;
+//            for (UIView *subview in navBar.subviews) {
+//                if ([NSStringFromClass(subview.class) containsString:@"ContentView"]) {
+//                    subview.layoutMargins = UIEdgeInsetsMake(0, space, 0, space); // Fix cancel button width is modified
+//                    break;
+//                }
+//            }
+//        }
+////        _searchBar.py_width = self.view.py_width - adaptWidth - PYSEARCH_MARGIN * 3 - 8;
+////        _searchBar.py_height = self.view.py_width > self.view.py_height ? 24 : 30;
+////        _searchTextField.frame = _searchBar.bounds;
+//    } else {
+//        UIView *titleView = self.navigationItem.titleView;
+//        titleView.py_x = PYSEARCH_MARGIN * 1.5;
+//        titleView.py_y = self.view.py_width > self.view.py_height ? 3 : 7;
+//        titleView.py_width = self.view.py_width - self.cancelButtonWidth - titleView.py_x * 2 - 3;
+//        titleView.py_height = self.view.py_width > self.view.py_height ? 24 : 30;
+//    }
 }
 
 - (BOOL)prefersStatusBarHidden
@@ -398,26 +398,40 @@
     self.removeSpaceOnSearchString = YES;
     
     UIView *titleView = [[UIView alloc] init];
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:titleView.bounds];
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 0.67 * PYSEARCH_REALY_SCREEN_WIDTH, 0.67 * PYSEARCH_REALY_SCREEN_WIDTH * 0.125)];
     [titleView addSubview:searchBar];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0) { // iOS 11
-        [NSLayoutConstraint activateConstraints:@[
-                                                  [searchBar.topAnchor constraintEqualToAnchor:titleView.topAnchor],
-                                                  [searchBar.leftAnchor constraintEqualToAnchor:titleView.leftAnchor],
-                                                  [searchBar.rightAnchor constraintEqualToAnchor:titleView.rightAnchor constant:-PYSEARCH_MARGIN],
-                                                  [searchBar.bottomAnchor constraintEqualToAnchor:titleView.bottomAnchor]
-                                                  ]];
-    } else {
-        searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    }
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0) { // iOS 11
+//        [NSLayoutConstraint activateConstraints:@[
+//                                                  [searchBar.topAnchor constraintEqualToAnchor:titleView.topAnchor],
+//                                                  [searchBar.leftAnchor constraintEqualToAnchor:titleView.leftAnchor],
+//                                                  [searchBar.rightAnchor constraintEqualToAnchor:titleView.rightAnchor constant:-PYSEARCH_MARGIN],
+//                                                  [searchBar.bottomAnchor constraintEqualToAnchor:titleView.bottomAnchor]
+//                                                  ]];
+//    } else {
+//        searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    }
     self.navigationItem.titleView = titleView;
     searchBar.placeholder = [NSBundle py_localizedStringForKey:PYSearchSearchPlaceholderText];
-    searchBar.backgroundImage = [NSBundle py_imageNamed:@"clearImage"];
+//    searchBar.backgroundImage = [NSBundle py_imageNamed:@"clearImage"];
     searchBar.delegate = self;
+    searchBar.backgroundImage = [[UIImage alloc] init];
+    searchBar.barTintColor = [UIColor whiteColor];
+    
     for (UIView *subView in [[searchBar.subviews lastObject] subviews]) {
         if ([[subView class] isSubclassOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)subView;
             textField.font = [UIFont systemFontOfSize:16];
+            textField.leftViewMode = UITextFieldViewModeNever;
+            if (@available(iOS 11.0, *)) {
+            //查看视图层级，在iOS 11之前searchbar的x是12
+            textField.frame = CGRectMake(12, 0, 240, 30);
+            }
+            else {
+            textField.frame = CGRectMake(0, 0, 240, 30);
+            }
+            textField.borderStyle = UITextBorderStyleNone;
+//            textField.layer.cornerRadius = 0;
+            textField.layer.masksToBounds = YES;
             _searchTextField = textField;
             break;
         }

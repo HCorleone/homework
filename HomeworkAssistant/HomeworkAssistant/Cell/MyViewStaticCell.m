@@ -43,7 +43,7 @@
             make.centerY.mas_equalTo(self);
 //            make.size.mas_equalTo(CGSizeMake(24, 24));
         }];
-        self.title.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
+        self.title.font = [UIFont systemFontOfSize:16];
     }
     self.backgroundColor = [UIColor whiteColor];
     self.contentView.backgroundColor = [UIColor whiteColor];

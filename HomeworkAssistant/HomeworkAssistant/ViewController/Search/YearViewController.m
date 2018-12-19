@@ -1,18 +1,18 @@
 //
-//  SubjectViewController.m
+//  YearViewController.m
 //  HomeworkAssistant
 //
-//  Created by 无敌帅枫 on 2018/12/7.
+//  Created by 无敌帅枫 on 2018/12/19.
 //  Copyright © 2018 无敌帅枫. All rights reserved.
 //
 
-#import "SubjectViewController.h"
+#import "YearViewController.h"
 #import "ClassificationCell.h"
 #import "CollectionHeaderView.h"
 
 extern NSString * const YZUpdateMenuTitleNote;
 
-@interface SubjectViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface YearViewController()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSArray *titles;
 /** 旧cell */
@@ -20,12 +20,12 @@ extern NSString * const YZUpdateMenuTitleNote;
 
 @end
 
-@implementation SubjectViewController
+@implementation YearViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = whitecolor;
-    _titles = @[@"全部科目",@"语文",@"数学",@"英语",@"物理",@"化学",@"生物",@"政治",@"历史",@"地理",@"科学"];
+    _titles = @[@"全部年份",@"2018",@"2017",@"2016",@"2015"];
     [self setupView];
 }
 
@@ -42,7 +42,7 @@ extern NSString * const YZUpdateMenuTitleNote;
     collectView.showsVerticalScrollIndicator = NO;
     collectView.backgroundColor = whitecolor;
     [collectView registerClass:[ClassificationCell class] forCellWithReuseIdentifier:@"grade"];
-//    [collectView registerClass:[CollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerview"];
+    //    [collectView registerClass:[CollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerview"];
 }
 
 #pragma mark collectionView代理方法
@@ -85,10 +85,10 @@ extern NSString * const YZUpdateMenuTitleNote;
 
 //点击item方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    ClassificationCell *cell = (ClassificationCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    NSString *col = @"1";
-    [[NSNotificationCenter defaultCenter] postNotificationName:YZUpdateMenuTitleNote object:self userInfo:@{@"title":cell.title.text,@"col":col}];
-    NSLog(@"%@",cell.title.text);
+//    ClassificationCell *cell = (ClassificationCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//    NSString *col = @"1";
+//    [[NSNotificationCenter defaultCenter] postNotificationName:YZUpdateMenuTitleNote object:self userInfo:@{@"title":cell.title.text,@"col":col}];
+//    NSLog(@"%@",cell.title.text);
 }
 
 //设置点击高亮和非高亮效果！

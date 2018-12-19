@@ -103,7 +103,7 @@
 - (void)customizeTabBarForController:(RDVTabBarController *)tabBarController {
 //    UIImage *finishedImage = [UIImage imageNamed:@"tabbar_selected_background"];
 //    UIImage *unfinishedImage = [UIImage imageNamed:@"tabbar_normal_background"];
-    NSArray *tabBarItemImages = @[@"学习", @"扫一扫v2", @"我的"];
+    NSArray *tabBarItemImages = @[@"学习", @"扫一扫bluev2", @"我的"];
 //    NSArray *tabBarItemTitles = @[@"", @"", @""];
     
     RDVTabBar *tabBar = [tabBarController tabBar];

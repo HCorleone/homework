@@ -109,7 +109,7 @@
         make.top.mas_equalTo(self.lianxiField.mas_bottom).with.offset(0.1 * SCREEN_WIDTH);
         make.size.mas_equalTo(CGSizeMake(0.83 * SCREEN_WIDTH, 0.83 * SCREEN_WIDTH * 0.12));
     }];
-    summitBtn.titleLabel.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
+    summitBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [summitBtn setTitle:@"提交建议" forState:UIControlStateNormal];
     [summitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
@@ -149,7 +149,7 @@
     UILabel *title = [[UILabel alloc]init];
     title.text = @"提供建议";
     [title setTextColor: [UIColor whiteColor]];
-    title.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:16];
+    title.font = [UIFont systemFontOfSize:16];
     [self.navView addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.navView);

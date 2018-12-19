@@ -15,12 +15,12 @@
     if (self){
         self.backgroundColor = whitecolor;
         _headerTitle = [[UILabel alloc] init];
-        [_headerTitle setTextColor:[UIColor colorWithHexString:@"#C4C8CC"]];
-        _headerTitle.font = [UIFont fontWithName:@"NotoSansHans-Regular" size:14];
+        [_headerTitle setTextColor:[UIColor colorWithHexString:@"#2E3033"]];
+        _headerTitle.font = [UIFont systemFontOfSize:14];
         [self addSubview:_headerTitle];
         [_headerTitle mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self).offset(20);
-            make.centerY.mas_equalTo(self);
+            make.bottom.mas_equalTo(self).offset(-1);
         }];
     }
     return self;
