@@ -14,9 +14,11 @@
 #import "LoginViewController.h"
 #import "QRScanViewController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<RDVTabBarDelegate>
 
-@property (nonatomic, strong)  LoginViewController *loginVC;
+@property (nonatomic, strong) LoginViewController *loginVC;
+@property (nonatomic, strong) UINavigationController *firstNC;
+@property (nonatomic, strong) UINavigationController *thirdNC;
 
 @end
 
@@ -82,13 +84,15 @@
 - (void)setupViewControllers{
     
     MainViewController *firstVC = [[MainViewController alloc]init];
-    UIViewController *firstNC = [[UINavigationController alloc]initWithRootViewController:firstVC];
+    UINavigationController *firstNC = [[UINavigationController alloc]initWithRootViewController:firstVC];
+    self.firstNC = firstNC;
     
     QRScanViewController *secondVC = [[QRScanViewController alloc]init];
-    UIViewController *secondNC = [[UINavigationController alloc]initWithRootViewController:secondVC];
+    UINavigationController *secondNC = [[UINavigationController alloc]initWithRootViewController:secondVC];
     
     MyViewController *thirdVC = [[MyViewController alloc]init];
-    UIViewController *thirdNC = [[UINavigationController alloc]initWithRootViewController:thirdVC];
+    UINavigationController *thirdNC = [[UINavigationController alloc]initWithRootViewController:thirdVC];
+    self.thirdNC = thirdNC;
     
     RDVTabBarController *tabBarController = [[RDVTabBarController alloc]init];
     [tabBarController setViewControllers:@[firstNC, secondNC, thirdNC]];
@@ -107,7 +111,7 @@
 //    NSArray *tabBarItemTitles = @[@"", @"", @""];
     
     RDVTabBar *tabBar = [tabBarController tabBar];
-    
+    tabBar.delegate = self;
     [tabBar setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 66 + BOT_OFFSET)];
     tabBar.backgroundColor = [UIColor clearColor];
     
@@ -136,8 +140,51 @@
     }
 }
 
+#pragma mark - RDVTabbarDelegate
 
+- (BOOL)tabBar:(RDVTabBar *)tabBar shouldSelectItemAtIndex:(NSInteger)index {
+    
+    if (index == 1) {
+        if (self.viewController.selectedIndex == 0) {
+            MainViewController *mainVC = (MainViewController *)self.firstNC.viewControllers[0];
+            [mainVC toScan];
+        }
+        else if (self.viewController.selectedIndex == 2){
+            MyViewController *myVC = (MyViewController *)self.thirdNC.viewControllers[0];
+            [myVC toScan];
+        }
+        return NO;
+    }
+    else {
+        if ([[self.viewController delegate] respondsToSelector:@selector(tabBarController:shouldSelectViewController:)]) {
+            if (![[self.viewController delegate] tabBarController:self.viewController shouldSelectViewController:[self.viewController viewControllers][index]]) {
+                return NO;
+            }
+        }
+        
+        if ([self.viewController selectedViewController] == [self.viewController viewControllers][index]) {
+            if ([[self.viewController selectedViewController] isKindOfClass:[UINavigationController class]]) {
+                UINavigationController *selectedController = (UINavigationController *)[self.viewController selectedViewController];
+                if ([selectedController topViewController] != [selectedController viewControllers][0]) {
+                    [selectedController popToRootViewControllerAnimated:YES];
+                }
+            }
+            
+            return NO;
+        }
+    }
+    
+    return YES;
+}
 
+- (void)tabBar:(RDVTabBar *)tabBar didSelectItemAtIndex:(NSInteger)index {
+    if (index < 0 || index >= [[self.viewController viewControllers] count]) {
+        return;
+    }
+
+    [self.viewController setSelectedIndex:index];
+    
+}
 
 
 

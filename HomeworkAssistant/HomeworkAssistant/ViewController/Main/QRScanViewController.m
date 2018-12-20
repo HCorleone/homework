@@ -13,12 +13,12 @@
 #import "MyViewController.h"
 #import "InputBarCodeViewController.h"
 #import "FillBookInformationViewController.h"
+#import "QRCodeView.h"
 
 @interface QRScanViewController ()<SGQRCodeScanManagerDelegate>
 
 @property (nonatomic, strong) SGQRCodeScanManager *scanManager;
 @property (nonatomic, strong) SGQRCodeScanningView *scanView;
-@property (nonatomic, strong) UIViewController *lastVC;
 
 @end
 
@@ -26,7 +26,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     
     SGQRCodeScanManager *scanManager = [SGQRCodeScanManager sharedManager];
@@ -62,15 +61,11 @@
         make.left.mas_equalTo(self.view).offset(20);
         make.top.mas_equalTo(self.view).offset(35 + TOP_OFFSET);
     }];
-    
-    NSArray *vcArr = [self.navigationController viewControllers];
-    NSInteger vcCount = vcArr.count;
-    UIViewController *lastVc = vcArr[vcCount - 2];
-    self.lastVC = lastVc;
-    
-    if ([lastVc isKindOfClass:[MyViewController class]]) {
+
+    if (self.scanType == ScanTypeUploadAnswer ||
+        self.scanType == ScanTypeFeedBack) {
         scanTitle.text = @"将图书背面的条码放到扫描框内";
-        
+
         UIButton *manualBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [manualBtn setTitle:@"手动输入条码" forState:UIControlStateNormal];
         [manualBtn setTitleColor:whitecolor forState:UIControlStateNormal];
@@ -102,15 +97,14 @@
     AVMetadataMachineReadableCodeObject * tempMetadataObject = [metadataObjects objectAtIndex : 0 ];
     NSString *result = tempMetadataObject.stringValue;
     
-    if ([self.lastVC isKindOfClass:[MainViewController class]]) {
+    if (self.scanType == ScanTypeDefault) {
         if (result.length >= 7) {
             if ([[result substringToIndex:7] isEqualToString: @"openId:"]) {
                 [self.scanView removeTimer];
                 [self.scanManager stopRunning];
 //                NSLog(@"%@",[result substringFromIndex:7]);
                 NSString *code = [result substringFromIndex:7];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"shareCode" object:nil userInfo:@{@"shareCode":code}];
-                [self.navigationController popViewControllerAnimated:YES];
+                [self returnShareCode:code];
             }
             else {
                 [self.scanView removeTimer];
@@ -128,7 +122,7 @@
             [self.navigationController pushViewController:searchResultVC animated:YES];
         }
     }
-    else if ([self.lastVC isKindOfClass:[MyViewController class]]){
+    else if (self.scanType == ScanTypeUploadAnswer){
         
         [self.scanView removeTimer];
         [self.scanManager stopRunning];
@@ -137,8 +131,21 @@
         userDefaults(result, @"InputBarCode");
         [self.navigationController pushViewController:fill animated:YES];
     }
+    else if (self.scanType == ScanTypeFeedBack) {
+        [self.scanView removeTimer];
+        [self.scanManager stopRunning];
+        
+        NSLog(@"前往反馈界面");
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
+- (void)returnShareCode:(NSString *)code {
+    [self.navigationController popViewControllerAnimated:YES];
+    if (self.shareCodeBlock) {
+        self.shareCodeBlock(code);
+    }
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -156,8 +163,7 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self.scanManager stopRunning];
-    //移除通知
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"shareCode" object:self];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

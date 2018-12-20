@@ -238,9 +238,7 @@
 - (void)wechatUser {
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"wechatLogin" object:self];
-    
-    
-    NSLog(@"当前线程：%@",[NSThread currentThread]);
+
     
     [[TTUserManager sharedInstance] clearCurrentUserInfo];
     SendAuthReq *req = [[SendAuthReq alloc] init];
@@ -336,7 +334,6 @@
             [TTUserManager sharedInstance].currentUser.headImgUrl = responseObject[@"headImgUrl"];
             [TTUserManager sharedInstance].currentUser.name = responseObject[@"name"];
             [TTUserManager sharedInstance].currentUser.openId = responseObject[@"openId"];
-            NSLog(@"当前线程：%@",[NSThread currentThread]);
             [self getExtraUserInfo];
             
         }
@@ -398,8 +395,6 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
         [self.navigationController pushViewController:[[FillOthersViewController alloc] init] animated:YES];
     }
-
-//    NSLog(@"发送用户登陆成功的通知");
     
 }
 

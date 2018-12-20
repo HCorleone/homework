@@ -160,7 +160,6 @@
     //分割线
     UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH - 40, 0.5)];
     [line setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.1]];
-    line.layer.opacity = 0.5;
     [self.myListView.tableFooterView addSubview:line];
     
     //添加按钮

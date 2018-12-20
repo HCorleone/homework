@@ -20,4 +20,6 @@ target 'HomeworkAssistant' do
 	pod 'SGQRCode'
 	pod 'MJRefresh'
 	pod 'PYSearch'
+#    pod 'JXCategoryView'
+	pod 'XWHUDManager'
 end

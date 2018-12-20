@@ -44,10 +44,6 @@
 //二维码弹窗
 @property (nonatomic, strong) QRCodeView *testView;
 
-/** 扫码获取的信息 */
-@property (nonatomic, strong) NSString *code;
-@property (nonatomic, strong) NSString *codes;//存
-
 @end
 
 @implementation MainViewController
@@ -195,6 +191,7 @@
                            @"openID":openId,
                            @"pkn":@"com.enjoytime.palmhomework",
                            @"sign":sign
+//                           @"av":@"_debug_"
                            };
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -576,22 +573,21 @@
 
 //前往扫描
 - (void)toScan {
-
-    
-    //注册通知：
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showBooKList:) name:@"shareCode" object:nil];
     
     QRScanViewController *scanVC = [[QRScanViewController alloc]init];
+    scanVC.scanType = ScanTypeDefault;
+    scanVC.shareCodeBlock = ^(NSString * _Nonnull shareCode) {
+        BookListViewController *book = [[BookListViewController alloc] init];
+        book.idStr = shareCode;
+        book.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+        
+        [self presentViewController:book animated:NO completion:nil];
+    };
+    
     [self.navigationController pushViewController:scanVC animated:YES];
+    
 }
 
--(void)showBooKList:(NSNotification *)notification {
-    
-    _code = notification.userInfo[@"shareCode"];
-    _codes = notification.userInfo[@"shareCode"];
-    NSLog(@"%@", _code);
-    
-}
 //前往搜索界面
 - (void)toSearch {
 
@@ -629,7 +625,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"userLikeOrNot" object:nil];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -640,14 +635,6 @@
         [self downloadDataForMyList];
     }
     
-    if (self.code) {
-        self.code = nil;
-        BookListViewController *book = [[BookListViewController alloc] init];
-        book.idStr = self.codes;
-        book.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-        
-        [self presentViewController:book animated:NO completion:nil];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

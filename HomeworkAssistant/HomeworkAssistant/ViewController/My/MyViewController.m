@@ -16,12 +16,11 @@
 #import "QRScanViewController.h"
 #import "EditorNameView.h"
 #import "NIDropDown.h"
-#import "YTQGetUserManager.h"
 #import "CommonAlterView.h"
 #import "SHPlacePickerView.h"
+#import "BookListViewController.h"
 
-
-@interface MyViewController () <UITableViewDelegate, UITableViewDataSource, NIDropDownDelegate>
+@interface MyViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UIView *loginView;
 @property (nonatomic, strong) UITableView *menuView;
@@ -60,7 +59,21 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeView:) name:@"loginSuccess" object:nil];
     }
     
+}
+
+//扫描
+- (void)toScan {
+    QRScanViewController *scanVC = [[QRScanViewController alloc]init];
+    scanVC.scanType = ScanTypeDefault;
+    scanVC.shareCodeBlock = ^(NSString * _Nonnull shareCode) {
+        BookListViewController *book = [[BookListViewController alloc] init];
+        book.idStr = shareCode;
+        book.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+        
+        [self presentViewController:book animated:NO completion:nil];
+    };
     
+    [self.navigationController pushViewController:scanVC animated:YES];
 }
 
 #pragma mark - 用户登录或注销
@@ -172,7 +185,7 @@
     [headImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(sloginView).offset(20);
         make.top.mas_equalTo(sloginView).offset(0.053 * SCREEN_WIDTH);
-        make.size.mas_equalTo(CGSizeMake(0.187 * SCREEN_WIDTH, 0.187 * SCREEN_WIDTH));
+        make.size.mas_equalTo(CGSizeMake(0.194 * SCREEN_WIDTH, 0.194 * SCREEN_WIDTH));
     }];
     headImg.layer.masksToBounds = YES;
     headImg.layer.cornerRadius = 0.187 * SCREEN_WIDTH/2;
@@ -184,21 +197,37 @@
     userName.text = [TTUserManager sharedInstance].currentUser.name;
     userName.numberOfLines = 2;
     [userName mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(sloginView).offset(0.09 * SCREEN_WIDTH);
+        make.left.mas_equalTo(headImg.mas_right).with.offset(10);
+        make.top.mas_equalTo(sloginView).offset(0.07 * SCREEN_WIDTH);
         make.width.mas_equalTo(0.288 * SCREEN_WIDTH);
     }];
     
     //年级
-    _gradeLabel = [[UILabel alloc]init];
-    [sloginView addSubview:_gradeLabel];
-    _gradeLabel.text = [TTUserManager sharedInstance].currentUser.grade;
-    _gradeLabel.textColor =  [UIColor colorWithRed:143/255.0 green:147/255.0 blue:148/255.0 alpha:1/1.0];
-    _gradeLabel.font = [UIFont systemFontOfSize:14];
-    [_gradeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    UILabel *gradeLabel = [[UILabel alloc]init];
+    [sloginView addSubview:gradeLabel];
+    gradeLabel.text = [TTUserManager sharedInstance].currentUser.grade;
+    gradeLabel.textColor =  [UIColor colorWithRed:143/255.0 green:147/255.0 blue:148/255.0 alpha:1/1.0];
+    gradeLabel.font = [UIFont systemFontOfSize:10];
+    [gradeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(userName);
         make.top.mas_equalTo(userName.mas_bottom).with.offset(0.02 * SCREEN_WIDTH);
     }];
+    self.gradeLabel = gradeLabel;
+    
+    //学校
+    UILabel *schoolName = [[UILabel alloc]init];
+    [sloginView addSubview:schoolName];
+//    schoolName.text = [TTUserManager sharedInstance].currentUser.schoolName;
+    schoolName.text = @"北京市第二实验小学";
+    schoolName.textColor =  [UIColor colorWithRed:143/255.0 green:147/255.0 blue:148/255.0 alpha:1/1.0];
+    schoolName.font = [UIFont systemFontOfSize:10];
+    [schoolName mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(userName);
+        make.top.mas_equalTo(gradeLabel.mas_bottom).with.offset(0.01 * SCREEN_WIDTH);
+    }];
+    
+    //等级
+    
     
     //编辑个人信息
     UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -216,8 +245,8 @@
     UIButton *logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:logoutBtn];
     [logoutBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.view).offset(-50 - BOT_OFFSET);
+        make.right.mas_equalTo(self.view).offset(-20);
+        make.bottom.mas_equalTo(self.view).offset(-60 - BOT_OFFSET);
     }];
     logoutBtn.backgroundColor = [UIColor clearColor];
     [logoutBtn setTitleColor:[UIColor colorWithHexString:@"#8F9394"] forState:UIControlStateNormal];
@@ -225,34 +254,34 @@
     [logoutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     self.logoutBtn = logoutBtn;
     
-    //上传按钮
+//    //上传按钮
+//
+//    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+//    gradientLayer.frame = CGRectMake(0, 0, 0.725 * SCREEN_WIDTH, 0.13 * 0.725 * SCREEN_WIDTH);
+//    [gradientLayer setColors:[NSArray arrayWithObjects:
+//                              (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
+//                              (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
+//                              nil
+//                              ]];
+//
+//
+//    gradientLayer.startPoint = CGPointMake(0, 0);
+//    gradientLayer.endPoint = CGPointMake(0, 1);
+//    gradientLayer.locations = @[@0,@1];
     
-    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = CGRectMake(0, 0, 0.725 * SCREEN_WIDTH, 0.13 * 0.725 * SCREEN_WIDTH);
-    [gradientLayer setColors:[NSArray arrayWithObjects:
-                              (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
-                              (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
-                              nil
-                              ]];
-    
-    
-    gradientLayer.startPoint = CGPointMake(0, 0);
-    gradientLayer.endPoint = CGPointMake(0, 1);
-    gradientLayer.locations = @[@0,@1];
-    
-    UIButton *uploadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [sloginView addSubview:uploadBtn];
-    [uploadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(sloginView);
-        make.size.mas_equalTo(CGSizeMake(0.725 * SCREEN_WIDTH, 0.13 * 0.725 * SCREEN_WIDTH));
-        make.bottom.mas_equalTo(sloginView).offset(-0.07 * SCREEN_WIDTH);
-    }];
-    uploadBtn.layer.masksToBounds = YES;
-    [uploadBtn.layer addSublayer:gradientLayer];
-    uploadBtn.layer.cornerRadius = 0.13 * 0.725 * SCREEN_WIDTH/2;
-    [uploadBtn setTitleColor:whitecolor forState:UIControlStateNormal];
-    [uploadBtn setTitle:@"上传答案" forState:UIControlStateNormal];
-    [uploadBtn addTarget:self action:@selector(toUpLoad) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *uploadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [sloginView addSubview:uploadBtn];
+//    [uploadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.mas_equalTo(sloginView);
+//        make.size.mas_equalTo(CGSizeMake(0.725 * SCREEN_WIDTH, 0.13 * 0.725 * SCREEN_WIDTH));
+//        make.bottom.mas_equalTo(sloginView).offset(-0.07 * SCREEN_WIDTH);
+//    }];
+//    uploadBtn.layer.masksToBounds = YES;
+//    [uploadBtn.layer addSublayer:gradientLayer];
+//    uploadBtn.layer.cornerRadius = 0.13 * 0.725 * SCREEN_WIDTH/2;
+//    [uploadBtn setTitleColor:whitecolor forState:UIControlStateNormal];
+//    [uploadBtn setTitle:@"上传答案" forState:UIControlStateNormal];
+//    [uploadBtn addTarget:self action:@selector(toUpLoad) forControlEvents:UIControlEventTouchUpInside];
 }
 
 
@@ -433,22 +462,22 @@
             break;
         }
         case 2:{
-            cell.icon.image = [UIImage imageNamed:@"检查更新"];
+            cell.icon.image = [UIImage imageNamed:@"提供建议v2"];
             cell.title.text = @"提供建议";
             break;
         }
         case 3:{
-            cell.icon.image = [UIImage imageNamed:@"分享应用"];
+            cell.icon.image = [UIImage imageNamed:@"给个好评v2"];
             cell.title.text = @"给个好评";
             break;
         }
         case 4:{
-            cell.icon.image = [UIImage imageNamed:@"分享应用"];
+            cell.icon.image = [UIImage imageNamed:@"检查更新v2"];
             cell.title.text = @"检查更新";
             break;
         }
         case 5:{
-            cell.icon.image = [UIImage imageNamed:@"分享应用"];
+            cell.icon.image = [UIImage imageNamed:@"分享应用v2"];
             cell.title.text = @"分享应用";
             break;
         }
@@ -467,11 +496,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:{    //上传答案
-            [self.navigationController pushViewController:[[QRScanViewController alloc] init] animated:YES];
+            QRScanViewController *scanVC = [[QRScanViewController alloc] init];
+            scanVC.scanType = ScanTypeUploadAnswer;
+            [self.navigationController pushViewController:scanVC animated:YES];
             break;
         }
         case 1:{    //我要反馈
-            [self.navigationController pushViewController:[[QRScanViewController alloc] init] animated:YES];
+            QRScanViewController *scanVC = [[QRScanViewController alloc] init];
+            scanVC.scanType = ScanTypeFeedBack;
+            [self.navigationController pushViewController:scanVC animated:YES];
             break;
         }
         case 2:{    //提供建议

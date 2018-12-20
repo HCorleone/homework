@@ -242,7 +242,6 @@
     if ([self selectedViewController] == [self viewControllers][index]) {
         if ([[self selectedViewController] isKindOfClass:[UINavigationController class]]) {
             UINavigationController *selectedController = (UINavigationController *)[self selectedViewController];
-            
             if ([selectedController topViewController] != [selectedController viewControllers][0]) {
                 [selectedController popToRootViewControllerAnimated:YES];
             }
@@ -260,10 +259,12 @@
     }
     
     [self setSelectedIndex:index];
+
     
-    if ([[self delegate] respondsToSelector:@selector(tabBarController:didSelectViewController:)]) {
-        [[self delegate] tabBarController:self didSelectViewController:[self viewControllers][index]];
-    }
+//    if ([[self delegate] respondsToSelector:@selector(tabBarController:didSelectViewController:)]) {
+//        [[self delegate] tabBarController:self didSelectViewController:[self viewControllers][index]];
+//
+//    }
 }
 
 @end

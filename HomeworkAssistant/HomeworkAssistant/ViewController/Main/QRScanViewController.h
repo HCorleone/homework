@@ -10,7 +10,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^shareCodeBlock)(NSString *shareCode);//扫描到openid的回调
+
+typedef NS_ENUM(NSInteger, ScanType) {
+    ScanTypeShareOrSearch,
+    ScanTypeUploadAnswer,
+    ScanTypeFeedBack,
+    ScanTypeDefault = ScanTypeShareOrSearch
+};
+
+
+
+
 @interface QRScanViewController : UIViewController
+
+@property (nonatomic, copy) shareCodeBlock shareCodeBlock;
+@property (nonatomic, assign) ScanType scanType;
 
 @end
 

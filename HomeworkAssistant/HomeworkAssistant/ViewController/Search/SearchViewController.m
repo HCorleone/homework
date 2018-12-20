@@ -168,7 +168,6 @@
 #pragma mark - PYSearchViewControllerDelegate
 - (void)searchViewController:(PYSearchViewController *)searchViewController didSearchWithSearchBar: (UISearchBar *)searchBar searchText:(NSString *)searchText {
     
-    
     if ([TextCheckTool lc_checkingSpecialChar:searchText]) {
         //        NSLog(@"不能含有非法字符");
         [CommonAlterView showAlertView:@"不能含有非法字符"];

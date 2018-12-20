@@ -66,6 +66,7 @@ static NSString *page = @"1";
     [self setupNav];
     [self setupMenu];
     [self downloadData];
+    
 }
 
 
@@ -124,7 +125,7 @@ static NSString *page = @"1";
 //初始化搜索结果view
 - (void)setupViewWithList:(NSMutableArray *)array {
     
-    RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 108 + TOP_OFFSET, SCREEN_WIDTH,SCREEN_HEIGHT - 108 - TOP_OFFSET) style:UITableViewStylePlain withArray:array];
+    RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 108 + TOP_OFFSET, SCREEN_WIDTH,SCREEN_HEIGHT - 108 - TOP_OFFSET - 42) style:UITableViewStylePlain withArray:array];
     [self.view addSubview:rTableView];
     rTableView.scrollEnabled = YES;
     rTableView.estimatedRowHeight = 0;
