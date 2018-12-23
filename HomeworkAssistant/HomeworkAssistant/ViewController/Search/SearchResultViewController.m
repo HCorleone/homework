@@ -23,6 +23,7 @@ static NSString *grade = @"";
 static NSString *subject = @"";
 static NSString *version = @"";
 static NSString *volume = @"";
+static NSString *year = @"";
 static NSString *page = @"1";
 
 @interface SearchResultViewController ()<UISearchBarDelegate, YZPullDownMenuDataSource, UITableViewDelegate>
@@ -44,6 +45,7 @@ static NSString *page = @"1";
     subject = @"";
     version = @"";
     volume = @"";
+    year = @"";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -82,7 +84,7 @@ static NSString *page = @"1";
                            @"subject":subject,
                            @"bookVersion":version,
                            @"volume":volume,
-                           @"year":@"",
+                           @"year":year,
                            @"pageNo":@"",
                            @"pageSize":@"",
                            @"av":@"_debug_"
@@ -214,6 +216,12 @@ static NSString *page = @"1";
             }
         }
     }
+    else if ([dic[@"col"] integerValue] == 3) {
+        year = dic[@"title"];
+        if ([year isEqualToString:@"全部年份"]) {
+            year = @"";
+        }
+    }
     [self downloadData];
     
 }
@@ -224,8 +232,7 @@ static NSString *page = @"1";
     [self.searchBar resignFirstResponder];
     
     if ([TextCheckTool lc_checkingSpecialChar:self.searchBar.text]) {
-//        NSLog(@"不能含有非法字符");
-        [CommonAlterView showAlertView:@"不能含有非法字符"];
+        [XWHUDManager showWarningTipHUDInView:@"不能含有非法字符"];
         return;
     }
     
@@ -265,6 +272,7 @@ static NSString *page = @"1";
     
     //菜单栏
     YZPullDownMenu *menu = [[YZPullDownMenu alloc] init];
+    menu.from = FromAnswerSearch;
     menu.frame = CGRectMake(0, 72 + TOP_OFFSET, SCREEN_WIDTH, 36);
     [self.view addSubview:menu];
     

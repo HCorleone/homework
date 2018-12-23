@@ -11,6 +11,10 @@
 
 // 更新下拉菜单标题通知名称
 NSString * const YZUpdateMenuTitleNote = @"YZUpdateMenuTitleNote";
+// 自己加的观察者通知名称
+NSString * const ChineseArticleNote = @"ChineseArticleNote";
+NSString * const EnglishArticleNote = @"EnglishArticleNote";
+
 
 @interface YZPullDownMenu ()
 /**
@@ -45,6 +49,7 @@ NSString * const YZUpdateMenuTitleNote = @"YZUpdateMenuTitleNote";
  *  观察者
  */
 @property (nonatomic, weak)   id observer;
+
 @end
 
 @implementation YZPullDownMenu
@@ -135,39 +140,41 @@ NSString * const YZUpdateMenuTitleNote = @"YZUpdateMenuTitleNote";
     
     _coverColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     
+    if (FromDefault == self.from || FromAnswerSearch == self.from) {
+        // 监听更新菜单标题通知
+        [self setupObserverWithName:YZUpdateMenuTitleNote];
+    }
+    else if (FromChineseArticle == self.from) {
+        [self setupObserverWithName:ChineseArticleNote];
+    }
+    else if (FromEnglishArticle == self.from) {
+        [self setupObserverWithName:EnglishArticleNote];
+    }
     
+}
 
-    
-    
-    
-    // 监听更新菜单标题通知
-    _observer = [[NSNotificationCenter defaultCenter] addObserverForName:YZUpdateMenuTitleNote object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-
+- (void)setupObserverWithName:(NSString *)observerForName {
+    _observer = [[NSNotificationCenter defaultCenter] addObserverForName:observerForName object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         // 获取列
-//        NSInteger col = [self.controllers indexOfObject:note.object];
+        //        NSInteger col = [self.controllers indexOfObject:note.object];
         NSDictionary *dic = [note userInfo];
-
+        
         NSInteger col1 = [dic[@"col"] integerValue];
         // 获取对应按钮
         UIButton *btn = self.menuButtons[col1];
-
+        
         // 隐藏下拉菜单
         [self dismiss];
-
+        
         // 获取所有值
         NSArray *allValues = note.userInfo.allValues;
-
+        
         // 不需要设置标题,字典个数大于1，或者有数组
-//        if (allValues.count > 1 || [allValues.firstObject isKindOfClass:[NSArray class]]) return ;
-
+        //        if (allValues.count > 1 || [allValues.firstObject isKindOfClass:[NSArray class]]) return ;
+        
         // 设置按钮标题
         [btn setTitle:allValues.firstObject forState:UIControlStateNormal];
-
     }];
-}
-
-- (void)test {
-    
 }
 
 #pragma mark - 布局子控件

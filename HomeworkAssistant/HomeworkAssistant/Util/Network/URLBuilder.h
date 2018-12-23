@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)getURLForMyCollections;//我的收藏
 
+//作文接口
++ (NSString *)getURLForArticle;
+
 //登陆接口
 + (NSString *)getURLForLogin;//登陆
 

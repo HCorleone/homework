@@ -25,5 +25,7 @@
 #import "CommonAlterView.h"
 #import "CommonToolClass.h"
 #import "PYSearch.h"
+#import "XWHUDManager.h"
+#import "JXCategoryView.h"
 
 #endif /* HomeworkAssistant_pch */

@@ -20,7 +20,6 @@
 @property (nonatomic, strong) UITextField *acountF;
 @property (nonatomic, strong) UITextField *passwordF;
 
-
 @end
 
 @implementation LoginViewController
@@ -382,12 +381,14 @@
 }
 
 - (void)loginSuccess {
+    [XWHUDManager showSuccessTipHUD:@"登陆成功"];
     [TTUserManager sharedInstance].isLogin = YES;
     [[TTUserManager sharedInstance]saveLoginUserInfo];
     [[TTUserManager sharedInstance]loadCurrentUserInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
     
     if ([TTUserManager sharedInstance].currentUser.grade) {
+        
         [self.navigationController popViewControllerAnimated:YES];
     }
     else

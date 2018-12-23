@@ -15,7 +15,7 @@
 #import "MyListView.h"
 #import "QRCodeView.h"
 #import "SearchResultViewController.h"
-
+#import "ArticleViewController.h"
 #import "BookListViewController.h"
 
 @interface MainViewController ()<UIScrollViewDelegate>
@@ -178,7 +178,7 @@
     //为您推荐
     RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 0.12 * SCREEN_WIDTH, SCREEN_WIDTH, array.count * 128 ) style:UITableViewStylePlain withArray:array];
     [self.recommendView addSubview:rTableView];
-        self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, 456 + rTableView.frame.size.height);
+//        self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, 456 + rTableView.frame.size.height);
 }
 
 
@@ -383,7 +383,7 @@
     mainView.backgroundColor = maincolor;
     mainView.delegate = self;
     self.mainView = mainView;
-    self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT + 500);
+    self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, 1.49 * SCREEN_WIDTH + 30 * 128);
     
     UIView *mainContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     mainContentView.backgroundColor = whitecolor;
@@ -557,14 +557,15 @@
         [self.navigationController pushViewController:mylistVC animated:YES];
     }
     else {
-        [CommonAlterView showAlertView:@"请先登录"];
-//        NSLog(@"请先登录");
+        [XWHUDManager showTipHUD:@"请先登录"];
     }
 }
 
 //前往作文页面
 - (void)toArticle {
     NSLog(@"前往作文view");
+    ArticleViewController *articleVC = [[ArticleViewController alloc]init];
+    [self.navigationController pushViewController:articleVC animated:YES];
 }
 //前往浏览记录
 - (void)toHistory {

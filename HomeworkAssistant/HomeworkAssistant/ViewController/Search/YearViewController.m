@@ -85,10 +85,10 @@ extern NSString * const YZUpdateMenuTitleNote;
 
 //点击item方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    ClassificationCell *cell = (ClassificationCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    NSString *col = @"1";
-//    [[NSNotificationCenter defaultCenter] postNotificationName:YZUpdateMenuTitleNote object:self userInfo:@{@"title":cell.title.text,@"col":col}];
-//    NSLog(@"%@",cell.title.text);
+    ClassificationCell *cell = (ClassificationCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    NSString *col = @"3";
+    [[NSNotificationCenter defaultCenter] postNotificationName:YZUpdateMenuTitleNote object:self userInfo:@{@"title":cell.title.text,@"col":col}];
+    NSLog(@"%@",cell.title.text);
 }
 
 //设置点击高亮和非高亮效果！

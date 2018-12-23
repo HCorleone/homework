@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+//确定是哪个地方用到该下来菜单，已决定创建哪一个观察者
+typedef NS_ENUM(NSInteger, From) {
+    FromAnswerSearch,
+    FromChineseArticle,
+    FromEnglishArticle,
+    FromDefault = FromAnswerSearch
+};
+
 @class YZPullDownItem,YZPullDownMenu;
 
 /**
@@ -102,4 +110,8 @@ extern NSString * const YZUpdateMenuTitleNote;
  *  刷新下拉菜单
  */
 - (void)reload;
+
+//从什么地方创建的菜单
+@property (nonatomic, assign) From from;
+
 @end

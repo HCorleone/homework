@@ -106,7 +106,7 @@
 //            [CommonAlterView showMessages:@"请先登录" andVC:weakSelf handler:^(UIAlertAction *action) {
 //                [weakSelf dismissViewControllerAnimated:NO completion:nil];
 //            }];
-            [CommonAlterView showAlertView:@"请先登录"];
+            [XWHUDManager showTipHUD:@"请先登录"];
             [weakSelf dismissViewControllerAnimated:NO completion:nil];
             
         }

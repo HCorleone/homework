@@ -3,7 +3,7 @@
 
 target 'HomeworkAssistant' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
-  # use_frameworks!
+   use_frameworks!
 
   # Pods for HomeworkAssistant
 	pod 'RDVTabBarController'
@@ -11,8 +11,8 @@ target 'HomeworkAssistant' do
 	pod 'SDWebImage'
 	pod 'AFNetworking'
 	pod 'MBProgressHUD'
-    	pod 'UMCCommon'
-    	pod 'UMCSecurityPlugins'
+    pod 'UMCCommon'
+    pod 'UMCSecurityPlugins'
 	pod 'UMCShare/UI'
 	pod 'UMCShare/Social/ReducedWeChat'
 	pod 'UMCShare/Social/ReducedQQ'
@@ -20,6 +20,6 @@ target 'HomeworkAssistant' do
 	pod 'SGQRCode'
 	pod 'MJRefresh'
 	pod 'PYSearch'
-#    pod 'JXCategoryView'
+    pod 'JXCategoryView'
 	pod 'XWHUDManager'
 end

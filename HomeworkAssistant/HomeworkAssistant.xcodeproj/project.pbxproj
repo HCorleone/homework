@@ -135,6 +135,16 @@
 		3D9EAF1821A52E49006AF423 /* AnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9EAF1721A52E49006AF423 /* AnswerViewController.m */; };
 		3D9EAF1B21A53010006AF423 /* AnswerDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9EAF1A21A53010006AF423 /* AnswerDetail.m */; };
 		3D9EAF1E21A5305C006AF423 /* AnswerDetailCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9EAF1D21A5305C006AF423 /* AnswerDetailCollectionView.m */; };
+		3DA91F3221CC9712005262D4 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA91F3121CC9712005262D4 /* ArticleViewController.m */; };
+		3DA91F3521CC9D3D005262D4 /* ChineseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA91F3421CC9D3D005262D4 /* ChineseViewController.m */; };
+		3DA91F3821CC9D4A005262D4 /* EnglishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA91F3721CC9D4A005262D4 /* EnglishViewController.m */; };
+		3DA91F5D21CF2548005262D4 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA91F5C21CF2548005262D4 /* Article.m */; };
+		3DA91F6021CF2925005262D4 /* ArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA91F5F21CF2925005262D4 /* ArticleCell.m */; };
+		3DA91F6921CF7B4C005262D4 /* ArticleGradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA91F6821CF7B4C005262D4 /* ArticleGradeViewController.m */; };
+		3DA91F6C21CF92F0005262D4 /* ArticleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA91F6B21CF92F0005262D4 /* ArticleDetailViewController.m */; };
+		3DA91F7021CF9C0C005262D4 /* 搜索_白色v2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA91F6D21CF9C0B005262D4 /* 搜索_白色v2@3x.png */; };
+		3DA91F7121CF9C0C005262D4 /* 搜索_白色v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA91F6E21CF9C0B005262D4 /* 搜索_白色v2.png */; };
+		3DA91F7221CF9C0C005262D4 /* 搜索_白色v2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA91F6F21CF9C0C005262D4 /* 搜索_白色v2@2x.png */; };
 		3DBE437D21CB7FCB00CE677F /* 我要反馈v2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBE437A21CB7FCB00CE677F /* 我要反馈v2@2x.png */; };
 		3DBE437E21CB7FCB00CE677F /* 我要反馈v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBE437B21CB7FCB00CE677F /* 我要反馈v2.png */; };
 		3DBE437F21CB7FCB00CE677F /* 我要反馈v2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBE437C21CB7FCB00CE677F /* 我要反馈v2@3x.png */; };
@@ -201,7 +211,7 @@
 		9FD90A3821BBCE2400EDF389 /* YTQGetUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A3721BBCE2400EDF389 /* YTQGetUserManager.m */; };
 		9FD90A3E21BBD20000EDF389 /* AssignToObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A3B21BBD20000EDF389 /* AssignToObject.m */; };
 		9FD90A4221BBD3F000EDF389 /* GetUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A4121BBD3F000EDF389 /* GetUserModel.m */; };
-		EB9AA2F1DEEC58D054515ADB /* libPods-HomeworkAssistant.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F857E4F36CA277C9BE2D06 /* libPods-HomeworkAssistant.a */; };
+		BF3257C6BBCCA703AD296E99 /* Pods_HomeworkAssistant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD6BBDE04556590051E9F61 /* Pods_HomeworkAssistant.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -379,6 +389,24 @@
 		3D9EAF1A21A53010006AF423 /* AnswerDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnswerDetail.m; sourceTree = "<group>"; };
 		3D9EAF1C21A5305C006AF423 /* AnswerDetailCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnswerDetailCollectionView.h; sourceTree = "<group>"; };
 		3D9EAF1D21A5305C006AF423 /* AnswerDetailCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnswerDetailCollectionView.m; sourceTree = "<group>"; };
+		3DA91F2521CBA662005262D4 /* libXWHUDManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libXWHUDManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DA91F3021CC9712005262D4 /* ArticleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArticleViewController.h; sourceTree = "<group>"; };
+		3DA91F3121CC9712005262D4 /* ArticleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArticleViewController.m; sourceTree = "<group>"; };
+		3DA91F3321CC9D3D005262D4 /* ChineseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChineseViewController.h; sourceTree = "<group>"; };
+		3DA91F3421CC9D3D005262D4 /* ChineseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChineseViewController.m; sourceTree = "<group>"; };
+		3DA91F3621CC9D4A005262D4 /* EnglishViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnglishViewController.h; sourceTree = "<group>"; };
+		3DA91F3721CC9D4A005262D4 /* EnglishViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnglishViewController.m; sourceTree = "<group>"; };
+		3DA91F5B21CF2548005262D4 /* Article.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
+		3DA91F5C21CF2548005262D4 /* Article.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
+		3DA91F5E21CF2925005262D4 /* ArticleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArticleCell.h; sourceTree = "<group>"; };
+		3DA91F5F21CF2925005262D4 /* ArticleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArticleCell.m; sourceTree = "<group>"; };
+		3DA91F6721CF7B4C005262D4 /* ArticleGradeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArticleGradeViewController.h; sourceTree = "<group>"; };
+		3DA91F6821CF7B4C005262D4 /* ArticleGradeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArticleGradeViewController.m; sourceTree = "<group>"; };
+		3DA91F6A21CF92F0005262D4 /* ArticleDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArticleDetailViewController.h; sourceTree = "<group>"; };
+		3DA91F6B21CF92F0005262D4 /* ArticleDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArticleDetailViewController.m; sourceTree = "<group>"; };
+		3DA91F6D21CF9C0B005262D4 /* 搜索_白色v2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索_白色v2@3x.png"; sourceTree = "<group>"; };
+		3DA91F6E21CF9C0B005262D4 /* 搜索_白色v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索_白色v2.png"; sourceTree = "<group>"; };
+		3DA91F6F21CF9C0C005262D4 /* 搜索_白色v2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索_白色v2@2x.png"; sourceTree = "<group>"; };
 		3DB06F2021C5159E00E058A2 /* Group_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group_3@2x.png"; sourceTree = "<group>"; };
 		3DB06F2121C5159E00E058A2 /* Group_3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group_3@3x.png"; sourceTree = "<group>"; };
 		3DBE437A21CB7FCB00CE677F /* 我要反馈v2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我要反馈v2@2x.png"; sourceTree = "<group>"; };
@@ -409,6 +437,7 @@
 		3DF0B99121BFE05E00AF682A /* 学习-默认@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "学习-默认@3x.png"; sourceTree = "<group>"; };
 		3DF0B99E21C0E94800AF682A /* TextCheckTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextCheckTool.h; sourceTree = "<group>"; };
 		3DF0B99F21C0E94800AF682A /* TextCheckTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextCheckTool.m; sourceTree = "<group>"; };
+		7CD6BBDE04556590051E9F61 /* Pods_HomeworkAssistant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeworkAssistant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		974F88E9F3024FEFD7D51BEA /* Pods-HomeworkAssistant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkAssistant.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeworkAssistant/Pods-HomeworkAssistant.release.xcconfig"; sourceTree = "<group>"; };
 		9F4D102621B7C65E00F4610A /* LTTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTTextView.h; sourceTree = "<group>"; };
 		9F4D102721B7C65E00F4610A /* LTTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTTextView.m; sourceTree = "<group>"; };
@@ -483,7 +512,6 @@
 		9FD90A3B21BBD20000EDF389 /* AssignToObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignToObject.m; sourceTree = "<group>"; };
 		9FD90A4021BBD3F000EDF389 /* GetUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetUserModel.h; sourceTree = "<group>"; };
 		9FD90A4121BBD3F000EDF389 /* GetUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetUserModel.m; sourceTree = "<group>"; };
-		C8F857E4F36CA277C9BE2D06 /* libPods-HomeworkAssistant.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HomeworkAssistant.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E44170AF14A5B0A29A093372 /* Pods-HomeworkAssistant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkAssistant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeworkAssistant/Pods-HomeworkAssistant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -492,7 +520,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB9AA2F1DEEC58D054515ADB /* libPods-HomeworkAssistant.a in Frameworks */,
+				BF3257C6BBCCA703AD296E99 /* Pods_HomeworkAssistant.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,6 +603,9 @@
 		3D958B7221C7AAE200AF7F3F /* v2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				3DA91F6E21CF9C0B005262D4 /* 搜索_白色v2.png */,
+				3DA91F6F21CF9C0C005262D4 /* 搜索_白色v2@2x.png */,
+				3DA91F6D21CF9C0B005262D4 /* 搜索_白色v2@3x.png */,
 				3DBE438E21CB800800CE677F /* 分享应用v2.png */,
 				3DBE438D21CB800700CE677F /* 分享应用v2@2x.png */,
 				3DBE438C21CB800700CE677F /* 分享应用v2@3x.png */,
@@ -682,6 +713,8 @@
 		3D9EA90A219916D3006AF423 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3DA91F5B21CF2548005262D4 /* Article.h */,
+				3DA91F5C21CF2548005262D4 /* Article.m */,
 				3D9EA90B219916F6006AF423 /* Book.h */,
 				3D9EA90C219916F6006AF423 /* Book.m */,
 				3D9EAF1921A53010006AF423 /* AnswerDetail.h */,
@@ -717,6 +750,8 @@
 				3D47256021B6482200C0E7CF /* SearchHistoryCell.m */,
 				3D4725AC21BA67C700C0E7CF /* ClassificationCell.h */,
 				3D4725AD21BA67C700C0E7CF /* ClassificationCell.m */,
+				3DA91F5E21CF2925005262D4 /* ArticleCell.h */,
+				3DA91F5F21CF2925005262D4 /* ArticleCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -852,18 +887,18 @@
 		3D9EAF0621A398EA006AF423 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				3D47258821BA2A7F00C0E7CF /* MainViewController.h */,
+				3D47258921BA2A7F00C0E7CF /* MainViewController.m */,
 				3D47256221B7855800C0E7CF /* MyListViewController.h */,
 				3D47256321B7855800C0E7CF /* MyListViewController.m */,
 				3D7D18E421AD66A2006B9C8F /* QRScanViewController.h */,
 				3D7D18E521AD66A2006B9C8F /* QRScanViewController.m */,
+				9FD3795821BFC63B005581BC /* BookListViewController.h */,
+				9FD3795921BFC63B005581BC /* BookListViewController.m */,
 				3D9EAF0721A39968006AF423 /* RecommendTableView.h */,
 				3D9EAF0821A39968006AF423 /* RecommendTableView.m */,
 				3D7D18F921B0CEE4006B9C8F /* MyListView.h */,
 				3D7D18FA21B0CEE4006B9C8F /* MyListView.m */,
-				3D47258821BA2A7F00C0E7CF /* MainViewController.h */,
-				3D47258921BA2A7F00C0E7CF /* MainViewController.m */,
-				9FD3795821BFC63B005581BC /* BookListViewController.h */,
-				9FD3795921BFC63B005581BC /* BookListViewController.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -912,6 +947,16 @@
 		3DBE437921CB28ED00CE677F /* Article */ = {
 			isa = PBXGroup;
 			children = (
+				3DA91F3021CC9712005262D4 /* ArticleViewController.h */,
+				3DA91F3121CC9712005262D4 /* ArticleViewController.m */,
+				3DA91F6A21CF92F0005262D4 /* ArticleDetailViewController.h */,
+				3DA91F6B21CF92F0005262D4 /* ArticleDetailViewController.m */,
+				3DA91F3321CC9D3D005262D4 /* ChineseViewController.h */,
+				3DA91F3421CC9D3D005262D4 /* ChineseViewController.m */,
+				3DA91F3621CC9D4A005262D4 /* EnglishViewController.h */,
+				3DA91F3721CC9D4A005262D4 /* EnglishViewController.m */,
+				3DA91F6721CF7B4C005262D4 /* ArticleGradeViewController.h */,
+				3DA91F6821CF7B4C005262D4 /* ArticleGradeViewController.m */,
 			);
 			path = Article;
 			sourceTree = "<group>";
@@ -1037,7 +1082,8 @@
 		A35CC4704564C779F687B91E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C8F857E4F36CA277C9BE2D06 /* libPods-HomeworkAssistant.a */,
+				3DA91F2521CBA662005262D4 /* libXWHUDManager.a */,
+				7CD6BBDE04556590051E9F61 /* Pods_HomeworkAssistant.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1054,6 +1100,7 @@
 				3D9EA8E72195A787006AF423 /* Frameworks */,
 				3D9EA8E82195A787006AF423 /* Resources */,
 				826F127A3670E1CCC8E8E56C /* [CP] Copy Pods Resources */,
+				3225DD3C17484BA6D2941E26 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1105,6 +1152,7 @@
 				3D958B9E21C8994E00AF7F3F /* 英文作文v2@2x.png in Resources */,
 				3DBE438521CB7FE600CE677F /* 给个好评v2@3x.png in Resources */,
 				3D958B8F21C7CC2F00AF7F3F /* 学习-默认v2.png in Resources */,
+				3DA91F7021CF9C0C005262D4 /* 搜索_白色v2@3x.png in Resources */,
 				3DBE438921CB7FFB00CE677F /* 检查更新v2.png in Resources */,
 				3D9EA957219C26AF006AF423 /* 返回@2x.png in Resources */,
 				3D958B8321C7CBC100AF7F3F /* 学习-选中v2@2x.png in Resources */,
@@ -1155,6 +1203,7 @@
 				3D9EA968219D7405006AF423 /* 微信@2x.png in Resources */,
 				3D9EA8FA2195A788006AF423 /* LaunchScreen.storyboard in Resources */,
 				3DBE438321CB7FE600CE677F /* 给个好评v2.png in Resources */,
+				3DA91F7121CF9C0C005262D4 /* 搜索_白色v2.png in Resources */,
 				3D47256821B79CD500C0E7CF /* 管理@2x.png in Resources */,
 				3DF0B99721BFE05E00AF682A /* 学习-默认.png in Resources */,
 				3D958B8821C7CC2400AF7F3F /* 我的-选中v2@3x.png in Resources */,
@@ -1168,6 +1217,7 @@
 				3D9EA966219D7405006AF423 /* 微信@3x.png in Resources */,
 				3D958B7821C7AAF400AF7F3F /* 扫一扫bluev2.png in Resources */,
 				3D7D18F221AE83A6006B9C8F /* login in Resources */,
+				3DA91F7221CF9C0C005262D4 /* 搜索_白色v2@2x.png in Resources */,
 				3D958B6221C73E0600AF7F3F /* server.cer in Resources */,
 				3D958BB721CA657100AF7F3F /* 上传答案v2@2x.png in Resources */,
 				3D47256721B79CD500C0E7CF /* 管理@3x.png in Resources */,
@@ -1224,6 +1274,42 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3225DD3C17484BA6D2941E26 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-HomeworkAssistant/Pods-HomeworkAssistant-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/JXCategoryView/JXCategoryView.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/PYSearch/PYSearch.framework",
+				"${BUILT_PRODUCTS_DIR}/RDVTabBarController/RDVTabBarController.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SGQRCode/SGQRCode.framework",
+				"${BUILT_PRODUCTS_DIR}/XWHUDManager/XWHUDManager.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXCategoryView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PYSearch.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RDVTabBarController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGQRCode.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XWHUDManager.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HomeworkAssistant/Pods-HomeworkAssistant-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		616E041A383B051B17A7BC2D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1249,16 +1335,10 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HomeworkAssistant/Pods-HomeworkAssistant-resources.sh",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
-				"${PODS_ROOT}/PYSearch/PYSearch/PYSearch.bundle",
-				"${PODS_ROOT}/SGQRCode/SGQRCode/SGQRCode.bundle",
 				"${PODS_ROOT}/UMCShare/UMShare/UMSocialUI/UMSocialSDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PYSearch.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SGQRCode.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1275,6 +1355,7 @@
 			files = (
 				9F7690FA21C4D6B400A4AA5D /* FLJSearchBar.m in Sources */,
 				3D7D18F821B0CCCF006B9C8F /* MyListViewCell.m in Sources */,
+				3DA91F6C21CF92F0005262D4 /* ArticleDetailViewController.m in Sources */,
 				3D4725B121BA78CA00C0E7CF /* CollectionHeaderView.m in Sources */,
 				9F629B8121BE73C2002A79AC /* FillOthersView.m in Sources */,
 				3D4725A221BA5F1600C0E7CF /* VersionViewController.m in Sources */,
@@ -1284,12 +1365,16 @@
 				9F4D104621B7E83C00F4610A /* FillBookInformationView.m in Sources */,
 				3D47259C21BA5C5300C0E7CF /* UIView+YZCategory.m in Sources */,
 				3D958B6521C755A000AF7F3F /* CommonToolClass.m in Sources */,
+				3DA91F3821CC9D4A005262D4 /* EnglishViewController.m in Sources */,
 				3D7D18ED21AE42E0006B9C8F /* TTUserModel.m in Sources */,
 				3D47256121B6482200C0E7CF /* SearchHistoryCell.m in Sources */,
 				3D9EA90D219916F6006AF423 /* Book.m in Sources */,
 				3D9EA8FD2195A788006AF423 /* main.m in Sources */,
 				9F7690FB21C4D6B400A4AA5D /* UIImage+Extension.m in Sources */,
 				9F4D103221B7C67A00F4610A /* SingUpViewController.m in Sources */,
+				3DA91F6921CF7B4C005262D4 /* ArticleGradeViewController.m in Sources */,
+				3DA91F3521CC9D3D005262D4 /* ChineseViewController.m in Sources */,
+				3DA91F3221CC9712005262D4 /* ArticleViewController.m in Sources */,
 				3D9EAF0F21A39BF0006AF423 /* RecommendStaticCell.m in Sources */,
 				9F4D104C21B7F9A100F4610A /* NIDropDown.m in Sources */,
 				3D9EA90921990802006AF423 /* MyViewController.m in Sources */,
@@ -1308,6 +1393,7 @@
 				3D7D18E321AD24C7006B9C8F /* AnswerCell.m in Sources */,
 				3D958BB221CA1AAA00AF7F3F /* YearViewController.m in Sources */,
 				9F4D102821B7C65E00F4610A /* LTTextView.m in Sources */,
+				3DA91F5D21CF2548005262D4 /* Article.m in Sources */,
 				9F4D109E21B8037900F4610A /* NSArray+SafeObjectArray.m in Sources */,
 				3DF0B9A021C0E94800AF682A /* TextCheckTool.m in Sources */,
 				3D4725AB21BA63E600C0E7CF /* GradeViewController.m in Sources */,
@@ -1327,6 +1413,7 @@
 				3D7D18E021AC1997006B9C8F /* AnswerDetailViewController.m in Sources */,
 				3D47257621BA20C300C0E7CF /* QRCodeView.m in Sources */,
 				3D7D18FB21B0CEE4006B9C8F /* MyListView.m in Sources */,
+				3DA91F6021CF2925005262D4 /* ArticleCell.m in Sources */,
 				3D9EA95E219D6024006AF423 /* LoginTextField.m in Sources */,
 				3D4725A521BA5F3F00C0E7CF /* SubjectViewController.m in Sources */,
 				3D9EA94C219BBA19006AF423 /* UITextView+UITextView_Placeholder.m in Sources */,

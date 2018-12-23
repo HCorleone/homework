@@ -147,7 +147,7 @@
         }
         else {
 //            NSLog(@"请先登录");
-            [CommonAlterView showAlertView:@"请先登录"];
+            [XWHUDManager showTipHUD:@"请先登录"];
         }
     }
 }
@@ -202,9 +202,7 @@
     NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"]integerValue] == 200) {
-            
-            NSLog(@"收藏成功");
-            [CommonAlterView showAlertView:@"收藏成功"];
+            [XWHUDManager showSuccessTipHUDInView:@"收藏成功"];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"userLikeOrNot" object:nil];
         }
         

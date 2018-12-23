@@ -23,6 +23,12 @@
     return URLString;
 }
 
++ (NSString *)getURLForArticle {
+    NSString *URLString = @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?h=ZYSearchArticleHandler";
+    
+    return URLString;
+}
+
 + (NSDictionary *)getCommonInfo {
     NSDictionary *dic = @{
                           

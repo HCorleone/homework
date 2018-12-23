@@ -13,6 +13,8 @@
 #define TOP_OFFSET [GetCurrentDevice getTopOffset]
 #define BOT_OFFSET [GetCurrentDevice getBotOffset]
 
+//NAVBAR_HEIGHT
+#define NAVBAR_HEIGHT 72
 
 //TABBAR_HEIGHT
 #define TABBAR_HEIGHT 48
