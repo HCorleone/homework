@@ -27,11 +27,6 @@
     [self setupNav];
 }
 
-//返回上一个界面
-- (void)backToVc {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)setupNav {
     //导航栏
     UIView *navView = [[UIView alloc]init];
@@ -133,13 +128,13 @@
                 
                 if ([weakSelf.fillView.chooseBtn1.titleLabel.text isEqualToString:@"请选择年级"] || [weakSelf.fillView.chooseBtn2.titleLabel.text isEqualToString:@"请选择学科"] ||[weakSelf.fillView.chooseBtn3.titleLabel.text isEqualToString:@"请选择版本"]) {
                     NSLog(@"信息不全");
-                    [CommonAlterView showAlertView:@"信息不完整"];
+                    [XWHUDManager showTipHUDInView:@"信息不完整"];
                 }
                 else{
 
                     if ([weakSelf.fillView.inputField.text isEqualToString:@""] || [weakSelf.fillView.codeLabel.text isEqualToString:@""]) {
                         NSLog(@"信息不全");
-                        [CommonAlterView showAlertView:@"未输入条码"];
+                        [XWHUDManager showTipHUDInView:@"未输入条码"];
                     }
                     else{
                         
@@ -162,25 +157,23 @@
 #pragma mark - 请求接口
 -(void)getManager {
     
-    NSDictionary *dic = @{@"h":@"ZYUploadAnswerBaseInfoHandler",
+    NSDictionary *dic = @{
                           @"openID":userValue(@"openId"),
                           @"userName":userValue(@"name"),
                           @"title":self.fillView.inputField.text,
                           @"grade":self.fillView.chooseBtn1.titleLabel.text,
                           @"subject":self.fillView.chooseBtn2.titleLabel.text,
                           @"bookVersion":self.fillView.chooseBtn3.titleLabel.text,
-                          @"code":userValue(@"InputBarCode"),
-                          @"av":@"_debug_"
-                          
+                          @"code":userValue(@"InputBarCode")
                           };
-    
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
+    dic = [HMACSHA1 encryptDicForRequest:dic];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
     //设置请求方式
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     //接收数据是json形式给出
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
         __weak typeof(self) weakSelf = self;
-    [manager GET:GetUpAnswerID parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:[URLBuilder getURLForUploadAnswerBaseInfo] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"------------------------------%@------------------------------", responseObject);
         //返回成功
         if ([responseObject[@"code"] intValue] == 200) {

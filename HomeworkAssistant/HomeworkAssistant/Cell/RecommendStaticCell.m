@@ -157,20 +157,17 @@
     
     NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
     
-    NSString *URL = zuoyeURL;
     NSDictionary *dict = @{
-                           @"h":@"ZYDelUserLikeHandler",
                            @"openID":openId,
                            @"answerIDs":self.bookID,
-                           @"pkn":@"com.enjoytime.palmhomework",
-                           @"sourceType":@"rec",
-                           @"av":@"_debug_"
+                           @"sourceType":@"rec"
                            };
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForDelUserLike] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"]integerValue] == 200) {
             
@@ -188,18 +185,16 @@
     NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
     
     NSDictionary *dict = @{
-                           @"h":@"ZYUserLikeHandler",
                            @"openID":openId,
                            @"answerID":self.bookID,
-                           @"pkn":@"com.enjoytime.palmhomework",
                            @"sourceType":@"rec",
-                           @"av":@"_debug_"
                            };
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForUserLike] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"]integerValue] == 200) {
             [XWHUDManager showSuccessTipHUDInView:@"收藏成功"];

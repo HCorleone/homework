@@ -11,6 +11,7 @@
 #import "SearchHistoryCell.h"
 #import "ButtonLinks.h"
 #import "QRScanViewController.h"
+#import "BookListViewController.h"
 
 @interface SearchViewController ()<PYSearchViewControllerDelegate>
 
@@ -49,15 +50,13 @@
 - (void)loadHotWords {
 
     
-    NSDictionary *dict = @{
-                           @"h":@"ZYSearchHotWordsHandler",
-                           @"av":@"_debug_"
-                           };
+    NSDictionary *dict = [NSDictionary dictionary];
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForSearchHotWords] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {
             NSArray *jsonDataArr = responseObject[@"datas"];
@@ -149,12 +148,19 @@
 
 //前往扫描
 - (void)toScan {
+    
     QRScanViewController *scanVC = [[QRScanViewController alloc]init];
+    scanVC.scanType = ScanTypeDefault;
+    scanVC.shareCodeBlock = ^(NSString * _Nonnull shareCode) {
+        BookListViewController *book = [[BookListViewController alloc] init];
+        book.idStr = shareCode;
+        book.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+        
+        [self presentViewController:book animated:NO completion:nil];
+    };
+    
     [self.navigationController pushViewController:scanVC animated:YES];
-}
-
-- (void)backToVc {
-    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

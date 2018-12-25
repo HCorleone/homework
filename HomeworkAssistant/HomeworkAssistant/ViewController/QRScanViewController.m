@@ -89,10 +89,6 @@
     [self.navigationController pushViewController:[[InputBarCodeViewController alloc] init] animated:YES];
 }
 
-- (void)backToVc {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager didOutputMetadataObjects:(NSArray *)metadataObjects {
     AVMetadataMachineReadableCodeObject * tempMetadataObject = [metadataObjects objectAtIndex : 0 ];
     NSString *result = tempMetadataObject.stringValue;

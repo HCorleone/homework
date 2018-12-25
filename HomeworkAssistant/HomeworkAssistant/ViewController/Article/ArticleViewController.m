@@ -126,6 +126,7 @@
     titleCategoryView.titleColorGradientEnabled = YES;
     titleCategoryView.titleColor = whitecolor;
     titleCategoryView.titleSelectedColor = [UIColor colorWithHexString:@"#2988CC"];
+    titleCategoryView.defaultSelectedIndex = _offsetX;
     
     JXCategoryIndicatorBackgroundView *backgroundView = [[JXCategoryIndicatorBackgroundView alloc] init];
     backgroundView.backgroundViewColor = whitecolor;
@@ -136,15 +137,11 @@
     titleCategoryView.indicators = @[backgroundView];
     titleCategoryView.delegate = self;
     titleCategoryView.contentScrollView = self.articleScrollView;
-    
+
 }
 
 - (void)toSearch {
     
-}
-
-- (void)backToVc {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - JXCategoryViewDelegate

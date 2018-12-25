@@ -105,16 +105,14 @@
     NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
     
     NSDictionary *dict = @{
-                           @"h":@"ZYListUserLikeHandler",
-                           @"openID":openId,
-                           @"pkn":@"com.enjoytime.palmhomework",
-                           @"av":@"_debug_"
+                           @"openID":openId
                            };
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForMyCollections] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         
         if ([responseObject[@"code"] integerValue] == 200) {
@@ -185,10 +183,6 @@
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 
-- (void)backToVc {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
@@ -247,18 +241,15 @@
     NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
     
     NSDictionary *dict = @{
-                           @"h":@"ZYDelUserLikeHandler",
                            @"openID":openId,
                            @"answerIDs":model.answerID,
-                           @"pkn":@"com.enjoytime.palmhomework",
-                           @"sourceType":@"rec",
-                           @"av":@"_debug_"
+                           @"sourceType":@"rec"
                            };
-    
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForDelUserLike] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"]integerValue] == 200) {
             NSLog(@"取消收藏");

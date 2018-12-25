@@ -11,12 +11,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (MD5)
-+ (NSString *) md5:(NSString *) str;
+
++ (NSString *) md5:(NSString *) str;//zuoyeapi用这个
 
 // 32位小写
 + (NSString *)MD5ForLower32Bate:(NSString *)str;
 // 32位大写
-+ (NSString *)MD5ForUpper32Bate:(NSString *)str;
++ (NSString *)MD5ForUpper32Bate:(NSString *)str;//用户登录注册及找回密码用这个
 // 16为大写
 + (NSString *)MD5ForUpper16Bate:(NSString *)str;
 // 16位小写

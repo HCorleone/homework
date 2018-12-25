@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CommonToolClass : NSObject
 
++ (NSString *)currentTimeStr;//获取时间戳，精确到毫米
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -55,7 +55,7 @@
 {
     if(!_manager)
     {
-        _manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OldIP]];
+        _manager = [[AFHTTPSessionManager alloc] init];
         //设置请求方式
         _manager.requestSerializer = [AFHTTPRequestSerializer serializer];
         //接收数据是json形式给出
@@ -97,43 +97,21 @@
     }];
 }
 
-//返回操作
-- (void)backToVc {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-//时间戳
-- (NSString *)currentTimeStr{
-    NSDate* date = [NSDate dateWithTimeIntervalSinceNow:0];//获取当前时间0秒后的时间
-    NSTimeInterval time=[date timeIntervalSince1970]*1000;// *1000 是精确到毫秒，不乘就是精确到秒
-    NSString *timeString = [NSString stringWithFormat:@"%.0f", time];
-    return timeString;
-}
-
 //获取验证码
 -(void)getVerification
 {
     //时间戳
-//    NSInteger timesTamp = [NSString getNowTimestamp];
-//    NSString *timesStr = [NSString stringWithFormat:@"%ld", timesTamp];
-//    NSString *timesStr = [[NSNumber numberWithInteger:timesTamp]stringValue];
-    NSString *timesStr = [self currentTimeStr];
-    
+    NSString *timesStr = [CommonToolClass currentTimeStr];
     NSString *md5 = [NSString stringWithFormat:@"%@%@2017", timesStr, self.pwdView.phoneField.text];
-//    NSString *digest = [NSString md5:md5];
     NSString *digest = [NSString MD5ForUpper32Bate:md5];
-//    NSString *digest = [NSString MD5ForLower16Bate:md5];
-//    NSString *digest = [NSString MD5ForUpper16Bate:md5];
     
-    NSDictionary *dic = @{@"h":@"SendValidCodeUpdateHandler",
+    NSDictionary *dic = @{
                           @"mobile":self.pwdView.phoneField.text,
                           @"digest":digest,
                           @"salt":timesStr,
-                          @"av":@"_debug_"
-                          
                           };
     
-    [self.manager GET:@"/tataeraapi/api.s?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager GET:[URLBuilder getURLForVerificationCode] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"------------------------------%@", responseObject);
         if ([responseObject[@"code"] integerValue] == 200) {
             [self showArtleMessage:@"已发送验证码" isJump:NO];
@@ -152,15 +130,13 @@
 //确认修改
 -(void)getUpdatePwd{
     
-    NSDictionary *dic = @{@"h":@"UpdateUserPasswdHandler",
+    NSDictionary *dic = @{
                           @"mobile":self.pwdView.phoneField.text,
                           @"passwd":self.pwdView.pwdField.text,
                           @"validCode":self.pwdView.codeField.text,
-                          @"av":@"_debug_"
-                          
                           };
     //    __weak typeof(self) weakSelf = self;
-    [self.manager GET:@"/tataeraapi/api.s?" parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager GET:[URLBuilder getURLForFindBackPassword] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"------------------------------%@", responseObject);
         if ([responseObject[@"code"] integerValue] == 200) {
             [self showArtleMessage:@"修改成功" isJump:YES];

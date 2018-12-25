@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "YZPullDownMenu.h"
 #import "ArticleGradeViewController.h"
+#import "ArticleTypeViewController.h"
+#import "WordsNumViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

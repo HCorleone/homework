@@ -253,35 +253,7 @@
     [logoutBtn setTitle:@"注销" forState:UIControlStateNormal];
     [logoutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     self.logoutBtn = logoutBtn;
-    
-//    //上传按钮
-//
-//    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-//    gradientLayer.frame = CGRectMake(0, 0, 0.725 * SCREEN_WIDTH, 0.13 * 0.725 * SCREEN_WIDTH);
-//    [gradientLayer setColors:[NSArray arrayWithObjects:
-//                              (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
-//                              (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
-//                              nil
-//                              ]];
-//
-//
-//    gradientLayer.startPoint = CGPointMake(0, 0);
-//    gradientLayer.endPoint = CGPointMake(0, 1);
-//    gradientLayer.locations = @[@0,@1];
-    
-//    UIButton *uploadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [sloginView addSubview:uploadBtn];
-//    [uploadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.mas_equalTo(sloginView);
-//        make.size.mas_equalTo(CGSizeMake(0.725 * SCREEN_WIDTH, 0.13 * 0.725 * SCREEN_WIDTH));
-//        make.bottom.mas_equalTo(sloginView).offset(-0.07 * SCREEN_WIDTH);
-//    }];
-//    uploadBtn.layer.masksToBounds = YES;
-//    [uploadBtn.layer addSublayer:gradientLayer];
-//    uploadBtn.layer.cornerRadius = 0.13 * 0.725 * SCREEN_WIDTH/2;
-//    [uploadBtn setTitleColor:whitecolor forState:UIControlStateNormal];
-//    [uploadBtn setTitle:@"上传答案" forState:UIControlStateNormal];
-//    [uploadBtn addTarget:self action:@selector(toUpLoad) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
 
@@ -329,7 +301,7 @@
                 }
                 else
                 {
-                    [CommonAlterView showAlertView:@"请选择年级"];
+                    [XWHUDManager showTipHUDInView:@"请选择年级和地区"];
                 }
                 
             }
@@ -392,21 +364,20 @@
 #pragma mark - 请求接口
 -(void)getManager {
     
-    NSDictionary *dic = @{@"h":@"ZYUpsertUserExtHander",
+    NSDictionary *dic = @{
                           @"openID":userValue(@"openId"),
                           @"grade":self.editor.downBtn.titleLabel.text,
-                          @"city":self.editor.cityBtn.titleLabel.text,
-                          @"av":@"_debug_"
-                          
+                          @"city":self.editor.cityBtn.titleLabel.text
                           };
+    dic = [HMACSHA1 encryptDicForRequest:dic];
     
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
     //设置请求方式
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     //接收数据是json形式给出
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     __weak typeof(self) weakSelf = self;
-    [manager GET:upUserInform parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:[URLBuilder getURLForUpsertUserExt] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"------------------------------%@------------------------------", responseObject);
         if ([responseObject[@"code"] intValue] == 200) {
             

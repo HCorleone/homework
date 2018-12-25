@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ArticleViewController : UIViewController
+@interface ArticleViewController : BaseViewController
+
+@property (nonatomic, assign) NSInteger offsetX;
 
 @end
 

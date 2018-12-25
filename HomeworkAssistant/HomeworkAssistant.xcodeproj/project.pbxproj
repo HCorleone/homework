@@ -145,6 +145,9 @@
 		3DA91F7021CF9C0C005262D4 /* 搜索_白色v2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA91F6D21CF9C0B005262D4 /* 搜索_白色v2@3x.png */; };
 		3DA91F7121CF9C0C005262D4 /* 搜索_白色v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA91F6E21CF9C0B005262D4 /* 搜索_白色v2.png */; };
 		3DA91F7221CF9C0C005262D4 /* 搜索_白色v2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA91F6F21CF9C0C005262D4 /* 搜索_白色v2@2x.png */; };
+		3DA91F7521D0784C005262D4 /* ArticleTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA91F7421D0784C005262D4 /* ArticleTypeViewController.m */; };
+		3DA91F7821D07BB1005262D4 /* WordsNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA91F7721D07BB1005262D4 /* WordsNumViewController.m */; };
+		3DA91F7B21D08C5A005262D4 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA91F7A21D08C5A005262D4 /* BaseViewController.m */; };
 		3DBE437D21CB7FCB00CE677F /* 我要反馈v2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBE437A21CB7FCB00CE677F /* 我要反馈v2@2x.png */; };
 		3DBE437E21CB7FCB00CE677F /* 我要反馈v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBE437B21CB7FCB00CE677F /* 我要反馈v2.png */; };
 		3DBE437F21CB7FCB00CE677F /* 我要反馈v2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBE437C21CB7FCB00CE677F /* 我要反馈v2@3x.png */; };
@@ -208,9 +211,7 @@
 		9FD90A2021B91FB000EDF389 /* SubmitCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A1E21B91FB000EDF389 /* SubmitCollectionViewCell.m */; };
 		9FD90A3221BA49C000EDF389 /* EditorNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A3121BA49C000EDF389 /* EditorNameView.m */; };
 		9FD90A3521BBA08A00EDF389 /* NSString+GetNowTimestamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A3421BBA08A00EDF389 /* NSString+GetNowTimestamp.m */; };
-		9FD90A3821BBCE2400EDF389 /* YTQGetUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A3721BBCE2400EDF389 /* YTQGetUserManager.m */; };
 		9FD90A3E21BBD20000EDF389 /* AssignToObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A3B21BBD20000EDF389 /* AssignToObject.m */; };
-		9FD90A4221BBD3F000EDF389 /* GetUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD90A4121BBD3F000EDF389 /* GetUserModel.m */; };
 		BF3257C6BBCCA703AD296E99 /* Pods_HomeworkAssistant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD6BBDE04556590051E9F61 /* Pods_HomeworkAssistant.framework */; };
 /* End PBXBuildFile section */
 
@@ -407,6 +408,12 @@
 		3DA91F6D21CF9C0B005262D4 /* 搜索_白色v2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索_白色v2@3x.png"; sourceTree = "<group>"; };
 		3DA91F6E21CF9C0B005262D4 /* 搜索_白色v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索_白色v2.png"; sourceTree = "<group>"; };
 		3DA91F6F21CF9C0C005262D4 /* 搜索_白色v2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索_白色v2@2x.png"; sourceTree = "<group>"; };
+		3DA91F7321D0784C005262D4 /* ArticleTypeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArticleTypeViewController.h; sourceTree = "<group>"; };
+		3DA91F7421D0784C005262D4 /* ArticleTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArticleTypeViewController.m; sourceTree = "<group>"; };
+		3DA91F7621D07BB1005262D4 /* WordsNumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WordsNumViewController.h; sourceTree = "<group>"; };
+		3DA91F7721D07BB1005262D4 /* WordsNumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordsNumViewController.m; sourceTree = "<group>"; };
+		3DA91F7921D08C5A005262D4 /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		3DA91F7A21D08C5A005262D4 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		3DB06F2021C5159E00E058A2 /* Group_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group_3@2x.png"; sourceTree = "<group>"; };
 		3DB06F2121C5159E00E058A2 /* Group_3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group_3@3x.png"; sourceTree = "<group>"; };
 		3DBE437A21CB7FCB00CE677F /* 我要反馈v2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我要反馈v2@2x.png"; sourceTree = "<group>"; };
@@ -506,12 +513,8 @@
 		9FD90A3121BA49C000EDF389 /* EditorNameView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditorNameView.m; sourceTree = "<group>"; };
 		9FD90A3321BBA08A00EDF389 /* NSString+GetNowTimestamp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+GetNowTimestamp.h"; sourceTree = "<group>"; };
 		9FD90A3421BBA08A00EDF389 /* NSString+GetNowTimestamp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+GetNowTimestamp.m"; sourceTree = "<group>"; };
-		9FD90A3621BBCE2400EDF389 /* YTQGetUserManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YTQGetUserManager.h; sourceTree = "<group>"; };
-		9FD90A3721BBCE2400EDF389 /* YTQGetUserManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YTQGetUserManager.m; sourceTree = "<group>"; };
 		9FD90A3A21BBD20000EDF389 /* AssignToObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignToObject.h; sourceTree = "<group>"; };
 		9FD90A3B21BBD20000EDF389 /* AssignToObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignToObject.m; sourceTree = "<group>"; };
-		9FD90A4021BBD3F000EDF389 /* GetUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetUserModel.h; sourceTree = "<group>"; };
-		9FD90A4121BBD3F000EDF389 /* GetUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetUserModel.m; sourceTree = "<group>"; };
 		E44170AF14A5B0A29A093372 /* Pods-HomeworkAssistant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkAssistant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeworkAssistant/Pods-HomeworkAssistant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -590,6 +593,8 @@
 		3D958B6E21C792E200AF7F3F /* other */ = {
 			isa = PBXGroup;
 			children = (
+				3DF0B99E21C0E94800AF682A /* TextCheckTool.h */,
+				3DF0B99F21C0E94800AF682A /* TextCheckTool.m */,
 				3D47259A21BA5C5300C0E7CF /* UIView+YZCategory.h */,
 				3D47259B21BA5C5300C0E7CF /* UIView+YZCategory.m */,
 				3D97C68021BE96D900D9404E /* GetCurrentDevice.h */,
@@ -701,10 +706,14 @@
 		3D9EA906219907DC006AF423 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				3DBE437921CB28ED00CE677F /* Article */,
-				3D7C712F21A659BD008F9D52 /* Search */,
-				3D9EAF1521A52DFE006AF423 /* AnswerDetail */,
+				3DA91F7921D08C5A005262D4 /* BaseViewController.h */,
+				3DA91F7A21D08C5A005262D4 /* BaseViewController.m */,
+				3D7D18E421AD66A2006B9C8F /* QRScanViewController.h */,
+				3D7D18E521AD66A2006B9C8F /* QRScanViewController.m */,
 				3D9EAF0621A398EA006AF423 /* Main */,
+				3D7C712F21A659BD008F9D52 /* Search */,
+				3DBE437921CB28ED00CE677F /* Article */,
+				3D9EAF1521A52DFE006AF423 /* AnswerDetail */,
 				3D9EA91721998B64006AF423 /* My */,
 			);
 			path = ViewController;
@@ -723,10 +732,6 @@
 				3D7D18EC21AE42E0006B9C8F /* TTUserModel.m */,
 				3D7D18EE21AE69E6006B9C8F /* TTUserManager.h */,
 				3D7D18EF21AE69E6006B9C8F /* TTUserManager.m */,
-				9FD90A3621BBCE2400EDF389 /* YTQGetUserManager.h */,
-				9FD90A3721BBCE2400EDF389 /* YTQGetUserManager.m */,
-				9FD90A4021BBD3F000EDF389 /* GetUserModel.h */,
-				9FD90A4121BBD3F000EDF389 /* GetUserModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -891,8 +896,6 @@
 				3D47258921BA2A7F00C0E7CF /* MainViewController.m */,
 				3D47256221B7855800C0E7CF /* MyListViewController.h */,
 				3D47256321B7855800C0E7CF /* MyListViewController.m */,
-				3D7D18E421AD66A2006B9C8F /* QRScanViewController.h */,
-				3D7D18E521AD66A2006B9C8F /* QRScanViewController.m */,
 				9FD3795821BFC63B005581BC /* BookListViewController.h */,
 				9FD3795921BFC63B005581BC /* BookListViewController.m */,
 				3D9EAF0721A39968006AF423 /* RecommendTableView.h */,
@@ -912,8 +915,6 @@
 				9F4D104A21B7F9A100F4610A /* NIDropDown.m */,
 				9FD90A1221B915D000EDF389 /* CommonAlterView.h */,
 				9FD90A1321B915D000EDF389 /* CommonAlterView.m */,
-				3DF0B99E21C0E94800AF682A /* TextCheckTool.h */,
-				3DF0B99F21C0E94800AF682A /* TextCheckTool.m */,
 				9FD3796821C253F9005581BC /* ImgScrollView.h */,
 				9FD3796721C253F9005581BC /* ImgScrollView.m */,
 				9FAB957421C4AF1000859BBB /* ButtonLinks.h */,
@@ -957,6 +958,10 @@
 				3DA91F3721CC9D4A005262D4 /* EnglishViewController.m */,
 				3DA91F6721CF7B4C005262D4 /* ArticleGradeViewController.h */,
 				3DA91F6821CF7B4C005262D4 /* ArticleGradeViewController.m */,
+				3DA91F7321D0784C005262D4 /* ArticleTypeViewController.h */,
+				3DA91F7421D0784C005262D4 /* ArticleTypeViewController.m */,
+				3DA91F7621D07BB1005262D4 /* WordsNumViewController.h */,
+				3DA91F7721D07BB1005262D4 /* WordsNumViewController.m */,
 			);
 			path = Article;
 			sourceTree = "<group>";
@@ -1370,6 +1375,7 @@
 				3D47256121B6482200C0E7CF /* SearchHistoryCell.m in Sources */,
 				3D9EA90D219916F6006AF423 /* Book.m in Sources */,
 				3D9EA8FD2195A788006AF423 /* main.m in Sources */,
+				3DA91F7821D07BB1005262D4 /* WordsNumViewController.m in Sources */,
 				9F7690FB21C4D6B400A4AA5D /* UIImage+Extension.m in Sources */,
 				9F4D103221B7C67A00F4610A /* SingUpViewController.m in Sources */,
 				3DA91F6921CF7B4C005262D4 /* ArticleGradeViewController.m in Sources */,
@@ -1386,6 +1392,7 @@
 				9F4D104321B7E5FC00F4610A /* FillBookInformationViewController.m in Sources */,
 				3D9EA91321994E35006AF423 /* MyViewStaticCell.m in Sources */,
 				3D4725AE21BA67C700C0E7CF /* ClassificationCell.m in Sources */,
+				3DA91F7B21D08C5A005262D4 /* BaseViewController.m in Sources */,
 				9FD3796921C253F9005581BC /* ImgScrollView.m in Sources */,
 				3D9EAF0921A39968006AF423 /* RecommendTableView.m in Sources */,
 				9F4D103421B7C67A00F4610A /* ForgetPwdViewController.m in Sources */,
@@ -1411,6 +1418,7 @@
 				9FD90A3221BA49C000EDF389 /* EditorNameView.m in Sources */,
 				3D958B6D21C7661400AF7F3F /* URLBuilder.m in Sources */,
 				3D7D18E021AC1997006B9C8F /* AnswerDetailViewController.m in Sources */,
+				3DA91F7521D0784C005262D4 /* ArticleTypeViewController.m in Sources */,
 				3D47257621BA20C300C0E7CF /* QRCodeView.m in Sources */,
 				3D7D18FB21B0CEE4006B9C8F /* MyListView.m in Sources */,
 				3DA91F6021CF2925005262D4 /* ArticleCell.m in Sources */,
@@ -1432,9 +1440,7 @@
 				9F4D103321B7C67A00F4610A /* SingUpView.m in Sources */,
 				3D7D18D921AB9BD0006B9C8F /* SearchResultViewController.m in Sources */,
 				9F629B7921BE425B002A79AC /* SHPlacePickerView.m in Sources */,
-				9FD90A3821BBCE2400EDF389 /* YTQGetUserManager.m in Sources */,
 				9F4D10A221B8037900F4610A /* UITextField+Category.m in Sources */,
-				9FD90A4221BBD3F000EDF389 /* GetUserModel.m in Sources */,
 				9F4D10A021B8037900F4610A /* UIImageView+Category.m in Sources */,
 				3D9EA91A21998BC4006AF423 /* JYViewController.m in Sources */,
 			);

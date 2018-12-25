@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,10 +20,7 @@ typedef NS_ENUM(NSInteger, ScanType) {
     ScanTypeDefault = ScanTypeShareOrSearch
 };
 
-
-
-
-@interface QRScanViewController : UIViewController
+@interface QRScanViewController : BaseViewController
 
 @property (nonatomic, copy) shareCodeBlock shareCodeBlock;
 @property (nonatomic, assign) ScanType scanType;

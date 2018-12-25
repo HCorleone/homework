@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "BaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ForgetPwdViewController : UIViewController
+@interface ForgetPwdViewController : BaseViewController
 
 @end
 

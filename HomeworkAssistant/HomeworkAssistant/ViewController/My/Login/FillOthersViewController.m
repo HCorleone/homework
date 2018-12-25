@@ -56,7 +56,7 @@
             {
                 NSLog(@"下一步");
                 if (!self.cell.title.text && !self.otherView.areaBtn.titleLabel.text) {
-                    [CommonAlterView showAlertView:@"请选择年级和地区"];
+                    [XWHUDManager showTipHUDInView:@"请选择年级和地区"];
                 }
                 else {
                     //请求接口
@@ -216,25 +216,24 @@
 #pragma mark - 请求网络
 -(void)getManager
 {
-    NSDictionary *dic = @{@"h":@"ZYUpsertUserExtHander",
+    NSDictionary *dic = @{
                           @"openID":userValue(@"openId"),
                           @"grade":self.cell.title.text,
                           @"city":self.otherView.areaBtn.titleLabel.text,
                           @"schoolID":@"3",
                           @"schoolName":@"4",
                           @"longitude":@"1.000000",
-                          @"latitude":@"2.000000",
-                          @"av":@"_debug_"
-                          
+                          @"latitude":@"2.000000"
                           };
     
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
+    dic = [HMACSHA1 encryptDicForRequest:dic];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
     //设置请求方式
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     //接收数据是json形式给出
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     //    __weak typeof(self) weakSelf = self;
-    [manager GET:getURL parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:[URLBuilder getURLForUpsertUserExt] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"------------------------------%@------------------------------", responseObject);
         
         //返回成功

@@ -42,11 +42,6 @@
     [self getAnswer];
 }
 
-//返回上一个界面
-- (void)backToVc {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)setupNav {
     //导航栏
     UIView *navView = [[UIView alloc]init];
@@ -215,20 +210,18 @@
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     
-    NSDictionary *dic = @{@"h":@"ZYUploadAnswerPicHandler",
+    NSDictionary *dic = @{
                           @"id":userValue(@"GetUpAnswerID"),
-                          @"fileList":self.fileList,
-                          @"av":@"_debug_"
-                          
+                          @"fileList":self.fileList
                           };
-    
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
+    dic = [HMACSHA1 encryptDicForRequest:dic];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
     //设置请求方式
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     //接收数据是json形式给出
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     __weak typeof(self) weakSelf = self;
-    [manager POST:UpLoadAnswer parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:[URLBuilder getURLForUploadAnswerPic] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"----------------%@---------------", responseObject);
         
         if ([responseObject[@"code"] intValue] == 200) {
@@ -246,7 +239,7 @@
             
         }
         else {
-            [CommonAlterView showAlertView:@"上传失败"];
+            [XWHUDManager showTipHUDInView:@"上传失败"];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
@@ -371,7 +364,7 @@
         else
         {
             //警告
-            [CommonAlterView showAlertView:@"相机不能用"];
+            [XWHUDManager showWarningTipHUD:@"相机不能用"];
         }
     }];
     //打开相册

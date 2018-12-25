@@ -28,4 +28,40 @@
 #import "XWHUDManager.h"
 #import "JXCategoryView.h"
 
+//color
+#define whitecolor [UIColor whiteColor]
+#define maincolor [UIColor colorWithHexString:@"#3DC5F2"]
+
+//用于适配x及以上的设备
+#define TOP_OFFSET [GetCurrentDevice getTopOffset]
+#define BOT_OFFSET [GetCurrentDevice getBotOffset]
+
+//NAVBAR_HEIGHT
+#define NAVBAR_HEIGHT 72
+
+//TABBAR_HEIGHT
+#define TABBAR_HEIGHT 48
+
+//screensize
+#define SCREEN_WIDTH [[UIScreen mainScreen]bounds].size.width
+#define SCREEN_HEIGHT [[UIScreen mainScreen]bounds].size.height
+
+//umeng appkey:5bed3ff1b465f50e1200008e
+#import <UMShare/UMShare.h>
+#import <UMCommon/UMCommon.h>
+
+//Wechat appID:wxdd59bf4228be5b2d
+//Wechat appSecret:e21f45c9103b92de4b64cea1fb304ab3
+#import "WXApi.h"
+#define WX_APPID @"wxdd59bf4228be5b2d"
+#define WXAPPKEYSECRET @"e21f45c9103b92de4b64cea1fb304ab3"
+#define WX_ACCESS_TOKEN @"access_token"
+#define WX_OPEN_ID @"openid"
+#define WX_REFRESH_TOKEN @"refresh_token"
+#define WX_UNION_ID @"unionid"
+#define WX_BASE_URL @"https://api.weixin.qq.com/sns"
+
+//用于MD5加密的key:"&&*%$dkeunk0*!@^*&%nnc<scvqw"
+#define MD5_KEY @"&&*%$dkeunk0*!@^*&%nnc<scvqw"
+
 #endif /* HomeworkAssistant_pch */

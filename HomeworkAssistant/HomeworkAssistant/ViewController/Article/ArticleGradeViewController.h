@@ -7,6 +7,7 @@
 //
 
 #import "GradeViewController.h"
+#import "ClassificationCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,9 +16,13 @@ typedef NS_ENUM(NSInteger, GradeFrom) {
     FromEnglish
 };
 
-@interface ArticleGradeViewController : GradeViewController
+@interface ArticleGradeViewController : UIViewController
 
 @property (nonatomic, assign) GradeFrom from;
+
+- (NSArray *)getTitles;
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

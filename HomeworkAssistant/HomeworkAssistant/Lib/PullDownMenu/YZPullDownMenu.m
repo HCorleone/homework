@@ -160,6 +160,11 @@ NSString * const EnglishArticleNote = @"EnglishArticleNote";
         NSDictionary *dic = [note userInfo];
         
         NSInteger col1 = [dic[@"col"] integerValue];
+        
+        if (col1 == 2 && [observerForName isEqualToString:@"EnglishArticleNote"]) {
+            col1 -= 1;
+        }
+        
         // 获取对应按钮
         UIButton *btn = self.menuButtons[col1];
         

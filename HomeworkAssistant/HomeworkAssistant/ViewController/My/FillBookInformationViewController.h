@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "FillBookInformationView.h"
-
+#import "BaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FillBookInformationViewController : UIViewController
+@interface FillBookInformationViewController : BaseViewController
 
 /** 填写书籍试图 */
 @property (nonatomic, strong) FillBookInformationView *fillView;

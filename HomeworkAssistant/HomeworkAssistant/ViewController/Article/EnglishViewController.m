@@ -51,7 +51,8 @@
 - (void)setupAllChildViewController {
     ArticleGradeViewController *test1 =[[ArticleGradeViewController alloc] init];
     test1.from = FromEnglish;
-    UIViewController *test2 = [[UIViewController alloc] init];
+    WordsNumViewController *test2 = [[WordsNumViewController alloc] init];
+    test2.from = FromEnglish;
     [self addChildViewController:test1];
     [self addChildViewController:test2];
     
@@ -69,11 +70,11 @@
 {
     // 第1列 高度
     if (index == 0) {
-        return 1.1 * SCREEN_WIDTH;
+        return 0.61 * SCREEN_WIDTH;
     }
     
     // 第3列 高度
-    return 450;
+    return 0.4 * SCREEN_WIDTH;
     
 }
 

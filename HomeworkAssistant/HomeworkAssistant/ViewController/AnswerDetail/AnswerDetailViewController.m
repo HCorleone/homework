@@ -129,18 +129,16 @@
     NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
     
     NSDictionary *dict = @{
-                           @"h":@"ZYUserLikeHandler",
                            @"openID":openId,
                            @"answerID":self.answerID,
-                           @"pkn":@"com.enjoytime.palmhomework",
-                           @"sourceType":@"rec",
-                           @"av":@"_debug_"
+                           @"sourceType":@"rec"
                            };
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForUserLike] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"]integerValue] == 200) {
             self.isSelected = YES;
@@ -161,18 +159,16 @@
     NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
     
     NSDictionary *dict = @{
-                           @"h":@"ZYDelUserLikeHandler",
                            @"openID":openId,
                            @"answerIDs":self.answerID,
-                           @"pkn":@"com.enjoytime.palmhomework",
-                           @"sourceType":@"rec",
-                           @"av":@"_debug_"
+                           @"sourceType":@"rec"
                            };
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForDelUserLike] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"]integerValue] == 200) {
             self.isSelected = NO;
@@ -280,11 +276,6 @@
     NSString *temp = [[NSNumber numberWithInteger:page]stringValue];
     self.page.text = [[temp stringByAppendingString:@"/"] stringByAppendingString:self.answerModel.answerCount];
     
-}
-
-
-- (void)backToVc {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

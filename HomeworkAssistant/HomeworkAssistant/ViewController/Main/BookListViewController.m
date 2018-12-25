@@ -132,19 +132,14 @@
 //获取他人表单
 -(void)getManager {
     
-    NSDictionary *dic = @{@"h":@"ZYListUserLikeHandler",
+    NSDictionary *dic = @{
                           @"openID":self.idStr,
-                          @"pkn":@"com.enjoytime.palmhomework",
-                          @"av":@"_debug_"
                           };
-    
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
-    //设置请求方式
+    dic = [HMACSHA1 encryptDicForRequest:dic];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    //接收数据是json形式给出
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    //    __weak typeof(self) weakSelf = self;
-    [manager GET:getURL parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:[URLBuilder getURLForMyCollections] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"------------------------------%@------------------------------", responseObject);
         
         self.imgArray = [responseObject[@"datas"] valueForKey:@"coverURL"];
@@ -160,21 +155,18 @@
 
 -(void)addBookList {
     
-    NSDictionary *dic = @{@"h":@"ZYCopyUserLikeHandler",
+    NSDictionary *dic = @{
                           @"openID":userValue(@"openId"),
-                          @"pkn":@"com.enjoytime.palmhomework",
                           @"answerIDs":self.addStr,
-                          @"av":@"_debug_"
-                          
                           };
-    
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
+    dic = [HMACSHA1 encryptDicForRequest:dic];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
     //设置请求方式
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     //接收数据是json形式给出
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
         __weak typeof(self) weakSelf = self;
-    [manager GET:getURL parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:[URLBuilder getURLForCopyUserLike] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"------------------------------%@------------------------------", responseObject);
         [[NSNotificationCenter defaultCenter] postNotificationName:@"userLikeOrNot" object:nil];
         

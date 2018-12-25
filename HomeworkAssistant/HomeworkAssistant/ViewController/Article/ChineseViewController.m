@@ -97,20 +97,17 @@ static NSString *pageNo = @"";
                            @"wordNum":wordNum,
                            @"grade":grade,
                            @"pageNo":pageNo,
-                           @"pageSize":@"",
-                           @"av":@"_debug_"
+                           @"pageSize":@""
                            };
-    
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
     NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForArticle] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+        if ([responseObject[@"msg"] isEqualToString:@"没有数据"]) {
+            [XWHUDManager showTipHUDInView:@"暂无搜索结果"];
+        }
         if ([responseObject[@"code"] integerValue] == 200) {
-            if (responseObject[@"datas"] == [NSNull null]) {
-                [XWHUDManager showHUDMessage:@"暂无搜索结果"];
-            }
-            else {
                 NSArray *jsonDataArr = responseObject[@"datas"];
                 NSMutableArray *mArr = [NSMutableArray array];
                 //建立模型数组
@@ -121,7 +118,6 @@ static NSString *pageNo = @"";
                 }
                 [self.listData addObjectsFromArray:mArr];
                 [self.tableView reloadData];
-            }
         }
         
     } failure:nil];
@@ -141,20 +137,18 @@ static NSString *pageNo = @"";
                            @"wordNum":wordNum,
                            @"grade":grade,
                            @"pageNo":@"",
-                           @"pageSize":@"",
-                           @"av":@"_debug_"
+                           @"pageSize":@""
                            };
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
     NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForArticle] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+        if ([responseObject[@"msg"] isEqualToString:@"没有数据"]) {
+            [XWHUDManager showTipHUDInView:@"暂无搜索结果"];
+        }
         if ([responseObject[@"code"] integerValue] == 200) {
-            if (responseObject[@"datas"] == [NSNull null]) {
-                [XWHUDManager showHUDMessage:@"暂无搜索结果"];
-            }
-            else {
                 NSArray *jsonDataArr = responseObject[@"datas"];
                 self.listData = [NSMutableArray array];
                 //建立模型数组
@@ -164,7 +158,6 @@ static NSString *pageNo = @"";
                     [self.listData addObject:aModel];
                 }
                 [self.tableView reloadData];
-            }
         }
         
     } failure:nil];
@@ -179,6 +172,18 @@ static NSString *pageNo = @"";
         grade = dic[@"title"];
         if ([grade isEqualToString:@"全部年级"]) {
             grade = @"";
+        }
+    }
+    else if ([dic[@"col"] integerValue] == 1) {
+        articleType = dic[@"title"];
+        if ([articleType isEqualToString:@"全部题材"]) {
+            articleType = @"";
+        }
+    }
+    else if ([dic[@"col"] integerValue] == 2) {
+        wordNum = dic[@"title"];
+        if ([wordNum isEqualToString:@"全部字数"]) {
+            wordNum = @"";
         }
     }
     
@@ -211,11 +216,11 @@ static NSString *pageNo = @"";
     return 136;
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    ArticleDetailViewController *articleDetailVC = [[ArticleDetailViewController alloc] init];
-//    articleDetailVC.model = self.listData[indexPath.row];
-//    [self.navigationController pushViewController:articleDetailVC animated:YES];
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ArticleDetailViewController *articleDetailVC = [[ArticleDetailViewController alloc] init];
+    articleDetailVC.model = self.listData[indexPath.row];
+    [self.navigationController pushViewController:articleDetailVC animated:YES];
+}
 
 #pragma mark - 搜索菜单栏
 - (void)setupMenu {
@@ -236,8 +241,10 @@ static NSString *pageNo = @"";
 - (void)setupAllChildViewController {
     ArticleGradeViewController *test1 =[[ArticleGradeViewController alloc] init];
     test1.from = FromChinese;
-    UIViewController *test2 = [[UIViewController alloc] init];
-    UIViewController *test3 = [[UIViewController alloc] init];
+    ArticleTypeViewController *test2 = [[ArticleTypeViewController alloc] init];
+    test2.from = FromChinese;
+    WordsNumViewController *test3 = [[WordsNumViewController alloc] init];
+    test3.from = FromChinese;
     [self addChildViewController:test1];
     [self addChildViewController:test2];
     [self addChildViewController:test3];
@@ -276,16 +283,16 @@ static NSString *pageNo = @"";
 {
     // 第1列 高度
     if (index == 0) {
-        return 1.1 * SCREEN_WIDTH;
+        return 0.61 * SCREEN_WIDTH;
     }
     
     // 第2列 高度
     if (index == 1) {
-        return 0.53 * SCREEN_WIDTH;
+        return 1.27 * SCREEN_WIDTH;
     }
     
     // 第3列 高度
-    return 450;
+    return 0.4 * SCREEN_WIDTH;
 
 }
 

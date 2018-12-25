@@ -131,6 +131,7 @@
     
     NSString *strToSign = [NSString stringWithFormat:@"openID=%@",openId];
     NSString *sign = [HMACSHA1 dataToBeEncrypted:strToSign];
+    
     NSDictionary *dict = @{
                            @"openID":openId,
                            @"sign":sign
@@ -184,16 +185,10 @@
 
 - (void)downloadDataForMyList {
     NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
-    
-    NSString *strToSign = [NSString stringWithFormat:@"openID=%@&pkn=com.enjoytime.palmhomework",openId];
-    NSString *sign = [HMACSHA1 dataToBeEncrypted:strToSign];
     NSDictionary *dict = @{
                            @"openID":openId,
-                           @"pkn":@"com.enjoytime.palmhomework",
-                           @"sign":sign
-//                           @"av":@"_debug_"
                            };
-    
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
@@ -292,7 +287,6 @@
 
 #pragma mark - 分享书单二维码
 - (void)shareMyList {
-    
     QRCodeView *testView = [[QRCodeView alloc]init];
     [testView showQRCode];
     self.testView = testView;
@@ -383,7 +377,7 @@
     mainView.backgroundColor = maincolor;
     mainView.delegate = self;
     self.mainView = mainView;
-    self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, 1.49 * SCREEN_WIDTH + 30 * 128);
+    self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, 1.505 * SCREEN_WIDTH + 30 * 128);
     
     UIView *mainContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     mainContentView.backgroundColor = whitecolor;
@@ -425,9 +419,10 @@
     
     chineseArticleLogo.userInteractionEnabled = YES;
     englishArticleLogo.userInteractionEnabled = YES;
-    UITapGestureRecognizer *toArticleGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toArticle)];
-    [chineseArticleLogo addGestureRecognizer:toArticleGes];
-    [englishArticleLogo addGestureRecognizer:toArticleGes];
+    UITapGestureRecognizer *toArticleGes1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toChineseArticle)];
+    UITapGestureRecognizer *toArticleGes2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toEnglishArticle)];
+    [chineseArticleLogo addGestureRecognizer:toArticleGes1];
+    [englishArticleLogo addGestureRecognizer:toArticleGes2];
     
     //搜索框
     UIView *searchView = [[UIView alloc]init];
@@ -562,15 +557,31 @@
 }
 
 //前往作文页面
-- (void)toArticle {
-    NSLog(@"前往作文view");
-    ArticleViewController *articleVC = [[ArticleViewController alloc]init];
+- (void)toChineseArticle {
+    ArticleViewController *articleVC = [[ArticleViewController alloc] init];
+    articleVC.offsetX = 0;
+    [self.navigationController pushViewController:articleVC animated:YES];
+}
+
+- (void)toEnglishArticle {
+    ArticleViewController *articleVC = [[ArticleViewController alloc] init];
+    articleVC.offsetX = 1;
     [self.navigationController pushViewController:articleVC animated:YES];
 }
 //前往浏览记录
 - (void)toHistory {
-    NSLog(@"前往浏览记录");
+//    NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
+    NSDictionary *dict = @{
+                           @"openID":@"1",
+                           @"banana":@"2",
+                           @"apple":@"3",
+                           @"candy":@""
+                           };
+    NSDictionary *tempDic = [HMACSHA1 encryptDicForRequest:dict];
+    NSLog(@"%@",tempDic);
 }
+
+
 
 //前往扫描
 - (void)toScan {

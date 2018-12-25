@@ -29,6 +29,7 @@
         [self addSubview:self.title];
         [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self).offset(20);
+            make.right.mas_equalTo(self).offset(-20);
             make.top.mas_equalTo(self).offset(16);
         }];
         self.title.font = [UIFont systemFontOfSize:16];

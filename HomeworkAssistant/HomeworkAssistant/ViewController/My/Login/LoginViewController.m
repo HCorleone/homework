@@ -11,7 +11,6 @@
 #import "SingUpViewController.h"
 #import "ForgetPwdViewController.h"
 #import "FillOthersViewController.h"
-#import "YTQGetUserManager.h"
 
 @interface LoginViewController ()
 
@@ -318,16 +317,14 @@
     
     
     NSDictionary *dict = @{
-                           @"h":@"LoginTataUserHandler",
                            @"mobile":self.acountF.text,
                            @"passwd":self.passwordF.text,
-                           @"av":@"_debug_"
                            };
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:tataURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForLogin] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {
             [TTUserManager sharedInstance].currentUser.headImgUrl = responseObject[@"headImgUrl"];
@@ -337,7 +334,7 @@
             
         }
         else {
-            [CommonAlterView showAlertView:@"用户名或密码错误"];
+            [XWHUDManager showWarningTipHUDInView:@"用户名或密码错误"];
         }
         
     } failure:nil];
@@ -349,15 +346,14 @@
 - (void)getExtraUserInfo {
     
     NSDictionary *dict = @{
-                           @"h":@"ZYGetUserExtHander",
                            @"openID":[TTUserManager sharedInstance].currentUser.openId,
-                           @"av":@"_debug_"
                            };
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForGetUserExt] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {
             if (responseObject[@"datas"] != [NSNull null]) {
@@ -411,10 +407,6 @@
 - (void)forget {
     ForgetPwdViewController *forgetPwd = [[ForgetPwdViewController alloc] init];
     [self.navigationController pushViewController:forgetPwd animated:YES];
-}
-//返回按钮方法
-- (void)backToVc {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

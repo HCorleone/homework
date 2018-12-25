@@ -29,13 +29,6 @@
     [self getView];
 }
 
-//返回上一个界面
-- (void)backToVc {
-//    [self.navigationController popViewControllerAnimated:YES];
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
-
 -(void)getView {
     //请输入书籍条形码
     _inputField = [[UITextField alloc] init];

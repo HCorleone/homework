@@ -7,6 +7,7 @@
 //
 
 #import "SearchResultViewController.h"
+#import "BookListViewController.h"
 #import "RecommendStaticCell.h"
 #import "RecommendTableView.h"
 #import "AnswerViewController.h"
@@ -78,7 +79,6 @@ static NSString *page = @"1";
 - (void)downloadData {
     page = @"1";
     NSDictionary *dict = @{
-                           @"h":@"ZYSearchAnswerHandler",
                            @"keyword":self.searchContent,
                            @"grade":grade,
                            @"subject":subject,
@@ -86,19 +86,18 @@ static NSString *page = @"1";
                            @"volume":volume,
                            @"year":year,
                            @"pageNo":@"",
-                           @"pageSize":@"",
-                           @"av":@"_debug_"
+                           @"pageSize":@""
                            };
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
-    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForAnswerSearch] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {
             if (responseObject[@"datas"] == [NSNull null]) {
-//                NSLog(@"数组为空");
-                [CommonAlterView showAlertView:@"无搜索结果"];
+              [XWHUDManager showTipHUDInView:@"暂无搜索结果"];
             }
             else {
                 NSArray *jsonDataArr = responseObject[@"datas"];
@@ -145,7 +144,6 @@ static NSString *page = @"1";
     page = [[NSNumber numberWithInteger:flag]stringValue];
     
     NSDictionary *dict = @{
-                           @"h":@"ZYSearchAnswerHandler",
                            @"keyword":self.searchContent,
                            @"grade":grade,
                            @"subject":subject,
@@ -153,19 +151,18 @@ static NSString *page = @"1";
                            @"volume":volume,
                            @"year":@"",
                            @"pageNo":page,
-                           @"pageSize":@"",
-                           @"av":@"_debug_"
+                           @"pageSize":@""
                            };
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForAnswerSearch] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {
             if (responseObject[@"datas"] == [NSNull null]) {
-//                NSLog(@"数组为空");
-                [CommonAlterView showAlertView:@"无更多搜索结果"];
+               [XWHUDManager showTipHUDInView:@"暂无搜索结果"];
             }
             else {
                 NSArray *jsonDataArr = responseObject[@"datas"];
@@ -346,12 +343,19 @@ static NSString *page = @"1";
 #pragma mark - other
 //前往扫描
 - (void)toScan {
+    
     QRScanViewController *scanVC = [[QRScanViewController alloc]init];
+    scanVC.scanType = ScanTypeDefault;
+    scanVC.shareCodeBlock = ^(NSString * _Nonnull shareCode) {
+        BookListViewController *book = [[BookListViewController alloc] init];
+        book.idStr = shareCode;
+        book.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+        
+        [self presentViewController:book animated:NO completion:nil];
+    };
+    
     [self.navigationController pushViewController:scanVC animated:YES];
-}
-
-- (void)backToVc {
-    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 - (void)setupNav {

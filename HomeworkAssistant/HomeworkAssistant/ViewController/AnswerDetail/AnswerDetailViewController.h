@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "AnswerDetail.h"
-
+#import "BaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AnswerDetailViewController : UIViewController
+@interface AnswerDetailViewController : BaseViewController
 
 @property (nonatomic, strong) AnswerDetail *answerModel;
 @property (nonatomic, strong) NSMutableArray *dataList;

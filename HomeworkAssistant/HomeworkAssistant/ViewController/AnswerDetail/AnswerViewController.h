@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Book.h"
+#import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AnswerViewController : UIViewController
+@interface AnswerViewController : BaseViewController
 
 @property (nonatomic, strong) Book *bookModel;
 @property (nonatomic, assign) BOOL isSelected;

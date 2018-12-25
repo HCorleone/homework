@@ -30,14 +30,6 @@
     
 }
 
-- (NSString *)currentTimeStr{
-    NSDate* date = [NSDate dateWithTimeIntervalSinceNow:0];//获取当前时间0秒后的时间
-    NSTimeInterval time=[date timeIntervalSince1970]*1000;// *1000 是精确到毫秒，不乘就是精确到秒
-    NSString *timeString = [NSString stringWithFormat:@"%.0f", time];
-    return timeString;
-}
-
-
 - (void)setupNav {
     //导航栏
     UIView *navView = [[UIView alloc]init];
@@ -73,32 +65,25 @@
     }];
 }
 
-- (void)backToVc {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)downloadData {
     
-    NSString *secretKey = @"&&*%$dkeunk0*!@^*&%nnc<scvqw";
-    NSString *tTime = [self currentTimeStr];
+    NSString *secretKey = MD5_KEY;
+    NSString *tTime = [CommonToolClass currentTimeStr];
     NSString *temp = [[[[self.bookModel.answerID stringByAppendingString:@":"]stringByAppendingString:secretKey]stringByAppendingString:@":"]stringByAppendingString:tTime];
     NSString *kMD5 = [NSString md5:temp];
     
     NSDictionary *dict = @{
-                           @"h":@"ZYAnswerDetailHandler",
                            @"openID":@"123",
                            @"answerID":self.bookModel.answerID,
                            @"sourceType":@"rec",
-                           @"pkn":@"com.enjoytime.palmhomework",
                            @"t":tTime,
-                           @"k":kMD5,
-                           @"av":@"_debug_"
+                           @"k":kMD5
                            };
-
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
 
-    NSURLSessionDataTask *dataTask = [manager GET:zuoyeURL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForAnswerDetail] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {
 

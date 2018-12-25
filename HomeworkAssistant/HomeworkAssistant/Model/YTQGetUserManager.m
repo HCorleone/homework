@@ -17,9 +17,8 @@
     
     NSDictionary *dic = @{@"h":@"ZYGetUserExtHander",
                           @"openID":userValue(@"openId"),
-                          @"av":@"_debug_"
                           };
-    
+    dic = [HMACSHA1 encryptDicForRequest:dic];
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:OnLineIP]];
     //设置请求方式
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
