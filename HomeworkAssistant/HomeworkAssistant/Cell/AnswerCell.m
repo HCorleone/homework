@@ -1,8 +1,8 @@
 //
-//  AnswerCell.m
+//  AnswerDetailCollectionViewCell.m
 //  HomeworkAssistant
 //
-//  Created by 无敌帅枫 on 2018/11/27.
+//  Created by 无敌帅枫 on 2018/11/21.
 //  Copyright © 2018 无敌帅枫. All rights reserved.
 //
 
@@ -12,10 +12,10 @@
 @interface AnswerCell()
 
 @property (nonatomic, strong) UIImageView *topImage;
+@property (nonatomic, strong) UILabel *botLabel;
+@property (nonatomic, strong) NSString *idx;//当前页数
 
 @end
-
-#define H SCREEN_HEIGHT - 48 - 72 - BOT_OFFSET
 
 @implementation AnswerCell
 
@@ -23,22 +23,27 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-//        self.topImage = [[UIImageView alloc]init];
-//        [self addSubview:self.topImage];
-//        [self.topImage mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.and.right.and.top.and.bottom.mas_equalTo(self);
-//        }];
-        _imgScrollView = [[ImgScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, H) andImageViewFrame:CGRectMake(0, 0, SCREEN_WIDTH, H)];
-        _imgScrollView.imgView.contentMode = UIViewContentModeScaleToFill;
-        [self addSubview:_imgScrollView];
+        self.topImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 0.24 * SCREEN_WIDTH, 0.24 * SCREEN_WIDTH * 1.3)];
+        [self addSubview:self.topImage];
+        
+        self.botLabel = [[UILabel alloc]init];
+        [self addSubview:self.botLabel];
+//        self.botLabel.text = [self.idx stringByAppendingString:@"/"];
+        self.botLabel.textColor = [UIColor colorWithHexString:@"#353B3C"];
+        self.botLabel.font = [UIFont systemFontOfSize:12];
+        [self.botLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(self);
+            make.top.mas_equalTo(self.topImage.mas_bottom).with.offset(6);
+        }];
+        
     }
     return self;
 }
 
 - (void)setModel:(AnswerDetail *)model {
     _model = model;
-    [_imgScrollView.imgView sd_setImageWithURL:[NSURL URLWithString:model.detailAnswerURL]];
+    [self.topImage sd_setImageWithURL:[NSURL URLWithString:model.thumbsAnswerURL]];
+    self.botLabel.text = [[model.idx1 stringByAppendingString:@"/"] stringByAppendingString:model.answerCount];
 }
-
 
 @end

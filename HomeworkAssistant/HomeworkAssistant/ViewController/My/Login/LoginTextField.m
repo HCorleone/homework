@@ -12,6 +12,7 @@
 
 - (instancetype)init:(NSString *)placeholder {
     self = [super init];
+    
     self.layer.borderWidth = 0.5;
     self.layer.borderColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9].CGColor;
     self.layer.cornerRadius = 2;

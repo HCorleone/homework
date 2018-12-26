@@ -11,9 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-
-@interface RecommendStaticCell : UITableViewCell
+//首页推荐、答案搜索、我的书单列表、历史浏览记录的Cell
+@interface BookCell : UITableViewCell
 
 @property (nonatomic, strong) Book *model;
 @property (nonatomic, assign) BOOL isSelected;

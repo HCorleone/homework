@@ -8,7 +8,7 @@
 
 #import "YearViewController.h"
 #import "ClassificationCell.h"
-#import "CollectionHeaderView.h"
+#import "SearchMenuHeaderView.h"
 
 extern NSString * const YZUpdateMenuTitleNote;
 

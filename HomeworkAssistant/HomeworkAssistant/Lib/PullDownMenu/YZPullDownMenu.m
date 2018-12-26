@@ -219,7 +219,6 @@ NSString * const EnglishArticleNote = @"EnglishArticleNote";
 - (void)willMoveToWindow:(UIWindow *)newWindow
 {
     [super willMoveToWindow:newWindow];
-    
     [self reload];
 }
 

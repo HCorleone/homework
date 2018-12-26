@@ -6,9 +6,9 @@
 //  Copyright © 2018 无敌帅枫. All rights reserved.
 //
 
-#import "CollectionHeaderView.h"
+#import "SearchMenuHeaderView.h"
 
-@implementation CollectionHeaderView
+@implementation SearchMenuHeaderView
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];

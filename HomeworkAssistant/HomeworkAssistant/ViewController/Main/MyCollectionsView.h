@@ -7,15 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MainViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MyListView : UICollectionView
+@interface MyCollectionsView : UICollectionView
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout withArray:(NSMutableArray *)array;
 - (void)reloadDataWithList:(NSMutableArray *)arr;
 
 @property (nonatomic, strong) NSMutableArray *dataList;
+@property (nonatomic, strong) MainViewController *currentVC;
 
 @end
 

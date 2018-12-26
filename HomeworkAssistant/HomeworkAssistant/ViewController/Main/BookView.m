@@ -6,22 +6,22 @@
 //  Copyright © 2018 无敌帅枫. All rights reserved.
 //
 
-#import "RecommendTableView.h"
-#import "RecommendStaticCell.h"
+#import "BookView.h"
+#import "BookCell.h"
 #import "Book.h"
 #import "AnswerViewController.h"
 #import "MyListViewController.h"
 
-@interface RecommendTableView()<UITableViewDelegate, UITableViewDataSource>
+@interface BookView()<UITableViewDelegate, UITableViewDataSource>
 
 @end
 
 
-@implementation RecommendTableView
+@implementation BookView
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style withArray:(NSMutableArray *)array {
     self = [super initWithFrame:frame style:style];
-    [self registerClass:[RecommendStaticCell class] forCellReuseIdentifier:@"RecommendStaticCell"];
+    [self registerClass:[BookCell class] forCellReuseIdentifier:@"RecommendStaticCell"];
     self.dataList = array;
     self.delegate = self;
     self.dataSource = self;
@@ -44,9 +44,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    RecommendStaticCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecommendStaticCell" forIndexPath:indexPath];
+    BookCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecommendStaticCell" forIndexPath:indexPath];
     cell.model = self.dataList[indexPath.row];
-    cell.isSelected = NO;
     cell.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#1698D9"].CGColor;
     [cell.saveBtn setTitleColor:[UIColor colorWithHexString:@"#1698D9"] forState:UIControlStateNormal];
     return cell;
@@ -61,28 +60,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    RecommendStaticCell *cell = [self cellForRowAtIndexPath:indexPath];
+    BookCell *cell = [self cellForRowAtIndexPath:indexPath];
     
     AnswerViewController *answerVC = [[AnswerViewController alloc]init];
     answerVC.bookModel = self.dataList[indexPath.row];
-    answerVC.isSelected = cell.isSelected;
-    [[self viewController].navigationController pushViewController:answerVC animated:YES];
+    answerVC.isSelected = cell.saveBtn.isSelected;
+    [_currentVC.navigationController pushViewController:answerVC animated:YES];
 }
-
-
-
-// 获取当前View的控制器
-- (UIViewController*)viewController {
-    for (UIView* next = [self superview]; next; next = next.superview) {
-        UIResponder* nextResponder = [next nextResponder];
-        if ([nextResponder isKindOfClass:[UIViewController class]]) {
-            return (UIViewController*)nextResponder;
-        }
-    }
-    return nil;
-    
-}
-
 
 - (void)reloadDataWithList:(NSMutableArray *)arr {
     self.dataList = arr;

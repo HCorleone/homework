@@ -8,7 +8,7 @@
 
 #import "VersionViewController.h"
 #import "ClassificationCell.h"
-#import "CollectionHeaderView.h"
+#import "SearchMenuHeaderView.h"
 
 @interface VersionViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -40,7 +40,7 @@
     collectView.showsVerticalScrollIndicator = NO;
     collectView.backgroundColor = whitecolor;
     [collectView registerClass:[ClassificationCell class] forCellWithReuseIdentifier:@"grade"];
-    [collectView registerClass:[CollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerview"];
+    [collectView registerClass:[SearchMenuHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerview"];
 }
 
 #pragma mark collectionView代理方法
@@ -94,7 +94,7 @@
 
 //header
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    CollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerview" forIndexPath:indexPath];
+    SearchMenuHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerview" forIndexPath:indexPath];
     switch (indexPath.section) {
         case 0:
             headerView.headerTitle.text = @"上下册";

@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MainViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RecommendTableView : UITableView
+@interface BookView : UITableView
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style withArray:(NSMutableArray *)array;
 - (void)reloadDataWithList:(NSMutableArray *)arr;
+
 @property (nonatomic, strong) NSMutableArray *dataList;
+@property (nonatomic, strong) MainViewController *currentVC;
 
 @end
 

@@ -9,7 +9,7 @@
 #import "FillOthersViewController.h"
 #import "SHPlacePickerView.h"
 #import "ClassificationCell.h"
-#import "CollectionHeaderView.h"
+#import "SearchMenuHeaderView.h"
 #import "FillOthersView.h"
 
 @interface FillOthersViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
@@ -85,7 +85,7 @@
     _collectView.delegate = self;
     _collectView.backgroundColor = whitecolor;
     [_collectView registerClass:[ClassificationCell class] forCellWithReuseIdentifier:@"grade"];
-    [_collectView registerClass:[CollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerview"];
+    [_collectView registerClass:[SearchMenuHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerview"];
 }
 
 #pragma mark collectionView代理方法
@@ -134,7 +134,7 @@
 
 //header
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    CollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerview" forIndexPath:indexPath];
+    SearchMenuHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerview" forIndexPath:indexPath];
     
     switch (indexPath.section) {
         case 0:

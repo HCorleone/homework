@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+//分栏搜索下拉菜单Cell
 @interface ClassificationCell : UICollectionViewCell
 
 @property (nonatomic, strong) UILabel *title;

@@ -11,7 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MyListViewCell : UICollectionViewCell
+//首页我的书单横向的CollectionViewCell
+@interface MyCollectionsCell : UICollectionViewCell
 
 @property (nonatomic, strong) Book *model;
 

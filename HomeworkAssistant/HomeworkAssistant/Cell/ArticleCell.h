@@ -11,6 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+//作文模块列表Cell
 @interface ArticleCell : UITableViewCell
 
 @property (nonatomic, strong) Article *model;

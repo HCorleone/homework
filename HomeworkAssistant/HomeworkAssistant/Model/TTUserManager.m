@@ -35,7 +35,8 @@ static TTUserManager *manager = nil;
     [def setObject:self.currentUser.schoolName forKey:@"schoolName"];
     [def setObject:self.currentUser.longitude forKey:@"longitude"];
     [def setObject:self.currentUser.latitude forKey:@"latitude"];
-    
+    [def setObject:self.currentUser.level forKey:@"level"];
+    [def setObject:self.currentUser.bonusPoint forKey:@"bonusPoint"];
 }
 
 - (void)saveLoginUserInfo {
@@ -50,6 +51,8 @@ static TTUserManager *manager = nil;
     [def setObject:self.currentUser.schoolName forKey:@"schoolName"];
     [def setObject:self.currentUser.longitude forKey:@"longitude"];
     [def setObject:self.currentUser.latitude forKey:@"latitude"];
+    [def setObject:self.currentUser.level forKey:@"level"];
+    [def setObject:self.currentUser.bonusPoint forKey:@"bonusPoint"];
 }
 
 - (void)loadCurrentUserInfo {
@@ -64,6 +67,8 @@ static TTUserManager *manager = nil;
     self.currentUser.schoolName = [def stringForKey:@"schoolName"];
     self.currentUser.longitude = [def stringForKey:@"longitude"];
     self.currentUser.latitude = [def stringForKey:@"latitude"];
+    self.currentUser.level = [def stringForKey:@"level"];
+    self.currentUser.bonusPoint = [def stringForKey:@"bonusPoint"];
 }
 
 - (void)clearCurrentUserInfo {

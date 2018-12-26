@@ -215,19 +215,69 @@
     self.gradeLabel = gradeLabel;
     
     //学校
-    UILabel *schoolName = [[UILabel alloc]init];
-    [sloginView addSubview:schoolName];
+//    UILabel *schoolName = [[UILabel alloc]init];
+//    [sloginView addSubview:schoolName];
 //    schoolName.text = [TTUserManager sharedInstance].currentUser.schoolName;
-    schoolName.text = @"北京市第二实验小学";
-    schoolName.textColor =  [UIColor colorWithRed:143/255.0 green:147/255.0 blue:148/255.0 alpha:1/1.0];
-    schoolName.font = [UIFont systemFontOfSize:10];
-    [schoolName mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(userName);
-        make.top.mas_equalTo(gradeLabel.mas_bottom).with.offset(0.01 * SCREEN_WIDTH);
-    }];
+//    schoolName.text = @"北京市第二实验小学";
+//    schoolName.textColor =  [UIColor colorWithRed:143/255.0 green:147/255.0 blue:148/255.0 alpha:1/1.0];
+//    schoolName.font = [UIFont systemFontOfSize:10];
+//    [schoolName mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(userName);
+//        make.top.mas_equalTo(gradeLabel.mas_bottom).with.offset(0.01 * SCREEN_WIDTH);
+//    }];
     
     //等级
+    UILabel *level = [[UILabel alloc] init];
+    level.font = [UIFont systemFontOfSize:10];
+    level.textColor = [UIColor colorWithHexString:@"#2E3033"];
+    NSString *currentLevel = [TTUserManager sharedInstance].currentUser.level;
+    NSInteger currentlevel = [currentLevel integerValue] + 1;
+    currentLevel = [[NSNumber numberWithInteger:currentlevel] stringValue];
+    currentLevel = [NSString stringWithFormat:@"Level %@",currentLevel];
+    level.text = currentLevel;
+    [sloginView addSubview:level];
+    [level mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(headImg);
+        make.top.mas_equalTo(headImg.mas_bottom).with.offset(0.08 * SCREEN_WIDTH);
+    }];
     
+    //等级条
+    NSString *currentPoints = [TTUserManager sharedInstance].currentUser.bonusPoint;
+    NSInteger currentpoints = [currentPoints integerValue];
+    NSInteger pointsToLevelUp = [self getBonusPointToLevelUp:currentlevel];
+    NSString *pointstolevelup = [[NSNumber numberWithInteger:pointsToLevelUp] stringValue];
+    
+    UIView *grayLine = [[UIView alloc] init];
+    grayLine.backgroundColor = [UIColor colorWithHexString:@"#F2F6FA"];
+    grayLine.layer.cornerRadius = 2;
+    [sloginView addSubview:grayLine];
+    [grayLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(level);
+        make.left.mas_equalTo(level.mas_right).with.offset(0.025 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.41 * SCREEN_WIDTH, 4));
+    }];
+    
+    UIView *blueLine = [[UIView alloc] init];
+    blueLine.backgroundColor = [UIColor colorWithHexString:@"#4BB7FA"];
+    blueLine.layer.cornerRadius = 2;
+    [sloginView addSubview:blueLine];
+    [blueLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(level);
+        make.left.mas_equalTo(level.mas_right).with.offset(0.025 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.41 * SCREEN_WIDTH * currentpoints/pointsToLevelUp, 4));
+    }];
+    
+    
+    //显示当前积分和所需积分
+    UILabel *bonusPoint = [[UILabel alloc] init];
+    bonusPoint.font = [UIFont systemFontOfSize:10];
+    bonusPoint.textColor = [UIColor colorWithHexString:@"#C4C8CC"];
+    bonusPoint.text = [NSString stringWithFormat:@"%@/%@",currentPoints,pointstolevelup];
+    [sloginView addSubview:bonusPoint];
+    [bonusPoint mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(level);
+        make.left.mas_equalTo(grayLine.mas_right).with.offset(0.025 * SCREEN_WIDTH);
+    }];
     
     //编辑个人信息
     UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -256,6 +306,46 @@
 
 }
 
+- (NSInteger)getBonusPointToLevelUp:(NSInteger)level {
+    switch (level) {
+        case 0:
+            return 5;
+            break;
+        case 1:
+            return 10;
+            break;
+        case 2:
+            return 15;
+            break;
+        case 3:
+            return 25;
+            break;
+        case 4:
+            return 40;
+            break;
+        case 5:
+            return 65;
+            break;
+        case 6:
+            return 100;
+            break;
+        case 7:
+            return 150;
+            break;
+        case 8:
+            return 200;
+            break;
+        case 9:
+            return 300;
+            break;
+        case 10:
+            return 300;
+            break;
+        default:
+            break;
+    }
+    return 300;
+}
 
 //编辑界面
 -(void)getEditorView {

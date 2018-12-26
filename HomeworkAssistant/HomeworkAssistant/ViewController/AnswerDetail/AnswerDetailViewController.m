@@ -7,7 +7,7 @@
 //
 
 #import "AnswerDetailViewController.h"
-#import "AnswerCell.h"
+#import "AnswerDetailCell.h"
 #import <UShareUI/UShareUI.h>
 #import "AnswerDetail.h"
 
@@ -241,7 +241,7 @@
     collectionView.dataSource = self;
     collectionView.delegate = self;
     collectionView.backgroundColor = whitecolor;
-    [collectionView registerClass:[AnswerCell class] forCellWithReuseIdentifier:@"AC"];
+    [collectionView registerClass:[AnswerDetailCell class] forCellWithReuseIdentifier:@"AC"];
     self.collectionView = collectionView;
     
     NSInteger flag = [self.answerModel.idx1 integerValue];
@@ -264,7 +264,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    AnswerCell *cell = (AnswerCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"AC" forIndexPath:indexPath];
+    AnswerDetailCell *cell = (AnswerDetailCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"AC" forIndexPath:indexPath];
     cell.model = self.dataList[indexPath.row];
     return cell;
     

@@ -6,10 +6,10 @@
 //  Copyright © 2018 无敌帅枫. All rights reserved.
 //
 
-#import "RecommendStaticCell.h"
+#import "BookCell.h"
 #import "UIImageView+WebCache.h"
 
-@interface RecommendStaticCell()
+@interface BookCell()
 
 @property (nonatomic, strong) UIImageView *bookCover;
 @property (nonatomic, strong) UILabel *title;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation RecommendStaticCell
+@implementation BookCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:@"RecommendStaticCell"];
@@ -36,31 +36,32 @@
         self.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#1698D9"].CGColor;
         self.saveBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
         [self.saveBtn setTitle:@"收藏" forState:UIControlStateNormal];
-        [self addSubview:self.saveBtn];
+        [self.contentView addSubview:self.saveBtn];
         [self.saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self).offset(-20);
             make.bottom.mas_equalTo(self).offset(-20);
             make.size.mas_equalTo(CGSizeMake(50, 17));
         }];
-        [self.saveBtn addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
-        self.isSelected = NO;
+        [self.saveBtn addTarget:self action:@selector(test:) forControlEvents:UIControlEventTouchUpInside];
         
         self.bookCover = [[UIImageView alloc]init];
         self.bookCover.layer.masksToBounds = YES;
         self.bookCover.layer.cornerRadius = 4;
         self.bookCover.contentMode = UIViewContentModeScaleAspectFit;
-        [self addSubview:self.bookCover];
-        [self.bookCover mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self);
-            make.left.mas_equalTo(self).offset(20);
-            make.size.mas_equalTo(CGSizeMake(84, 112));
-        }];
+        self.bookCover.frame = CGRectMake(20, 8, 84, 112);
+        [self.contentView addSubview:self.bookCover];
+        
+//        [self.bookCover mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerY.mas_equalTo(self);
+//            make.left.mas_equalTo(self).offset(20);
+//            make.size.mas_equalTo(CGSizeMake(84, 112));
+//        }];
         
         self.title = [[UILabel alloc]init];
         self.title.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
         self.title.numberOfLines = 2;
 //        self.title.lineBreakMode = UILineBreakModeWordWrap;
-        [self addSubview:self.title];
+        [self.contentView addSubview:self.title];
         [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self).offset(10);
             make.left.mas_equalTo(self.bookCover.mas_right).with.offset(15);
@@ -71,7 +72,7 @@
         self.subject = [[UILabel alloc]init];
         self.subject.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
         self.subject.textColor = [UIColor colorWithHexString:@"#909499"];
-        [self addSubview:self.subject];
+        [self.contentView addSubview:self.subject];
         [self.subject mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.title.mas_bottom).with.offset(10);
 //            make.top.mas_equalTo(self).offset(30);
@@ -82,7 +83,7 @@
         self.bookVersion = [[UILabel alloc]init];
         self.bookVersion.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
         self.bookVersion.textColor = [UIColor colorWithHexString:@"#909499"];
-        [self addSubview:self.bookVersion];
+        [self.contentView addSubview:self.bookVersion];
         [self.bookVersion mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.subject);
             make.left.mas_equalTo(self.subject.mas_right).with.offset(20);
@@ -92,7 +93,7 @@
         self.grade = [[UILabel alloc]init];
         self.grade.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
         self.grade.textColor = [UIColor colorWithHexString:@"#909499"];
-        [self addSubview:self.grade];
+        [self.contentView addSubview:self.grade];
         [self.grade mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.subject);
             make.left.mas_equalTo(self.bookVersion.mas_right).with.offset(20);
@@ -102,7 +103,7 @@
         self.uploaderName = [[UILabel alloc]init];
         self.uploaderName.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
         self.uploaderName.textColor = [UIColor colorWithHexString:@"#C4C8CC"];
-        [self addSubview:self.uploaderName];
+        [self.contentView addSubview:self.uploaderName];
         [self.uploaderName mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(self).offset(-20);
             make.left.mas_equalTo(self.bookCover.mas_right).with.offset(15);
@@ -127,26 +128,21 @@
     
 }
 
-
-
-- (void)test {
-    if (self.isSelected) {
+- (void)test:(UIButton *)btn {
+    if (btn.isSelected) {
         [self userDisLike];
         self.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#1698D9"].CGColor;
         [self.saveBtn setTitleColor:[UIColor colorWithHexString:@"#1698D9"] forState:UIControlStateNormal];
-        self.isSelected = NO;
-        
+        btn.selected = !btn.isSelected;
     }
     else {
         if ([TTUserManager sharedInstance].isLogin) {
             [self userLike];
             self.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#C4C8CC"].CGColor;
             [self.saveBtn setTitleColor:[UIColor colorWithHexString:@"#C4C8CC"] forState:UIControlStateNormal];
-            self.isSelected = YES;
-            
+            btn.selected = !btn.isSelected;
         }
         else {
-//            NSLog(@"请先登录");
             [XWHUDManager showTipHUD:@"请先登录"];
         }
     }
@@ -213,8 +209,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    self.backgroundColor = [UIColor clearColor];
 }
 
 @end

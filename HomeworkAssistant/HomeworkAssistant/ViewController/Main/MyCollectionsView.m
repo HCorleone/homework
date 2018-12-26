@@ -6,21 +6,21 @@
 //  Copyright © 2018 无敌帅枫. All rights reserved.
 //
 
-#import "MyListView.h"
-#import "MyListViewCell.h"
+#import "MyCollectionsView.h"
+#import "MyCollectionsCell.h"
 #import "AnswerViewController.h"
 #import "SearchViewController.h"
 
-@interface MyListView()<UICollectionViewDelegate,  UICollectionViewDataSource>
+@interface MyCollectionsView()<UICollectionViewDelegate,  UICollectionViewDataSource>
 
 @end
 
-@implementation MyListView
+@implementation MyCollectionsView
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout withArray:(nonnull NSMutableArray *)array {
     self = [super initWithFrame:frame collectionViewLayout:layout];
     self.backgroundColor = whitecolor;
-    [self registerClass:[MyListViewCell class] forCellWithReuseIdentifier:@"MyListCell"];
+    [self registerClass:[MyCollectionsCell class] forCellWithReuseIdentifier:@"MyListCell"];
     self.dataList = array;
     self.delegate = self;
     self.dataSource = self;
@@ -42,7 +42,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    MyListViewCell *cell = (MyListViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"MyListCell" forIndexPath:indexPath];
+    MyCollectionsCell *cell = (MyCollectionsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"MyListCell" forIndexPath:indexPath];
     if (indexPath.row == self.dataList.count) {
         cell.topImage.image = [UIImage imageNamed:@"添加书籍"];
         cell.title.text = @"添加书籍";
@@ -80,19 +80,8 @@
         AnswerViewController *answerVC = [[AnswerViewController alloc]init];
         answerVC.bookModel = self.dataList[indexPath.row];
         answerVC.isSelected = YES;
-        [[self viewController].navigationController pushViewController:answerVC animated:YES];
+        [_currentVC.navigationController pushViewController:answerVC animated:YES];
     }
-}
-
-- (UIViewController*)viewController {
-    for (UIView* next = [self superview]; next; next = next.superview) {
-        UIResponder* nextResponder = [next nextResponder];
-        if ([nextResponder isKindOfClass:[UIViewController class]]) {
-            return (UIViewController*)nextResponder;
-        }
-    }
-    return nil;
-    
 }
 
 - (void)reloadDataWithList:(NSMutableArray *)arr {

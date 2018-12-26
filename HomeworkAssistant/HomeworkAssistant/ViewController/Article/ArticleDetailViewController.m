@@ -20,8 +20,6 @@
 @property (nonatomic, strong) UILabel *articleType;
 @property (nonatomic, strong) UILabel *wordsNum;
 
-
-
 @end
 
 @implementation ArticleDetailViewController
@@ -79,7 +77,6 @@
             CGFloat y = self.grade.y + self.grade.height;
             self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, height + y + 20 + BOT_OFFSET);
         }
-        
         
     } failure:nil];
     [dataTask resume];

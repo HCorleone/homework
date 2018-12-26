@@ -8,7 +8,6 @@
 
 #import "SearchViewController.h"
 #import "SearchResultViewController.h"
-#import "SearchHistoryCell.h"
 #import "ButtonLinks.h"
 #import "QRScanViewController.h"
 #import "BookListViewController.h"
@@ -49,7 +48,6 @@
 
 - (void)loadHotWords {
 
-    
     NSDictionary *dict = [NSDictionary dictionary];
     dict = [HMACSHA1 encryptDicForRequest:dict];
     
@@ -70,6 +68,7 @@
 }
 
 - (void)setupNav {
+    
     //导航栏
     UIView *navView = [[UIView alloc]init];
     [self.view addSubview:navView];
@@ -81,7 +80,6 @@
         make.height.mas_equalTo(72 + TOP_OFFSET);
     }];
     self.navView = navView;
-    
     
     //扫描按钮
     UIButton *scanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -165,6 +163,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
     self.navigationController.navigationBar.hidden = YES;
 }
@@ -177,9 +176,9 @@
         [XWHUDManager showWarningTipHUDInView:@"不能含有非法字符"];
         return;
     }
-    
     SearchResultViewController *searchResultVC = [[SearchResultViewController alloc]init];
     searchResultVC.searchContent = searchText;
     [self.navigationController pushViewController:searchResultVC animated:YES];
+    
 }
 @end

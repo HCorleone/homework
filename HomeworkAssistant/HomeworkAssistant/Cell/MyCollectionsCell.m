@@ -6,16 +6,16 @@
 //  Copyright © 2018 无敌帅枫. All rights reserved.
 //
 
-#import "MyListViewCell.h"
+#import "MyCollectionsCell.h"
 #import "UIImageView+WebCache.h"
 
-@interface MyListViewCell()
+@interface MyCollectionsCell()
 
 
 
 @end
 
-@implementation MyListViewCell
+@implementation MyCollectionsCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

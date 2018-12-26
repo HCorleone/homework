@@ -6,10 +6,10 @@
 //  Copyright © 2018 无敌帅枫. All rights reserved.
 //
 
-#import "AnswerDetailCollectionViewCell.h"
+#import "AnswerCell.h"
 #import "UIImageView+WebCache.h"
 
-@interface AnswerDetailCollectionViewCell()
+@interface AnswerCell()
 
 @property (nonatomic, strong) UIImageView *topImage;
 @property (nonatomic, strong) UILabel *botLabel;
@@ -17,13 +17,13 @@
 
 @end
 
-@implementation AnswerDetailCollectionViewCell
+@implementation AnswerCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.topImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 90, 120)];
+        self.topImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 0.24 * SCREEN_WIDTH, 0.24 * SCREEN_WIDTH * 1.3)];
         [self addSubview:self.topImage];
         
         self.botLabel = [[UILabel alloc]init];
@@ -34,7 +34,6 @@
         [self.botLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self);
             make.top.mas_equalTo(self.topImage.mas_bottom).with.offset(6);
-            make.height.mas_equalTo(15);
         }];
         
     }

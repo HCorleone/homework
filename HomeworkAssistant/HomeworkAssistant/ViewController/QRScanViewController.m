@@ -27,7 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     SGQRCodeScanManager *scanManager = [SGQRCodeScanManager sharedManager];
     NSArray *arr = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code,  AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
     [scanManager setupSessionPreset:@"AVCaptureSessionPresetHigh" metadataObjectTypes:arr currentController:self];
@@ -48,7 +47,7 @@
     scanTitle.text = @"扫描同学的二维码即可同步书单";
     [self.view addSubview:scanTitle];
     [scanTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view).offset(130 + TOP_OFFSET);
+        make.top.mas_equalTo(self.view).offset(0.35 * SCREEN_WIDTH);
         make.centerX.mas_equalTo(self.view);
     }];
     
@@ -77,6 +76,28 @@
             make.right.mas_equalTo(self.view).offset(-20);
         }];
         [manualBtn addTarget:self action:@selector(toManual) forControlEvents:UIControlEventTouchUpInside];
+    }
+    //手电筒控制按钮
+    UIButton *flashLight = [UIButton buttonWithType:UIButtonTypeCustom];
+    [flashLight setBackgroundImage:[UIImage imageNamed:@"手电筒v2"] forState:UIControlStateNormal];
+//    [flashLight setBackgroundImage:[UIImage imageNamed:@"手电筒v2"] forState:UIControlStateSelected];
+    [self.view addSubview:flashLight];
+    [flashLight mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(55, 55));
+        make.bottom.mas_equalTo(self.view).offset(-0.4 * SCREEN_WIDTH);
+    }];
+    [flashLight addTarget:self action:@selector(controlFlashLight:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (IBAction)controlFlashLight:(UIButton *)btn {
+    if (btn.selected) {
+        btn.selected = !btn.selected;
+        [SGQRCodeHelperTool SG_CloseFlashlight];
+    }
+    else {
+        btn.selected = !btn.selected;
+        [SGQRCodeHelperTool SG_openFlashlight];
     }
 }
 

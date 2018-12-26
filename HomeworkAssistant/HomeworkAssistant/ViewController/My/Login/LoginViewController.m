@@ -366,7 +366,7 @@
                 [TTUserManager sharedInstance].currentUser.qqkey = [responseObject[@"datas"] valueForKey:@"qqkey"];
                 [TTUserManager sharedInstance].currentUser.updateTime = [responseObject[@"datas"] valueForKey:@"updateTime"];
             }
-                [self loginSuccess];
+            [self loginSuccess];
         }
         else {
             //登陆失败

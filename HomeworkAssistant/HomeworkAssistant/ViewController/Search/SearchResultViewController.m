@@ -8,8 +8,8 @@
 
 #import "SearchResultViewController.h"
 #import "BookListViewController.h"
-#import "RecommendStaticCell.h"
-#import "RecommendTableView.h"
+#import "BookCell.h"
+#import "BookView.h"
 #import "AnswerViewController.h"
 #import "Book.h"
 #import "YZPullDownMenu.h"
@@ -33,7 +33,7 @@ static NSString *page = @"1";
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) NSMutableArray *searchResult;
 @property (nonatomic, strong) NSArray *titles;
-@property (nonatomic, strong) RecommendTableView *searchResultView;
+@property (nonatomic, strong) BookView *searchResultView;
 
 @end
 
@@ -126,7 +126,7 @@ static NSString *page = @"1";
 //初始化搜索结果view
 - (void)setupViewWithList:(NSMutableArray *)array {
     
-    RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 108 + TOP_OFFSET, SCREEN_WIDTH,SCREEN_HEIGHT - 108 - TOP_OFFSET - 42) style:UITableViewStylePlain withArray:array];
+    BookView *rTableView = [[BookView alloc]initWithFrame:CGRectMake(0, 108 + TOP_OFFSET, SCREEN_WIDTH,SCREEN_HEIGHT - 108 - TOP_OFFSET) style:UITableViewStylePlain withArray:array];
     [self.view addSubview:rTableView];
     rTableView.scrollEnabled = YES;
     rTableView.estimatedRowHeight = 0;
@@ -255,7 +255,7 @@ static NSString *page = @"1";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    RecommendStaticCell *cell = [self.searchResultView cellForRowAtIndexPath:indexPath];
+    BookCell *cell = [self.searchResultView cellForRowAtIndexPath:indexPath];
     
     AnswerViewController *answerVC = [[AnswerViewController alloc]init];
     answerVC.bookModel = self.searchResult[indexPath.row];

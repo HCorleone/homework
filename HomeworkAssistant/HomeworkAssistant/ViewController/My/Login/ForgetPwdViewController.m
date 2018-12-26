@@ -114,10 +114,10 @@
     [self.manager GET:[URLBuilder getURLForVerificationCode] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"------------------------------%@", responseObject);
         if ([responseObject[@"code"] integerValue] == 200) {
-            [self showArtleMessage:@"已发送验证码" isJump:NO];
+            [XWHUDManager showTipHUDInView:@"已发送验证码"];
         }else if ([responseObject[@"code"] integerValue] == 400)
         {
-            [self showArtleMessage:@"验证码发送失败" isJump:NO];
+            [XWHUDManager showTipHUDInView:@"验证码发送失败"];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -139,38 +139,17 @@
     [self.manager GET:[URLBuilder getURLForFindBackPassword] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"------------------------------%@", responseObject);
         if ([responseObject[@"code"] integerValue] == 200) {
-            [self showArtleMessage:@"修改成功" isJump:YES];
+            [XWHUDManager showSuccessTipHUDInView:@"修改成功"];
             [self.navigationController popViewControllerAnimated:YES];
-            
         }else if ([responseObject[@"code"] integerValue] == 400)
         {
-            [self showArtleMessage:@"验证码错误" isJump:NO];
+            [XWHUDManager showWarningTipHUDInView:@"验证码错误"];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
         
     }];
-}
-
-//显示警告框
--(void)showArtleMessage:(NSString *)str isJump:(BOOL)is
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:str preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *action = [[UIAlertAction alloc] init];
-    if (is == 0)
-    {
-        action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
-    }
-    else
-    {
-        action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-            [self.navigationController popViewControllerAnimated:YES];
-        }];
-    }
-    [alert addAction:action];
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

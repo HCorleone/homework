@@ -7,12 +7,12 @@
 //
 
 #import "MainViewController.h"
-#import "RecommendTableView.h"
+#import "BookView.h"
 #import "Book.h"
 #import "SearchViewController.h"
 #import "QRScanViewController.h"
 #import "MyListViewController.h"
-#import "MyListView.h"
+#import "MyCollectionsView.h"
 #import "QRCodeView.h"
 #import "SearchResultViewController.h"
 #import "ArticleViewController.h"
@@ -30,11 +30,11 @@
 //我的书单模块
 @property (nonatomic, strong) UIView *myCollectionsView;//这个是用户没有收藏或未登录显示的view
 @property (nonatomic, strong) UIView *myListContainer;//这个是用户有收藏时显示的view
-@property (nonatomic, strong) MyListView *myListView;
+@property (nonatomic, strong) MyCollectionsView *myListView;
 @property (nonatomic, strong) NSMutableArray *myListViewData;
 //为您推荐模块
 @property (nonatomic, strong) UIView *recommendView;
-@property (nonatomic, strong) RecommendTableView *recommendListView;
+@property (nonatomic, strong) BookView *recommendListView;
 @property (nonatomic, strong) NSMutableArray *recommendListViewData;
 
 //需要调整frame的控件
@@ -177,8 +177,9 @@
 
 - (void)setupViewWithData:(NSMutableArray *)array {
     //为您推荐
-    RecommendTableView *rTableView = [[RecommendTableView alloc]initWithFrame:CGRectMake(0, 0.12 * SCREEN_WIDTH, SCREEN_WIDTH, array.count * 128 ) style:UITableViewStylePlain withArray:array];
+    BookView *rTableView = [[BookView alloc]initWithFrame:CGRectMake(0, 0.12 * SCREEN_WIDTH, SCREEN_WIDTH, array.count * 128 ) style:UITableViewStylePlain withArray:array];
     [self.recommendView addSubview:rTableView];
+    rTableView.currentVC = self;
 //        self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, 456 + rTableView.frame.size.height);
 }
 
@@ -279,8 +280,9 @@
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.itemSize = CGSizeMake(83.5, 150);
-    MyListView *myListView = [[MyListView alloc]initWithFrame:CGRectMake(0, 0.125 * SCREEN_WIDTH, SCREEN_WIDTH, 0.41 * SCREEN_WIDTH) collectionViewLayout:layout withArray:array];
+    MyCollectionsView *myListView = [[MyCollectionsView alloc]initWithFrame:CGRectMake(0, 0.125 * SCREEN_WIDTH, SCREEN_WIDTH, 0.41 * SCREEN_WIDTH) collectionViewLayout:layout withArray:array];
     [myListContainer addSubview:myListView];
+    myListView.currentVC = self;
     self.myListView = myListView;
 }
 
@@ -291,8 +293,6 @@
     [testView showQRCode];
     self.testView = testView;
 }
-
-
 
 #pragma mark - 建立UI
 //导航栏
@@ -547,13 +547,8 @@
 #pragma mark - 跳转
 //前往我的列表
 - (void)toMyList {
-    if ([TTUserManager sharedInstance].isLogin) {
         MyListViewController *mylistVC = [[MyListViewController alloc]init];
         [self.navigationController pushViewController:mylistVC animated:YES];
-    }
-    else {
-        [XWHUDManager showTipHUD:@"请先登录"];
-    }
 }
 
 //前往作文页面
@@ -568,20 +563,11 @@
     articleVC.offsetX = 1;
     [self.navigationController pushViewController:articleVC animated:YES];
 }
+
 //前往浏览记录
 - (void)toHistory {
-//    NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
-    NSDictionary *dict = @{
-                           @"openID":@"1",
-                           @"banana":@"2",
-                           @"apple":@"3",
-                           @"candy":@""
-                           };
-    NSDictionary *tempDic = [HMACSHA1 encryptDicForRequest:dict];
-    NSLog(@"%@",tempDic);
+    
 }
-
-
 
 //前往扫描
 - (void)toScan {
@@ -602,7 +588,6 @@
 
 //前往搜索界面
 - (void)toSearch {
-
     SearchViewController *searchVC = [[SearchViewController alloc]init];
     [self.navigationController pushViewController:searchVC animated:YES];
 }

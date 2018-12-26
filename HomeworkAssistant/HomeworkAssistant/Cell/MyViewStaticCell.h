@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+//我的界面菜单栏Cell
 @interface MyViewStaticCell : UITableViewCell
 
 @property (nonatomic, strong) UIImageView *icon;

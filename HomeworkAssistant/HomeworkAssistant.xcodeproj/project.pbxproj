@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D1C2BDB21A5311800725BD4 /* AnswerDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1C2BDA21A5311800725BD4 /* AnswerDetailCollectionViewCell.m */; };
+		3D1C2BDB21A5311800725BD4 /* AnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1C2BDA21A5311800725BD4 /* AnswerCell.m */; };
 		3D1C2BDE21A5430400725BD4 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1C2BDD21A5430400725BD4 /* NSString+MD5.m */; };
 		3D47255D21B6160200C0E7CF /* 清除历史@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D47255B21B6160200C0E7CF /* 清除历史@3x.png */; };
 		3D47255E21B6160200C0E7CF /* 清除历史@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D47255C21B6160200C0E7CF /* 清除历史@2x.png */; };
-		3D47256121B6482200C0E7CF /* SearchHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D47256021B6482200C0E7CF /* SearchHistoryCell.m */; };
 		3D47256421B7855800C0E7CF /* MyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D47256321B7855800C0E7CF /* MyListViewController.m */; };
 		3D47256721B79CD500C0E7CF /* 管理@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D47256521B79CD500C0E7CF /* 管理@3x.png */; };
 		3D47256821B79CD500C0E7CF /* 管理@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D47256621B79CD500C0E7CF /* 管理@2x.png */; };
@@ -27,7 +26,7 @@
 		3D4725A521BA5F3F00C0E7CF /* SubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4725A421BA5F3F00C0E7CF /* SubjectViewController.m */; };
 		3D4725AB21BA63E600C0E7CF /* GradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4725AA21BA63E600C0E7CF /* GradeViewController.m */; };
 		3D4725AE21BA67C700C0E7CF /* ClassificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4725AD21BA67C700C0E7CF /* ClassificationCell.m */; };
-		3D4725B121BA78CA00C0E7CF /* CollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4725B021BA78CA00C0E7CF /* CollectionHeaderView.m */; };
+		3D4725B121BA78CA00C0E7CF /* SearchMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4725B021BA78CA00C0E7CF /* SearchMenuHeaderView.m */; };
 		3D4725B621BA7E5400C0E7CF /* 标签-向下箭头@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4725B221BA7E5400C0E7CF /* 标签-向下箭头@3x.png */; };
 		3D4725B721BA7E5400C0E7CF /* 标签-向上箭头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4725B321BA7E5400C0E7CF /* 标签-向上箭头@2x.png */; };
 		3D4725B821BA7E5400C0E7CF /* 标签-向上箭头@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4725B421BA7E5400C0E7CF /* 标签-向上箭头@3x.png */; };
@@ -37,13 +36,13 @@
 		3D7C713221A659DD008F9D52 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C713121A659DD008F9D52 /* SearchViewController.m */; };
 		3D7D18D921AB9BD0006B9C8F /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18D821AB9BD0006B9C8F /* SearchResultViewController.m */; };
 		3D7D18E021AC1997006B9C8F /* AnswerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18DF21AC1997006B9C8F /* AnswerDetailViewController.m */; };
-		3D7D18E321AD24C7006B9C8F /* AnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18E221AD24C7006B9C8F /* AnswerCell.m */; };
+		3D7D18E321AD24C7006B9C8F /* AnswerDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18E221AD24C7006B9C8F /* AnswerDetailCell.m */; };
 		3D7D18E621AD66A2006B9C8F /* QRScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18E521AD66A2006B9C8F /* QRScanViewController.m */; };
 		3D7D18ED21AE42E0006B9C8F /* TTUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18EC21AE42E0006B9C8F /* TTUserModel.m */; };
 		3D7D18F021AE69E6006B9C8F /* TTUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18EF21AE69E6006B9C8F /* TTUserManager.m */; };
 		3D7D18F221AE83A6006B9C8F /* login in Resources */ = {isa = PBXBuildFile; fileRef = 3D7D18F121AE83A6006B9C8F /* login */; };
-		3D7D18F821B0CCCF006B9C8F /* MyListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18F721B0CCCF006B9C8F /* MyListViewCell.m */; };
-		3D7D18FB21B0CEE4006B9C8F /* MyListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18FA21B0CEE4006B9C8F /* MyListView.m */; };
+		3D7D18F821B0CCCF006B9C8F /* MyCollectionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18F721B0CCCF006B9C8F /* MyCollectionsCell.m */; };
+		3D7D18FB21B0CEE4006B9C8F /* MyCollectionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18FA21B0CEE4006B9C8F /* MyCollectionsView.m */; };
 		3D958B6221C73E0600AF7F3F /* server.cer in Resources */ = {isa = PBXBuildFile; fileRef = 3D958B6121C73E0600AF7F3F /* server.cer */; };
 		3D958B6521C755A000AF7F3F /* CommonToolClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D958B6421C755A000AF7F3F /* CommonToolClass.m */; };
 		3D958B6921C7563E00AF7F3F /* HMACSHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D958B6821C7563E00AF7F3F /* HMACSHA1.m */; };
@@ -128,13 +127,12 @@
 		3D9EAF0121A2DD42006AF423 /* 搜索@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9EAEFF21A2DD42006AF423 /* 搜索@3x.png */; };
 		3D9EAF0421A2E18E006AF423 /* 扫一扫@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9EAF0221A2E18D006AF423 /* 扫一扫@2x.png */; };
 		3D9EAF0521A2E18E006AF423 /* 扫一扫@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9EAF0321A2E18D006AF423 /* 扫一扫@3x.png */; };
-		3D9EAF0921A39968006AF423 /* RecommendTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9EAF0821A39968006AF423 /* RecommendTableView.m */; };
-		3D9EAF0F21A39BF0006AF423 /* RecommendStaticCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9EAF0E21A39BF0006AF423 /* RecommendStaticCell.m */; };
+		3D9EAF0921A39968006AF423 /* BookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9EAF0821A39968006AF423 /* BookView.m */; };
+		3D9EAF0F21A39BF0006AF423 /* BookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9EAF0E21A39BF0006AF423 /* BookCell.m */; };
 		3D9EAF1321A4F3C6006AF423 /* 空状态@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9EAF1121A4F3C6006AF423 /* 空状态@2x.png */; };
 		3D9EAF1421A4F3C6006AF423 /* 空状态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9EAF1221A4F3C6006AF423 /* 空状态@3x.png */; };
 		3D9EAF1821A52E49006AF423 /* AnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9EAF1721A52E49006AF423 /* AnswerViewController.m */; };
 		3D9EAF1B21A53010006AF423 /* AnswerDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9EAF1A21A53010006AF423 /* AnswerDetail.m */; };
-		3D9EAF1E21A5305C006AF423 /* AnswerDetailCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9EAF1D21A5305C006AF423 /* AnswerDetailCollectionView.m */; };
 		3DA91F3221CC9712005262D4 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA91F3121CC9712005262D4 /* ArticleViewController.m */; };
 		3DA91F3521CC9D3D005262D4 /* ChineseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA91F3421CC9D3D005262D4 /* ChineseViewController.m */; };
 		3DA91F3821CC9D4A005262D4 /* EnglishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA91F3721CC9D4A005262D4 /* EnglishViewController.m */; };
@@ -160,6 +158,12 @@
 		3DBE438F21CB800800CE677F /* 分享应用v2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBE438C21CB800700CE677F /* 分享应用v2@3x.png */; };
 		3DBE439021CB800800CE677F /* 分享应用v2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBE438D21CB800700CE677F /* 分享应用v2@2x.png */; };
 		3DBE439121CB800800CE677F /* 分享应用v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBE438E21CB800800CE677F /* 分享应用v2.png */; };
+		3DC8CC0D21D30DC900FEE10E /* 手电筒v2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC0A21D30DC900FEE10E /* 手电筒v2@3x.png */; };
+		3DC8CC0E21D30DC900FEE10E /* 手电筒v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC0B21D30DC900FEE10E /* 手电筒v2.png */; };
+		3DC8CC0F21D30DC900FEE10E /* 手电筒v2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC0C21D30DC900FEE10E /* 手电筒v2@2x.png */; };
+		3DC8CC1421D3245A00FEE10E /* 返回_黑色v2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC1221D3245900FEE10E /* 返回_黑色v2@2x.png */; };
+		3DC8CC1521D3245A00FEE10E /* 返回_黑色v2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC1321D3245A00FEE10E /* 返回_黑色v2@3x.png */; };
+		3DC8CC1721D3247A00FEE10E /* 返回_黑色v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC1621D3247900FEE10E /* 返回_黑色v2.png */; };
 		3DF0B96621BFDC4D00AF682A /* 添加书籍.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B95821BFDC4C00AF682A /* 添加书籍.png */; };
 		3DF0B96721BFDC4D00AF682A /* 添加书籍@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B95921BFDC4C00AF682A /* 添加书籍@2x.png */; };
 		3DF0B99221BFE05E00AF682A /* 学习-选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B98621BFE05C00AF682A /* 学习-选中@3x.png */; };
@@ -216,14 +220,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3D1C2BD921A5311800725BD4 /* AnswerDetailCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnswerDetailCollectionViewCell.h; sourceTree = "<group>"; };
-		3D1C2BDA21A5311800725BD4 /* AnswerDetailCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnswerDetailCollectionViewCell.m; sourceTree = "<group>"; };
+		3D1C2BD921A5311800725BD4 /* AnswerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnswerCell.h; sourceTree = "<group>"; };
+		3D1C2BDA21A5311800725BD4 /* AnswerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnswerCell.m; sourceTree = "<group>"; };
 		3D1C2BDC21A5430400725BD4 /* NSString+MD5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		3D1C2BDD21A5430400725BD4 /* NSString+MD5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		3D47255B21B6160200C0E7CF /* 清除历史@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "清除历史@3x.png"; sourceTree = "<group>"; };
 		3D47255C21B6160200C0E7CF /* 清除历史@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "清除历史@2x.png"; sourceTree = "<group>"; };
-		3D47255F21B6482200C0E7CF /* SearchHistoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchHistoryCell.h; sourceTree = "<group>"; };
-		3D47256021B6482200C0E7CF /* SearchHistoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchHistoryCell.m; sourceTree = "<group>"; };
 		3D47256221B7855800C0E7CF /* MyListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyListViewController.h; sourceTree = "<group>"; };
 		3D47256321B7855800C0E7CF /* MyListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyListViewController.m; sourceTree = "<group>"; };
 		3D47256521B79CD500C0E7CF /* 管理@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "管理@3x.png"; sourceTree = "<group>"; };
@@ -250,8 +252,8 @@
 		3D4725AA21BA63E600C0E7CF /* GradeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradeViewController.m; sourceTree = "<group>"; };
 		3D4725AC21BA67C700C0E7CF /* ClassificationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassificationCell.h; sourceTree = "<group>"; };
 		3D4725AD21BA67C700C0E7CF /* ClassificationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassificationCell.m; sourceTree = "<group>"; };
-		3D4725AF21BA78CA00C0E7CF /* CollectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionHeaderView.h; sourceTree = "<group>"; };
-		3D4725B021BA78CA00C0E7CF /* CollectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionHeaderView.m; sourceTree = "<group>"; };
+		3D4725AF21BA78CA00C0E7CF /* SearchMenuHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchMenuHeaderView.h; sourceTree = "<group>"; };
+		3D4725B021BA78CA00C0E7CF /* SearchMenuHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchMenuHeaderView.m; sourceTree = "<group>"; };
 		3D4725B221BA7E5400C0E7CF /* 标签-向下箭头@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签-向下箭头@3x.png"; sourceTree = "<group>"; };
 		3D4725B321BA7E5400C0E7CF /* 标签-向上箭头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签-向上箭头@2x.png"; sourceTree = "<group>"; };
 		3D4725B421BA7E5400C0E7CF /* 标签-向上箭头@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签-向上箭头@3x.png"; sourceTree = "<group>"; };
@@ -264,8 +266,8 @@
 		3D7D18D821AB9BD0006B9C8F /* SearchResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
 		3D7D18DE21AC1997006B9C8F /* AnswerDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnswerDetailViewController.h; sourceTree = "<group>"; };
 		3D7D18DF21AC1997006B9C8F /* AnswerDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnswerDetailViewController.m; sourceTree = "<group>"; };
-		3D7D18E121AD24C7006B9C8F /* AnswerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnswerCell.h; sourceTree = "<group>"; };
-		3D7D18E221AD24C7006B9C8F /* AnswerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnswerCell.m; sourceTree = "<group>"; };
+		3D7D18E121AD24C7006B9C8F /* AnswerDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnswerDetailCell.h; sourceTree = "<group>"; };
+		3D7D18E221AD24C7006B9C8F /* AnswerDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnswerDetailCell.m; sourceTree = "<group>"; };
 		3D7D18E421AD66A2006B9C8F /* QRScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRScanViewController.h; sourceTree = "<group>"; };
 		3D7D18E521AD66A2006B9C8F /* QRScanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRScanViewController.m; sourceTree = "<group>"; };
 		3D7D18EB21AE42E0006B9C8F /* TTUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTUserModel.h; sourceTree = "<group>"; };
@@ -273,10 +275,10 @@
 		3D7D18EE21AE69E6006B9C8F /* TTUserManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTUserManager.h; sourceTree = "<group>"; };
 		3D7D18EF21AE69E6006B9C8F /* TTUserManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTUserManager.m; sourceTree = "<group>"; };
 		3D7D18F121AE83A6006B9C8F /* login */ = {isa = PBXFileReference; lastKnownFileType = folder; path = login; sourceTree = "<group>"; };
-		3D7D18F621B0CCCF006B9C8F /* MyListViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyListViewCell.h; sourceTree = "<group>"; };
-		3D7D18F721B0CCCF006B9C8F /* MyListViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyListViewCell.m; sourceTree = "<group>"; };
-		3D7D18F921B0CEE4006B9C8F /* MyListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyListView.h; sourceTree = "<group>"; };
-		3D7D18FA21B0CEE4006B9C8F /* MyListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyListView.m; sourceTree = "<group>"; };
+		3D7D18F621B0CCCF006B9C8F /* MyCollectionsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCollectionsCell.h; sourceTree = "<group>"; };
+		3D7D18F721B0CCCF006B9C8F /* MyCollectionsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCollectionsCell.m; sourceTree = "<group>"; };
+		3D7D18F921B0CEE4006B9C8F /* MyCollectionsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCollectionsView.h; sourceTree = "<group>"; };
+		3D7D18FA21B0CEE4006B9C8F /* MyCollectionsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCollectionsView.m; sourceTree = "<group>"; };
 		3D958B6121C73E0600AF7F3F /* server.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = server.cer; sourceTree = "<group>"; };
 		3D958B6321C755A000AF7F3F /* CommonToolClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonToolClass.h; sourceTree = "<group>"; };
 		3D958B6421C755A000AF7F3F /* CommonToolClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonToolClass.m; sourceTree = "<group>"; };
@@ -378,18 +380,16 @@
 		3D9EAEFF21A2DD42006AF423 /* 搜索@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索@3x.png"; sourceTree = "<group>"; };
 		3D9EAF0221A2E18D006AF423 /* 扫一扫@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "扫一扫@2x.png"; sourceTree = "<group>"; };
 		3D9EAF0321A2E18D006AF423 /* 扫一扫@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "扫一扫@3x.png"; sourceTree = "<group>"; };
-		3D9EAF0721A39968006AF423 /* RecommendTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommendTableView.h; sourceTree = "<group>"; };
-		3D9EAF0821A39968006AF423 /* RecommendTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendTableView.m; sourceTree = "<group>"; };
-		3D9EAF0D21A39BF0006AF423 /* RecommendStaticCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommendStaticCell.h; sourceTree = "<group>"; };
-		3D9EAF0E21A39BF0006AF423 /* RecommendStaticCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendStaticCell.m; sourceTree = "<group>"; };
+		3D9EAF0721A39968006AF423 /* BookView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookView.h; sourceTree = "<group>"; };
+		3D9EAF0821A39968006AF423 /* BookView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookView.m; sourceTree = "<group>"; };
+		3D9EAF0D21A39BF0006AF423 /* BookCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookCell.h; sourceTree = "<group>"; };
+		3D9EAF0E21A39BF0006AF423 /* BookCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookCell.m; sourceTree = "<group>"; };
 		3D9EAF1121A4F3C6006AF423 /* 空状态@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "空状态@2x.png"; sourceTree = "<group>"; };
 		3D9EAF1221A4F3C6006AF423 /* 空状态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "空状态@3x.png"; sourceTree = "<group>"; };
 		3D9EAF1621A52E49006AF423 /* AnswerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnswerViewController.h; sourceTree = "<group>"; };
 		3D9EAF1721A52E49006AF423 /* AnswerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnswerViewController.m; sourceTree = "<group>"; };
 		3D9EAF1921A53010006AF423 /* AnswerDetail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnswerDetail.h; sourceTree = "<group>"; };
 		3D9EAF1A21A53010006AF423 /* AnswerDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnswerDetail.m; sourceTree = "<group>"; };
-		3D9EAF1C21A5305C006AF423 /* AnswerDetailCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnswerDetailCollectionView.h; sourceTree = "<group>"; };
-		3D9EAF1D21A5305C006AF423 /* AnswerDetailCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnswerDetailCollectionView.m; sourceTree = "<group>"; };
 		3DA91F2521CBA662005262D4 /* libXWHUDManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libXWHUDManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DA91F3021CC9712005262D4 /* ArticleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArticleViewController.h; sourceTree = "<group>"; };
 		3DA91F3121CC9712005262D4 /* ArticleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArticleViewController.m; sourceTree = "<group>"; };
@@ -428,6 +428,12 @@
 		3DBE438C21CB800700CE677F /* 分享应用v2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享应用v2@3x.png"; sourceTree = "<group>"; };
 		3DBE438D21CB800700CE677F /* 分享应用v2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享应用v2@2x.png"; sourceTree = "<group>"; };
 		3DBE438E21CB800800CE677F /* 分享应用v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享应用v2.png"; sourceTree = "<group>"; };
+		3DC8CC0A21D30DC900FEE10E /* 手电筒v2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "手电筒v2@3x.png"; sourceTree = "<group>"; };
+		3DC8CC0B21D30DC900FEE10E /* 手电筒v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "手电筒v2.png"; sourceTree = "<group>"; };
+		3DC8CC0C21D30DC900FEE10E /* 手电筒v2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "手电筒v2@2x.png"; sourceTree = "<group>"; };
+		3DC8CC1221D3245900FEE10E /* 返回_黑色v2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回_黑色v2@2x.png"; sourceTree = "<group>"; };
+		3DC8CC1321D3245A00FEE10E /* 返回_黑色v2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回_黑色v2@3x.png"; sourceTree = "<group>"; };
+		3DC8CC1621D3247900FEE10E /* 返回_黑色v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回_黑色v2.png"; sourceTree = "<group>"; };
 		3DF0B95821BFDC4C00AF682A /* 添加书籍.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加书籍.png"; sourceTree = "<group>"; };
 		3DF0B95921BFDC4C00AF682A /* 添加书籍@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加书籍@2x.png"; sourceTree = "<group>"; };
 		3DF0B98621BFE05C00AF682A /* 学习-选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "学习-选中@3x.png"; sourceTree = "<group>"; };
@@ -608,6 +614,12 @@
 		3D958B7221C7AAE200AF7F3F /* v2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				3DC8CC1621D3247900FEE10E /* 返回_黑色v2.png */,
+				3DC8CC1221D3245900FEE10E /* 返回_黑色v2@2x.png */,
+				3DC8CC1321D3245A00FEE10E /* 返回_黑色v2@3x.png */,
+				3DC8CC0B21D30DC900FEE10E /* 手电筒v2.png */,
+				3DC8CC0C21D30DC900FEE10E /* 手电筒v2@2x.png */,
+				3DC8CC0A21D30DC900FEE10E /* 手电筒v2@3x.png */,
 				3DA91F6E21CF9C0B005262D4 /* 搜索_白色v2.png */,
 				3DA91F6F21CF9C0C005262D4 /* 搜索_白色v2@2x.png */,
 				3DA91F6D21CF9C0B005262D4 /* 搜索_白色v2@3x.png */,
@@ -739,20 +751,18 @@
 		3D9EA90E21992B17006AF423 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				9FD90A1F21B91FB000EDF389 /* SubmitCollectionViewCell.h */,
-				9FD90A1E21B91FB000EDF389 /* SubmitCollectionViewCell.m */,
+				3D7D18F621B0CCCF006B9C8F /* MyCollectionsCell.h */,
+				3D7D18F721B0CCCF006B9C8F /* MyCollectionsCell.m */,
+				3D9EAF0D21A39BF0006AF423 /* BookCell.h */,
+				3D9EAF0E21A39BF0006AF423 /* BookCell.m */,
 				3D9EA91121994E35006AF423 /* MyViewStaticCell.h */,
 				3D9EA91221994E35006AF423 /* MyViewStaticCell.m */,
-				3D9EAF0D21A39BF0006AF423 /* RecommendStaticCell.h */,
-				3D9EAF0E21A39BF0006AF423 /* RecommendStaticCell.m */,
-				3D1C2BD921A5311800725BD4 /* AnswerDetailCollectionViewCell.h */,
-				3D1C2BDA21A5311800725BD4 /* AnswerDetailCollectionViewCell.m */,
-				3D7D18E121AD24C7006B9C8F /* AnswerCell.h */,
-				3D7D18E221AD24C7006B9C8F /* AnswerCell.m */,
-				3D7D18F621B0CCCF006B9C8F /* MyListViewCell.h */,
-				3D7D18F721B0CCCF006B9C8F /* MyListViewCell.m */,
-				3D47255F21B6482200C0E7CF /* SearchHistoryCell.h */,
-				3D47256021B6482200C0E7CF /* SearchHistoryCell.m */,
+				3D1C2BD921A5311800725BD4 /* AnswerCell.h */,
+				3D1C2BDA21A5311800725BD4 /* AnswerCell.m */,
+				3D7D18E121AD24C7006B9C8F /* AnswerDetailCell.h */,
+				3D7D18E221AD24C7006B9C8F /* AnswerDetailCell.m */,
+				9FD90A1F21B91FB000EDF389 /* SubmitCollectionViewCell.h */,
+				9FD90A1E21B91FB000EDF389 /* SubmitCollectionViewCell.m */,
 				3D4725AC21BA67C700C0E7CF /* ClassificationCell.h */,
 				3D4725AD21BA67C700C0E7CF /* ClassificationCell.m */,
 				3DA91F5E21CF2925005262D4 /* ArticleCell.h */,
@@ -898,10 +908,10 @@
 				3D47256321B7855800C0E7CF /* MyListViewController.m */,
 				9FD3795821BFC63B005581BC /* BookListViewController.h */,
 				9FD3795921BFC63B005581BC /* BookListViewController.m */,
-				3D9EAF0721A39968006AF423 /* RecommendTableView.h */,
-				3D9EAF0821A39968006AF423 /* RecommendTableView.m */,
-				3D7D18F921B0CEE4006B9C8F /* MyListView.h */,
-				3D7D18FA21B0CEE4006B9C8F /* MyListView.m */,
+				3D9EAF0721A39968006AF423 /* BookView.h */,
+				3D9EAF0821A39968006AF423 /* BookView.m */,
+				3D7D18F921B0CEE4006B9C8F /* MyCollectionsView.h */,
+				3D7D18FA21B0CEE4006B9C8F /* MyCollectionsView.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -937,8 +947,6 @@
 			children = (
 				3D9EAF1621A52E49006AF423 /* AnswerViewController.h */,
 				3D9EAF1721A52E49006AF423 /* AnswerViewController.m */,
-				3D9EAF1C21A5305C006AF423 /* AnswerDetailCollectionView.h */,
-				3D9EAF1D21A5305C006AF423 /* AnswerDetailCollectionView.m */,
 				3D7D18DE21AC1997006B9C8F /* AnswerDetailViewController.h */,
 				3D7D18DF21AC1997006B9C8F /* AnswerDetailViewController.m */,
 			);
@@ -991,8 +999,8 @@
 				9FD90A3121BA49C000EDF389 /* EditorNameView.m */,
 				9FD3795B21BFC90B005581BC /* BookListView.h */,
 				9FD3795C21BFC90B005581BC /* BookListView.m */,
-				3D4725AF21BA78CA00C0E7CF /* CollectionHeaderView.h */,
-				3D4725B021BA78CA00C0E7CF /* CollectionHeaderView.m */,
+				3D4725AF21BA78CA00C0E7CF /* SearchMenuHeaderView.h */,
+				3D4725B021BA78CA00C0E7CF /* SearchMenuHeaderView.m */,
 				9F4D103C21B7D05E00F4610A /* My */,
 			);
 			path = View;
@@ -1183,18 +1191,21 @@
 				3D4725B721BA7E5400C0E7CF /* 标签-向上箭头@2x.png in Resources */,
 				3DF0B99B21BFE05E00AF682A /* 学习-默认@2x.png in Resources */,
 				3D9EA958219C26AF006AF423 /* 返回@3x.png in Resources */,
+				3DC8CC1721D3247A00FEE10E /* 返回_黑色v2.png in Resources */,
 				3D958BC421CA661200AF7F3F /* 扫一扫v2@3x.png in Resources */,
 				3D4725C021BCC65F00C0E7CF /* 修改信息@2x.png in Resources */,
 				3D4725B821BA7E5400C0E7CF /* 标签-向上箭头@3x.png in Resources */,
 				3D958B8E21C7CC2F00AF7F3F /* 学习-默认v2@2x.png in Resources */,
 				3D9EAEFD21A2D895006AF423 /* 首页头图@2x.png in Resources */,
 				3D9EA928219A9B9C006AF423 /* 分享应用@3x.png in Resources */,
+				3DC8CC0D21D30DC900FEE10E /* 手电筒v2@3x.png in Resources */,
 				3DF0B99421BFE05E00AF682A /* 我的-选中@3x.png in Resources */,
 				3D9EA942219A9DBF006AF423 /* 学习-激活@2x.png in Resources */,
 				3D958BB821CA657100AF7F3F /* 上传答案v2.png in Resources */,
 				3D9EA967219D7405006AF423 /* qq@2x.png in Resources */,
 				3D9EA940219A9DBF006AF423 /* 我的-未激活@3x.png in Resources */,
 				3D9EAF0121A2DD42006AF423 /* 搜索@3x.png in Resources */,
+				3DC8CC1421D3245A00FEE10E /* 返回_黑色v2@2x.png in Resources */,
 				3D958B8421C7CBC100AF7F3F /* 学习-选中v2@3x.png in Resources */,
 				3D958B7721C7AAF400AF7F3F /* 扫一扫bluev2@3x.png in Resources */,
 				3DBE438A21CB7FFB00CE677F /* 检查更新v2@2x.png in Resources */,
@@ -1208,6 +1219,7 @@
 				3D9EA968219D7405006AF423 /* 微信@2x.png in Resources */,
 				3D9EA8FA2195A788006AF423 /* LaunchScreen.storyboard in Resources */,
 				3DBE438321CB7FE600CE677F /* 给个好评v2.png in Resources */,
+				3DC8CC0E21D30DC900FEE10E /* 手电筒v2.png in Resources */,
 				3DA91F7121CF9C0C005262D4 /* 搜索_白色v2.png in Resources */,
 				3D47256821B79CD500C0E7CF /* 管理@2x.png in Resources */,
 				3DF0B99721BFE05E00AF682A /* 学习-默认.png in Resources */,
@@ -1240,6 +1252,7 @@
 				3D958B9021C7CC2F00AF7F3F /* 学习-默认v2@3x.png in Resources */,
 				3D9EA8F72195A788006AF423 /* Assets.xcassets in Resources */,
 				3D9EA91D219A9B7A006AF423 /* 切图 in Resources */,
+				3DC8CC1521D3245A00FEE10E /* 返回_黑色v2@3x.png in Resources */,
 				3D958B7C21C7CBB500AF7F3F /* 我的-默认v2@2x.png in Resources */,
 				3D958BBD21CA659500AF7F3F /* 提供建议v2@3x.png in Resources */,
 				3DF0B99D21BFE05E00AF682A /* 学习-默认@3x.png in Resources */,
@@ -1258,6 +1271,7 @@
 				3DBE439121CB800800CE677F /* 分享应用v2.png in Resources */,
 				3D9EA92C219A9B9C006AF423 /* 用户好评@3x.png in Resources */,
 				3D958B8A21C7CC2400AF7F3F /* 我的-选中v2@2x.png in Resources */,
+				3DC8CC0F21D30DC900FEE10E /* 手电筒v2@2x.png in Resources */,
 				3D9EAF1321A4F3C6006AF423 /* 空状态@2x.png in Resources */,
 				9FAB957321C49C8B00859BBB /* 上拉icon@3x.png in Resources */,
 				3D958B9621C88A1600AF7F3F /* 更新时间v2@2x.png in Resources */,
@@ -1359,9 +1373,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F7690FA21C4D6B400A4AA5D /* FLJSearchBar.m in Sources */,
-				3D7D18F821B0CCCF006B9C8F /* MyListViewCell.m in Sources */,
+				3D7D18F821B0CCCF006B9C8F /* MyCollectionsCell.m in Sources */,
 				3DA91F6C21CF92F0005262D4 /* ArticleDetailViewController.m in Sources */,
-				3D4725B121BA78CA00C0E7CF /* CollectionHeaderView.m in Sources */,
+				3D4725B121BA78CA00C0E7CF /* SearchMenuHeaderView.m in Sources */,
 				9F629B8121BE73C2002A79AC /* FillOthersView.m in Sources */,
 				3D4725A221BA5F1600C0E7CF /* VersionViewController.m in Sources */,
 				3D958BA521C8CC4A00AF7F3F /* UIColor+ColorChange.m in Sources */,
@@ -1372,7 +1386,6 @@
 				3D958B6521C755A000AF7F3F /* CommonToolClass.m in Sources */,
 				3DA91F3821CC9D4A005262D4 /* EnglishViewController.m in Sources */,
 				3D7D18ED21AE42E0006B9C8F /* TTUserModel.m in Sources */,
-				3D47256121B6482200C0E7CF /* SearchHistoryCell.m in Sources */,
 				3D9EA90D219916F6006AF423 /* Book.m in Sources */,
 				3D9EA8FD2195A788006AF423 /* main.m in Sources */,
 				3DA91F7821D07BB1005262D4 /* WordsNumViewController.m in Sources */,
@@ -1381,7 +1394,7 @@
 				3DA91F6921CF7B4C005262D4 /* ArticleGradeViewController.m in Sources */,
 				3DA91F3521CC9D3D005262D4 /* ChineseViewController.m in Sources */,
 				3DA91F3221CC9712005262D4 /* ArticleViewController.m in Sources */,
-				3D9EAF0F21A39BF0006AF423 /* RecommendStaticCell.m in Sources */,
+				3D9EAF0F21A39BF0006AF423 /* BookCell.m in Sources */,
 				9F4D104C21B7F9A100F4610A /* NIDropDown.m in Sources */,
 				3D9EA90921990802006AF423 /* MyViewController.m in Sources */,
 				3D47259021BA591C00C0E7CF /* YZPullDownMenu.m in Sources */,
@@ -1394,10 +1407,10 @@
 				3D4725AE21BA67C700C0E7CF /* ClassificationCell.m in Sources */,
 				3DA91F7B21D08C5A005262D4 /* BaseViewController.m in Sources */,
 				9FD3796921C253F9005581BC /* ImgScrollView.m in Sources */,
-				3D9EAF0921A39968006AF423 /* RecommendTableView.m in Sources */,
+				3D9EAF0921A39968006AF423 /* BookView.m in Sources */,
 				9F4D103421B7C67A00F4610A /* ForgetPwdViewController.m in Sources */,
 				9FD90A3521BBA08A00EDF389 /* NSString+GetNowTimestamp.m in Sources */,
-				3D7D18E321AD24C7006B9C8F /* AnswerCell.m in Sources */,
+				3D7D18E321AD24C7006B9C8F /* AnswerDetailCell.m in Sources */,
 				3D958BB221CA1AAA00AF7F3F /* YearViewController.m in Sources */,
 				9F4D102821B7C65E00F4610A /* LTTextView.m in Sources */,
 				3DA91F5D21CF2548005262D4 /* Article.m in Sources */,
@@ -1410,9 +1423,8 @@
 				3D47258A21BA2A7F00C0E7CF /* MainViewController.m in Sources */,
 				3D9EA930219A9CA0006AF423 /* LoginViewController.m in Sources */,
 				3D958B6921C7563E00AF7F3F /* HMACSHA1.m in Sources */,
-				3D1C2BDB21A5311800725BD4 /* AnswerDetailCollectionViewCell.m in Sources */,
+				3D1C2BDB21A5311800725BD4 /* AnswerCell.m in Sources */,
 				3D7D18F021AE69E6006B9C8F /* TTUserManager.m in Sources */,
-				3D9EAF1E21A5305C006AF423 /* AnswerDetailCollectionView.m in Sources */,
 				3D97C68221BE96D900D9404E /* GetCurrentDevice.m in Sources */,
 				3D9EAF1B21A53010006AF423 /* AnswerDetail.m in Sources */,
 				9FD90A3221BA49C000EDF389 /* EditorNameView.m in Sources */,
@@ -1420,7 +1432,7 @@
 				3D7D18E021AC1997006B9C8F /* AnswerDetailViewController.m in Sources */,
 				3DA91F7521D0784C005262D4 /* ArticleTypeViewController.m in Sources */,
 				3D47257621BA20C300C0E7CF /* QRCodeView.m in Sources */,
-				3D7D18FB21B0CEE4006B9C8F /* MyListView.m in Sources */,
+				3D7D18FB21B0CEE4006B9C8F /* MyCollectionsView.m in Sources */,
 				3DA91F6021CF2925005262D4 /* ArticleCell.m in Sources */,
 				3D9EA95E219D6024006AF423 /* LoginTextField.m in Sources */,
 				3D4725A521BA5F3F00C0E7CF /* SubjectViewController.m in Sources */,
