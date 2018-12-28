@@ -164,6 +164,7 @@
 		3DC8CC1421D3245A00FEE10E /* 返回_黑色v2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC1221D3245900FEE10E /* 返回_黑色v2@2x.png */; };
 		3DC8CC1521D3245A00FEE10E /* 返回_黑色v2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC1321D3245A00FEE10E /* 返回_黑色v2@3x.png */; };
 		3DC8CC1721D3247A00FEE10E /* 返回_黑色v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC1621D3247900FEE10E /* 返回_黑色v2.png */; };
+		3DC8CC1A21D5D34400FEE10E /* HttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC1921D5D34400FEE10E /* HttpTool.m */; };
 		3DF0B96621BFDC4D00AF682A /* 添加书籍.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B95821BFDC4C00AF682A /* 添加书籍.png */; };
 		3DF0B96721BFDC4D00AF682A /* 添加书籍@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B95921BFDC4C00AF682A /* 添加书籍@2x.png */; };
 		3DF0B99221BFE05E00AF682A /* 学习-选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B98621BFE05C00AF682A /* 学习-选中@3x.png */; };
@@ -434,6 +435,8 @@
 		3DC8CC1221D3245900FEE10E /* 返回_黑色v2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回_黑色v2@2x.png"; sourceTree = "<group>"; };
 		3DC8CC1321D3245A00FEE10E /* 返回_黑色v2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回_黑色v2@3x.png"; sourceTree = "<group>"; };
 		3DC8CC1621D3247900FEE10E /* 返回_黑色v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回_黑色v2.png"; sourceTree = "<group>"; };
+		3DC8CC1821D5D34400FEE10E /* HttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HttpTool.h; sourceTree = "<group>"; };
+		3DC8CC1921D5D34400FEE10E /* HttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HttpTool.m; sourceTree = "<group>"; };
 		3DF0B95821BFDC4C00AF682A /* 添加书籍.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加书籍.png"; sourceTree = "<group>"; };
 		3DF0B95921BFDC4C00AF682A /* 添加书籍@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加书籍@2x.png"; sourceTree = "<group>"; };
 		3DF0B98621BFE05C00AF682A /* 学习-选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "学习-选中@3x.png"; sourceTree = "<group>"; };
@@ -592,6 +595,8 @@
 			children = (
 				3D958B6B21C7661400AF7F3F /* URLBuilder.h */,
 				3D958B6C21C7661400AF7F3F /* URLBuilder.m */,
+				3DC8CC1821D5D34400FEE10E /* HttpTool.h */,
+				3DC8CC1921D5D34400FEE10E /* HttpTool.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -725,7 +730,7 @@
 				3D9EAF0621A398EA006AF423 /* Main */,
 				3D7C712F21A659BD008F9D52 /* Search */,
 				3DBE437921CB28ED00CE677F /* Article */,
-				3D9EAF1521A52DFE006AF423 /* AnswerDetail */,
+				3D9EAF1521A52DFE006AF423 /* Answer */,
 				3D9EA91721998B64006AF423 /* My */,
 			);
 			path = ViewController;
@@ -942,7 +947,7 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		3D9EAF1521A52DFE006AF423 /* AnswerDetail */ = {
+		3D9EAF1521A52DFE006AF423 /* Answer */ = {
 			isa = PBXGroup;
 			children = (
 				3D9EAF1621A52E49006AF423 /* AnswerViewController.h */,
@@ -950,7 +955,7 @@
 				3D7D18DE21AC1997006B9C8F /* AnswerDetailViewController.h */,
 				3D7D18DF21AC1997006B9C8F /* AnswerDetailViewController.m */,
 			);
-			path = AnswerDetail;
+			path = Answer;
 			sourceTree = "<group>";
 		};
 		3DBE437921CB28ED00CE677F /* Article */ = {
@@ -1455,6 +1460,7 @@
 				9F4D10A221B8037900F4610A /* UITextField+Category.m in Sources */,
 				9F4D10A021B8037900F4610A /* UIImageView+Category.m in Sources */,
 				3D9EA91A21998BC4006AF423 /* JYViewController.m in Sources */,
+				3DC8CC1A21D5D34400FEE10E /* HttpTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

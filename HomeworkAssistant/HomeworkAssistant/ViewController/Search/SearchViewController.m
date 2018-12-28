@@ -51,9 +51,10 @@
     NSDictionary *dict = [NSDictionary dictionary];
     dict = [HMACSHA1 encryptDicForRequest:dict];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForSearchHotWords] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {
@@ -127,7 +128,6 @@
         make.left.mas_equalTo(self.navView).offset(0.14 * SCREEN_WIDTH);
     }];
 
-    
     //取消按钮
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];

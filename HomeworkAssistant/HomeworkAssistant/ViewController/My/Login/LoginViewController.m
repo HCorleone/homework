@@ -264,9 +264,9 @@
                                    @"grant_type":@"authorization_code"
                                    };
             
-            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-            
+//            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+            AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
             NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 
                 [TTUserManager sharedInstance].currentUser.accessToken = responseObject[@"access_token"];
@@ -296,9 +296,9 @@
                            @"openid":[TTUserManager sharedInstance].currentUser.openid,
                            };
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    //            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     NSURLSessionDataTask *dataTask = [manager GET:URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [TTUserManager sharedInstance].currentUser.headImgUrl = responseObject[@"headimgurl"];
@@ -321,9 +321,9 @@
                            @"passwd":self.passwordF.text,
                            };
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForLogin] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {
@@ -350,9 +350,9 @@
                            };
     dict = [HMACSHA1 encryptDicForRequest:dict];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForGetUserExt] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {

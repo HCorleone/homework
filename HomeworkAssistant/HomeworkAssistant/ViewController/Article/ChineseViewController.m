@@ -100,9 +100,9 @@ static NSString *pageNo = @"";
                            @"pageSize":@""
                            };
     dict = [HMACSHA1 encryptDicForRequest:dict];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForArticle] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"msg"] isEqualToString:@"没有数据"]) {
             [XWHUDManager showTipHUDInView:@"暂无搜索结果"];
@@ -141,9 +141,9 @@ static NSString *pageNo = @"";
                            };
     dict = [HMACSHA1 encryptDicForRequest:dict];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForArticle] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"msg"] isEqualToString:@"没有数据"]) {
             [XWHUDManager showTipHUDInView:@"暂无搜索结果"];

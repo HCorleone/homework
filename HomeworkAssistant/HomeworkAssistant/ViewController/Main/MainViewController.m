@@ -129,13 +129,10 @@
         openId = [TTUserManager sharedInstance].currentUser.openId;
     }
     
-    NSString *strToSign = [NSString stringWithFormat:@"openID=%@",openId];
-    NSString *sign = [HMACSHA1 dataToBeEncrypted:strToSign];
-    
     NSDictionary *dict = @{
-                           @"openID":openId,
-                           @"sign":sign
+                           @"openID":openId
                            };
+    dict = [HMACSHA1 encryptDicForRequest:dict];
     
     //    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"server" ofType:@"cer"];
     //    NSData *cerData = [NSData dataWithContentsOfFile:cerPath];
@@ -146,11 +143,11 @@
     //    [security setPinnedCertificates:cerSet];
     
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    manager.requestSerializer.timeoutInterval = 20.0f;
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+//    manager.requestSerializer.timeoutInterval = 20.0f;
     //    manager.securityPolicy = security;
-    
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForRecommend] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {
@@ -186,15 +183,17 @@
 
 - (void)downloadDataForMyList {
     NSString *openId = [TTUserManager sharedInstance].currentUser.openId;
+    
     NSDictionary *dict = @{
                            @"openID":openId,
                            };
     dict = [HMACSHA1 encryptDicForRequest:dict];
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
+//
+//    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForMyCollections] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
         
         if ([responseObject[@"code"] integerValue] == 200) {
             if (responseObject[@"datas"] == [NSNull null]) {

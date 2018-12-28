@@ -13,13 +13,13 @@
 #import "GetCurrentDevice.h"//判断当前设备是否为x及以上从而获得适配的上下边距
 #import "UIColor+ColorChange.h"//hexstring转颜色
 #import "UIView+YZCategory.h"//直接设置控件布局
-
+#import "HttpTool.h"//初始化网络请求的manager
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CommonToolClass : NSObject
 
-+ (NSString *)currentTimeStr;//获取时间戳，精确到毫米
++ (NSString *)currentTimeStr;//获取时间戳，精确到毫秒
 
 @end
 

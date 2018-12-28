@@ -66,7 +66,7 @@
     return _imgArray;
 }
 
--(void)getBookView {
+- (void)getBookView {
     
     //此按钮事方式点击显示界面 视图消失。
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -130,15 +130,16 @@
 }
 
 //获取他人表单
--(void)getManager {
+- (void)getManager {
     
     NSDictionary *dic = @{
                           @"openID":self.idStr,
                           };
     dic = [HMACSHA1 encryptDicForRequest:dic];
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+//    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
+//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     [manager GET:[URLBuilder getURLForMyCollections] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"------------------------------%@------------------------------", responseObject);
         
@@ -160,11 +161,12 @@
                           @"answerIDs":self.addStr,
                           };
     dic = [HMACSHA1 encryptDicForRequest:dic];
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
-    //设置请求方式
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    //接收数据是json形式给出
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+//    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
+//    //设置请求方式
+//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    //接收数据是json形式给出
+//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
         __weak typeof(self) weakSelf = self;
     [manager GET:[URLBuilder getURLForCopyUserLike] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"------------------------------%@------------------------------", responseObject);
@@ -173,28 +175,24 @@
         [weakSelf dismissViewControllerAnimated:NO completion:nil];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
-        
     }];
     
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 //定义每个UICollectionViewCell 的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(IMAGEX, IMAGEY);
 }
 
 //定义每个UICollectionViewCell 横向的间距(上下)
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return SCREEN_WIDTH * 0.085;
 }
 
 
 //定义每个UICollectionViewCell 纵向的间距(左右)
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 0;
 }
 

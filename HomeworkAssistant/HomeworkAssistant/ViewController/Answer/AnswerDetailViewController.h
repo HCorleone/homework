@@ -11,12 +11,16 @@
 #import "BaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^needToReloadCell)(BOOL IsSelected);
+
 @interface AnswerDetailViewController : BaseViewController
 
 @property (nonatomic, strong) AnswerDetail *answerModel;
 @property (nonatomic, strong) NSMutableArray *dataList;
 @property (nonatomic, strong) NSString *answerID;
 @property (nonatomic, assign) BOOL isSelected;
+
+@property (nonatomic, copy) needToReloadCell reloadBlock;
 
 @end
 

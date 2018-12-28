@@ -160,9 +160,10 @@
                            };
     dict = [HMACSHA1 encryptDicForRequest:dict];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+//
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForDelUserLike] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"]integerValue] == 200) {
@@ -187,9 +188,10 @@
                            };
     dict = [HMACSHA1 encryptDicForRequest:dict];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+//
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForUserLike] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"]integerValue] == 200) {

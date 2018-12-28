@@ -215,11 +215,12 @@
                           @"fileList":self.fileList
                           };
     dic = [HMACSHA1 encryptDicForRequest:dic];
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
-    //设置请求方式
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    //接收数据是json形式给出
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+//    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
+//    //设置请求方式
+//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    //接收数据是json形式给出
+//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     __weak typeof(self) weakSelf = self;
     [manager POST:[URLBuilder getURLForUploadAnswerPic] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"----------------%@---------------", responseObject);

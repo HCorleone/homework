@@ -80,7 +80,6 @@
     //手电筒控制按钮
     UIButton *flashLight = [UIButton buttonWithType:UIButtonTypeCustom];
     [flashLight setBackgroundImage:[UIImage imageNamed:@"手电筒v2"] forState:UIControlStateNormal];
-//    [flashLight setBackgroundImage:[UIImage imageNamed:@"手电筒v2"] forState:UIControlStateSelected];
     [self.view addSubview:flashLight];
     [flashLight mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
@@ -90,7 +89,7 @@
     [flashLight addTarget:self action:@selector(controlFlashLight:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (IBAction)controlFlashLight:(UIButton *)btn {
+- (void)controlFlashLight:(UIButton *)btn {
     if (btn.selected) {
         btn.selected = !btn.selected;
         [SGQRCodeHelperTool SG_CloseFlashlight];

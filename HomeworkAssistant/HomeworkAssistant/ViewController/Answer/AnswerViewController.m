@@ -156,9 +156,9 @@
                            @"k":kMD5
                            };
     dict = [HMACSHA1 encryptDicForRequest:dict];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForAnswerDetail] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {
@@ -243,6 +243,12 @@
     answerDetailVC.dataList = self.answerList;
     answerDetailVC.isSelected = self.isSelected;
     answerDetailVC.answerID = self.bookModel.answerID;
+    answerDetailVC.reloadBlock = ^(BOOL IsSelected) {
+        if (self.reloadBlock) {
+            self.reloadBlock(IsSelected);
+        }
+    };
+    
     
     [self.navigationController pushViewController:answerDetailVC animated:YES];
 }

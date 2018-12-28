@@ -13,8 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QRCodeView : UIView
 
 - (void)showQRCode;
-@property (nonatomic, strong) UIView *bgView;
-@property (nonatomic, strong) UIView *whiteView;
 
 @end
 

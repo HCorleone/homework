@@ -12,10 +12,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^needToReloadCell)(BOOL IsSelected);
+
 @interface AnswerViewController : BaseViewController
 
 @property (nonatomic, strong) Book *bookModel;
 @property (nonatomic, assign) BOOL isSelected;
+
+@property (nonatomic, copy) needToReloadCell reloadBlock;
 
 @end
 

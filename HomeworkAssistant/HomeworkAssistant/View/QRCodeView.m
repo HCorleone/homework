@@ -11,6 +11,9 @@
 
 @interface QRCodeView()<UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) UIView *bgView;
+@property (nonatomic, strong) UIView *whiteView;
+
 @end
 
 @implementation QRCodeView
@@ -54,7 +57,7 @@
     title.font = [UIFont systemFontOfSize:16];
     title.textAlignment = NSTextAlignmentCenter;
     title.numberOfLines = 0;
-    title.lineBreakMode = UILineBreakModeCharacterWrap;
+    title.lineBreakMode = NSLineBreakByCharWrapping;
     [whiteView addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(whiteView);

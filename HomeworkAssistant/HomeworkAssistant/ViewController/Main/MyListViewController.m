@@ -138,9 +138,10 @@
                            };
     dict = [HMACSHA1 encryptDicForRequest:dict];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+//
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForMyCollections] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([responseObject[@"code"] integerValue] == 200) {
@@ -218,7 +219,7 @@
     }];
 }
 
-//删除书籍
+#pragma mark - 批量删除书籍
 - (void)userDisLike:(NSArray *)indexPathArr {
     
     NSMutableArray *selectModelArr = [NSMutableArray array];
@@ -240,9 +241,10 @@
                            @"sourceType":@"rec"
                            };
     dict = [HMACSHA1 encryptDicForRequest:dict];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
 
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForDelUserLike] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
         if ([responseObject[@"code"]integerValue] == 200) {
@@ -304,7 +306,6 @@
 - (UIView *)editingView{
     if (!_editingView) {
         
-        
         UIView *editingView = [[UIView alloc] init];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -362,13 +363,15 @@
              */
         }
         
-    }else if ([[sender titleForState:UIControlStateNormal] isEqualToString:@"全选"]) {
+    }
+    else if ([[sender titleForState:UIControlStateNormal] isEqualToString:@"全选"]) {
         [self.myListViewData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [self.myListView selectRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
         }];
         
         [sender setTitle:@"全不选" forState:UIControlStateNormal];
-    }else if ([[sender titleForState:UIControlStateNormal] isEqualToString:@"全不选"]) {
+    }
+    else if ([[sender titleForState:UIControlStateNormal] isEqualToString:@"全不选"]) {
         [self.myListView reloadData];
         /** 遍历反选
          [[self.tableView indexPathsForSelectedRows] enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

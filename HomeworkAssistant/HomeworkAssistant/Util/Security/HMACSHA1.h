@@ -16,10 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
  这个类是用于进行网络请求的时候加密所要传输的信息
 */
 
-
-//将所有参数排序后加密后再上传
-+(NSString *)dataToBeEncrypted:(NSString *)data;
-
 + (NSDictionary *)encryptDicForRequest:(NSDictionary *)dic;
 
 @end

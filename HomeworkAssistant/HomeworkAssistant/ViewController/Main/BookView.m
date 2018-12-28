@@ -65,6 +65,18 @@
     AnswerViewController *answerVC = [[AnswerViewController alloc]init];
     answerVC.bookModel = self.dataList[indexPath.row];
     answerVC.isSelected = cell.saveBtn.isSelected;
+    answerVC.reloadBlock = ^(BOOL IsSelected) {
+        cell.saveBtn.selected = IsSelected;
+        if (IsSelected) {
+            cell.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#C4C8CC"].CGColor;
+            [cell.saveBtn setTitleColor:[UIColor colorWithHexString:@"#C4C8CC"] forState:UIControlStateNormal];
+        }
+        else {
+            cell.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#1698D9"].CGColor;
+            [cell.saveBtn setTitleColor:[UIColor colorWithHexString:@"#1698D9"] forState:UIControlStateNormal];
+        }
+    };
+    
     [_currentVC.navigationController pushViewController:answerVC animated:YES];
 }
 

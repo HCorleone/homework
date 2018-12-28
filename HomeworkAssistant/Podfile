@@ -22,4 +22,5 @@ target 'HomeworkAssistant' do
 	pod 'PYSearch'
     pod 'JXCategoryView'
 	pod 'XWHUDManager'
+    pod 'FMDB'
 end
