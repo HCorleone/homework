@@ -7,18 +7,20 @@
 //
 
 #import "MainViewController.h"
+#import "HistoryViewController.h"
 #import "BookView.h"
 #import "Book.h"
 #import "SearchViewController.h"
 #import "QRScanViewController.h"
-#import "MyListViewController.h"
+#import "MyCollectionsViewController.h"
 #import "MyCollectionsView.h"
 #import "QRCodeView.h"
 #import "SearchResultViewController.h"
 #import "ArticleViewController.h"
 #import "BookListViewController.h"
+#import "AgreementView.h"
 
-@interface MainViewController ()<UIScrollViewDelegate>
+@interface MainViewController ()<UIScrollViewDelegate, UIGestureRecognizerDelegate>
 //主页滚动视图
 @property (nonatomic, strong) UIScrollView *mainView;
 @property (nonatomic, strong) UIView *mainContentView;
@@ -51,6 +53,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstInstalled"] == YES) {
+        [self showAgreement];
+    }
     
     [self setupView];
     [self setupNavView];
@@ -177,7 +182,11 @@
     BookView *rTableView = [[BookView alloc]initWithFrame:CGRectMake(0, 0.12 * SCREEN_WIDTH, SCREEN_WIDTH, array.count * 128 ) style:UITableViewStylePlain withArray:array];
     [self.recommendView addSubview:rTableView];
     rTableView.currentVC = self;
-//        self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, 456 + rTableView.frame.size.height);
+    rTableView.allowsSelection = YES;
+    self.recommendListView = rTableView;
+//    self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, 456 + rTableView.frame.size.height);
+    
+    self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, 1.505 * SCREEN_WIDTH + 30 * 128);
 }
 
 
@@ -242,9 +251,9 @@
         make.top.mas_equalTo(myListContainer).offset(0.04 * SCREEN_WIDTH);
     }];
     
-    //蓝色小标记1
+    //小标记1
     UILabel *blueSign_one = [[UILabel alloc]init];
-    blueSign_one.backgroundColor = [UIColor colorWithHexString:@"#49ACF2"];
+    blueSign_one.backgroundColor = [UIColor colorWithHexString:@"#FF8D07"];
     [myListContainer addSubview:blueSign_one];
     [blueSign_one mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(myListContainer);
@@ -267,7 +276,7 @@
     [checkMyList addTarget:self action:@selector(toMyList) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [shareBtn setImage:[UIImage imageNamed:@"分享给同学"] forState:UIControlStateNormal];
+    [shareBtn setImage:[UIImage imageNamed:@"分享给同学v2"] forState:UIControlStateNormal];
     [myListContainer addSubview:shareBtn];
     [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(myListContainer);
@@ -293,6 +302,12 @@
     self.testView = testView;
 }
 
+#pragma mark - 展示用户协议
+- (void)showAgreement {
+    AgreementView *testView = [[AgreementView alloc] initWithFrame:self.view.frame];
+    [[UIApplication sharedApplication].keyWindow addSubview:testView];
+}
+
 #pragma mark - 建立UI
 //导航栏
 - (void)setupNavView {
@@ -301,7 +316,7 @@
     topOffsetView.backgroundColor = maincolor;
     [self.view addSubview:topOffsetView];
     
-    self.navView = [[UIView alloc]init];
+    self.navView = [[UIView alloc] init];
     self.navView.hidden = YES;
     [self.view addSubview:self.navView];
     [self.navView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -375,17 +390,21 @@
     mainView.bounces = NO;
     mainView.backgroundColor = maincolor;
     mainView.delegate = self;
+    mainView.contentSize = CGSizeMake(SCREEN_WIDTH, 1.505 * SCREEN_WIDTH + 30 * 128);
     self.mainView = mainView;
-    self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, 1.505 * SCREEN_WIDTH + 30 * 128);
     
-    UIView *mainContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] init];
+//    tapGes.delegate =self;
+//    [self.mainView addGestureRecognizer:tapGes];
+    
+    UIView *mainContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1.505 * SCREEN_WIDTH + 30 * 128)];
     mainContentView.backgroundColor = whitecolor;
     [mainView addSubview:mainContentView];
     self.mainContentView = mainContentView;
     
     //头部视图
     UIImageView *headerView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.34 * SCREEN_WIDTH)];
-    headerView.image = [UIImage imageNamed:@"首页头图"];
+    headerView.image = [UIImage imageNamed:@"首页头图v2"];
     [mainContentView addSubview:headerView];
     
     //浏览记录
@@ -480,9 +499,9 @@
         make.top.mas_equalTo(myCollectionsView).offset(0.04 * SCREEN_WIDTH);
     }];
     
-    //蓝色小标记1
+    //小标记1
     UILabel *blueSign_one = [[UILabel alloc]init];
-    blueSign_one.backgroundColor = [UIColor colorWithHexString:@"#49ACF2"];
+    blueSign_one.backgroundColor = [UIColor colorWithHexString:@"#FF8D07"];
     [myCollectionsView addSubview:blueSign_one];
     [blueSign_one mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(myCollectionsView);
@@ -516,7 +535,7 @@
     [mainContentView addSubview:line_two];
     
     //推荐模块
-    UIView *recommendView = [[UIView alloc]initWithFrame:CGRectMake(0, 1.39 * SCREEN_WIDTH, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    UIView *recommendView = [[UIView alloc]initWithFrame:CGRectMake(0, 1.39 * SCREEN_WIDTH, SCREEN_WIDTH, SCREEN_HEIGHT - 1.39 * SCREEN_WIDTH + 128*30)];
     recommendView.backgroundColor = whitecolor;
     [mainContentView addSubview:recommendView];
     self.recommendView = recommendView;
@@ -531,9 +550,9 @@
         make.top.mas_equalTo(recommendView).offset(0.04 * SCREEN_WIDTH);
     }];
     
-    //蓝色小标记2
+    //小标记2
     UILabel *blueSign_two = [[UILabel alloc]init];
-    blueSign_two.backgroundColor = [UIColor colorWithHexString:@"#49ACF2"];
+    blueSign_two.backgroundColor = [UIColor colorWithHexString:@"#FF8D07"];
     [recommendView addSubview:blueSign_two];
     [blueSign_two mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(recommendView);
@@ -546,7 +565,7 @@
 #pragma mark - 跳转
 //前往我的列表
 - (void)toMyList {
-        MyListViewController *mylistVC = [[MyListViewController alloc]init];
+        MyCollectionsViewController *mylistVC = [[MyCollectionsViewController alloc]init];
         [self.navigationController pushViewController:mylistVC animated:YES];
 }
 
@@ -565,7 +584,8 @@
 
 //前往浏览记录
 - (void)toHistory {
-    
+    HistoryViewController *historyVC = [[HistoryViewController alloc] init];
+    [self.navigationController pushViewController:historyVC animated:YES];
 }
 
 //前往扫描
@@ -591,8 +611,14 @@
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 
-
-
+//#pragma mark - 手势delegate
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+//    // 假设为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
+//    if ([NSStringFromClass([self.recommendListView class]) isEqualToString:@"tableViewCell"]) {
+//        return YES;
+//    }
+//    return  NO;
+//}
 
 #pragma mark - 其他
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

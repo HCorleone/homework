@@ -134,12 +134,17 @@
 
                     if ([weakSelf.fillView.inputField.text isEqualToString:@""] || [weakSelf.fillView.codeLabel.text isEqualToString:@""]) {
                         NSLog(@"信息不全");
-                        [XWHUDManager showTipHUDInView:@"未输入条码"];
+                        [XWHUDManager showTipHUDInView:@"信息不全"];
                     }
                     else{
+                        if ([TTUserManager sharedInstance].isLogin) {
+                            //请求接口
+                            [weakSelf getManager];
+                        }
+                        else {
+                            [XWHUDManager showTipHUD:@"请先登录"];
+                        }
                         
-                        //请求接口
-                        [weakSelf getManager];
                     }
                 }
                 

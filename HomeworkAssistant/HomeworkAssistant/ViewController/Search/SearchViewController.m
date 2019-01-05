@@ -118,25 +118,25 @@
     [testView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(0.67 * SCREEN_WIDTH, 0.67 * SCREEN_WIDTH * 0.125));
         make.centerY.mas_equalTo(scanBtn);
-        make.left.mas_equalTo(self.navView).offset(0.14 * SCREEN_WIDTH);
+        make.left.mas_equalTo(self.navView).offset(0.156 * SCREEN_WIDTH);
     }];
     
     [self.navView addSubview:testSearchBar];
     [testSearchBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(0.67 * SCREEN_WIDTH, 0.67 * SCREEN_WIDTH * 0.125));
         make.centerY.mas_equalTo(scanBtn);
-        make.left.mas_equalTo(self.navView).offset(0.14 * SCREEN_WIDTH);
+        make.left.mas_equalTo(self.navView).offset(0.156 * SCREEN_WIDTH);
     }];
 
     //取消按钮
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+    cancelBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     cancelBtn.backgroundColor = [UIColor clearColor];
     [self.navView addSubview:cancelBtn];
     [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(scanBtn);
         make.right.mas_equalTo(self.navView).with.offset(-20);
-        make.size.mas_equalTo(CGSizeMake(40, 24));
     }];
     [cancelBtn addTarget:self action:@selector(backToVc) forControlEvents:UIControlEventTouchUpInside];
     

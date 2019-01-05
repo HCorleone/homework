@@ -1,0 +1,89 @@
+//
+//  RecommendTableView.m
+//  HomeworkAssistant
+//
+//  Created by 无敌帅枫 on 2018/11/20.
+//  Copyright © 2018 无敌帅枫. All rights reserved.
+//
+
+#import "BookView.h"
+#import "BookCell.h"
+#import "Book.h"
+#import "AnswerViewController.h"
+#import "MyCollectionsViewController.h"
+
+@interface BookView()<UITableViewDelegate, UITableViewDataSource>
+
+@end
+
+
+@implementation BookView
+
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style withArray:(NSMutableArray *)array {
+    self = [super initWithFrame:frame style:style];
+    [self registerClass:[BookCell class] forCellReuseIdentifier:@"BookCell"];
+    self.dataList = array;
+    self.delegate = self;
+    self.dataSource = self;
+    self.scrollEnabled = NO;
+    [self setSeparatorInset:UIEdgeInsetsMake(0, 20, 0, 20)];
+    [self setSeparatorColor:[[UIColor blackColor] colorWithAlphaComponent:0.1]];
+    
+    return self;
+}
+
+
+
+#pragma TableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataList.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BookCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BookCell" forIndexPath:indexPath];
+    cell.model = self.dataList[indexPath.row];
+    cell.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#FA8919"].CGColor;
+    [cell.saveBtn setTitleColor:[UIColor colorWithHexString:@"#FA8919"] forState:UIControlStateNormal];
+    return cell;
+}
+
+
+
+#pragma TableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 128;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    BookCell *cell = [self cellForRowAtIndexPath:indexPath];
+    
+    AnswerViewController *answerVC = [[AnswerViewController alloc]init];
+    answerVC.bookModel = self.dataList[indexPath.row];
+    answerVC.isSelected = cell.saveBtn.isSelected;
+    answerVC.reloadBlock = ^(BOOL IsSelected) {
+        cell.saveBtn.selected = IsSelected;
+        if (IsSelected) {
+            cell.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#C4C8CC"].CGColor;
+            [cell.saveBtn setTitleColor:[UIColor colorWithHexString:@"#C4C8CC"] forState:UIControlStateNormal];
+        }
+        else {
+            cell.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#FA8919"].CGColor;
+            [cell.saveBtn setTitleColor:[UIColor colorWithHexString:@"#FA8919"] forState:UIControlStateNormal];
+        }
+    };
+    
+    [DBManager insertToDataBase:self.dataList[indexPath.row]];
+    [_currentVC.navigationController pushViewController:answerVC animated:YES];
+}
+
+- (void)reloadDataWithList:(NSMutableArray *)arr {
+    self.dataList = arr;
+    [self reloadData];
+}
+
+@end

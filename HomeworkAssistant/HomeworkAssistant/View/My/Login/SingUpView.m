@@ -56,8 +56,8 @@
         CAGradientLayer *gradientLayer = [CAGradientLayer layer];
         gradientLayer.frame = CGRectMake(0, 0, 0.29 * SCREEN_WIDTH, 0.29 * SCREEN_WIDTH * 0.365);
         [gradientLayer setColors:[NSArray arrayWithObjects:
-                                  (id)[UIColor colorWithHexString:@"#6FDDFF"].CGColor,
-                                  (id)[UIColor colorWithHexString:@"#33C2FF"].CGColor,
+                                  (id)[UIColor colorWithHexString:@"#FFC94C"].CGColor,
+                                  (id)[UIColor colorWithHexString:@"#FF8800"].CGColor,
                                   nil
                                   ]];
         
@@ -73,8 +73,8 @@
         CALayer *shadowLayer = [[CALayer alloc] init];
         shadowLayer.frame = CGRectMake(0, 0, 0.29 * SCREEN_WIDTH, 0.29 * SCREEN_WIDTH * 0.365);
         shadowLayer.shadowOffset = CGSizeMake(0, 1);
-        shadowLayer.backgroundColor = [UIColor colorWithHexString:@"#2983C8"].CGColor;
-        shadowLayer.shadowColor = [UIColor colorWithHexString:@"#2983C8"].CGColor;
+        shadowLayer.backgroundColor = [UIColor colorWithHexString:@"#C3733A"].CGColor;
+        shadowLayer.shadowColor = [UIColor colorWithHexString:@"#C3733A"].CGColor;
         shadowLayer.shadowOpacity = 1;
         shadowLayer.cornerRadius = 8;
         
@@ -99,8 +99,8 @@
         CAGradientLayer *gradientLayer2 = [CAGradientLayer layer];
 //        gradientLayer.frame = CGRectMake(0, 0, 0.29 * SCREEN_WIDTH, 0.29 * SCREEN_WIDTH * 0.365);
         [gradientLayer2 setColors:[NSArray arrayWithObjects:
-                                  (id)[UIColor colorWithHexString:@"#6FDDFF"].CGColor,
-                                  (id)[UIColor colorWithHexString:@"#33C2FF"].CGColor,
+                                  (id)[UIColor colorWithHexString:@"#FFC94C"].CGColor,
+                                  (id)[UIColor colorWithHexString:@"#FF8800"].CGColor,
                                   nil
                                   ]];
         
@@ -115,8 +115,8 @@
         CALayer *shadowLayer2 = [[CALayer alloc] init];
 //        shadowLayer.frame = CGRectMake(0, 0, 0.29 * SCREEN_WIDTH, 0.29 * SCREEN_WIDTH * 0.365);
         shadowLayer2.shadowOffset = CGSizeMake(0, 1);
-        shadowLayer2.backgroundColor = [UIColor colorWithHexString:@"#2983C8"].CGColor;
-        shadowLayer2.shadowColor = [UIColor colorWithHexString:@"#2983C8"].CGColor;
+        shadowLayer2.backgroundColor = [UIColor colorWithHexString:@"#C3733A"].CGColor;
+        shadowLayer2.shadowColor = [UIColor colorWithHexString:@"#C3733A"].CGColor;
         shadowLayer2.shadowOpacity = 1;
         shadowLayer2.cornerRadius = 8;
         

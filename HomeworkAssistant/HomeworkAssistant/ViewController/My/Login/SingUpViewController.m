@@ -25,8 +25,8 @@
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = self.view.bounds;
     [gradientLayer setColors:[NSArray arrayWithObjects:
-                              (id)[UIColor colorWithHexString:@"#55CEF2"].CGColor,
-                              (id)[UIColor colorWithHexString:@"#3DB6F2"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#F2B830"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#FF8800"].CGColor,
                               nil
                               ]];
     

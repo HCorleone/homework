@@ -26,14 +26,14 @@
 @implementation BookCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    self = [super initWithStyle:style reuseIdentifier:@"RecommendStaticCell"];
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     if (self) {
         
         self.saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.saveBtn.layer.borderWidth = 0.5;
         self.saveBtn.layer.cornerRadius = 3;
-        self.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#1698D9"].CGColor;
+        self.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#FA8919"].CGColor;
         self.saveBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
         [self.saveBtn setTitle:@"收藏" forState:UIControlStateNormal];
         [self.contentView addSubview:self.saveBtn];
@@ -131,8 +131,8 @@
 - (void)test:(UIButton *)btn {
     if (btn.isSelected) {
         [self userDisLike];
-        self.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#1698D9"].CGColor;
-        [self.saveBtn setTitleColor:[UIColor colorWithHexString:@"#1698D9"] forState:UIControlStateNormal];
+        self.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#FA8919"].CGColor;
+        [self.saveBtn setTitleColor:[UIColor colorWithHexString:@"#FA8919"] forState:UIControlStateNormal];
         btn.selected = !btn.isSelected;
     }
     else {

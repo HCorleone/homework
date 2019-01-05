@@ -14,19 +14,26 @@
 
 #define MENU_HEIGHT 36
 
-static NSString *articleType = @"";
-//static NSString *language = @"1";
-static NSString *wordNum = @"";
-static NSString *grade = @"";
-static NSString *pageNo = @"";
+//static NSString *articleType = @"";
+//static NSString *wordNum = @"";
+//static NSString *grade = @"";
+//static NSString *pageNo = @"";
 
-@interface ChineseViewController ()<YZPullDownMenuDataSource, UITableViewDelegate, UITableViewDataSource>
+@interface ChineseViewController ()<YZPullDownMenuDataSource, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
+@property (nonatomic, strong) UIView *navView;
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) NSMutableArray *listData;
-@property (nonatomic, strong) NSString *language;
 @property (nonatomic, strong) YZPullDownMenu *menu;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UISearchBar *searchBar;
+
+@property (nonatomic, strong) NSString *keyword;
+@property (nonatomic, strong) NSString *language;
+@property (nonatomic, strong) NSString *articleType;
+@property (nonatomic, strong) NSString *wordNum;
+@property (nonatomic, strong) NSString *grade;
+@property (nonatomic, strong) NSString *pageNo;
 
 @end
 
@@ -56,26 +63,98 @@ static NSString *pageNo = @"";
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    articleType = @"";
-    wordNum = @"";
-    grade = @"";
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.keyword = @"";
+    self.articleType = @"";
+    self.wordNum = @"";
+    self.grade = @"";
+    self.pageNo = @"1";
+    [self setupNav];
     [self setupMenu];
     [self setupTableView];
     [self downloadData];
     
 }
 
+- (void)setupNav {
+    //导航栏
+    UIView *navView = [[UIView alloc]init];
+    [self.view addSubview:navView];
+    navView.backgroundColor = maincolor;
+    [navView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view);
+        make.right.mas_equalTo(self.view);
+        make.height.mas_equalTo(NAVBAR_HEIGHT + TOP_OFFSET);
+    }];
+    self.navView = navView;
+
+    UISearchBar *testSearchBar = [[UISearchBar alloc]init];
+    if(@available(iOS 11.0, *)) {
+        [[testSearchBar.heightAnchor constraintEqualToConstant:44] setActive:YES];
+    }
+    testSearchBar.backgroundImage = [[UIImage alloc] init];
+    testSearchBar.barTintColor = [UIColor whiteColor];
+    testSearchBar.placeholder = @"请输入作文题目关键字";
+    UITextField *searchField = [testSearchBar valueForKey:@"searchField"];
+    if (searchField) {
+        searchField.backgroundColor = [UIColor whiteColor];
+        searchField.font = [UIFont systemFontOfSize:14];
+        searchField.leftViewMode = UITextFieldViewModeNever;
+        [testSearchBar setValue:searchField forKey:@"searchField"];
+        //        testSearchBar.searchTextPositionAdjustment = (UIOffset){0, 0}; // 光标偏移量
+    }
+    testSearchBar.delegate = self;
+    self.searchBar = testSearchBar;
+    
+    //用uiview的圆角去代替searchbar的圆角
+    UIView *testView = [[UIView alloc]init];
+    testView.backgroundColor = whitecolor;
+    testView.layer.cornerRadius = 3;
+    testView.layer.masksToBounds = YES;
+    [self.navView addSubview:testView];
+    [testView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(0.77 * SCREEN_WIDTH, 0.77 * SCREEN_WIDTH * 0.11));
+        make.bottom.mas_equalTo(self.navView).offset(-10);
+        make.left.mas_equalTo(self.navView).offset(20);
+    }];
+    
+    [self.navView addSubview:testSearchBar];
+    [testSearchBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(0.77 * SCREEN_WIDTH, 0.77 * SCREEN_WIDTH * 0.11));
+        make.bottom.mas_equalTo(self.navView).offset(-10);
+        make.left.mas_equalTo(self.navView).offset(20);
+    }];
+    
+    //取消按钮
+    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+    cancelBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    cancelBtn.backgroundColor = [UIColor clearColor];
+    [self.navView addSubview:cancelBtn];
+    [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(testView);
+        make.right.mas_equalTo(self.navView).offset(-20);
+    }];
+    [cancelBtn addTarget:self action:@selector(hideNavView) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)hideNavView {
+    [self.searchBar resignFirstResponder];
+    self.fatherVC.navView.hidden = NO;
+    self.fatherVC.articleScrollView.scrollEnabled = YES;
+}
+
 - (void)setupTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, MENU_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVBAR_HEIGHT - TOP_OFFSET - MENU_HEIGHT) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, MENU_HEIGHT + TOP_OFFSET + NAVBAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVBAR_HEIGHT - TOP_OFFSET - MENU_HEIGHT) style:UITableViewStylePlain];
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.tableView registerClass:[ArticleCell class] forCellReuseIdentifier:@"ArticleCell"];
     [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 20, 0, 20)];
     [self.tableView setSeparatorColor:[[UIColor blackColor] colorWithAlphaComponent:0.1]];
@@ -86,17 +165,17 @@ static NSString *pageNo = @"";
 //下来刷新方法
 - (void)pullToRefresh {
     //页数控制
-    NSInteger flag = [pageNo integerValue];
+    NSInteger flag = [self.pageNo integerValue];
     flag += 1;
-    pageNo = [[NSNumber numberWithInteger:flag]stringValue];
+    self.pageNo = [[NSNumber numberWithInteger:flag]stringValue];
     
     NSDictionary *dict = @{
-                           @"keyword":@"",
-                           @"articleType":articleType,
+                           @"keyword":self.keyword,
+                           @"articleType":self.articleType,
                            @"language":self.language,
-                           @"wordNum":wordNum,
-                           @"grade":grade,
-                           @"pageNo":pageNo,
+                           @"wordNum":self.wordNum,
+                           @"grade":self.grade,
+                           @"pageNo":self.pageNo,
                            @"pageSize":@""
                            };
     dict = [HMACSHA1 encryptDicForRequest:dict];
@@ -129,13 +208,12 @@ static NSString *pageNo = @"";
 
 - (void)downloadData {
     self.language = [self getLanguage];
-    pageNo = @"1";
     NSDictionary *dict = @{
-                           @"keyword":@"",
-                           @"articleType":articleType,
+                           @"keyword":self.keyword,
+                           @"articleType":self.articleType,
                            @"language":self.language,
-                           @"wordNum":wordNum,
-                           @"grade":grade,
+                           @"wordNum":self.wordNum,
+                           @"grade":self.grade,
                            @"pageNo":@"",
                            @"pageSize":@""
                            };
@@ -169,21 +247,21 @@ static NSString *pageNo = @"";
 - (void)refreshSearchView:(NSNotification *)note {
     NSDictionary *dic = [note userInfo];
     if ([dic[@"col"] integerValue] == 0) {
-        grade = dic[@"title"];
-        if ([grade isEqualToString:@"全部年级"]) {
-            grade = @"";
+        self.grade = dic[@"title"];
+        if ([self.grade isEqualToString:@"全部年级"]) {
+            self.grade = @"";
         }
     }
     else if ([dic[@"col"] integerValue] == 1) {
-        articleType = dic[@"title"];
-        if ([articleType isEqualToString:@"全部题材"]) {
-            articleType = @"";
+        self.articleType = dic[@"title"];
+        if ([self.articleType isEqualToString:@"全部题材"]) {
+            self.articleType = @"";
         }
     }
     else if ([dic[@"col"] integerValue] == 2) {
-        wordNum = dic[@"title"];
-        if ([wordNum isEqualToString:@"全部字数"]) {
-            wordNum = @"";
+        self.wordNum = dic[@"title"];
+        if ([self.wordNum isEqualToString:@"全部字数"]) {
+            self.wordNum = @"";
         }
     }
     
@@ -228,7 +306,7 @@ static NSString *pageNo = @"";
     //菜单栏
     YZPullDownMenu *menu = [YZPullDownMenu alloc];
     menu.from = [self getMenuType];
-    menu = [menu initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, MENU_HEIGHT)];
+    menu = [menu initWithFrame:CGRectMake(0, NAVBAR_HEIGHT + TOP_OFFSET, SCREEN_WIDTH, MENU_HEIGHT)];
     [self.view addSubview:menu];
     
     menu.dataSource = self;
@@ -251,6 +329,26 @@ static NSString *pageNo = @"";
 
 }
 
+#pragma mark - SearchBarDelegate
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    [self.searchBar resignFirstResponder];
+    
+    if ([TextCheckTool lc_checkingSpecialChar:self.searchBar.text]) {
+        [XWHUDManager showWarningTipHUDInView:@"不能含有非法字符"];
+        return;
+    }
+    
+    self.keyword = self.searchBar.text;
+    [self downloadData];
+}
+
+
+#pragma mark - ScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+}
+
 #pragma mark - YZPullDownMenuDataSource
 // 返回下拉菜单多少列
 - (NSInteger)numberOfColsInMenu:(YZPullDownMenu *)pullDownMenu
@@ -265,7 +363,7 @@ static NSString *pageNo = @"";
     [button setTitle:_titles[index] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:12];
     [button setTitleColor:[UIColor colorWithHexString:@"#939699"] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor colorWithHexString:@"#2988CC"] forState:UIControlStateSelected];
+    [button setTitleColor:[UIColor colorWithHexString:@"#FA8919"] forState:UIControlStateSelected];
     [button setImage:[UIImage imageNamed:@"下拉icon"] forState:UIControlStateNormal];
     [button setImage:[UIImage imageNamed:@"上拉icon"] forState:UIControlStateSelected];
     

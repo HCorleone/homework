@@ -103,12 +103,8 @@
             [weakSelf addBookList];
         }
         else {
-//            [CommonAlterView showMessages:@"请先登录" andVC:weakSelf handler:^(UIAlertAction *action) {
-//                [weakSelf dismissViewControllerAnimated:NO completion:nil];
-//            }];
             [XWHUDManager showTipHUD:@"请先登录"];
             [weakSelf dismissViewControllerAnimated:NO completion:nil];
-            
         }
         
     };
@@ -183,6 +179,11 @@
 //定义每个UICollectionViewCell 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(IMAGEX, IMAGEY);
+}
+
+//设置每个item的UIEdgeInsets
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(20, 0, 20, 0);
 }
 
 //定义每个UICollectionViewCell 横向的间距(上下)

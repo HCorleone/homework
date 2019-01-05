@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ArticleViewController : BaseViewController
 
 @property (nonatomic, assign) NSInteger offsetX;
+@property (nonatomic, strong) UIView *navView;
+@property (nonatomic, strong) UIScrollView *articleScrollView;
 
 @end
 

@@ -46,14 +46,17 @@
     }];
     //建议文本
     LTTextView  *textView = [[LTTextView alloc] init];
+    textView.textView.textContainerInset = UIEdgeInsetsMake(8, 8, 0, 8);
     textView.placeholderTextView.text = @"输入您的建议，我们将为您不断改进";
+    textView.placeholderTextView.textColor = [UIColor colorWithHexString:@"#8F9394"];
+    textView.placeholderTextView.font = [UIFont systemFontOfSize:14];
     [self.view addSubview:textView];
-    self.contentTextView = textView;
     [textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
         make.top.mas_equalTo(self.navView.mas_bottom).with.offset(0.05 * SCREEN_WIDTH);
         make.size.mas_equalTo(CGSizeMake(0.86 * SCREEN_WIDTH, 0.7 * 0.86 * SCREEN_WIDTH));
     }];
+    self.contentTextView = textView;
     
     //联系方式框背景
     self.loginView = [[UIView alloc]init];
@@ -70,26 +73,28 @@
     }];
     //联系方式文本
     UITextField *lianxiField = [[UITextField alloc]init];
+    lianxiField.font = [UIFont systemFontOfSize:14];
     lianxiField.placeholder = @"请留下您的联系方式";
-    [lianxiField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+    [lianxiField setValue:[UIFont systemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
     [lianxiField setValue:[UIColor colorWithHexString:@"#8F9394"] forKeyPath:@"_placeholderLabel.textColor"];
     lianxiField.delegate = self;
+    lianxiField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 5)];
+    lianxiField.leftView.userInteractionEnabled = NO;
+    lianxiField.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:lianxiField];
-    self.lianxiField = lianxiField;
     [lianxiField mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(self.loginView).offset(0.04 * SCREEN_WIDTH);
         make.centerX.mas_equalTo(self.view);
         make.top.mas_equalTo(self.contentTextView.mas_bottom).with.offset(0.03 * SCREEN_WIDTH);
         make.size.mas_equalTo(CGSizeMake(0.86 * SCREEN_WIDTH, 0.86 * SCREEN_WIDTH * 0.14));
     }];
-    
+    self.lianxiField = lianxiField;
     
     //提交按钮
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = CGRectMake(0, 0, 0.83 * SCREEN_WIDTH, 0.83 * SCREEN_WIDTH * 0.12);
     [gradientLayer setColors:[NSArray arrayWithObjects:
-                              (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
-                              (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#FFC94C"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#FF8800"].CGColor,
                               nil
                               ]];
     
@@ -113,14 +118,16 @@
     [summitBtn setTitle:@"提交建议" forState:UIControlStateNormal];
     [summitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    
 }
 
 //发送反馈信息
 - (void)toSend:(id)sender {
-    
-    
-    
+    if ([self.contentTextView.textView.text isEqualToString:@""]) {
+        [XWHUDManager showTipHUDInView:@"请输入您的建议"];
+    }
+    else {
+        [XWHUDManager showTipHUDInView:@"我们已收到您的反馈"];
+    }
 }
 
 - (void)setupNav {

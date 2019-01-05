@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "FeedBackViewController.h"
 #import "SearchResultViewController.h"
 #import "QRScanViewController.h"
 #import "SGQRCode.h"
@@ -35,10 +36,12 @@
     [self.scanManager startRunning];
     
     SGQRCodeScanningView *scanView = [[SGQRCodeScanningView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    scanView.scanningImageName = @"扫描线";
     scanView.cornerColor = whitecolor;
     scanView.backgroundAlpha = 0.4;
     [self.view addSubview:scanView];
     self.scanView = scanView;
+    [self.scanView addTimer];
     
     UILabel *scanTitle = [[UILabel alloc]init];
     scanTitle.font = [UIFont systemFontOfSize:15];
@@ -105,17 +108,23 @@
     //手动输入条形码
     [self.scanView removeTimer];
     [self.scanManager stopRunning];
-    
-    [self.navigationController pushViewController:[[InputBarCodeViewController alloc] init] animated:YES];
+    InputBarCodeViewController *inputCodeVC = [[InputBarCodeViewController alloc] init];
+    if (self.scanType == ScanTypeUploadAnswer) {
+        inputCodeVC.from = FromUploadAnswer;
+    }
+    else {
+        inputCodeVC.from = FromFeedBackAnswer;
+    }
+    [self.navigationController pushViewController:inputCodeVC animated:YES];
 }
 
 - (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager didOutputMetadataObjects:(NSArray *)metadataObjects {
-    AVMetadataMachineReadableCodeObject * tempMetadataObject = [metadataObjects objectAtIndex : 0 ];
+    AVMetadataMachineReadableCodeObject *tempMetadataObject = [metadataObjects objectAtIndex:0];
     NSString *result = tempMetadataObject.stringValue;
     
     if (self.scanType == ScanTypeDefault) {
         if (result.length >= 7) {
-            if ([[result substringToIndex:7] isEqualToString: @"openId:"]) {
+            if ([[result substringToIndex:7] isEqualToString:@"openId:"]) {
                 [self.scanView removeTimer];
                 [self.scanManager stopRunning];
 //                NSLog(@"%@",[result substringFromIndex:7]);
@@ -125,7 +134,7 @@
             else {
                 [self.scanView removeTimer];
                 [self.scanManager stopRunning];
-                SearchResultViewController *searchResultVC = [[SearchResultViewController alloc]init];
+                SearchResultViewController *searchResultVC = [[SearchResultViewController alloc] init];
                 searchResultVC.searchContent = result;
                 [self.navigationController pushViewController:searchResultVC animated:YES];
             }
@@ -133,7 +142,7 @@
         else {
             [self.scanView removeTimer];
             [self.scanManager stopRunning];
-            SearchResultViewController *searchResultVC = [[SearchResultViewController alloc]init];
+            SearchResultViewController *searchResultVC = [[SearchResultViewController alloc] init];
             searchResultVC.searchContent = result;
             [self.navigationController pushViewController:searchResultVC animated:YES];
         }
@@ -150,9 +159,9 @@
     else if (self.scanType == ScanTypeFeedBack) {
         [self.scanView removeTimer];
         [self.scanManager stopRunning];
-        
-        NSLog(@"前往反馈界面");
-        [self.navigationController popViewControllerAnimated:YES];
+        FeedBackViewController *feedBackVC = [[FeedBackViewController alloc] init];
+        feedBackVC.uploadCode = result;
+        [self.navigationController pushViewController:feedBackVC animated:YES];
     }
 }
 
@@ -165,8 +174,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.scanView addTimer];
     if (self.scanManager) {
+        [self.scanView addTimer];
         [self.scanManager startRunning];
     }
 }

@@ -14,6 +14,8 @@
 #import "UIColor+ColorChange.h"//hexstring转颜色
 #import "UIView+YZCategory.h"//直接设置控件布局
 #import "HttpTool.h"//初始化网络请求的manager
+#import "DBManager.h"//管理浏览历史记录数据库
+#import "TextCheckTool.h"//文字校验工具
 
 NS_ASSUME_NONNULL_BEGIN
 

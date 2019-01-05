@@ -6,14 +6,14 @@
 //  Copyright © 2018 无敌帅枫. All rights reserved.
 //
 
-#import "MyListViewController.h"
+#import "MyCollectionsViewController.h"
 #import "AnswerViewController.h"
 #import "SearchViewController.h"
 #import "BookView.h"
 #import "BookCell.h"
 #import "Book.h"
 
-@interface MyListViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface MyCollectionsViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIView *navView;
 @property (nonatomic, strong) NSMutableArray *myListViewData;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation MyListViewController
+@implementation MyCollectionsViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -293,6 +293,7 @@
 
     AnswerViewController *answerVC = [[AnswerViewController alloc]init];
     answerVC.bookModel = self.myListViewData[indexPath.row];
+    answerVC.isSelected = YES;
     [self.navigationController pushViewController:answerVC animated:YES];
 }
 

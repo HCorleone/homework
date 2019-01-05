@@ -95,11 +95,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>你确定要用相机吗</string>
+	<string>此APP需要经过您的同意获取使用相机权限</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>是否保存</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>此APP需要经过您的同意获取访问相册权限</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

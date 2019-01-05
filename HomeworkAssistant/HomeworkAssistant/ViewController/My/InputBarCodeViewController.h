@@ -10,7 +10,16 @@
 #import "BaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, From) {
+    FromUploadAnswer,
+    FromFeedBackAnswer,
+    FromDefault = FromUploadAnswer
+};
+
+
 @interface InputBarCodeViewController : BaseViewController
+
+@property (nonatomic, assign) From from;
 
 @end
 

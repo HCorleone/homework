@@ -30,8 +30,8 @@
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = self.view.bounds;
     [gradientLayer setColors:[NSArray arrayWithObjects:
-                              (id)[UIColor colorWithHexString:@"#55CEF2"].CGColor,
-                              (id)[UIColor colorWithHexString:@"#3DB6F2"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#F2B830"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#FF8800"].CGColor,
                                nil
                               ]];
      
@@ -102,8 +102,8 @@
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = CGRectMake(0, 0, 0.689 * SCREEN_WIDTH, 0.15 * 0.689 * SCREEN_WIDTH);
     [gradientLayer setColors:[NSArray arrayWithObjects:
-                              (id)[UIColor colorWithHexString:@"#6FDDFF"].CGColor,
-                              (id)[UIColor colorWithHexString:@"#33C2FF"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#FFC94C"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#FF8800"].CGColor,
                               nil
                               ]];
     
@@ -119,8 +119,8 @@
     CALayer *shadowLayer = [[CALayer alloc] init];
     shadowLayer.frame = CGRectMake(0, 0, 0.689 * SCREEN_WIDTH, 0.15 * 0.689 * SCREEN_WIDTH);
     shadowLayer.shadowOffset = CGSizeMake(0, 1);
-    shadowLayer.backgroundColor = [UIColor colorWithHexString:@"#2983C8"].CGColor;
-    shadowLayer.shadowColor = [UIColor colorWithHexString:@"#2983C8"].CGColor;
+    shadowLayer.backgroundColor = [UIColor colorWithHexString:@"#C3733A"].CGColor;
+    shadowLayer.shadowColor = [UIColor colorWithHexString:@"#C3733A"].CGColor;
     shadowLayer.shadowOpacity = 1;
     shadowLayer.cornerRadius = 8;
     
@@ -314,7 +314,7 @@
 #pragma mark - 手机号登陆
 - (void)signin {
     [[TTUserManager sharedInstance] clearCurrentUserInfo];
-    
+    [self.view endEditing:YES];
     
     NSDictionary *dict = @{
                            @"mobile":self.acountF.text,
@@ -385,7 +385,10 @@
     
     if ([TTUserManager sharedInstance].currentUser.grade) {
         
-        [self.navigationController popViewControllerAnimated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.navigationController popViewControllerAnimated:YES];
+        });
+        
     }
     else
     {

@@ -14,11 +14,6 @@
 @interface ArticleViewController ()<JXCategoryViewDelegate>
 
 @property (nonatomic, assign) BOOL shouldHandleScreenEdgeGesture;
-
-@property (nonatomic, strong) UIView *navView;
-
-@property (nonatomic, strong) UIScrollView *articleScrollView;
-
 @property (nonatomic, strong) JXCategoryTitleView *categoryView;
 
 @end
@@ -43,8 +38,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = whitecolor;
-    [self setupNav];
     [self setupScroll];
+    [self setupNav];
     [self setupIndicator];
 }
 
@@ -73,7 +68,7 @@
     //搜索按钮
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [searchBtn setImage:[UIImage imageNamed:@"搜索_白色v2"] forState:UIControlStateNormal];
-    [searchBtn addTarget:self action:@selector(toSearch) forControlEvents:UIControlEventTouchUpInside];
+    [searchBtn addTarget:self action:@selector(toSearch:) forControlEvents:UIControlEventTouchUpInside];
     [navView addSubview:searchBtn];
     [searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
@@ -84,20 +79,29 @@
 
 - (void)setupScroll {
     
-    UIScrollView *articleScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, NAVBAR_HEIGHT + TOP_OFFSET, SCREEN_WIDTH, SCREEN_HEIGHT - NAVBAR_HEIGHT - TOP_OFFSET)];
-    articleScrollView.contentSize = CGSizeMake(2 * SCREEN_WIDTH, SCREEN_HEIGHT - NAVBAR_HEIGHT - TOP_OFFSET);
+    UIScrollView *articleScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     articleScrollView.bounces = NO;
+    
+    if (@available(iOS 11.0, *)) {
+        articleScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    
+    articleScrollView.contentSize = CGSizeMake(2 * SCREEN_WIDTH, SCREEN_HEIGHT);
+    articleScrollView.showsVerticalScrollIndicator = NO;
+    articleScrollView.showsHorizontalScrollIndicator = NO;
     articleScrollView.pagingEnabled = YES;
     [self.view addSubview:articleScrollView];
     self.articleScrollView = articleScrollView;
     
     ChineseViewController *chineseArticleVC = [[ChineseViewController alloc] init];
-    chineseArticleVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVBAR_HEIGHT - TOP_OFFSET);
+    chineseArticleVC.fatherVC = self;
+    chineseArticleVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [self addChildViewController:chineseArticleVC];
     [articleScrollView addSubview:chineseArticleVC.view];
     
     EnglishViewController *englishArticleVC = [[EnglishViewController alloc] init];
-    englishArticleVC.view.frame = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVBAR_HEIGHT - TOP_OFFSET);
+    englishArticleVC.fatherVC = self;
+    englishArticleVC.view.frame = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [self addChildViewController:englishArticleVC];
     [articleScrollView addSubview:englishArticleVC.view];
     
@@ -125,7 +129,7 @@
     titleCategoryView.titles = titles;
     titleCategoryView.titleColorGradientEnabled = YES;
     titleCategoryView.titleColor = whitecolor;
-    titleCategoryView.titleSelectedColor = [UIColor colorWithHexString:@"#2988CC"];
+    titleCategoryView.titleSelectedColor = [UIColor colorWithHexString:@"#FA8919"];
     titleCategoryView.defaultSelectedIndex = _offsetX;
     
     JXCategoryIndicatorBackgroundView *backgroundView = [[JXCategoryIndicatorBackgroundView alloc] init];
@@ -140,8 +144,9 @@
 
 }
 
-- (void)toSearch {
-    
+- (void)toSearch:(UIButton *)btn {
+    self.navView.hidden = YES;
+    self.articleScrollView.scrollEnabled = NO;
 }
 
 #pragma mark - JXCategoryViewDelegate

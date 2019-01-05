@@ -25,7 +25,6 @@
 @property (nonatomic, strong) UIView *loginView;
 @property (nonatomic, strong) UITableView *menuView;
 @property (nonatomic, strong) UIView *sloginView;
-@property (nonatomic, strong) UIButton *logoutBtn;
 /** 视图 */
 @property (nonatomic, strong) EditorNameView *editor;
 /** 下拉菜单 */
@@ -85,10 +84,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"userLogout" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeView:) name:@"loginSuccess" object:nil];
     self.sloginView.hidden = YES;
-    self.logoutBtn.hidden = YES;
-    [self.logoutBtn removeFromSuperview];
     [self.sloginView removeFromSuperview];
-    
+    [self.menuView reloadData];
 }
 
 //接收登录成功的通知来改变界面
@@ -96,6 +93,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"loginSuccess" object:nil];
     NSLog(@"接到用户登陆成功通知，更改MyView的界面");
     [self setupSLoginView];
+    [self.menuView reloadData];
 }
 
 #pragma mark - 顶部登录框
@@ -109,13 +107,9 @@
     
     [self.loginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.width.mas_equalTo(0.832 * SCREEN_WIDTH);
         make.top.mas_equalTo(self.view).offset(0.1 * SCREEN_HEIGHT + TOP_OFFSET);
-        make.height.mas_equalTo(0.6 * 0.832 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.889 * SCREEN_WIDTH, 0.889 * SCREEN_WIDTH * 0.369));
     }];
-    
-    //    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.loginView.bounds];
-    //    self.loginView.layer.shadowPath = path.CGPath;
     
     self.loginView.layer.cornerRadius = 2;
     self.loginView.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -128,38 +122,38 @@
     headImg.image = [UIImage imageNamed:@"logo"];
     [self.loginView addSubview:headImg];
     [headImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.loginView);
-        make.top.mas_equalTo(self.loginView).offset(0.076 * SCREEN_WIDTH);
-        make.size.mas_equalTo(CGSizeMake(0.187 * SCREEN_WIDTH, 0.187 * SCREEN_WIDTH));
+        make.left.mas_equalTo(self.loginView).offset(20);
+        make.top.mas_equalTo(self.loginView).offset(0.053 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.194 * SCREEN_WIDTH, 0.194 * SCREEN_WIDTH));
     }];
     
     //登陆注册按钮
     
-    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = CGRectMake(0, 0, 0.405 * SCREEN_WIDTH, 0.236 * 0.405 * SCREEN_WIDTH);
-    [gradientLayer setColors:[NSArray arrayWithObjects:
-                              (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
-                              (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
-                              nil
-                              ]];
-    
-    
-    gradientLayer.startPoint = CGPointMake(0, 0);
-    gradientLayer.endPoint = CGPointMake(0, 1);
-    gradientLayer.locations = @[@0,@1];
-    
+//    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+//    gradientLayer.frame = CGRectMake(0, 0, 0.405 * SCREEN_WIDTH, 0.236 * 0.405 * SCREEN_WIDTH);
+//    [gradientLayer setColors:[NSArray arrayWithObjects:
+//                              (id)[UIColor colorWithHexString:@"#FFC94C"].CGColor,
+//                              (id)[UIColor colorWithHexString:@"#FF8800"].CGColor,
+//                              nil
+//                              ]];
+//
+//
+//    gradientLayer.startPoint = CGPointMake(0, 0);
+//    gradientLayer.endPoint = CGPointMake(0, 1);
+//    gradientLayer.locations = @[@0,@1];
+//
     UIButton *logoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [logoBtn.layer addSublayer:gradientLayer];
-    logoBtn.layer.masksToBounds = YES;
-    logoBtn.layer.cornerRadius = 0.236 * 0.405 * SCREEN_WIDTH/2;
+//    [logoBtn.layer addSublayer:gradientLayer];
+//    logoBtn.layer.masksToBounds = YES;
+//    logoBtn.layer.cornerRadius = 0.236 * 0.405 * SCREEN_WIDTH/2;
+    [logoBtn setBackgroundColor:whitecolor];
     [logoBtn setTitle:@"登陆/注册" forState:UIControlStateNormal];
-    logoBtn.titleLabel.textColor = whitecolor;
-    logoBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    [logoBtn setTitleColor:[UIColor colorWithHexString:@"#0F0F0F"] forState:UIControlStateNormal];
+    logoBtn.titleLabel.font = [UIFont systemFontOfSize:18];
     [self.loginView addSubview:logoBtn];
     [logoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.loginView);
-        make.centerY.mas_equalTo(self.loginView).offset(0.054 * SCREEN_HEIGHT/2 + 20);
-        make.size.mas_equalTo(CGSizeMake(0.405 * SCREEN_WIDTH, 0.236 * 0.405 * SCREEN_WIDTH));
+        make.left.mas_equalTo(headImg.mas_right).with.offset(10);
+        make.top.mas_equalTo(self.loginView).offset(0.07 * SCREEN_WIDTH);
     }];
     [logoBtn addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -167,15 +161,15 @@
 
 //登陆成功的框
 - (void)setupSLoginView {
+    
     UIView *sloginView = [[UIView alloc]init];
     [self.view addSubview:sloginView];
     sloginView.backgroundColor = [UIColor whiteColor];
     sloginView.layer.cornerRadius = 10;
     [sloginView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.width.mas_equalTo(0.832 * SCREEN_WIDTH);
         make.top.mas_equalTo(self.view).offset(0.1 * SCREEN_HEIGHT + TOP_OFFSET);
-        make.height.mas_equalTo(0.6 * 0.832 * SCREEN_WIDTH);
+        make.size.mas_equalTo(CGSizeMake(0.889 * SCREEN_WIDTH, 0.889 * SCREEN_WIDTH * 0.369));
     }];
     self.sloginView = sloginView;
     
@@ -226,62 +220,8 @@
 //        make.top.mas_equalTo(gradeLabel.mas_bottom).with.offset(0.01 * SCREEN_WIDTH);
 //    }];
     
-    //等级
-    UILabel *level = [[UILabel alloc] init];
-    level.font = [UIFont systemFontOfSize:10];
-    level.textColor = [UIColor colorWithHexString:@"#2E3033"];
-    NSString *currentLevel = [TTUserManager sharedInstance].currentUser.level;
-    NSInteger currentlevel = [currentLevel integerValue] + 1;
-    currentLevel = [[NSNumber numberWithInteger:currentlevel] stringValue];
-    currentLevel = [NSString stringWithFormat:@"Level %@",currentLevel];
-    level.text = currentLevel;
-    [sloginView addSubview:level];
-    [level mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(headImg);
-        make.top.mas_equalTo(headImg.mas_bottom).with.offset(0.08 * SCREEN_WIDTH);
-    }];
-    
-    //等级条
-    NSString *currentPoints = [TTUserManager sharedInstance].currentUser.bonusPoint;
-    NSInteger currentpoints = [currentPoints integerValue];
-    NSInteger pointsToLevelUp = [self getBonusPointToLevelUp:currentlevel];
-    NSString *pointstolevelup = [[NSNumber numberWithInteger:pointsToLevelUp] stringValue];
-    
-    UIView *grayLine = [[UIView alloc] init];
-    grayLine.backgroundColor = [UIColor colorWithHexString:@"#F2F6FA"];
-    grayLine.layer.cornerRadius = 2;
-    [sloginView addSubview:grayLine];
-    [grayLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(level);
-        make.left.mas_equalTo(level.mas_right).with.offset(0.025 * SCREEN_WIDTH);
-        make.size.mas_equalTo(CGSizeMake(0.41 * SCREEN_WIDTH, 4));
-    }];
-    
-    UIView *blueLine = [[UIView alloc] init];
-    blueLine.backgroundColor = [UIColor colorWithHexString:@"#4BB7FA"];
-    blueLine.layer.cornerRadius = 2;
-    [sloginView addSubview:blueLine];
-    [blueLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(level);
-        make.left.mas_equalTo(level.mas_right).with.offset(0.025 * SCREEN_WIDTH);
-        make.size.mas_equalTo(CGSizeMake(0.41 * SCREEN_WIDTH * currentpoints/pointsToLevelUp, 4));
-    }];
-    
-    
-    //显示当前积分和所需积分
-    UILabel *bonusPoint = [[UILabel alloc] init];
-    bonusPoint.font = [UIFont systemFontOfSize:10];
-    bonusPoint.textColor = [UIColor colorWithHexString:@"#C4C8CC"];
-    bonusPoint.text = [NSString stringWithFormat:@"%@/%@",currentPoints,pointstolevelup];
-    [sloginView addSubview:bonusPoint];
-    [bonusPoint mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(level);
-        make.left.mas_equalTo(grayLine.mas_right).with.offset(0.025 * SCREEN_WIDTH);
-    }];
-    
     //编辑个人信息
     UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    editorBtn.backgroundColor = [UIColor grayColor];
     [editorBtn setImage:[UIImage imageNamed:@"修改信息"] forState:UIControlStateNormal];
     [editorBtn addTarget:self action:@selector(clickEditor) forControlEvents:UIControlEventTouchUpInside];
     [sloginView addSubview:editorBtn];
@@ -291,18 +231,18 @@
         make.size.mas_equalTo(CGSizeMake(24, 24));
     }];
     
-    //注销
-    UIButton *logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.view addSubview:logoutBtn];
-    [logoutBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.view).offset(-20);
-        make.bottom.mas_equalTo(self.view).offset(-60 - BOT_OFFSET);
-    }];
-    logoutBtn.backgroundColor = [UIColor clearColor];
-    [logoutBtn setTitleColor:[UIColor colorWithHexString:@"#8F9394"] forState:UIControlStateNormal];
-    [logoutBtn setTitle:@"注销" forState:UIControlStateNormal];
-    [logoutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
-    self.logoutBtn = logoutBtn;
+//    //注销
+//    UIButton *logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [self.view addSubview:logoutBtn];
+//    [logoutBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.mas_equalTo(self.view).offset(-20);
+//        make.bottom.mas_equalTo(self.view).offset(-60 - BOT_OFFSET);
+//    }];
+//    logoutBtn.backgroundColor = [UIColor clearColor];
+//    [logoutBtn setTitleColor:[UIColor colorWithHexString:@"#8F9394"] forState:UIControlStateNormal];
+//    [logoutBtn setTitle:@"注销" forState:UIControlStateNormal];
+//    [logoutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+//    self.logoutBtn = logoutBtn;
 
 }
 
@@ -496,8 +436,8 @@
     [self.menuView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view).offset(41.5);
         make.right.mas_equalTo(self.view).offset(-41.5);
-        make.top.mas_equalTo(self.loginView.mas_bottom).with.offset(36);
-        make.height.mas_equalTo( 6 * 0.07 * SCREEN_HEIGHT);
+        make.top.mas_equalTo(self.loginView.mas_bottom).with.offset(20);
+        make.height.mas_equalTo( 8 * 0.07 * SCREEN_HEIGHT);
     }];
 }
 
@@ -507,40 +447,54 @@
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    
+    if ([TTUserManager sharedInstance].isLogin) {
+        return 8;
+    }
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MyViewStaticCell *cell = [MyViewStaticCell cellWithTableView:tableView];
     switch (indexPath.row) {
         case 0:{
+            cell.icon.image = [UIImage imageNamed:@"我的下载v2"];
+            cell.title.text = @"我的下载";
+            break;
+        }
+        case 1:{
             cell.icon.image = [UIImage imageNamed:@"上传答案v2"];
             cell.title.text = @"上传答案";
             break;
         }
-        case 1:{
+        case 2:{
             cell.icon.image = [UIImage imageNamed:@"我要反馈v2"];
-            cell.title.text = @"我要反馈";
+            cell.title.text = @"反馈缺失书籍";
             break;
         }
-        case 2:{
+        case 3:{
             cell.icon.image = [UIImage imageNamed:@"提供建议v2"];
             cell.title.text = @"提供建议";
             break;
         }
-        case 3:{
+        case 4:{
             cell.icon.image = [UIImage imageNamed:@"给个好评v2"];
             cell.title.text = @"给个好评";
             break;
         }
-        case 4:{
+        case 5:{
             cell.icon.image = [UIImage imageNamed:@"检查更新v2"];
             cell.title.text = @"检查更新";
             break;
         }
-        case 5:{
+        case 6:{
             cell.icon.image = [UIImage imageNamed:@"分享应用v2"];
             cell.title.text = @"分享应用";
+            break;
+        }
+        case 7:{
+            cell.icon.image = [UIImage imageNamed:@"注销v2"];
+            cell.title.text = @"注销";
             break;
         }
         default:
@@ -557,35 +511,45 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case 0:{    //上传答案
+        case 0:{    //我的下载
+//            QRScanViewController *scanVC = [[QRScanViewController alloc] init];
+//            scanVC.scanType = ScanTypeUploadAnswer;
+//            [self.navigationController pushViewController:scanVC animated:YES];
+            break;
+        }
+        case 1:{    //上传答案
             QRScanViewController *scanVC = [[QRScanViewController alloc] init];
             scanVC.scanType = ScanTypeUploadAnswer;
             [self.navigationController pushViewController:scanVC animated:YES];
             break;
         }
-        case 1:{    //我要反馈
+        case 2:{    //我要反馈
             QRScanViewController *scanVC = [[QRScanViewController alloc] init];
             scanVC.scanType = ScanTypeFeedBack;
             [self.navigationController pushViewController:scanVC animated:YES];
             break;
         }
-        case 2:{    //提供建议
+        case 3:{    //提供建议
             JYViewController *jyVC = [[JYViewController alloc]init];
             [self.navigationController pushViewController:jyVC animated:YES];
             break;
         }
-        case 3:{    //给个好评
+        case 4:{    //给个好评
             NSString *urlStr = [self getReviewUrlByAppId:1];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr] options:@{} completionHandler:nil];
             break;
         }
-        case 4:{    //检查更新
+        case 5:{    //检查更新
             NSString *urlStr = [self getReviewUrlByAppId:2];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr] options:@{} completionHandler:nil];
             break;
         }
-        case 5:{    //分享应用
+        case 6:{    //分享应用
             [self showDialog];
+            break;
+        }
+        case 7:{    //注销
+            [self logout];
             break;
         }
         default:

@@ -13,24 +13,22 @@
 #import "TTUserManager.h"
 #import "Masonry.h"
 #import "AFNetworking.h"
-#import "UIColor+ColorChange.h"
 #import "RDVTabBarController.h"
 #import "MBProgressHUD.h"
-#import "NSString+MD5.h"
 #import "CommonCategory.h"
 #import "CommonDefine.h"
 #import "MJRefresh.h"
-#import "GetCurrentDevice.h"
-#import "TextCheckTool.h"
 #import "CommonAlterView.h"
 #import "CommonToolClass.h"
 #import "PYSearch.h"
 #import "XWHUDManager.h"
 #import "JXCategoryView.h"
+#import <FMDB/FMDB.h>
+#import "HXPhotoPicker.h"
 
 //color
 #define whitecolor [UIColor whiteColor]
-#define maincolor [UIColor colorWithHexString:@"#3DC5F2"]
+#define maincolor [UIColor colorWithHexString:@"#FFBD38"]
 
 //用于适配x及以上的设备
 #define TOP_OFFSET [GetCurrentDevice getTopOffset]

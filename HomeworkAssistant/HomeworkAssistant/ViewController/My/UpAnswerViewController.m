@@ -121,8 +121,8 @@
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = CGRectMake(0, 0, 0.40 * SCREEN_WIDTH, 0.40 * SCREEN_WIDTH * 0.24);
     [gradientLayer setColors:[NSArray arrayWithObjects:
-                              (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
-                              (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#FFC94C"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#FF8800"].CGColor,
                               nil
                               ]];
     

@@ -52,7 +52,7 @@
     CGFloat textViewW = self.frame.size.width;
     CGFloat textViewH = self.frame.size.height;
     self.textView.frame = CGRectMake(0, 0, textViewW, textViewH );
-    self.placeholderTextView.frame  = CGRectMake(0, 0, textViewW, textViewH );
+    self.placeholderTextView.frame  = CGRectMake(8, 0, textViewW - 8, textViewH );
 
 }
 //点击return 按钮 去掉

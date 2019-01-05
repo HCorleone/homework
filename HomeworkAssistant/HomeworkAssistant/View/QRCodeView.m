@@ -19,6 +19,7 @@
 @implementation QRCodeView
 
 - (void)showQRCode {
+    
     // 大背景
     UIView *bgView = [[UIView alloc]init];
     [[UIApplication sharedApplication].keyWindow addSubview:bgView];

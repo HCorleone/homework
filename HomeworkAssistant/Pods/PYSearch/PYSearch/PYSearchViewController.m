@@ -1073,8 +1073,8 @@
     label.userInteractionEnabled = YES;
     label.font = [UIFont systemFontOfSize:14];
     label.text = title;
-    label.textColor = [UIColor py_colorWithHexString:@"#2988CC"];
-    label.backgroundColor = [UIColor py_colorWithHexString:@"#F5F9FC"];
+    label.textColor = [UIColor py_colorWithHexString:@"#FA8919"];
+    label.backgroundColor = [UIColor py_colorWithHexString:@"#FFF7EB"];
     label.layer.cornerRadius = 3;
     label.clipsToBounds = YES;
     label.textAlignment = NSTextAlignmentCenter;

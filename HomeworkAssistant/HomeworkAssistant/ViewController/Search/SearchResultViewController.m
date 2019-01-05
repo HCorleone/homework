@@ -133,6 +133,7 @@ static NSString *page = @"1";
     rTableView.estimatedRowHeight = 0;
     rTableView.estimatedSectionHeaderHeight = 0;
     rTableView.estimatedSectionFooterHeight = 0;
+    rTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     rTableView.delegate = self;
     self.searchResultView = rTableView;
     self.searchResultView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(pullToRefresh)];
@@ -262,6 +263,18 @@ static NSString *page = @"1";
     AnswerViewController *answerVC = [[AnswerViewController alloc]init];
     answerVC.bookModel = self.searchResult[indexPath.row];
     answerVC.isSelected = cell.saveBtn.isSelected;
+    answerVC.reloadBlock = ^(BOOL IsSelected) {
+        cell.saveBtn.selected = IsSelected;
+        if (IsSelected) {
+            cell.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#C4C8CC"].CGColor;
+            [cell.saveBtn setTitleColor:[UIColor colorWithHexString:@"#C4C8CC"] forState:UIControlStateNormal];
+        }
+        else {
+            cell.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#FA8919"].CGColor;
+            [cell.saveBtn setTitleColor:[UIColor colorWithHexString:@"#FA8919"] forState:UIControlStateNormal];
+        }
+    };
+    [DBManager insertToDataBase:self.searchResult[indexPath.row]];
     [self.navigationController pushViewController:answerVC animated:YES];
     
 }
@@ -307,7 +320,7 @@ static NSString *page = @"1";
     [button setTitle:_titles[index] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:12];
     [button setTitleColor:[UIColor colorWithHexString:@"#939699"] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor colorWithHexString:@"#2988CC"] forState:UIControlStateSelected];
+    [button setTitleColor:[UIColor colorWithHexString:@"#FA8919"] forState:UIControlStateSelected];
     [button setImage:[UIImage imageNamed:@"下拉icon"] forState:UIControlStateNormal];
     [button setImage:[UIImage imageNamed:@"上拉icon"] forState:UIControlStateSelected];
     
@@ -373,7 +386,6 @@ static NSString *page = @"1";
     }];
     self.navView = navView;
     
-    
     //扫描按钮
     UIButton *scanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [scanBtn setImage:[UIImage imageNamed:@"扫一扫v2"] forState:UIControlStateNormal];
@@ -413,26 +425,25 @@ static NSString *page = @"1";
     [testView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(0.67 * SCREEN_WIDTH, 0.67 * SCREEN_WIDTH * 0.125));
         make.centerY.mas_equalTo(scanBtn);
-        make.left.mas_equalTo(self.navView).offset(0.14 * SCREEN_WIDTH);
+        make.left.mas_equalTo(self.navView).offset(0.156 * SCREEN_WIDTH);
     }];
     
     [self.navView addSubview:testSearchBar];
     [testSearchBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(0.67 * SCREEN_WIDTH, 0.67 * SCREEN_WIDTH * 0.125));
         make.centerY.mas_equalTo(scanBtn);
-        make.left.mas_equalTo(self.navView).offset(0.14 * SCREEN_WIDTH);
+        make.left.mas_equalTo(self.navView).offset(0.156 * SCREEN_WIDTH);
     }];
-    
     
     //取消按钮
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+    cancelBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     cancelBtn.backgroundColor = [UIColor clearColor];
     [self.navView addSubview:cancelBtn];
     [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(scanBtn);
         make.right.mas_equalTo(self.navView).with.offset(-20);
-        make.size.mas_equalTo(CGSizeMake(40, 24));
     }];
     [cancelBtn addTarget:self action:@selector(backToVc) forControlEvents:UIControlEventTouchUpInside];
     

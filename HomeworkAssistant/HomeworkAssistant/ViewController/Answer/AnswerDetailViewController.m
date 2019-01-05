@@ -112,19 +112,23 @@
     
     if (self.isSelected) {
         [self userDisLike];
+        if (self.reloadBlock) {
+            self.reloadBlock(!self.isSelected);
+        }
         
     }
     else {
         if ([TTUserManager sharedInstance].isLogin) {
             [self userLike];
+            if (self.reloadBlock) {
+                self.reloadBlock(!self.isSelected);
+            }
         }
         else {
             [XWHUDManager showTipHUD:@"请先登录"];
         }
     }
-    if (self.reloadBlock) {
-        self.reloadBlock(!self.isSelected);
-    }
+    
 }
 
 //用户点击收藏按钮

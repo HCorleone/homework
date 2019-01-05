@@ -11,10 +11,13 @@
 #import "ArticleGradeViewController.h"
 #import "ArticleTypeViewController.h"
 #import "WordsNumViewController.h"
+#import "ArticleViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ChineseViewController : UIViewController
+
+@property (nonatomic, strong) ArticleViewController *fatherVC;
 
 - (NSString *)getLanguage;
 - (NSArray *)getTitles;

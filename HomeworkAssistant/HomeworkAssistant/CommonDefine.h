@@ -11,9 +11,7 @@
 
 
 /** 选中年级，科目，版本 */
-#define ClickColor [UIColor colorWithRed:85/255.0 green:195/255.0 blue:242/255.0 alpha:1/1.0]
-
-
+#define ClickColor [UIColor colorWithHexString:@"#FFA033"]
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 

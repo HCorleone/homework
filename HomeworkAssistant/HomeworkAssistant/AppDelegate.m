@@ -26,6 +26,31 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //判断是否为第一次安装
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"firstInstalled"] == nil) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstInstalled"];
+    }
+    
+    //判断是否有浏览记录的数据库，没有就生成
+    NSString *doc = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *dbpath = [doc stringByAppendingPathComponent:@"history.sqlite"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:dbpath] == NO) {
+        FMDatabase *db = [FMDatabase databaseWithPath:dbpath];
+        if ([db open]) {
+            NSString *sql = @"CREATE TABLE IF NOT EXISTS 'history' ('coverURL' VARCHAR(30), 'title' VARCHAR(30), 'subject' VARCHAR(30), 'bookVersion' VARCHAR(30), 'uploaderName' VARCHAR(30), 'answerID' VARCHAR(30), 'grade' VARCHAR(30) , 'currentTime' VARCHAR(30))";
+            BOOL res = [db executeUpdate:sql];
+            if (!res) {
+                NSLog(@"error when creating db table");
+            } else {
+                NSLog(@"success to creating db table");
+            }
+            [db close];
+        } else {
+            NSLog(@"error when open db");
+        }
+    }
+
     //判断是否有用户登陆
     TTUserManager *manager = [TTUserManager sharedInstance];
     if (manager.currentUser.name == nil) {
@@ -107,7 +132,7 @@
 - (void)customizeTabBarForController:(RDVTabBarController *)tabBarController {
 //    UIImage *finishedImage = [UIImage imageNamed:@"tabbar_selected_background"];
 //    UIImage *unfinishedImage = [UIImage imageNamed:@"tabbar_normal_background"];
-    NSArray *tabBarItemImages = @[@"学习", @"扫一扫bluev2", @"我的"];
+    NSArray *tabBarItemImages = @[@"学习", @"扫一扫orangev2", @"我的"];
     
     RDVTabBar *tabBar = [tabBarController tabBar];
     tabBar.delegate = self;

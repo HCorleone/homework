@@ -9,8 +9,9 @@
 #import "InputBarCodeViewController.h"
 #import "MyViewController.h"
 #import "FillBookInformationViewController.h"
+#import "FeedBackViewController.h"
 
-@interface InputBarCodeViewController ()<UITextFieldDelegate>
+@interface InputBarCodeViewController ()
 
 @property (nonatomic, strong) UITextField *inputField;
 @property (nonatomic, strong) UIButton *nextBtn;
@@ -22,23 +23,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     [self setupNav];
-    
     [self getView];
 }
 
 -(void)getView {
     //请输入书籍条形码
     _inputField = [[UITextField alloc] init];
-    _inputField.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.02999999932944775/1.0];
+    _inputField.keyboardType = UIKeyboardTypeNumberPad;
+    _inputField.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.03];
     _inputField.textAlignment = NSTextAlignmentCenter;
-    _inputField.textColor = UIColorFromRGB(0x8F9394);
-    _inputField.text = @"请输入书籍条形码";
+    _inputField.textColor = [UIColor colorWithHexString:@"#8F9394"];
     _inputField.font = [UIFont systemFontOfSize:14.0];
-    //    _inputField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    _inputField.delegate = self;
+    _inputField.placeholder = @"请输入书籍条形码";
+    [_inputField setValue:[UIFont systemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+    [_inputField setValue:[UIColor colorWithHexString:@"#8F9394"] forKeyPath:@"_placeholderLabel.textColor"];
     [self.view addSubview:_inputField];
     [_inputField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(223);
@@ -52,8 +51,8 @@
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = CGRectMake(0, 0, 0.40 * SCREEN_WIDTH, 0.40 * SCREEN_WIDTH * 0.24);
     [gradientLayer setColors:[NSArray arrayWithObjects:
-                              (id)[UIColor colorWithHexString:@"#3DE5FF"].CGColor,
-                              (id)[UIColor colorWithHexString:@"#3FBCF4"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#FFC94C"].CGColor,
+                              (id)[UIColor colorWithHexString:@"#FF8800"].CGColor,
                               nil
                               ]];
     
@@ -82,26 +81,23 @@
 //点击下一步
 -(void)pressBtn{
     
-    FillBookInformationViewController *fill = [[FillBookInformationViewController alloc] init];
-    //    fill.fillView = [[FillBookInformationView alloc] init];
-    //    fill.fillView.codeLabel.text = self.inputField.text;
-    userDefaults(self.inputField.text, @"InputBarCode");
-    [self.navigationController pushViewController:fill animated:YES];
-}
-
-#pragma mark - UITextFieldDelegate代理
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    if ([textField.text isEqualToString:@"请输入书籍条形码"]) {
-        textField.text = nil;
+    if ([_inputField.text isEqualToString:@""]) {
+        [XWHUDManager showWarningTipHUDInView:@"请输入书籍条码"];
+        return;
     }
-    return YES;
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
-    if ([textField.text isEqualToString:@""]) {
-        textField.text = @"请输入书籍条形码";
+    
+    if (self.from == FromFeedBackAnswer) {
+        FeedBackViewController *feedBackVC = [[FeedBackViewController alloc] init];
+        feedBackVC.uploadCode = self.inputField.text;
+        [self.navigationController pushViewController:feedBackVC animated:YES];
     }
-    return YES;
+    else{
+        FillBookInformationViewController *fill = [[FillBookInformationViewController alloc] init];
+        //    fill.fillView = [[FillBookInformationView alloc] init];
+        //    fill.fillView.codeLabel.text = self.inputField.text;
+        userDefaults(self.inputField.text, @"InputBarCode");
+        [self.navigationController pushViewController:fill animated:YES];
+    }
 }
 
 //收起键盘

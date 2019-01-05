@@ -23,7 +23,6 @@
 
 #import "RDVTabBar.h"
 #import "RDVTabBarItem.h"
-#import "UIColor+ColorChange.h"
 
 @interface RDVTabBar ()
 
@@ -61,7 +60,7 @@
     
     // 边线
     _spacingLabel = [[UILabel alloc] init];
-    [_spacingLabel setBackgroundColor:[UIColor colorWithHexString:@"#cccccc"]];
+    [_spacingLabel setBackgroundColor:[UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1/1.0]];
     _spacingLabel.layer.opacity = 0.3;
     [self addSubview:_spacingLabel];
     
