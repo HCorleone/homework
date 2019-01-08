@@ -190,6 +190,12 @@
 		3DC8CC6C21E300DD00FEE10E /* MyDownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC6B21E300DD00FEE10E /* MyDownloadViewController.m */; };
 		3DC8CC7021E484E400FEE10E /* DownloadedAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC6F21E484E400FEE10E /* DownloadedAnswerViewController.m */; };
 		3DC8CC7321E4850000FEE10E /* DownloadedAnswerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC7221E4850000FEE10E /* DownloadedAnswerDetailViewController.m */; };
+		3DC8CC7721E4CBD800FEE10E /* 头像logov2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC7421E4CBD800FEE10E /* 头像logov2@3x.png */; };
+		3DC8CC7821E4CBD800FEE10E /* 头像logov2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC7521E4CBD800FEE10E /* 头像logov2@2x.png */; };
+		3DC8CC7921E4CBD800FEE10E /* 头像logov2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC7621E4CBD800FEE10E /* 头像logov2.png */; };
+		3DC8CC7D21E4CE5900FEE10E /* 分组_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC7A21E4CE5800FEE10E /* 分组_3.png */; };
+		3DC8CC7E21E4CE5900FEE10E /* 分组_3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC7B21E4CE5900FEE10E /* 分组_3@3x.png */; };
+		3DC8CC7F21E4CE5900FEE10E /* 分组_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC7C21E4CE5900FEE10E /* 分组_3@2x.png */; };
 		3DF0B96621BFDC4D00AF682A /* 添加书籍.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B95821BFDC4C00AF682A /* 添加书籍.png */; };
 		3DF0B96721BFDC4D00AF682A /* 添加书籍@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B95921BFDC4C00AF682A /* 添加书籍@2x.png */; };
 		3DF0B99221BFE05E00AF682A /* 学习-选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B98621BFE05C00AF682A /* 学习-选中@3x.png */; };
@@ -496,6 +502,12 @@
 		3DC8CC6F21E484E400FEE10E /* DownloadedAnswerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadedAnswerViewController.m; sourceTree = "<group>"; };
 		3DC8CC7121E4850000FEE10E /* DownloadedAnswerDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadedAnswerDetailViewController.h; sourceTree = "<group>"; };
 		3DC8CC7221E4850000FEE10E /* DownloadedAnswerDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadedAnswerDetailViewController.m; sourceTree = "<group>"; };
+		3DC8CC7421E4CBD800FEE10E /* 头像logov2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "头像logov2@3x.png"; sourceTree = "<group>"; };
+		3DC8CC7521E4CBD800FEE10E /* 头像logov2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "头像logov2@2x.png"; sourceTree = "<group>"; };
+		3DC8CC7621E4CBD800FEE10E /* 头像logov2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "头像logov2.png"; sourceTree = "<group>"; };
+		3DC8CC7A21E4CE5800FEE10E /* 分组_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分组_3.png"; sourceTree = "<group>"; };
+		3DC8CC7B21E4CE5900FEE10E /* 分组_3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分组_3@3x.png"; sourceTree = "<group>"; };
+		3DC8CC7C21E4CE5900FEE10E /* 分组_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分组_3@2x.png"; sourceTree = "<group>"; };
 		3DF0B95821BFDC4C00AF682A /* 添加书籍.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加书籍.png"; sourceTree = "<group>"; };
 		3DF0B95921BFDC4C00AF682A /* 添加书籍@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加书籍@2x.png"; sourceTree = "<group>"; };
 		3DF0B98621BFE05C00AF682A /* 学习-选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "学习-选中@3x.png"; sourceTree = "<group>"; };
@@ -680,6 +692,12 @@
 		3D958B7221C7AAE200AF7F3F /* v2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				3DC8CC7A21E4CE5800FEE10E /* 分组_3.png */,
+				3DC8CC7C21E4CE5900FEE10E /* 分组_3@2x.png */,
+				3DC8CC7B21E4CE5900FEE10E /* 分组_3@3x.png */,
+				3DC8CC7621E4CBD800FEE10E /* 头像logov2.png */,
+				3DC8CC7521E4CBD800FEE10E /* 头像logov2@2x.png */,
+				3DC8CC7421E4CBD800FEE10E /* 头像logov2@3x.png */,
 				3DC8CC6121E0486600FEE10E /* 扫一扫orangev2.png */,
 				3DC8CC6221E0486600FEE10E /* 扫一扫orangev2@2x.png */,
 				3DC8CC6321E0486600FEE10E /* 扫一扫orangev2@3x.png */,
@@ -1345,10 +1363,13 @@
 				3D958BC221CA661200AF7F3F /* 扫一扫v2@2x.png in Resources */,
 				3D47258721BA228C00C0E7CF /* 分享给同学@3x.png in Resources */,
 				3DF0B99621BFE05E00AF682A /* 我的-选中.png in Resources */,
+				3DC8CC7721E4CBD800FEE10E /* 头像logov2@3x.png in Resources */,
 				9FD3796621C24613005581BC /* 下拉@2x.png in Resources */,
 				3D9EA968219D7405006AF423 /* 微信@2x.png in Resources */,
 				3D9EA8FA2195A788006AF423 /* LaunchScreen.storyboard in Resources */,
 				3DBE438321CB7FE600CE677F /* 给个好评v2.png in Resources */,
+				3DC8CC7F21E4CE5900FEE10E /* 分组_3@2x.png in Resources */,
+				3DC8CC7821E4CBD800FEE10E /* 头像logov2@2x.png in Resources */,
 				3DC8CC0E21D30DC900FEE10E /* 手电筒v2.png in Resources */,
 				3DA91F7121CF9C0C005262D4 /* 搜索_白色v2.png in Resources */,
 				3D47256821B79CD500C0E7CF /* 管理@2x.png in Resources */,
@@ -1401,6 +1422,7 @@
 				3D958B8921C7CC2400AF7F3F /* 我的-选中v2.png in Resources */,
 				3D958B7E21C7CBB500AF7F3F /* 我的-默认v2.png in Resources */,
 				3DBE439121CB800800CE677F /* 分享应用v2.png in Resources */,
+				3DC8CC7D21E4CE5900FEE10E /* 分组_3.png in Resources */,
 				3DC8CC5E21E047AA00FEE10E /* 分享给同学v2@2x.png in Resources */,
 				3D9EA92C219A9B9C006AF423 /* 用户好评@3x.png in Resources */,
 				3D958B8A21C7CC2400AF7F3F /* 我的-选中v2@2x.png in Resources */,
@@ -1412,11 +1434,13 @@
 				3D9EA92D219A9B9C006AF423 /* 用户反馈@2x.png in Resources */,
 				3DC8CC6521E0486700FEE10E /* 扫一扫orangev2@2x.png in Resources */,
 				3DC8CC4821DF12A800FEE10E /* 扫描线@3x.png in Resources */,
+				3DC8CC7921E4CBD800FEE10E /* 头像logov2.png in Resources */,
 				3D958BBC21CA659500AF7F3F /* 提供建议v2@2x.png in Resources */,
 				3DF0B96621BFDC4D00AF682A /* 添加书籍.png in Resources */,
 				3D958B9421C88A1600AF7F3F /* 更新时间v2@3x.png in Resources */,
 				9FAB956E21C49A9C00859BBB /* 下拉icon@3x.png in Resources */,
 				3D9EAEFC21A2D895006AF423 /* 首页头图@3x.png in Resources */,
+				3DC8CC7E21E4CE5900FEE10E /* 分组_3@3x.png in Resources */,
 				3DBE438F21CB800800CE677F /* 分享应用v2@3x.png in Resources */,
 				3D4725BF21BCC65F00C0E7CF /* 修改信息@3x.png in Resources */,
 				3D9EA93D219A9DBF006AF423 /* 我的-激活@3x.png in Resources */,

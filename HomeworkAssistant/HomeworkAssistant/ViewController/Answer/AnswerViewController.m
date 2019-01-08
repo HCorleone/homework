@@ -396,7 +396,9 @@
             if (!error) {
                 NSData *imgData = UIImagePNGRepresentation(image);
                 NSString *thumbsImgPath = [NSString stringWithFormat:@"%@/Documents/MyDownloadImages/%@/thumbsImg/thumbsImg%ld.png",homePath,self.bookModel.answerID,(long)i];
-                [imgData writeToFile:thumbsImgPath atomically:YES];
+                [imgData writeToFile:thumbsImgPath atomically:NO];
+                imgData = nil;
+                thumbsImgPath = nil;
             }
             else {
                 
@@ -408,7 +410,9 @@
             if (!error) {
                 NSData *imgData = UIImagePNGRepresentation(image);
                 NSString *detailImgPath = [NSString stringWithFormat:@"%@/Documents/MyDownloadImages/%@/detailImg/detailImg%ld.png",homePath,self.bookModel.answerID,(long)i];
-                [imgData writeToFile:detailImgPath atomically:YES];
+                [imgData writeToFile:detailImgPath atomically:NO];
+                imgData = nil;
+                detailImgPath = nil;
             }
             else {
                 
@@ -420,8 +424,6 @@
     
     //将图片地址存到数据库
     [DBManager insertToDataBase_imgPath:self.bookModel.answerID NumberOfImg:thumbsURL.count];
-    
-    
     
 }
 

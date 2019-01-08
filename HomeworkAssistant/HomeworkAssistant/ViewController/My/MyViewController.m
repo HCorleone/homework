@@ -120,7 +120,7 @@
     
     //logo
     UIImageView *headImg = [[UIImageView alloc]init];
-    headImg.image = [UIImage imageNamed:@"logo"];
+    headImg.image = [UIImage imageNamed:@"头像logov2"];
     [self.loginView addSubview:headImg];
     [headImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.loginView).offset(20);
