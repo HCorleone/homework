@@ -152,8 +152,8 @@
     logoBtn.titleLabel.font = [UIFont systemFontOfSize:18];
     [self.loginView addSubview:logoBtn];
     [logoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(headImg.mas_right).with.offset(10);
-        make.top.mas_equalTo(self.loginView).offset(0.07 * SCREEN_WIDTH);
+        make.left.mas_equalTo(headImg.mas_right).with.offset(15);
+        make.centerY.mas_equalTo(headImg);
     }];
     [logoBtn addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -512,9 +512,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:{    //我的下载
-//            QRScanViewController *scanVC = [[QRScanViewController alloc] init];
-//            scanVC.scanType = ScanTypeUploadAnswer;
-//            [self.navigationController pushViewController:scanVC animated:YES];
+            NSDictionary *testDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"MyDownload"];
+            NSLog(@"+++Test:%@",testDic);
             break;
         }
         case 1:{    //上传答案

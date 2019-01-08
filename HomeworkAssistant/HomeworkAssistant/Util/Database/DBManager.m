@@ -10,6 +10,8 @@
 
 @implementation DBManager
 
+#pragma mark - 历史记录所用
+
 //查询数据库并把数据返回到histoView上
 + (NSArray *)selectDataForHistoryView {
     NSMutableArray *bookModelArr = [NSMutableArray array];
@@ -114,5 +116,8 @@
         [db close];
     }
 }
+
+#pragma mark - 我的下载所用
+
 
 @end

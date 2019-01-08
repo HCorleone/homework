@@ -12,12 +12,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DBManager : NSObject
 
+/*
+ * 浏览记录所用
+ */
 //将浏览记录以数组形式返回
 + (NSArray *)selectDataForHistoryView;
 //将当前浏览加入到浏览记录数据库中
 + (void)insertToDataBase:(Book *)bookModel;
 //将当前浏览记录从数据库中删除
 + (void)deleteFromDataBase:(NSArray *)bookModelArr;
+
+/*
+ * 我的下载所用
+ */
+
 
 @end
 

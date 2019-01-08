@@ -50,14 +50,46 @@
             NSLog(@"error when open db");
         }
     }
-
+    
+    //判断是否有我的下载数据库，没有就生成
+    NSString *doc1 = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *dbpath1 = [doc1 stringByAppendingPathComponent:@"MyDownload.sqlite"];
+    NSFileManager *fileManager1 = [NSFileManager defaultManager];
+    if ([fileManager1 fileExistsAtPath:dbpath1] == NO) {
+        FMDatabase *db1 = [FMDatabase databaseWithPath:dbpath1];
+        if ([db1 open]) {
+            NSString *sql1 = @"CREATE TABLE IF NOT EXISTS 'downloadModel' ('coverImgPath' VARCHAR(50), 'title' VARCHAR(30), 'subject' VARCHAR(30), 'bookVersion' VARCHAR(30), 'uploaderName' VARCHAR(30), 'answerID' VARCHAR(30), 'grade' VARCHAR(30) , 'currentTime' VARCHAR(30))";
+            NSString *sql2 = @"CREATE TABLE IF NOT EXISTS 'imagePath' ('answerID' VARCHAR(30),'thumbsPath' VARCHAR(50),'detailPath' VARCHAR(50),'idx' VARCHAR(20))";
+            BOOL res1 = [db1 executeUpdate:sql1];
+            BOOL res2 = [db1 executeUpdate:sql2];
+            if (!res1 && !res2) {
+                NSLog(@"error when creating db table");
+            } else {
+                NSLog(@"success to creating db table");
+            }
+            [db1 close];
+        } else {
+            NSLog(@"error when open db");
+        }
+    }
+    
+    //创建用于存放下载图片的目录
+    NSString * docsdir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString * imgFilePath = [docsdir stringByAppendingPathComponent:@"MyDownloadImages"];//将需要创建的串拼接到后面
+    NSFileManager *fileManager2 = [NSFileManager defaultManager];
+    BOOL isDir = NO;
+    // fileExistsAtPath 判断一个文件或目录是否有效，isDirectory判断是否一个目录
+    BOOL existed = [fileManager2 fileExistsAtPath:imgFilePath isDirectory:&isDir];
+    if ( !(isDir == YES && existed == YES) ) {//如果文件夹不存在
+        [fileManager2 createDirectoryAtPath:imgFilePath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
     //判断是否有用户登陆
     TTUserManager *manager = [TTUserManager sharedInstance];
     if (manager.currentUser.name == nil) {
         manager.isLogin = NO;
         [manager saveCurrentUserInfo];
     }
-
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     self.window.backgroundColor = [UIColor whiteColor];

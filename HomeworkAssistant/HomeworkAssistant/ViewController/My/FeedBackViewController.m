@@ -377,10 +377,6 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
-    
-    [self.dropDownList_1 pullBack];
-    [self.dropDownList_2 pullBack];
-    [self.dropDownList_3 pullBack];
 }
 
 @end

@@ -11,15 +11,29 @@
 #import "AnswerCell.h"
 #import "AnswerDetailViewController.h"
 #import "UIImageView+WebCache.h"
+#import "SDWebImageManager.h"
+#import "SDWebImagePrefetcher.h"
+#import "DownloadedModel.h"
 
 @interface AnswerViewController ()<UICollectionViewDelegate,  UICollectionViewDataSource>
 
+@property (nonatomic, strong) DownloadedModel *downloadedModel;
 @property (nonatomic, strong) NSMutableArray *answerList;
 @property (nonatomic, strong) UIView *navView;
 
 @end
 
 @implementation AnswerViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
+    self.navigationController.navigationBar.hidden = YES;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,7 +42,7 @@
     
     [self setupNav];
     [self downloadData];
-    
+//    [self downloadAnswer_step2];
 }
 
 - (void)setupNav {
@@ -53,6 +67,18 @@
         make.left.mas_equalTo(self.navView).offset(20);
         make.bottom.mas_equalTo(self.navView).offset(- 10 - 128);
     }];
+    
+    //下载按钮
+    UIButton *downloadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [downloadBtn setImage:[UIImage imageNamed:@"我的下载v2"] forState:UIControlStateNormal];
+    [downloadBtn addTarget:self action:@selector(downloadAnswer_step1) forControlEvents:UIControlEventTouchUpInside];
+    [navView addSubview:downloadBtn];
+    [downloadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(24, 24));
+        make.right.mas_equalTo(self.navView).offset(-20);
+        make.bottom.mas_equalTo(self.navView).offset(- 10 - 128);
+    }];
+    
     //标题
     UILabel *title = [[UILabel alloc]init];
     title.text = @"全部作业";
@@ -253,10 +279,134 @@
     [self.navigationController pushViewController:answerDetailVC animated:YES];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
-    self.navigationController.navigationBar.hidden = YES;
+
+
+#pragma mark - 下载作业并存在本地
+
+- (void)downloadAnswer_step1 {
+    
+    //创建相应的目录
+    NSString *docsdir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *imgFilePath = [docsdir stringByAppendingPathComponent:@"MyDownloadImages"];
+    NSString *answerIDPath = [imgFilePath stringByAppendingPathComponent:self.bookModel.answerID];
+    NSString *thumbsImgPath = [answerIDPath stringByAppendingPathComponent:@"thumbsImg"];
+    NSString *detailImgPath = [answerIDPath stringByAppendingPathComponent:@"detailImg"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL isDir1 = NO;
+    BOOL isDir2 = NO;
+    BOOL isDir3 = NO;
+    // fileExistsAtPath 判断一个文件或目录是否有效，isDirectory判断是否一个目录
+    BOOL existed1 = [fileManager fileExistsAtPath:answerIDPath isDirectory:&isDir1];
+    BOOL existed2 = [fileManager fileExistsAtPath:thumbsImgPath isDirectory:&isDir2];
+    BOOL existed3 = [fileManager fileExistsAtPath:detailImgPath isDirectory:&isDir3];
+    if ( !(isDir1 == YES && existed1 == YES) ) {//如果文件夹不存在
+        [fileManager createDirectoryAtPath:answerIDPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    if ( !(isDir2 == YES && existed2 == YES) ) {//如果文件夹不存在
+        [fileManager createDirectoryAtPath:thumbsImgPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    if ( !(isDir3 == YES && existed3 == YES) ) {//如果文件夹不存在
+        [fileManager createDirectoryAtPath:detailImgPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
+    
+    //先下载封面图
+    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:self.bookModel.coverURL] options:SDWebImageDownloaderContinueInBackground progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+        
+        NSData *imgData = UIImagePNGRepresentation(image);
+        NSString *coverImgPath = [NSString stringWithFormat:@"%@/Documents/MyDownloadImages/%@/coverImg.png",NSHomeDirectory(),self.bookModel.answerID];
+        [imgData writeToFile:coverImgPath atomically:YES];
+        
+//        self.downloadedModel.coverImg = image;
+//        self.downloadedModel.title = self.bookModel.title;
+//        self.downloadedModel.subject = self.bookModel.subject;
+//        self.downloadedModel.bookVersion = self.bookModel.bookVersion;
+//        self.downloadedModel.uploaderName = self.bookModel.uploaderName;
+//        self.downloadedModel.answerID = self.bookModel.answerID;
+//        self.downloadedModel.grade = self.bookModel.grade;
+        [self downloadAnswer_step2];
+    }];
 }
+
+
+- (void)downloadAnswer_step2 {
+    //先调用答案详情接口以获取答案图片的地址
+    NSString *secretKey = MD5_KEY;
+    NSString *tTime = [CommonToolClass currentTimeStr];
+    NSString *temp = [[[[self.bookModel.answerID stringByAppendingString:@":"]stringByAppendingString:secretKey]stringByAppendingString:@":"]stringByAppendingString:tTime];
+    NSString *kMD5 = [NSString md5:temp];
+    
+    NSDictionary *dict = @{
+                           @"openID":@"123",
+                           @"answerID":self.bookModel.answerID,
+                           @"sourceType":@"rec",
+                           @"t":tTime,
+                           @"k":kMD5
+                           };
+    dict = [HMACSHA1 encryptDicForRequest:dict];
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForAnswerDetail] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if ([responseObject[@"code"] integerValue] == 200) {
+            
+            NSDictionary *jsonDataDic = responseObject[@"datas"];
+            NSArray *thumbsArr = jsonDataDic[@"thumbs"];
+            NSArray *detailArr = jsonDataDic[@"details"];
+            NSMutableArray *thumbsURL = [NSMutableArray array];
+            NSMutableArray *detailURL = [NSMutableArray array];
+            for (int i =0; i < thumbsArr.count; i++) {
+                NSDictionary *aDic = thumbsArr[i];
+                NSDictionary *bDic = detailArr[i];
+                [thumbsURL addObject:aDic[@"answerURL"]];
+                [detailURL addObject:bDic[@"answerURL"]];
+            }
+            [self downloadAnswer_step3:thumbsURL detailURL:detailURL];
+        }
+        
+        
+    } failure:nil];
+    [dataTask resume];
+    
+}
+
+- (void)downloadAnswer_step3:(NSArray *)thumbsURL detailURL:(NSArray *)detailURL {
+    
+        NSString * homePath =NSHomeDirectory();
+    
+        SDWebImageDownloader *imgDownloader = [SDWebImageDownloader sharedDownloader];
+        //    imgDownloader.downloadTimeout = 20;
+        for(NSInteger i = 1; i < thumbsURL.count + 1; i++) {
+            
+            [imgDownloader downloadImageWithURL:[NSURL URLWithString:thumbsURL[i - 1]] options:SDWebImageScaleDownLargeImages|SDWebImageDownloaderContinueInBackground progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+                
+                if (!error) {
+                    NSData *imgData = UIImagePNGRepresentation(image);
+                    NSString *thumbsImgPath = [NSString stringWithFormat:@"%@/Documents/MyDownloadImages/%@/thumbsImg/thumbsImg%ld.png",homePath,self.bookModel.answerID,(long)i];
+                    [imgData writeToFile:thumbsImgPath atomically:YES];
+                }
+                else {
+                    
+                }
+                
+            }];
+            
+            [imgDownloader downloadImageWithURL:[NSURL URLWithString:detailURL[i - 1]] options:SDWebImageScaleDownLargeImages|SDWebImageDownloaderContinueInBackground progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+                if (!error) {
+                    NSData *imgData = UIImagePNGRepresentation(image);
+                    NSString *detailImgPath = [NSString stringWithFormat:@"%@/Documents/MyDownloadImages/%@/detailImg/detailImg%ld.png",homePath,self.bookModel.answerID,i];
+                    [imgData writeToFile:detailImgPath atomically:YES];
+                }
+                else {
+                    
+                }
+                
+            }];
+            
+        }
+    
+}
+
+
 
 @end

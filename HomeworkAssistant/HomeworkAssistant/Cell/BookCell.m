@@ -128,6 +128,17 @@
     
 }
 
+- (void)setDownloadedModel:(DownloadedModel *)downloadedModel {
+    _downloadedModel = downloadedModel;
+    self.bookCover.image = downloadedModel.coverImg;
+    self.title.text = downloadedModel.title;
+    self.subject.text = downloadedModel.subject;
+    self.bookVersion.text = downloadedModel.bookVersion;
+    self.grade.text = downloadedModel.grade;
+    self.uploaderName.text = downloadedModel.uploaderName;
+    self.bookID = downloadedModel.answerID;
+}
+
 - (void)test:(UIButton *)btn {
     if (btn.isSelected) {
         [self userDisLike];
