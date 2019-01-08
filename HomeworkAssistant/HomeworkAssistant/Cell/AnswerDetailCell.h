@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) AnswerDetail *model;
 @property (nonatomic, strong) ImgScrollView *imgScrollView;
-
+@property (nonatomic, strong) UIImageView *topImage;
 
 @end
 

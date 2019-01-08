@@ -128,15 +128,17 @@
     
 }
 
-- (void)setDownloadedModel:(DownloadedModel *)downloadedModel {
-    _downloadedModel = downloadedModel;
-    self.bookCover.image = downloadedModel.coverImg;
-    self.title.text = downloadedModel.title;
-    self.subject.text = downloadedModel.subject;
-    self.bookVersion.text = downloadedModel.bookVersion;
-    self.grade.text = downloadedModel.grade;
-    self.uploaderName.text = downloadedModel.uploaderName;
-    self.bookID = downloadedModel.answerID;
+- (void)setDownloadedBook:(DownloadedBook *)downloadedBook {
+    _downloadedBook = downloadedBook;
+    
+    [self.bookCover sd_setImageWithURL:[NSURL fileURLWithPath:[NSHomeDirectory() stringByAppendingString:downloadedBook.coverImgPath]]];
+    
+    self.title.text = downloadedBook.title;
+    self.subject.text = downloadedBook.subject;
+    self.bookVersion.text = downloadedBook.bookVersion;
+    self.grade.text = downloadedBook.grade;
+    self.uploaderName.text = downloadedBook.uploaderName;
+    self.bookID = downloadedBook.answerID;
 }
 
 - (void)test:(UIButton *)btn {

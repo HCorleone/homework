@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) AnswerDetail *model;
 
+@property (nonatomic, strong) UIImageView *topImage;
+@property (nonatomic, strong) UILabel *botLabel;
+@property (nonatomic, strong) NSString *idx;//当前页数
+
 @end
 
 NS_ASSUME_NONNULL_END

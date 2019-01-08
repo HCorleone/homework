@@ -1,27 +1,26 @@
 //
-//  HistoryViewController.m
+//  MyDownloadViewController.m
 //  HomeworkAssistant
 //
-//  Created by 无敌帅枫 on 2018/12/28.
-//  Copyright © 2018 无敌帅枫. All rights reserved.
+//  Created by 无敌帅枫 on 2019/1/7.
+//  Copyright © 2019 无敌帅枫. All rights reserved.
 //
 
-#import "HistoryViewController.h"
+#import "MyDownloadViewController.h"
+#import "DownloadedAnswerViewController.h"
 #import "BookCell.h"
-#import "Book.h"
-#import "AnswerViewController.h"
 
-@interface HistoryViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface MyDownloadViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UIView *navView;
-@property (nonatomic, strong) NSMutableArray *historyListData;
-@property (nonatomic, strong) UITableView *historyListView;
+@property (nonatomic, strong) NSMutableArray *downloadedListData;
+@property (nonatomic, strong) UITableView *downloadedListView;
 @property (nonatomic, strong) UIView *editingView;
 @property (nonatomic, strong) UIButton *managerBtn;
 
 @end
 
-@implementation HistoryViewController
+@implementation MyDownloadViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -59,7 +58,7 @@
     }];
     //标题
     UILabel *title = [[UILabel alloc]init];
-    title.text = @"浏览记录";
+    title.text = @"我的下载";
     [title setTextColor: [UIColor whiteColor]];
     title.font = [UIFont systemFontOfSize:16];
     [self.navView addSubview:title];
@@ -84,20 +83,20 @@
 
 - (void)setupView {
     
-    self.historyListData = [NSMutableArray arrayWithArray:[DBManager selectDataForHistoryView]];
+    self.downloadedListData = [NSMutableArray arrayWithArray:[DBManager selectDataForDownloadedView]];
     
-    UITableView *historyView = [[UITableView alloc] initWithFrame:CGRectMake(0, NAVBAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVBAR_HEIGHT) style:UITableViewStylePlain];
-    [self.view addSubview:historyView];
-    [historyView registerClass:[BookCell class] forCellReuseIdentifier:@"BookCell"];
-    historyView.delegate = self;
-    historyView.dataSource = self;
-    historyView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 48)];
-    self.historyListView = historyView;
+    UITableView *downloadedView = [[UITableView alloc] initWithFrame:CGRectMake(0, NAVBAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVBAR_HEIGHT) style:UITableViewStylePlain];
+    [self.view addSubview:downloadedView];
+    [downloadedView registerClass:[BookCell class] forCellReuseIdentifier:@"BookCell"];
+    downloadedView.delegate = self;
+    downloadedView.dataSource = self;
+    downloadedView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 48)];
+    self.downloadedListView = downloadedView;
     
     //分割线
     UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH - 40, 0.5)];
     [line setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.1]];
-    [self.historyListView.tableFooterView addSubview:line];
+    [self.downloadedListView.tableFooterView addSubview:line];
     
     //编辑框
     [self.view addSubview:self.editingView];
@@ -111,26 +110,42 @@
 
 #pragma mark - 按钮点击方法
 - (void)manageCell:(UIButton *)btn {
-    if (self.historyListView) {
+    if (self.downloadedListView) {
         if (btn.isSelected) {
             [self showEitingView:NO];
             btn.selected = !btn.isSelected;
         }
-        else if (!btn.isSelected && self.historyListData.count) {
+        else if (!btn.isSelected && self.downloadedListData.count) {
             [self showEitingView:YES];
             btn.selected = !btn.isSelected;
         }
-        [self.historyListView setEditing:!self.historyListView.isEditing animated:YES];
+        [self.downloadedListView setEditing:!self.downloadedListView.isEditing animated:YES];
     }
 }
 
 #pragma mark - 批量删除历史记录
-- (void)cleanHistory:(NSArray *)indexPathArr {
+- (void)cleanDownloaded:(NSArray *)indexPathArr {
+    
+    //删除数据库内容
     NSMutableArray *selectModelArr = [NSMutableArray array];
+    NSMutableArray *selectAnswerIDArr = [NSMutableArray array];
     for (NSIndexPath *indexPath in indexPathArr) {
-        [selectModelArr addObject:self.historyListData[indexPath.row]];
+        [selectModelArr addObject:self.downloadedListData[indexPath.row]];
     }
-    [DBManager deleteFromDataBase:selectModelArr];
+    for (DownloadedBook *model in selectModelArr) {
+        [selectAnswerIDArr addObject:model.answerID];
+    }
+    [DBManager deleteFromDataBase_downloadedBook:selectAnswerIDArr];
+    
+    //删除沙盒文件内容
+    NSString *docsdir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *imgFilePath = [docsdir stringByAppendingPathComponent:@"MyDownloadImages"];
+    for (NSString *selectAnswerID in selectAnswerIDArr) {
+        NSString *answerIDPath = [imgFilePath stringByAppendingPathComponent:selectAnswerID];
+        [[NSFileManager defaultManager] removeItemAtPath:answerIDPath error:nil];
+    }
+    
+    
 }
 
 #pragma mark - TableViewDataSource
@@ -139,18 +154,19 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.historyListData.count;
+    return self.downloadedListData.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     BookCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BookCell" forIndexPath:indexPath];
     
     cell.multipleSelectionBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
     cell.multipleSelectionBackgroundView.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-    cell.model = self.historyListData[indexPath.row];
-//    cell.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#FA8919"].CGColor;
-//    [cell.saveBtn setTitleColor:[UIColor colorWithHexString:@"#FA8919"] forState:UIControlStateNormal];
+    cell.downloadedBook = self.downloadedListData[indexPath.row];
+    //    cell.saveBtn.layer.borderColor = [UIColor colorWithHexString:@"#FA8919"].CGColor;
+    //    [cell.saveBtn setTitleColor:[UIColor colorWithHexString:@"#FA8919"] forState:UIControlStateNormal];
     cell.saveBtn.hidden = YES;
     return cell;
 }
@@ -165,15 +181,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     if (tableView.isEditing) {
         return;
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    AnswerViewController *answerVC = [[AnswerViewController alloc]init];
-    answerVC.bookModel = self.historyListData[indexPath.row];
+
+    DownloadedAnswerViewController *answerVC = [[DownloadedAnswerViewController alloc]init];
+    answerVC.bookModel = self.downloadedListData[indexPath.row];
     [self.navigationController pushViewController:answerVC animated:YES];
+    
 }
 
 #pragma mark - 编辑状态底部框及处理方法
@@ -218,17 +235,17 @@
 - (void)p_buttonClick:(UIButton *)sender{
     if ([[sender titleForState:UIControlStateNormal] isEqualToString:@"删除"]) {
         NSMutableIndexSet *insets = [[NSMutableIndexSet alloc] init];
-        [[self.historyListView indexPathsForSelectedRows] enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [[self.downloadedListView indexPathsForSelectedRows] enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [insets addIndex:obj.row];
         }];
-        [self cleanHistory:[self.historyListView indexPathsForSelectedRows]];
-        [self.historyListData removeObjectsAtIndexes:insets];
-        [self.historyListView deleteRowsAtIndexPaths:[self.historyListView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationFade];
+        [self cleanDownloaded:[self.downloadedListView indexPathsForSelectedRows]];
+        [self.downloadedListData removeObjectsAtIndexes:insets];
+        [self.downloadedListView deleteRowsAtIndexPaths:[self.downloadedListView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationFade];
         
         
         /** 数据清空情况下取消编辑状态*/
-        if (self.historyListData.count == 0) {
-            [self.historyListView setEditing:NO animated:YES];
+        if (self.downloadedListData.count == 0) {
+            [self.downloadedListView setEditing:NO animated:YES];
             [self showEitingView:NO];
             self.managerBtn.selected = NO;
             /** 带MJ刷新控件重置状态
@@ -239,14 +256,14 @@
         
     }
     else if ([[sender titleForState:UIControlStateNormal] isEqualToString:@"全选"]) {
-        [self.historyListData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [self.historyListView selectRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+        [self.downloadedListData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.downloadedListView selectRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
         }];
         
         [sender setTitle:@"全不选" forState:UIControlStateNormal];
     }
     else if ([[sender titleForState:UIControlStateNormal] isEqualToString:@"全不选"]) {
-        [self.historyListView reloadData];
+        [self.downloadedListView reloadData];
         /** 遍历反选
          [[self.tableView indexPathsForSelectedRows] enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
          [self.tableView deselectRowAtIndexPath:obj animated:NO];
@@ -267,6 +284,7 @@
         [self.view layoutIfNeeded];
     }];
 }
+
 
 
 @end

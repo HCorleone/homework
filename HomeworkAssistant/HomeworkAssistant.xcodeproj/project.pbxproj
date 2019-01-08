@@ -43,7 +43,6 @@
 		3D7D18F221AE83A6006B9C8F /* login in Resources */ = {isa = PBXBuildFile; fileRef = 3D7D18F121AE83A6006B9C8F /* login */; };
 		3D7D18F821B0CCCF006B9C8F /* MyCollectionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18F721B0CCCF006B9C8F /* MyCollectionsCell.m */; };
 		3D7D18FB21B0CEE4006B9C8F /* MyCollectionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7D18FA21B0CEE4006B9C8F /* MyCollectionsView.m */; };
-		3D958B6221C73E0600AF7F3F /* server.cer in Resources */ = {isa = PBXBuildFile; fileRef = 3D958B6121C73E0600AF7F3F /* server.cer */; };
 		3D958B6521C755A000AF7F3F /* CommonToolClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D958B6421C755A000AF7F3F /* CommonToolClass.m */; };
 		3D958B6921C7563E00AF7F3F /* HMACSHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D958B6821C7563E00AF7F3F /* HMACSHA1.m */; };
 		3D958B6D21C7661400AF7F3F /* URLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D958B6C21C7661400AF7F3F /* URLBuilder.m */; };
@@ -187,8 +186,10 @@
 		3DC8CC6421E0486700FEE10E /* 扫一扫orangev2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC6121E0486600FEE10E /* 扫一扫orangev2.png */; };
 		3DC8CC6521E0486700FEE10E /* 扫一扫orangev2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC6221E0486600FEE10E /* 扫一扫orangev2@2x.png */; };
 		3DC8CC6621E0486700FEE10E /* 扫一扫orangev2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC6321E0486600FEE10E /* 扫一扫orangev2@3x.png */; };
-		3DC8CC6921E0C63F00FEE10E /* DownloadedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC6821E0C63F00FEE10E /* DownloadedModel.m */; };
+		3DC8CC6921E0C63F00FEE10E /* DownloadedBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC6821E0C63F00FEE10E /* DownloadedBook.m */; };
 		3DC8CC6C21E300DD00FEE10E /* MyDownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC6B21E300DD00FEE10E /* MyDownloadViewController.m */; };
+		3DC8CC7021E484E400FEE10E /* DownloadedAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC6F21E484E400FEE10E /* DownloadedAnswerViewController.m */; };
+		3DC8CC7321E4850000FEE10E /* DownloadedAnswerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC7221E4850000FEE10E /* DownloadedAnswerDetailViewController.m */; };
 		3DF0B96621BFDC4D00AF682A /* 添加书籍.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B95821BFDC4C00AF682A /* 添加书籍.png */; };
 		3DF0B96721BFDC4D00AF682A /* 添加书籍@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B95921BFDC4C00AF682A /* 添加书籍@2x.png */; };
 		3DF0B99221BFE05E00AF682A /* 学习-选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B98621BFE05C00AF682A /* 学习-选中@3x.png */; };
@@ -304,7 +305,6 @@
 		3D7D18F721B0CCCF006B9C8F /* MyCollectionsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCollectionsCell.m; sourceTree = "<group>"; };
 		3D7D18F921B0CEE4006B9C8F /* MyCollectionsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCollectionsView.h; sourceTree = "<group>"; };
 		3D7D18FA21B0CEE4006B9C8F /* MyCollectionsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCollectionsView.m; sourceTree = "<group>"; };
-		3D958B6121C73E0600AF7F3F /* server.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = server.cer; sourceTree = "<group>"; };
 		3D958B6321C755A000AF7F3F /* CommonToolClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonToolClass.h; sourceTree = "<group>"; };
 		3D958B6421C755A000AF7F3F /* CommonToolClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonToolClass.m; sourceTree = "<group>"; };
 		3D958B6721C7563E00AF7F3F /* HMACSHA1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HMACSHA1.h; sourceTree = "<group>"; };
@@ -488,10 +488,14 @@
 		3DC8CC6121E0486600FEE10E /* 扫一扫orangev2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "扫一扫orangev2.png"; sourceTree = "<group>"; };
 		3DC8CC6221E0486600FEE10E /* 扫一扫orangev2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "扫一扫orangev2@2x.png"; sourceTree = "<group>"; };
 		3DC8CC6321E0486600FEE10E /* 扫一扫orangev2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "扫一扫orangev2@3x.png"; sourceTree = "<group>"; };
-		3DC8CC6721E0C63F00FEE10E /* DownloadedModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadedModel.h; sourceTree = "<group>"; };
-		3DC8CC6821E0C63F00FEE10E /* DownloadedModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadedModel.m; sourceTree = "<group>"; };
+		3DC8CC6721E0C63F00FEE10E /* DownloadedBook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadedBook.h; sourceTree = "<group>"; };
+		3DC8CC6821E0C63F00FEE10E /* DownloadedBook.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadedBook.m; sourceTree = "<group>"; };
 		3DC8CC6A21E300DD00FEE10E /* MyDownloadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyDownloadViewController.h; sourceTree = "<group>"; };
 		3DC8CC6B21E300DD00FEE10E /* MyDownloadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyDownloadViewController.m; sourceTree = "<group>"; };
+		3DC8CC6E21E484E400FEE10E /* DownloadedAnswerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadedAnswerViewController.h; sourceTree = "<group>"; };
+		3DC8CC6F21E484E400FEE10E /* DownloadedAnswerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadedAnswerViewController.m; sourceTree = "<group>"; };
+		3DC8CC7121E4850000FEE10E /* DownloadedAnswerDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadedAnswerDetailViewController.h; sourceTree = "<group>"; };
+		3DC8CC7221E4850000FEE10E /* DownloadedAnswerDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadedAnswerDetailViewController.m; sourceTree = "<group>"; };
 		3DF0B95821BFDC4C00AF682A /* 添加书籍.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加书籍.png"; sourceTree = "<group>"; };
 		3DF0B95921BFDC4C00AF682A /* 添加书籍@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加书籍@2x.png"; sourceTree = "<group>"; };
 		3DF0B98621BFE05C00AF682A /* 学习-选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "学习-选中@3x.png"; sourceTree = "<group>"; };
@@ -786,7 +790,6 @@
 				9F740E6821B9016F00EE9657 /* CommonDefine.h */,
 				3D9EA8ED2195A787006AF423 /* AppDelegate.h */,
 				3D9EA8EE2195A787006AF423 /* AppDelegate.m */,
-				3D958B6121C73E0600AF7F3F /* server.cer */,
 				3D9EA8FC2195A788006AF423 /* main.m */,
 			);
 			path = HomeworkAssistant;
@@ -815,14 +818,14 @@
 				3DA91F5C21CF2548005262D4 /* Article.m */,
 				3D9EA90B219916F6006AF423 /* Book.h */,
 				3D9EA90C219916F6006AF423 /* Book.m */,
+				3DC8CC6721E0C63F00FEE10E /* DownloadedBook.h */,
+				3DC8CC6821E0C63F00FEE10E /* DownloadedBook.m */,
 				3D9EAF1921A53010006AF423 /* AnswerDetail.h */,
 				3D9EAF1A21A53010006AF423 /* AnswerDetail.m */,
 				3D7D18EB21AE42E0006B9C8F /* TTUserModel.h */,
 				3D7D18EC21AE42E0006B9C8F /* TTUserModel.m */,
 				3D7D18EE21AE69E6006B9C8F /* TTUserManager.h */,
 				3D7D18EF21AE69E6006B9C8F /* TTUserManager.m */,
-				3DC8CC6721E0C63F00FEE10E /* DownloadedModel.h */,
-				3DC8CC6821E0C63F00FEE10E /* DownloadedModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -864,11 +867,10 @@
 		3D9EA91721998B64006AF423 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				3DC8CC6D21E4796100FEE10E /* MyDownload */,
 				3D9EA95F219D6C1E006AF423 /* Login */,
 				3D9EA90721990802006AF423 /* MyViewController.h */,
 				3D9EA90821990802006AF423 /* MyViewController.m */,
-				3DC8CC6A21E300DD00FEE10E /* MyDownloadViewController.h */,
-				3DC8CC6B21E300DD00FEE10E /* MyDownloadViewController.m */,
 				3D9EA91821998BC4006AF423 /* JYViewController.h */,
 				3D9EA91921998BC4006AF423 /* JYViewController.m */,
 				9F4D103821B7CEB700F4610A /* InputBarCodeViewController.h */,
@@ -1081,6 +1083,19 @@
 				3DC8CC3A21DEF55B00FEE10E /* ListCell.m */,
 			);
 			path = HHDropDownList;
+			sourceTree = "<group>";
+		};
+		3DC8CC6D21E4796100FEE10E /* MyDownload */ = {
+			isa = PBXGroup;
+			children = (
+				3DC8CC6A21E300DD00FEE10E /* MyDownloadViewController.h */,
+				3DC8CC6B21E300DD00FEE10E /* MyDownloadViewController.m */,
+				3DC8CC6E21E484E400FEE10E /* DownloadedAnswerViewController.h */,
+				3DC8CC6F21E484E400FEE10E /* DownloadedAnswerViewController.m */,
+				3DC8CC7121E4850000FEE10E /* DownloadedAnswerDetailViewController.h */,
+				3DC8CC7221E4850000FEE10E /* DownloadedAnswerDetailViewController.m */,
+			);
+			path = MyDownload;
 			sourceTree = "<group>";
 		};
 		71F5933A8C7F218E60BA7735 /* Pods */ = {
@@ -1350,7 +1365,6 @@
 				3D9EA966219D7405006AF423 /* 微信@3x.png in Resources */,
 				3D7D18F221AE83A6006B9C8F /* login in Resources */,
 				3DA91F7221CF9C0C005262D4 /* 搜索_白色v2@2x.png in Resources */,
-				3D958B6221C73E0600AF7F3F /* server.cer in Resources */,
 				3D958BB721CA657100AF7F3F /* 上传答案v2@2x.png in Resources */,
 				3D47256721B79CD500C0E7CF /* 管理@3x.png in Resources */,
 				3DF0B99C21BFE05E00AF682A /* 我的-默认@3x.png in Resources */,
@@ -1543,8 +1557,10 @@
 				3D7D18E321AD24C7006B9C8F /* AnswerDetailCell.m in Sources */,
 				3DC8CC2A21DCA3B600FEE10E /* AgreementView.m in Sources */,
 				3D958BB221CA1AAA00AF7F3F /* YearViewController.m in Sources */,
+				3DC8CC7321E4850000FEE10E /* DownloadedAnswerDetailViewController.m in Sources */,
 				9F4D102821B7C65E00F4610A /* LTTextView.m in Sources */,
 				3DA91F5D21CF2548005262D4 /* Article.m in Sources */,
+				3DC8CC7021E484E400FEE10E /* DownloadedAnswerViewController.m in Sources */,
 				3DC8CC3B21DEF55B00FEE10E /* ListCell.m in Sources */,
 				9F4D109E21B8037900F4610A /* NSArray+SafeObjectArray.m in Sources */,
 				3DF0B9A021C0E94800AF682A /* TextCheckTool.m in Sources */,
@@ -1572,7 +1588,7 @@
 				3D4725A521BA5F3F00C0E7CF /* SubjectViewController.m in Sources */,
 				3D9EA94C219BBA19006AF423 /* UITextView+UITextView_Placeholder.m in Sources */,
 				9FD90A3E21BBD20000EDF389 /* AssignToObject.m in Sources */,
-				3DC8CC6921E0C63F00FEE10E /* DownloadedModel.m in Sources */,
+				3DC8CC6921E0C63F00FEE10E /* DownloadedBook.m in Sources */,
 				3D9EA8EF2195A787006AF423 /* AppDelegate.m in Sources */,
 				9FD90A2021B91FB000EDF389 /* SubmitCollectionViewCell.m in Sources */,
 				9F629B7E21BE4B38002A79AC /* FillOthersViewController.m in Sources */,

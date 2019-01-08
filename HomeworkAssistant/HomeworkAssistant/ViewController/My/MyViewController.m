@@ -19,6 +19,7 @@
 #import "CommonAlterView.h"
 #import "SHPlacePickerView.h"
 #import "BookListViewController.h"
+#import "MyDownloadViewController.h"
 
 @interface MyViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -512,8 +513,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:{    //我的下载
-            NSDictionary *testDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"MyDownload"];
-            NSLog(@"+++Test:%@",testDic);
+            MyDownloadViewController *downloadedVC = [[MyDownloadViewController alloc] init];
+            [self.navigationController pushViewController:downloadedVC animated:YES];
             break;
         }
         case 1:{    //上传答案

@@ -11,7 +11,6 @@
 
 @interface AnswerDetailCell()
 
-@property (nonatomic, strong) UIImageView *topImage;
 
 @end
 

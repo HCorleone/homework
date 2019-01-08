@@ -13,11 +13,11 @@
 #import "UIImageView+WebCache.h"
 #import "SDWebImageManager.h"
 #import "SDWebImagePrefetcher.h"
-#import "DownloadedModel.h"
+#import "DownloadedBook.h"
 
 @interface AnswerViewController ()<UICollectionViewDelegate,  UICollectionViewDataSource>
 
-@property (nonatomic, strong) DownloadedModel *downloadedModel;
+@property (nonatomic, strong) DownloadedBook *downloadedBook;
 @property (nonatomic, strong) NSMutableArray *answerList;
 @property (nonatomic, strong) UIView *navView;
 
@@ -39,6 +39,8 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden = YES;
     self.view.backgroundColor = whitecolor;
+    
+    self.downloadedBook = [DownloadedBook new];
     
     [self setupNav];
     [self downloadData];
@@ -275,7 +277,6 @@
         }
     };
     
-    
     [self.navigationController pushViewController:answerDetailVC animated:YES];
 }
 
@@ -284,6 +285,15 @@
 #pragma mark - 下载作业并存在本地
 
 - (void)downloadAnswer_step1 {
+    
+    //查询是否已经下载有该答案
+    if ([DBManager checkIfAnswerIsDownloaded:self.bookModel.answerID] == YES) {
+        [XWHUDManager showTipHUDInView:@"该答案已经下载好了，请在我的下载中查看"];
+        return;
+    }
+    else {
+        [XWHUDManager showTipHUD:@"答案下载完毕之后可在我的下载中查看"];
+    }
     
     //创建相应的目录
     NSString *docsdir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -314,17 +324,20 @@
     //先下载封面图
     [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:self.bookModel.coverURL] options:SDWebImageDownloaderContinueInBackground progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
         
+        //写入本地目录
         NSData *imgData = UIImagePNGRepresentation(image);
         NSString *coverImgPath = [NSString stringWithFormat:@"%@/Documents/MyDownloadImages/%@/coverImg.png",NSHomeDirectory(),self.bookModel.answerID];
         [imgData writeToFile:coverImgPath atomically:YES];
         
-//        self.downloadedModel.coverImg = image;
-//        self.downloadedModel.title = self.bookModel.title;
-//        self.downloadedModel.subject = self.bookModel.subject;
-//        self.downloadedModel.bookVersion = self.bookModel.bookVersion;
-//        self.downloadedModel.uploaderName = self.bookModel.uploaderName;
-//        self.downloadedModel.answerID = self.bookModel.answerID;
-//        self.downloadedModel.grade = self.bookModel.grade;
+        self.downloadedBook.coverImgPath = [NSString stringWithFormat:@"/Documents/MyDownloadImages/%@/coverImg.png",self.bookModel.answerID];
+        self.downloadedBook.title = self.bookModel.title;
+        self.downloadedBook.subject = self.bookModel.subject;
+        self.downloadedBook.bookVersion = self.bookModel.bookVersion;
+        self.downloadedBook.uploaderName = self.bookModel.uploaderName;
+        self.downloadedBook.answerID = self.bookModel.answerID;
+        self.downloadedBook.grade = self.bookModel.grade;
+        
+        [DBManager insertToDataBase_downloadedBook:self.downloadedBook];
         [self downloadAnswer_step2];
     }];
 }
@@ -372,38 +385,43 @@
 
 - (void)downloadAnswer_step3:(NSArray *)thumbsURL detailURL:(NSArray *)detailURL {
     
-        NSString * homePath =NSHomeDirectory();
+    NSString * homePath =NSHomeDirectory();
     
-        SDWebImageDownloader *imgDownloader = [SDWebImageDownloader sharedDownloader];
-        //    imgDownloader.downloadTimeout = 20;
-        for(NSInteger i = 1; i < thumbsURL.count + 1; i++) {
+    SDWebImageDownloader *imgDownloader = [SDWebImageDownloader sharedDownloader];
+    
+    for(NSInteger i = 1; i < thumbsURL.count + 1; i++) {
+        
+        [imgDownloader downloadImageWithURL:[NSURL URLWithString:thumbsURL[i - 1]] options:SDWebImageScaleDownLargeImages|SDWebImageDownloaderContinueInBackground progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
             
-            [imgDownloader downloadImageWithURL:[NSURL URLWithString:thumbsURL[i - 1]] options:SDWebImageScaleDownLargeImages|SDWebImageDownloaderContinueInBackground progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+            if (!error) {
+                NSData *imgData = UIImagePNGRepresentation(image);
+                NSString *thumbsImgPath = [NSString stringWithFormat:@"%@/Documents/MyDownloadImages/%@/thumbsImg/thumbsImg%ld.png",homePath,self.bookModel.answerID,(long)i];
+                [imgData writeToFile:thumbsImgPath atomically:YES];
+            }
+            else {
                 
-                if (!error) {
-                    NSData *imgData = UIImagePNGRepresentation(image);
-                    NSString *thumbsImgPath = [NSString stringWithFormat:@"%@/Documents/MyDownloadImages/%@/thumbsImg/thumbsImg%ld.png",homePath,self.bookModel.answerID,(long)i];
-                    [imgData writeToFile:thumbsImgPath atomically:YES];
-                }
-                else {
-                    
-                }
-                
-            }];
+            }
             
-            [imgDownloader downloadImageWithURL:[NSURL URLWithString:detailURL[i - 1]] options:SDWebImageScaleDownLargeImages|SDWebImageDownloaderContinueInBackground progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
-                if (!error) {
-                    NSData *imgData = UIImagePNGRepresentation(image);
-                    NSString *detailImgPath = [NSString stringWithFormat:@"%@/Documents/MyDownloadImages/%@/detailImg/detailImg%ld.png",homePath,self.bookModel.answerID,i];
-                    [imgData writeToFile:detailImgPath atomically:YES];
-                }
-                else {
-                    
-                }
+        }];
+        
+        [imgDownloader downloadImageWithURL:[NSURL URLWithString:detailURL[i - 1]] options:SDWebImageScaleDownLargeImages|SDWebImageDownloaderContinueInBackground progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+            if (!error) {
+                NSData *imgData = UIImagePNGRepresentation(image);
+                NSString *detailImgPath = [NSString stringWithFormat:@"%@/Documents/MyDownloadImages/%@/detailImg/detailImg%ld.png",homePath,self.bookModel.answerID,(long)i];
+                [imgData writeToFile:detailImgPath atomically:YES];
+            }
+            else {
                 
-            }];
+            }
             
-        }
+        }];
+        
+    }
+    
+    //将图片地址存到数据库
+    [DBManager insertToDataBase_imgPath:self.bookModel.answerID NumberOfImg:thumbsURL.count];
+    
+    
     
 }
 

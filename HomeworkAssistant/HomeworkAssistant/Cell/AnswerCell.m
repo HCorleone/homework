@@ -11,10 +11,6 @@
 
 @interface AnswerCell()
 
-@property (nonatomic, strong) UIImageView *topImage;
-@property (nonatomic, strong) UILabel *botLabel;
-@property (nonatomic, strong) NSString *idx;//当前页数
-
 @end
 
 @implementation AnswerCell
