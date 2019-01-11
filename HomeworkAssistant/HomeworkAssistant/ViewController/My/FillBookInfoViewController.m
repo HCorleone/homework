@@ -1,21 +1,19 @@
 //
-//  FeedBackViewController.m
+//  FillBookInfoViewController.m
 //  HomeworkAssistant
 //
-//  Created by 无敌帅枫 on 2019/1/3.
+//  Created by 无敌帅枫 on 2019/1/9.
 //  Copyright © 2019 无敌帅枫. All rights reserved.
 //
 
-#import "FeedBackViewController.h"
+#import "FillBookInfoViewController.h"
 #import "HHDropDownList.h"
+#import "UploadAnswerViewController.h"
 
-@interface FeedBackViewController ()<HHDropDownListDelegate, HHDropDownListDataSource, HXAlbumListViewControllerDelegate>
+@interface FillBookInfoViewController ()<HHDropDownListDelegate, HHDropDownListDataSource, HXAlbumListViewControllerDelegate>
 
 @property (nonatomic, strong) UIView *navView;
 @property (nonatomic, strong) UITextField *titleField;
-
-@property (nonatomic, strong) UIButton *addCoverBtn;
-@property (nonatomic, strong) UIImageView *bookCover;
 
 //需要上传的内容
 @property (nonatomic, strong) NSString *uploadTitle;
@@ -28,13 +26,9 @@
 @property (nonatomic, strong) HHDropDownList *dropDownList_2;
 @property (nonatomic, strong) HHDropDownList *dropDownList_3;
 
-//照片选取相关
-@property (strong, nonatomic) HXPhotoManager *manager;
-@property (strong, nonatomic) HXDatePhotoToolManager *toolManager;
-
 @end
 
-@implementation FeedBackViewController
+@implementation FillBookInfoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -86,7 +80,7 @@
 }
 
 - (void)setupView {
-
+    
     //输入书名的textfiled
     UITextField *titleField = [[UITextField alloc] initWithFrame:CGRectMake(0.223 * SCREEN_WIDTH, 0.245 * SCREEN_WIDTH, 0.69 * SCREEN_WIDTH, 0.69 * SCREEN_WIDTH * 0.14)];
     [self.view addSubview:titleField];
@@ -119,7 +113,7 @@
     [self.dropDownList_1 setDataSource:self];
     [self.dropDownList_1 setIsExclusive:YES];
     self.dropDownList_1.from = FromGrade;
-//    [self.dropDownList_1 setHaveBorderLine:NO];
+    //    [self.dropDownList_1 setHaveBorderLine:NO];
     
     //年级label
     UILabel *label2 = [[UILabel alloc] init];
@@ -141,7 +135,7 @@
     [self.dropDownList_2 setDataSource:self];
     [self.dropDownList_2 setIsExclusive:YES];
     self.dropDownList_2.from = FromSubject;
-//    [self.dropDownList_2 setHaveBorderLine:NO];
+    //    [self.dropDownList_2 setHaveBorderLine:NO];
     
     //学科label
     UILabel *label3 = [[UILabel alloc] init];
@@ -163,7 +157,7 @@
     [self.dropDownList_3 setDataSource:self];
     [self.dropDownList_3 setIsExclusive:YES];
     self.dropDownList_3.from = FromVersion;
-//    [self.dropDownList_3 setHaveBorderLine:NO];
+    //    [self.dropDownList_3 setHaveBorderLine:NO];
     
     //版本label
     UILabel *label4 = [[UILabel alloc] init];
@@ -197,47 +191,15 @@
         make.centerY.mas_equalTo(codeField);
     }];
     
-    //添加封面按钮
-    UIButton *addCoverBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addCoverBtn setBackgroundImage:[UIImage imageNamed:@"添加书籍"] forState:UIControlStateNormal];
-    [self.view addSubview:addCoverBtn];
-    [addCoverBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view);
-        make.size.mas_equalTo(CGSizeMake(0.224 * SCREEN_WIDTH, 0.224 * SCREEN_WIDTH * 1.3));
-        make.top.mas_equalTo(codeField.mas_bottom).with.offset(0.08 * SCREEN_WIDTH);
-    }];
-    [addCoverBtn addTarget:self action:@selector(selectBookCover:) forControlEvents:UIControlEventTouchUpInside];
-    self.addCoverBtn = addCoverBtn;
     
-    //封面展示view
-    UIImageView *bookCover = [[UIImageView alloc] init];
-    [self.view addSubview:bookCover];
-    [bookCover mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view);
-        make.size.mas_equalTo(CGSizeMake(0.224 * SCREEN_WIDTH, 0.224 * SCREEN_WIDTH * 1.3));
-        make.top.mas_equalTo(codeField.mas_bottom).with.offset(0.08 * SCREEN_WIDTH);
-    }];
-    self.bookCover = bookCover;
-    self.bookCover.hidden = YES;
-    
-    //上传封面label
-    UILabel *label6 = [[UILabel alloc] init];
-    label6.text = @"请上传封面:";
-    label6.font = [UIFont systemFontOfSize:14];
-    label6.textColor = [UIColor colorWithHexString:@"#353B3C"];
-    [self.view addSubview:label6];
-    [label6 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view).offset(0.084 * SCREEN_WIDTH);
-        make.centerY.mas_equalTo(addCoverBtn);
-    }];
     //提交反馈按钮
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = CGRectMake(0, 0, 0.40 * SCREEN_WIDTH, 0.40 * SCREEN_WIDTH * 0.24);
     [gradientLayer setColors:[NSArray arrayWithObjects:
                               (id)[UIColor colorWithHexString:@"#FFC94C"].CGColor,
                               (id)[UIColor colorWithHexString:@"#FF8800"].CGColor,
-                                  nil
-                                  ]];
+                              nil
+                              ]];
     
     gradientLayer.startPoint = CGPointMake(0, 0);
     gradientLayer.endPoint = CGPointMake(0, 1);
@@ -255,10 +217,10 @@
         make.size.mas_equalTo(CGSizeMake(0.40 * SCREEN_WIDTH, 0.40 * SCREEN_WIDTH * 0.24));
     }];
     [uploadBtn setTitleColor:whitecolor forState:UIControlStateNormal];
-    [uploadBtn setTitle:@"提交反馈" forState:UIControlStateNormal];
+    [uploadBtn setTitle:@"下一步" forState:UIControlStateNormal];
     uploadBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     uploadBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-
+    
 }
 
 - (void)uploadFeedBack:(UIButton *)btn {
@@ -269,72 +231,47 @@
         [XWHUDManager showTipHUDInView:@"请输入书籍名称"];
         return;
     }
-    else if (!self.bookCover.image) {
-        [XWHUDManager showTipHUDInView:@"请添加书籍封面图片"];
+    else {
+        [self uploadBookInfo];
+    }
+    
+}
+
+- (void)uploadBookInfo {
+    //先判断用户是否登录
+    if (![TTUserManager sharedInstance].isLogin) {
+        [XWHUDManager showTipHUDInView:@"请先登录"];
         return;
     }
-    else {
-        [self uploadfeedBack];
-    }
     
-}
-
-- (void)uploadfeedBack {
-    
-    NSArray *contentArr = @[self.uploadTitle, self.uploadGrade, self.uploadSubject, self.uploadVersion];
-    NSString *content = [contentArr componentsJoinedByString:@"_"];
-    NSLog(@"%@",content);
     
     NSDictionary *dict = @{
-                           @"code":self.uploadCode,
-                           @"type":@"0",
-                           @"content":content,
-                           @"appType":@"xiazaiqi",
-//                           @"fileList":self.bookCover.image
+                           @"openID":[TTUserManager sharedInstance].currentUser.openId,
+                           @"userName":[TTUserManager sharedInstance].currentUser.name,
+                           @"title":self.uploadTitle,
+                           @"grade":self.uploadGrade,
+                           @"subject":self.uploadSubject,
+                           @"bookVersion":self.uploadVersion,
+                           @"code":self.uploadCode
                            };
-    
     dict = [HMACSHA1 encryptDicForRequest:dict];
     
-    NSString *testStr = [CommonToolClass getURLFromDic:dict];
-    NSString *resURL = [[[URLBuilder getURLForUploadFeedBack] stringByAppendingString:@"&"] stringByAppendingString:testStr];
-    NSLog(@"%@",resURL);
-    resURL = [resURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    
     AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
-    [manager.requestSerializer setValue:@"multipart/form-data; boundary=----WebKitFormBoundary6TAB8KxvuJTZYfUn" forHTTPHeaderField:@"Content-Type"];
-    NSURLSessionDataTask *dataTask = [manager POST:resURL parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-
-        NSData *imgData = UIImagePNGRepresentation(self.bookCover.image);
-
-//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//        [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
-//        NSString *str = [dateFormatter stringFromDate:[NSDate date]];
-//        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
-
-        [formData appendPartWithFileData:imgData name:@"fileList" fileName:@"img.png" mimeType:@"image/png"];
-
-
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"test+++++%@",responseObject);
-        [XWHUDManager showSuccessTipHUDInView:@"感谢您的反馈"];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSLog(@"test-----%@",error);
-        [XWHUDManager showWarningTipHUDInView:@"反馈失败"];
-    }];
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForUploadAnswerBaseInfo] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if ([responseObject[@"code"]integerValue] == 200) {
+            NSDictionary *dic = responseObject[@"datas"];
+            UploadAnswerViewController *uploadPicVC = [[UploadAnswerViewController alloc] init];
+            uploadPicVC.answerID = dic[@"id"];
+            [self.navigationController pushViewController:uploadPicVC animated:YES];
+        }
+        else {
+            [XWHUDManager showTipHUDInView:@"当前网络不佳，请您稍后再试"];
+        }
+        
+    } failure:nil];
     [dataTask resume];
-
-
-}
-
-- (void)selectBookCover:(UIButton *)btn {
-    HXAlbumListViewController *vc = [[HXAlbumListViewController alloc] init];
-    vc.delegate = self;
-    vc.manager = self.manager;
-    HXCustomNavigationController *nav = [[HXCustomNavigationController alloc] initWithRootViewController:vc];
     
-    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - HHDropDownListDataSource
@@ -370,28 +307,6 @@
         
     }
     
-}
-
-#pragma mark - 照片选取相关
-- (HXPhotoManager *)manager {
-    if (!_manager) {
-        _manager = [[HXPhotoManager alloc] initWithType:HXPhotoManagerSelectedTypePhoto];
-        _manager.configuration.singleSelected = YES;
-        _manager.configuration.albumListTableView = ^(UITableView *tableView) {
-            //            NSSLog(@"%@",tableView);
-        };
-        _manager.configuration.singleJumpEdit = YES;
-        _manager.configuration.movableCropBox = YES;
-        _manager.configuration.movableCropBoxEditSize = YES;
-        _manager.configuration.requestImageAfterFinishingSelection = YES;
-    }
-    return _manager;
-}
-
-//选择完毕之后的回调
-- (void)albumListViewController:(HXAlbumListViewController *)albumListViewController didDoneAllImage:(NSArray<UIImage *> *)imageList {
-    self.bookCover.hidden = NO;
-    self.bookCover.image = imageList[0];
 }
 
 #pragma mark - other

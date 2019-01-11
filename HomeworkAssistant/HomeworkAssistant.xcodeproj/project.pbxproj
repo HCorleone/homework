@@ -196,6 +196,8 @@
 		3DC8CC7D21E4CE5900FEE10E /* 分组_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC7A21E4CE5800FEE10E /* 分组_3.png */; };
 		3DC8CC7E21E4CE5900FEE10E /* 分组_3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC7B21E4CE5900FEE10E /* 分组_3@3x.png */; };
 		3DC8CC7F21E4CE5900FEE10E /* 分组_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC7C21E4CE5900FEE10E /* 分组_3@2x.png */; };
+		3DC8CC8221E5A54000FEE10E /* FillBookInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC8121E5A54000FEE10E /* FillBookInfoViewController.m */; };
+		3DC8CC8521E5A99A00FEE10E /* UploadAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC8421E5A99A00FEE10E /* UploadAnswerViewController.m */; };
 		3DF0B96621BFDC4D00AF682A /* 添加书籍.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B95821BFDC4C00AF682A /* 添加书籍.png */; };
 		3DF0B96721BFDC4D00AF682A /* 添加书籍@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B95921BFDC4C00AF682A /* 添加书籍@2x.png */; };
 		3DF0B99221BFE05E00AF682A /* 学习-选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B98621BFE05C00AF682A /* 学习-选中@3x.png */; };
@@ -508,6 +510,10 @@
 		3DC8CC7A21E4CE5800FEE10E /* 分组_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分组_3.png"; sourceTree = "<group>"; };
 		3DC8CC7B21E4CE5900FEE10E /* 分组_3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分组_3@3x.png"; sourceTree = "<group>"; };
 		3DC8CC7C21E4CE5900FEE10E /* 分组_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分组_3@2x.png"; sourceTree = "<group>"; };
+		3DC8CC8021E5A54000FEE10E /* FillBookInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FillBookInfoViewController.h; sourceTree = "<group>"; };
+		3DC8CC8121E5A54000FEE10E /* FillBookInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FillBookInfoViewController.m; sourceTree = "<group>"; };
+		3DC8CC8321E5A99A00FEE10E /* UploadAnswerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadAnswerViewController.h; sourceTree = "<group>"; };
+		3DC8CC8421E5A99A00FEE10E /* UploadAnswerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadAnswerViewController.m; sourceTree = "<group>"; };
 		3DF0B95821BFDC4C00AF682A /* 添加书籍.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加书籍.png"; sourceTree = "<group>"; };
 		3DF0B95921BFDC4C00AF682A /* 添加书籍@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加书籍@2x.png"; sourceTree = "<group>"; };
 		3DF0B98621BFE05C00AF682A /* 学习-选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "学习-选中@3x.png"; sourceTree = "<group>"; };
@@ -886,6 +892,7 @@
 			isa = PBXGroup;
 			children = (
 				3DC8CC6D21E4796100FEE10E /* MyDownload */,
+				3DC8CC8621E5F4CF00FEE10E /* 即将被废弃的 */,
 				3D9EA95F219D6C1E006AF423 /* Login */,
 				3D9EA90721990802006AF423 /* MyViewController.h */,
 				3D9EA90821990802006AF423 /* MyViewController.m */,
@@ -893,12 +900,12 @@
 				3D9EA91921998BC4006AF423 /* JYViewController.m */,
 				9F4D103821B7CEB700F4610A /* InputBarCodeViewController.h */,
 				9F4D103921B7CEB700F4610A /* InputBarCodeViewController.m */,
-				9F4D104121B7E5FC00F4610A /* FillBookInformationViewController.h */,
-				9F4D104221B7E5FC00F4610A /* FillBookInformationViewController.m */,
-				9F740E6521B8F6C700EE9657 /* UpAnswerViewController.h */,
-				9F740E6621B8F6C700EE9657 /* UpAnswerViewController.m */,
 				3DC8CC2C21DDC01E00FEE10E /* FeedBackViewController.h */,
 				3DC8CC2D21DDC01E00FEE10E /* FeedBackViewController.m */,
+				3DC8CC8021E5A54000FEE10E /* FillBookInfoViewController.h */,
+				3DC8CC8121E5A54000FEE10E /* FillBookInfoViewController.m */,
+				3DC8CC8321E5A99A00FEE10E /* UploadAnswerViewController.h */,
+				3DC8CC8421E5A99A00FEE10E /* UploadAnswerViewController.m */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -1114,6 +1121,17 @@
 				3DC8CC7221E4850000FEE10E /* DownloadedAnswerDetailViewController.m */,
 			);
 			path = MyDownload;
+			sourceTree = "<group>";
+		};
+		3DC8CC8621E5F4CF00FEE10E /* 即将被废弃的 */ = {
+			isa = PBXGroup;
+			children = (
+				9F4D104121B7E5FC00F4610A /* FillBookInformationViewController.h */,
+				9F4D104221B7E5FC00F4610A /* FillBookInformationViewController.m */,
+				9F740E6521B8F6C700EE9657 /* UpAnswerViewController.h */,
+				9F740E6621B8F6C700EE9657 /* UpAnswerViewController.m */,
+			);
+			path = "即将被废弃的";
 			sourceTree = "<group>";
 		};
 		71F5933A8C7F218E60BA7735 /* Pods */ = {
@@ -1563,6 +1581,7 @@
 				3DA91F3521CC9D3D005262D4 /* ChineseViewController.m in Sources */,
 				3DA91F3221CC9712005262D4 /* ArticleViewController.m in Sources */,
 				3D9EAF0F21A39BF0006AF423 /* BookCell.m in Sources */,
+				3DC8CC8221E5A54000FEE10E /* FillBookInfoViewController.m in Sources */,
 				9F4D104C21B7F9A100F4610A /* NIDropDown.m in Sources */,
 				3D9EA90921990802006AF423 /* MyViewController.m in Sources */,
 				3D47259021BA591C00C0E7CF /* YZPullDownMenu.m in Sources */,
@@ -1581,6 +1600,7 @@
 				3D7D18E321AD24C7006B9C8F /* AnswerDetailCell.m in Sources */,
 				3DC8CC2A21DCA3B600FEE10E /* AgreementView.m in Sources */,
 				3D958BB221CA1AAA00AF7F3F /* YearViewController.m in Sources */,
+				3DC8CC8521E5A99A00FEE10E /* UploadAnswerViewController.m in Sources */,
 				3DC8CC7321E4850000FEE10E /* DownloadedAnswerDetailViewController.m in Sources */,
 				9F4D102821B7C65E00F4610A /* LTTextView.m in Sources */,
 				3DA91F5D21CF2548005262D4 /* Article.m in Sources */,

@@ -14,6 +14,7 @@
 #import "MyViewController.h"
 #import "InputBarCodeViewController.h"
 #import "FillBookInformationViewController.h"
+#import "FillBookInfoViewController.h"
 #import "QRCodeView.h"
 
 @interface QRScanViewController ()<SGQRCodeScanManagerDelegate>
@@ -36,7 +37,7 @@
     [self.scanManager startRunning];
     
     SGQRCodeScanningView *scanView = [[SGQRCodeScanningView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    scanView.scanningImageName = @"扫描线";
+//    scanView.scanningImageName = @"扫描线";
     scanView.cornerColor = whitecolor;
     scanView.backgroundAlpha = 0.4;
     [self.view addSubview:scanView];
@@ -152,9 +153,9 @@
         [self.scanView removeTimer];
         [self.scanManager stopRunning];
         //扫码结果
-        FillBookInformationViewController *fill = [[FillBookInformationViewController alloc] init];
-        userDefaults(result, @"InputBarCode");
-        [self.navigationController pushViewController:fill animated:YES];
+        FillBookInfoViewController *fillInfoVC = [[FillBookInfoViewController alloc] init];
+        fillInfoVC.uploadCode = result;
+        [self.navigationController pushViewController:fillInfoVC animated:YES];
     }
     else if (self.scanType == ScanTypeFeedBack) {
         [self.scanView removeTimer];

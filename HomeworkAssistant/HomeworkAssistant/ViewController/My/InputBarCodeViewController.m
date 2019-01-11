@@ -10,6 +10,8 @@
 #import "MyViewController.h"
 #import "FillBookInformationViewController.h"
 #import "FeedBackViewController.h"
+#import "FillBookInfoViewController.h"
+#import "UploadAnswerViewController.h"
 
 @interface InputBarCodeViewController ()
 
@@ -91,12 +93,12 @@
         feedBackVC.uploadCode = self.inputField.text;
         [self.navigationController pushViewController:feedBackVC animated:YES];
     }
-    else{
-        FillBookInformationViewController *fill = [[FillBookInformationViewController alloc] init];
-        //    fill.fillView = [[FillBookInformationView alloc] init];
-        //    fill.fillView.codeLabel.text = self.inputField.text;
-        userDefaults(self.inputField.text, @"InputBarCode");
-        [self.navigationController pushViewController:fill animated:YES];
+    else {
+//        FillBookInfoViewController *fillInfoVC = [[FillBookInfoViewController alloc] init];
+//        fillInfoVC.uploadCode = self.inputField.text;
+//        [self.navigationController pushViewController:fillInfoVC animated:YES];
+        UploadAnswerViewController *testVC = [[UploadAnswerViewController alloc] init];
+        [self.navigationController pushViewController:testVC animated:YES];
     }
 }
 

@@ -26,7 +26,7 @@
 
 + (NSString *)getURLForAnswerSearch {
     NSString *URLString = @"https://zuoyeapi.shengxueweilai.com/homeworkapi/api.s?h=ZYSearchAnswerHandler";
-//    NSString *URLString = @"http://zuoyeapi.tatatimes.com/homeworkapi/api.s?h=ZYSearchAnswerHandler";
+
     return URLString;
 }
 
@@ -61,13 +61,13 @@
 }
 
 + (NSString *)getURLForUploadAnswerPic {
-    NSString *URLString = @"https://zuoyeapi.shengxueweilai.com/homeworkapi/api.s?h=ZYUploadAnswerPicHandler";
+    NSString *URLString = @"https://zuoyeapi.shengxueweilai.com/homeworkapi/upload.s?h=ZYUploadAnswerPicHandler";
     
     return URLString;
 }
 
 + (NSString *)getURLForUploadFeedBack {
-    NSString *URLString = @"https://zuoyeapi.shengxueweilai.com/homeworkapi/api.s?h=ZYFeedBackHander";
+    NSString *URLString = @"https://zuoyeapi.shengxueweilai.com/homeworkapi/upload.s?h=ZYFeedBackHander";
     
     return URLString;
 }
@@ -133,7 +133,10 @@
 + (NSDictionary *)getCommonInfo {
     NSDictionary *dict = [NSDictionary dictionary];
     dict = @{
-             @"pkn":@"com.enjoytime.palmhomework"
+             @"pkn":@"com.enjoytime.palmhomework",//包名，与后台协商
+             @"av":@"1.0.1",//app版本号
+//             @"agent":@"1",//防代理抓包
+             
              };
     return dict;
 }

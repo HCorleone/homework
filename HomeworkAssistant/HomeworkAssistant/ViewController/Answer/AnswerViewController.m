@@ -273,6 +273,7 @@
     answerDetailVC.answerID = self.bookModel.answerID;
     answerDetailVC.reloadBlock = ^(BOOL IsSelected) {
         if (self.reloadBlock) {
+            self.isSelected = IsSelected;
             self.reloadBlock(IsSelected);
         }
     };
@@ -385,6 +386,9 @@
 
 - (void)downloadAnswer_step3:(NSArray *)thumbsURL detailURL:(NSArray *)detailURL {
     
+    NSOperationQueue *testQueue = [[NSOperationQueue alloc] init];
+    testQueue.maxConcurrentOperationCount = 3;
+    
     NSString * homePath =NSHomeDirectory();
     
     SDWebImageDownloader *imgDownloader = [SDWebImageDownloader sharedDownloader];
@@ -394,11 +398,16 @@
         [imgDownloader downloadImageWithURL:[NSURL URLWithString:thumbsURL[i - 1]] options:SDWebImageScaleDownLargeImages|SDWebImageDownloaderContinueInBackground progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
             
             if (!error) {
-                NSData *imgData = UIImagePNGRepresentation(image);
-                NSString *thumbsImgPath = [NSString stringWithFormat:@"%@/Documents/MyDownloadImages/%@/thumbsImg/thumbsImg%ld.png",homePath,self.bookModel.answerID,(long)i];
-                [imgData writeToFile:thumbsImgPath atomically:NO];
-                imgData = nil;
-                thumbsImgPath = nil;
+                
+                NSBlockOperation *testBlockOperation1 = [NSBlockOperation blockOperationWithBlock:^{
+                    NSData *imgData = UIImagePNGRepresentation(image);
+                    NSString *thumbsImgPath = [NSString stringWithFormat:@"%@/Documents/MyDownloadImages/%@/thumbsImg/thumbsImg%ld.png",homePath,self.bookModel.answerID,(long)i];
+                    [imgData writeToFile:thumbsImgPath atomically:NO];
+                    imgData = nil;
+                    thumbsImgPath = nil;
+                }];
+                [testQueue addOperation:testBlockOperation1];
+                
             }
             else {
                 
@@ -408,16 +417,21 @@
         
         [imgDownloader downloadImageWithURL:[NSURL URLWithString:detailURL[i - 1]] options:SDWebImageScaleDownLargeImages|SDWebImageDownloaderContinueInBackground progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
             if (!error) {
+                
+                NSBlockOperation *testBlockOperation2 = [NSBlockOperation blockOperationWithBlock:^{
                 NSData *imgData = UIImagePNGRepresentation(image);
                 NSString *detailImgPath = [NSString stringWithFormat:@"%@/Documents/MyDownloadImages/%@/detailImg/detailImg%ld.png",homePath,self.bookModel.answerID,(long)i];
                 [imgData writeToFile:detailImgPath atomically:NO];
                 imgData = nil;
                 detailImgPath = nil;
-            }
-            else {
+                }];
+                [testQueue addOperation:testBlockOperation2];
                 
             }
-            
+            else {
+
+            }
+
         }];
         
     }

@@ -55,8 +55,11 @@
             case 1002:
             {
                 NSLog(@"下一步");
-                if (!self.cell.title.text && !self.otherView.areaBtn.titleLabel.text) {
-                    [XWHUDManager showTipHUDInView:@"请选择年级和地区"];
+                if (self.cell.title.text == nil) {
+                    [XWHUDManager showTipHUDInView:@"请选择年级"];
+                }
+                else if ([weakSelf.otherView.areaBtn.titleLabel.text isEqualToString:@"请选择地区"]) {
+                    [XWHUDManager showTipHUDInView:@"请选择地区"];
                 }
                 else {
                     //请求接口
@@ -148,7 +151,6 @@
             break;
     }
     
-    
     return headerView;
 }
 
@@ -210,7 +212,9 @@
         
     }];
     self.shplacePicker.backgroundColor = [UIColor whiteColor];
+    self.shplacePicker.isRecordLocation = NO;
     [self.view addSubview:self.shplacePicker];
+    
 }
 
 #pragma mark - 请求网络

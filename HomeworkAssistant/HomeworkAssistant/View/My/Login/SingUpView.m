@@ -16,6 +16,7 @@
     if ([super initWithFrame:frame])
     {
         _phoneField = [[LoginTextField alloc]init:@"请输入手机号"];
+        _phoneField.keyboardType = UIKeyboardTypeNumberPad;
         [_phoneField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
         [self addSubview:_phoneField];
         [_phoneField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -44,6 +45,7 @@
         }];
         
         _codeField = [[LoginTextField alloc]init:@"请输入验证码"];
+        _codeField.keyboardType = UIKeyboardTypeNumberPad;
         [_codeField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
         [self addSubview:_codeField];
         [_codeField mas_makeConstraints:^(MASConstraintMaker *make) {

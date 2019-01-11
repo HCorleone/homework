@@ -151,9 +151,9 @@ static NSString *page = @"1";
                            @"subject":subject,
                            @"bookVersion":version,
                            @"volume":volume,
-                           @"year":@"",
+                           @"year":year,
                            @"pageNo":page,
-                           @"pageSize":@""
+                           @"pageSize":@"",
                            };
     dict = [HMACSHA1 encryptDicForRequest:dict];
     

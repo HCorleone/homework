@@ -77,6 +77,7 @@
     self.loginView = loginView;
     //帐号框
     LoginTextField *acountF = [[LoginTextField alloc]init:@"请输入手机号"];
+    acountF.keyboardType = UIKeyboardTypeNumberPad;
     [loginView addSubview:acountF];
     [acountF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(0.689 * SCREEN_WIDTH, 0.15 * 0.689 * SCREEN_WIDTH));
@@ -390,10 +391,13 @@
         });
         
     }
-    else
-    {
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-        [self.navigationController pushViewController:[[FillOthersViewController alloc] init] animated:YES];
+    else {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+            [self.navigationController pushViewController:[[FillOthersViewController alloc] init] animated:YES];
+        });
+        
     }
     
 }

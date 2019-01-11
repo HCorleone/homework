@@ -13,7 +13,7 @@
 -(id)initWithFrame:(CGRect)frame
 {
     if ([super initWithFrame:frame]) {
-        _titleLabel = [UILabel labelWithContent:@"选择年级" SuperView:self TextColor:[UIColor colorWithRed:11/255.0 green:167/255.0 blue:212/255.0 alpha:1/1.0] Font:[UIFont systemFontOfSize:14.0] TextAlignment:NSTextAlignmentCenter NumberOfLines:1];
+        _titleLabel = [UILabel labelWithContent:@"选择年级" SuperView:self TextColor:[UIColor colorWithHexString:@"#FFA033"] Font:[UIFont systemFontOfSize:14.0] TextAlignment:NSTextAlignmentCenter NumberOfLines:1];
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(50);
             make.centerX.mas_equalTo(self.mas_centerX);
@@ -21,7 +21,7 @@
             make.height.mas_equalTo(12);
         }];
         
-        _titleLabel = [UILabel labelWithContent:@"选择地区" SuperView:self TextColor:[UIColor colorWithRed:11/255.0 green:167/255.0 blue:212/255.0 alpha:1/1.0] Font:[UIFont systemFontOfSize:14.0] TextAlignment:NSTextAlignmentCenter NumberOfLines:1];
+        _titleLabel = [UILabel labelWithContent:@"选择地区" SuperView:self TextColor:[UIColor colorWithHexString:@"#FFA033"] Font:[UIFont systemFontOfSize:14.0] TextAlignment:NSTextAlignmentCenter NumberOfLines:1];
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(440);
             make.centerX.mas_equalTo(self.mas_centerX);
@@ -54,7 +54,7 @@
         [_okBtn setTitle:@"下一步" forState:UIControlStateNormal];
         _okBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         _okBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-        _okBtn.backgroundColor = UIColorFromRGB(0x3FBCF4);
+        _okBtn.backgroundColor = [UIColor colorWithHexString:@"#FFA033"];
         _okBtn.layer.masksToBounds = YES;
         _okBtn.layer.cornerRadius = 15;
         _okBtn.tag = 1002;

@@ -125,9 +125,37 @@
     if ([self.contentTextView.textView.text isEqualToString:@""]) {
         [XWHUDManager showTipHUDInView:@"请输入您的建议"];
     }
-    else {
-        [XWHUDManager showTipHUDInView:@"我们已收到您的反馈"];
+    else if ([self.lianxiField.text isEqualToString:@""]) {
+        [XWHUDManager showTipHUDInView:@"请输入您的联系方式"];
     }
+    else {
+        [self sendFeedBack];
+    }
+}
+
+- (void)sendFeedBack {
+
+    NSDictionary *dict = @{
+                           @"type":@"5",
+                           @"content":self.contentTextView.textView.text,
+                           @"appType":@"xiazaiqi",
+                           @"contact":self.lianxiField.text
+                           };
+    dict = [HMACSHA1 encryptDicForRequest:dict];
+    
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
+    NSURLSessionDataTask *dataTask = [manager GET:[URLBuilder getURLForUploadFeedBack] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if ([responseObject[@"code"] integerValue] == 200) {
+            [XWHUDManager showSuccessTipHUDInView:@"感谢您的反馈"];
+        }
+        else {
+            [XWHUDManager showTipHUDInView:@"反馈失败，请您稍后再试"];
+        }
+        
+    } failure:nil];
+    [dataTask resume];
+    
 }
 
 - (void)setupNav {

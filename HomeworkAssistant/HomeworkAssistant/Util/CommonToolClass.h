@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)currentTimeStr;//获取时间戳，精确到毫秒
 
++ (NSString *)getURLFromDic:(NSDictionary *)dict;//取字典里的键值并拼接成长字符串
+
 @end
 
 NS_ASSUME_NONNULL_END
