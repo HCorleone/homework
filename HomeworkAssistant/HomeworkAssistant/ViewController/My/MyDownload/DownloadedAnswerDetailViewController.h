@@ -12,6 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^needToReloadCell)(BOOL IsSelected);
+
 @interface DownloadedAnswerDetailViewController : BaseViewController
 
 @property (nonatomic, strong) DownloadedBook *bookModel;
@@ -21,6 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *answerCount;
 @property (nonatomic, strong) NSString *answerID;
 @property (nonatomic, assign) BOOL isSelected;
+
+//用于分享的内容
+@property (nonatomic, strong) UIImage *bookImg;
+@property (nonatomic, strong) NSString *bookTitle;
+
+@property (nonatomic, copy) needToReloadCell reloadBlock;
 
 @end
 

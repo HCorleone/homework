@@ -21,6 +21,8 @@
 @property (nonatomic, strong) NSMutableArray *answerList;
 @property (nonatomic, strong) UIView *navView;
 
+@property (nonatomic, strong) UIImageView *bookCover;
+
 @end
 
 @implementation AnswerViewController
@@ -41,10 +43,8 @@
     self.view.backgroundColor = whitecolor;
     
     self.downloadedBook = [DownloadedBook new];
-    
-    [self setupNav];
+
     [self downloadData];
-//    [self downloadAnswer_step2];
 }
 
 - (void)setupNav {
@@ -104,6 +104,7 @@
         make.left.mas_equalTo(navView).offset(30);
         make.size.mas_equalTo(CGSizeMake(84, 112));
     }];
+    self.bookCover = bookCover;
     
     //书名
     UILabel *bookTitle = [[UILabel alloc]init];
@@ -192,21 +193,37 @@
         if ([responseObject[@"code"] integerValue] == 200) {
 
             NSDictionary *jsonDataDic = responseObject[@"datas"];
-            NSArray *thumbsArr = jsonDataDic[@"thumbs"];
-            NSArray *detailArr = jsonDataDic[@"details"];
-            self.answerList = [NSMutableArray array];
-            //建立模型数组
-            for (int i =0; i < thumbsArr.count; i++) {
-                NSDictionary *aDic = thumbsArr[i];
-                NSDictionary *bDic = detailArr[i];
-                AnswerDetail *aModel = [AnswerDetail initWithDic1:aDic Dic2:bDic];
-                aModel.answerCount = [[NSNumber numberWithUnsignedInteger:thumbsArr.count]stringValue];
-                [self.answerList addObject:aModel];
+            
+            NSDictionary *modelDic = jsonDataDic[@"answer"];
+            self.bookModel.coverURL = modelDic[@"coverURL"];
+            self.bookModel.title = modelDic[@"title"];
+            self.bookModel.subject = modelDic[@"subject"];
+            self.bookModel.bookVersion = modelDic[@"bookVersion"];
+            self.bookModel.grade = modelDic[@"grade"];
+            self.bookModel.uploaderName = modelDic[@"uploaderName"];
+            
+            NSString *linkURL = jsonDataDic[@"linkURL"];
+            if (![linkURL isEqualToString:@""]) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:linkURL] options:@{} completionHandler:nil];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            else {
+                NSArray *thumbsArr = jsonDataDic[@"thumbs"];
+                NSArray *detailArr = jsonDataDic[@"details"];
+                self.answerList = [NSMutableArray array];
+                //建立模型数组
+                for (int i =0; i < thumbsArr.count; i++) {
+                    NSDictionary *aDic = thumbsArr[i];
+                    NSDictionary *bDic = detailArr[i];
+                    AnswerDetail *aModel = [AnswerDetail initWithDic1:aDic Dic2:bDic];
+                    aModel.answerCount = [[NSNumber numberWithUnsignedInteger:thumbsArr.count]stringValue];
+                    [self.answerList addObject:aModel];
+                }
+                [self setupNav];
+                [self setupView];
             }
         }
-        [self setupView];
-
-
+        
     } failure:nil];
     [dataTask resume];
     
@@ -271,9 +288,11 @@
     answerDetailVC.dataList = self.answerList;
     answerDetailVC.isSelected = self.isSelected;
     answerDetailVC.answerID = self.bookModel.answerID;
+    answerDetailVC.bookTitle = self.bookModel.title;
+    answerDetailVC.bookImg = self.bookCover.image;
     answerDetailVC.reloadBlock = ^(BOOL IsSelected) {
+        self.isSelected = IsSelected;
         if (self.reloadBlock) {
-            self.isSelected = IsSelected;
             self.reloadBlock(IsSelected);
         }
     };

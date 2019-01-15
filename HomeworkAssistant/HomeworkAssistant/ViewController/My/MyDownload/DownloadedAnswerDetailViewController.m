@@ -71,22 +71,30 @@
 }
 
 - (void)setupBot {
+    UIView *whiteView = [[UIView alloc] init];
+    whiteView.backgroundColor = whitecolor;
+    [self.view addSubview:whiteView];
+    [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.bottom.and.right.mas_equalTo(self.view);
+        make.height.mas_equalTo(48 + BOT_OFFSET);
+    }];
+    
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.view addSubview:shareBtn];
+    [whiteView addSubview:shareBtn];
     [shareBtn setBackgroundColor:whitecolor];
     [shareBtn setTitle:@"分享给同学" forState:UIControlStateNormal];
     [shareBtn setTitleColor:maincolor forState:UIControlStateNormal];
     shareBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.view).offset(-BOT_OFFSET);
+        make.left.mas_equalTo(whiteView);
+        make.top.mas_equalTo(whiteView);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/2, 48));
     }];
     self.shareBtn = shareBtn;
     [self.shareBtn addTarget:self action:@selector(toShare) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.view addSubview:collectBtn];
+    [whiteView addSubview:collectBtn];
     if (!self.isSelected) {
         [collectBtn setBackgroundColor:maincolor];
         [collectBtn setTitle:@"收藏到书单" forState:UIControlStateNormal];
@@ -99,7 +107,7 @@
     }
     collectBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.view).offset(-0.064 * SCREEN_WIDTH);
+        make.right.mas_equalTo(whiteView).offset(-0.064 * SCREEN_WIDTH);
         //        make.bottom.mas_equalTo(self.view).offset(-BOT_OFFSET);
         make.centerY.mas_equalTo(shareBtn);
         make.size.mas_equalTo(CGSizeMake(0.368 * SCREEN_WIDTH, 0.044 * SCREEN_HEIGHT));
@@ -107,6 +115,7 @@
     collectBtn.layer.cornerRadius = 0.044 * SCREEN_HEIGHT/2;
     [collectBtn addTarget:self action:@selector(userLikeOrNot) forControlEvents:UIControlEventTouchUpInside];
     self.collectBtn = collectBtn;
+    
 }
 
 - (void)userLikeOrNot {
@@ -114,10 +123,16 @@
     
     if (self.isSelected) {
         [self userDisLike];
+        if (self.reloadBlock) {
+            self.reloadBlock(!self.isSelected);
+        }
     }
     else {
         if ([TTUserManager sharedInstance].isLogin) {
             [self userLike];
+            if (self.reloadBlock) {
+                self.reloadBlock(!self.isSelected);
+            }
         }
         else {
             [XWHUDManager showTipHUD:@"请先登录"];
@@ -187,21 +202,27 @@
 }
 
 - (void)toShare {
+    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self.navigationController popToRootViewControllerAnimated:NO];
+//    });
+    
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         //创建分享消息对象
         UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
         
         //创建网页内容对象
-        UIImage *logoImg = [UIImage imageNamed:@"logo"];
-        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"作业答案助手" descr:@"作业答案助手 k12学校作业辅导答案大全 海量作业答案任你搜索 一键同步书单" thumImage:logoImg];
+        UIImage *logoImg = self.bookImg;
+        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.bookTitle descr:[NSString stringWithFormat:@"我找到%@的答案啦，快来查看",self.bookTitle] thumImage:logoImg];
         //设置网页地址
-        shareObject.webpageUrl = @"http://abc.tatatimes.com/palmhomework.html";
-        
+//        shareObject.webpageUrl = @"http://abc.tatatimes.com/downloadhomework.html";
+        shareObject.webpageUrl = [self getShareURL];
         //分享消息对象设置分享内容对象
         messageObject.shareObject = shareObject;
         
         //调用分享接口
         [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+            
             if (error) {
                 UMSocialLogInfo(@"************Share fail with error %@*********",error);
             }else{
@@ -220,13 +241,28 @@
     }];
 }
 
+//获取分享的链接
+- (NSString *)getShareURL {
+    
+    NSDictionary *dict = @{
+                           @"answerID":self.answerID
+                           };
+    dict = [HMACSHA1 encryptDicForRequest:dict];
+    
+    NSString *testStr = [CommonToolClass getURLFromDic:dict];
+    NSString *resURL = [[[URLBuilder getURLForShareBook] stringByAppendingString:@"&"] stringByAppendingString:testStr];
+    NSLog(@"%@",resURL);
+    resURL = [resURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    return resURL;
+}
 
 - (void)setupBrowser {
     //获得数据
     self.dataList = [NSMutableArray arrayWithArray:[DBManager selectDetailImgWithAnswerID:self.answerID]];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-    layout.itemSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - 48 - 72);
+    layout.itemSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumLineSpacing = 0;
     
@@ -268,8 +304,9 @@
     
     NSDictionary *dic = self.dataList[indexPath.row];
     NSString *detailPath = dic[@"detailPath"];
-    [cell.imgScrollView.imgView sd_setImageWithURL:[NSURL fileURLWithPath:[NSHomeDirectory() stringByAppendingString:detailPath]]];
-    
+    cell.detailPath = detailPath;
+//    [cell.imgScrollView.imgView sd_setImageWithURL:[NSURL fileURLWithPath:[NSHomeDirectory() stringByAppendingString:detailPath]]];
+//    cell.imgScrollView.imgView.frame = [cell getSmallFrameWith:cell.imgScrollView.imgView.image.size];
     return cell;
     
 }

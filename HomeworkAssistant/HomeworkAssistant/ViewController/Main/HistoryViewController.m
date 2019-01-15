@@ -103,8 +103,8 @@
     [self.view addSubview:self.editingView];
     [self.editingView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(48);
-        make.bottom.mas_equalTo(self.view).offset(48);
+        make.height.mas_equalTo(48 + BOT_OFFSET);
+        make.bottom.mas_equalTo(self.view).offset(48 + BOT_OFFSET);
     }];
     
 }
@@ -182,29 +182,35 @@
     if (!_editingView) {
         
         UIView *editingView = [[UIView alloc] init];
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.titleLabel.font = [UIFont systemFontOfSize:14];
-        button.backgroundColor = maincolor;
-        [button setTitle:@"删除" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(p_buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [editingView addSubview:button];
-        [button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.right.bottom.equalTo(editingView);
-            make.width.equalTo(editingView).multipliedBy(0.5);
+        editingView.backgroundColor = whitecolor;
+        
+        UIButton *selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        selectBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        selectBtn.backgroundColor = whitecolor;
+        [selectBtn setTitle:@"全选" forState:UIControlStateNormal];
+        [selectBtn setTitleColor:maincolor forState:UIControlStateNormal];
+        [selectBtn addTarget:self action:@selector(p_buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [editingView addSubview:selectBtn];
+        [selectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(editingView);
+            make.top.mas_equalTo(editingView);
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/2, 48));
         }];
         
-        button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.titleLabel.font = [UIFont systemFontOfSize:14];
-        button.backgroundColor = whitecolor;
-        [button setTitle:@"全选" forState:UIControlStateNormal];
-        [button setTitleColor:maincolor forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(p_buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [editingView addSubview:button];
-        [button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.bottom.equalTo(editingView);
-            make.width.equalTo(editingView).multipliedBy(0.5);
+        UIButton *deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        deleteBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        deleteBtn.backgroundColor = maincolor;
+        [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
+        [deleteBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [deleteBtn addTarget:self action:@selector(p_buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [editingView addSubview:deleteBtn];
+        [deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(editingView).offset(-0.064 * SCREEN_WIDTH);
+            //        make.bottom.mas_equalTo(self.view).offset(-BOT_OFFSET);
+            make.centerY.mas_equalTo(selectBtn);
+            make.size.mas_equalTo(CGSizeMake(0.368 * SCREEN_WIDTH, 0.044 * SCREEN_HEIGHT));
         }];
+        deleteBtn.layer.cornerRadius = 0.044 * SCREEN_HEIGHT/2;
         
         UIView *grayline = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
         grayline.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.12];
@@ -261,7 +267,7 @@
 
 - (void)showEitingView:(BOOL)isShow{
     [self.editingView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.view).offset(isShow?0:48);
+        make.bottom.mas_equalTo(self.view).offset(isShow?0:48 + BOT_OFFSET);
     }];
     [UIView animateWithDuration:0.3 animations:^{
         [self.view layoutIfNeeded];

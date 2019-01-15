@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) ImgScrollView *imgScrollView;
 @property (nonatomic, strong) UIImageView *topImage;
 
+@property (nonatomic, strong) NSString *detailPath;
+
 @end
 
 NS_ASSUME_NONNULL_END

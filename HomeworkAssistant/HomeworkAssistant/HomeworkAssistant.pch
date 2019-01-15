@@ -48,11 +48,11 @@
 #import <UMShare/UMShare.h>
 #import <UMCommon/UMCommon.h>
 
-//Wechat appID:wxdd59bf4228be5b2d
-//Wechat appSecret:e21f45c9103b92de4b64cea1fb304ab3
+//Wechat appID:wx0ce44ca288dd81b0
+//Wechat appSecret:0a17977cad5b39828bffab0e8a6b44af
 #import "WXApi.h"
-#define WX_APPID @"wxdd59bf4228be5b2d"
-#define WXAPPKEYSECRET @"e21f45c9103b92de4b64cea1fb304ab3"
+#define WX_APPID @"wx0ce44ca288dd81b0"
+#define WX_APPKEYSECRET @"0a17977cad5b39828bffab0e8a6b44af"
 #define WX_ACCESS_TOKEN @"access_token"
 #define WX_OPEN_ID @"openid"
 #define WX_REFRESH_TOKEN @"refresh_token"

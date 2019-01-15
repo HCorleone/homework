@@ -16,6 +16,10 @@
 @property (nonatomic, strong) NSMutableArray *answerList;
 @property (nonatomic, strong) UIView *navView;
 
+@property (nonatomic, strong) UIImageView *bookCover;
+
+@property (nonatomic, assign) BOOL isSelected;
+
 @end
 
 @implementation DownloadedAnswerViewController
@@ -34,6 +38,7 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden = YES;
     self.view.backgroundColor = whitecolor;
+    self.isSelected = NO;
     
     [self setupNav];
     [self setupView];
@@ -96,6 +101,7 @@
         make.left.mas_equalTo(navView).offset(30);
         make.size.mas_equalTo(CGSizeMake(84, 112));
     }];
+    self.bookCover = bookCover;
     
     //书名
     UILabel *bookTitle = [[UILabel alloc]init];
@@ -227,8 +233,14 @@
 
     DownloadedAnswerDetailViewController *answerDetailVC = [[DownloadedAnswerDetailViewController alloc]init];
     answerDetailVC.answerID = self.bookModel.answerID;
+    answerDetailVC.isSelected = self.isSelected;
+    answerDetailVC.bookImg = self.bookCover.image;
+    answerDetailVC.bookTitle = self.bookModel.title;
     answerDetailVC.idx = [[NSNumber numberWithInteger:indexPath.row + 1] stringValue];
     answerDetailVC.answerCount = [[NSNumber numberWithInteger:self.answerList.count] stringValue];
+    answerDetailVC.reloadBlock = ^(BOOL IsSelected) {
+        self.isSelected = IsSelected;
+    };
     [self.navigationController pushViewController:answerDetailVC animated:YES];
     
 }

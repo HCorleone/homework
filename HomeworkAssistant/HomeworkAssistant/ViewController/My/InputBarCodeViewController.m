@@ -94,11 +94,11 @@
         [self.navigationController pushViewController:feedBackVC animated:YES];
     }
     else {
-//        FillBookInfoViewController *fillInfoVC = [[FillBookInfoViewController alloc] init];
-//        fillInfoVC.uploadCode = self.inputField.text;
-//        [self.navigationController pushViewController:fillInfoVC animated:YES];
-        UploadAnswerViewController *testVC = [[UploadAnswerViewController alloc] init];
-        [self.navigationController pushViewController:testVC animated:YES];
+        FillBookInfoViewController *fillInfoVC = [[FillBookInfoViewController alloc] init];
+        fillInfoVC.uploadCode = self.inputField.text;
+        [self.navigationController pushViewController:fillInfoVC animated:YES];
+//        UploadAnswerViewController *testVC = [[UploadAnswerViewController alloc] init];
+//        [self.navigationController pushViewController:testVC animated:YES];
     }
 }
 

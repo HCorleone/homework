@@ -20,20 +20,18 @@
 #import "SHPlacePickerView.h"
 #import "BookListViewController.h"
 #import "MyDownloadViewController.h"
+#import "EditInfoView.h"
 
 @interface MyViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UIView *loginView;
 @property (nonatomic, strong) UITableView *menuView;
 @property (nonatomic, strong) UIView *sloginView;
-/** 视图 */
-@property (nonatomic, strong) EditorNameView *editor;
-/** 下拉菜单 */
-@property (nonatomic, strong) NIDropDown *dropDown;
-/** 年级 */
+
+@property (nonatomic, strong) EditInfoView *editView;
+
 @property (nonatomic, strong) UILabel *gradeLabel;
-/** 地区选择器 */
-@property (nonatomic, strong) SHPlacePickerView *shplacePicker;
+@property (nonatomic, strong) UILabel *cityLabel;
 
 @end
 
@@ -41,16 +39,20 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
+    if (!self.editView.isShow) {
+        [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
+    }
+    self.gradeLabel.text = [TTUserManager sharedInstance].currentUser.grade;
+    self.cityLabel.text = [TTUserManager sharedInstance].currentUser.city;
+    
+    self.navigationController.navigationBar.hidden = YES;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.hidden = YES;
-    
+
     [self setupLoginView];
     [self setupMenu];
-    
     
     if ([TTUserManager sharedInstance].isLogin) {
         [self setupSLoginView];
@@ -221,6 +223,19 @@
 //        make.top.mas_equalTo(gradeLabel.mas_bottom).with.offset(0.01 * SCREEN_WIDTH);
 //    }];
     
+    //城市
+    UILabel *cityLabel = [[UILabel alloc]init];
+    [sloginView addSubview:cityLabel];
+    cityLabel.text = [TTUserManager sharedInstance].currentUser.city;
+//    schoolName.text = @"北京市第二实验小学";
+    cityLabel.textColor =  [UIColor colorWithRed:143/255.0 green:147/255.0 blue:148/255.0 alpha:1/1.0];
+    cityLabel.font = [UIFont systemFontOfSize:10];
+    [cityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(userName);
+        make.top.mas_equalTo(gradeLabel.mas_bottom).with.offset(0.01 * SCREEN_WIDTH);
+    }];
+    self.cityLabel = cityLabel;
+    
     //编辑个人信息
     UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [editorBtn setImage:[UIImage imageNamed:@"修改信息"] forState:UIControlStateNormal];
@@ -231,198 +246,28 @@
         make.centerY.mas_equalTo(userName);
         make.size.mas_equalTo(CGSizeMake(24, 24));
     }];
-    
-//    //注销
-//    UIButton *logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [self.view addSubview:logoutBtn];
-//    [logoutBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.mas_equalTo(self.view).offset(-20);
-//        make.bottom.mas_equalTo(self.view).offset(-60 - BOT_OFFSET);
-//    }];
-//    logoutBtn.backgroundColor = [UIColor clearColor];
-//    [logoutBtn setTitleColor:[UIColor colorWithHexString:@"#8F9394"] forState:UIControlStateNormal];
-//    [logoutBtn setTitle:@"注销" forState:UIControlStateNormal];
-//    [logoutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
-//    self.logoutBtn = logoutBtn;
 
 }
 
-- (NSInteger)getBonusPointToLevelUp:(NSInteger)level {
-    switch (level) {
-        case 0:
-            return 5;
-            break;
-        case 1:
-            return 10;
-            break;
-        case 2:
-            return 15;
-            break;
-        case 3:
-            return 25;
-            break;
-        case 4:
-            return 40;
-            break;
-        case 5:
-            return 65;
-            break;
-        case 6:
-            return 100;
-            break;
-        case 7:
-            return 150;
-            break;
-        case 8:
-            return 200;
-            break;
-        case 9:
-            return 300;
-            break;
-        case 10:
-            return 300;
-            break;
-        default:
-            break;
-    }
-    return 300;
-}
-
-//编辑界面
--(void)getEditorView {
-    
-    _editor = [[EditorNameView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    _editor.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
-    __weak typeof(self) weakSelf = self;
-    _editor.clickBlock = ^(UIButton * _Nonnull btn) {
-        switch (btn.tag) {
-            case 1001:
-            {
-                NSLog(@"选择年级");
-               NSArray *arr = [NSArray arrayWithObjects:@"学前", @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级", @"七年级", @"八年级", @"九年级", @"高一", @"高二", @"高三", nil];
-                if(weakSelf.dropDown == nil) {
-                    CGFloat f = 300;
-                    weakSelf.dropDown = [[NIDropDown alloc]showDropDown:weakSelf.editor.downBtn theHeight:&f theArr:arr theImgArr:nil theDirection:@"down" withViewController:weakSelf];
-                    [weakSelf.dropDown setCellHeigth:30];
-                    [weakSelf.dropDown setDropDownSelectionColor:[UIColor whiteColor]];
-                    [weakSelf.dropDown setDropDownItemBackgroundColor:[UIColor colorWithRed:244/255.0 green:244/255.0 blue:244/255.0 alpha:1/1.0]];
-                    weakSelf.dropDown.delegate = weakSelf;
-                }
-                else {
-                    [weakSelf.dropDown hideDropDown:weakSelf.editor.downBtn];
-                }
-            }
-                break;
-                
-            case 1002:
-            {
-                NSLog(@"地区");
-                [weakSelf selectCity];
-            }
-                break;
-                
-            case 1003:
-            {
-                NSLog(@"确认");
-                
-                if (![weakSelf.editor.downBtn.titleLabel.text isEqualToString:@"请选择年级"]) {
-                    [weakSelf getManager];
-                    
-                    weakSelf.gradeLabel.text = weakSelf.editor.downBtn.titleLabel.text;
-                }
-                else
-                {
-                    [XWHUDManager showTipHUDInView:@"请选择年级和地区"];
-                }
-                
-            }
-                break;
-            case 1004:
-                
-            {
-                NSLog(@"取消");
-                weakSelf.editor.hidden = YES;
-                [weakSelf.editor removeFromSuperview];
-                weakSelf.shplacePicker.hidden = YES;
-                [weakSelf.shplacePicker removeFromSuperview];
-                [[weakSelf rdv_tabBarController] setTabBarHidden:NO animated:NO];
-            }
-                break;
-                
-        }
+- (void)clickEditor {
+    EditInfoView *editView = [[EditInfoView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    editView.isShow = YES;
+    editView.currentVC = self;
+    editView.reloadInfo = ^(NSDictionary * _Nonnull dict) {
+        self.gradeLabel.text = dict[@"grade"];
+        self.cityLabel.text = dict[@"city"];
     };
-    [self.view addSubview:_editor];
-    
-}
-
-//选择城市
--(void)selectCity {
-    
-    __weak __typeof(self)weakSelf = self;
-    self.shplacePicker = [[SHPlacePickerView alloc] initWithIsRecordLocation:YES SendPlaceArray:^(NSArray *placeArray) {
-        
-        NSLog(@"省:%@ 市:%@ 区:%@",placeArray[0],placeArray[1],placeArray[2]);
-        [weakSelf.editor.cityBtn setTitle:[NSString stringWithFormat:@"%@", placeArray[1]] forState:UIControlStateNormal];
-        
-    }];
-    self.shplacePicker.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.shplacePicker];
-}
-
--(void)clickEditor {
-    
-    NSLog(@"编辑个人信息");
+    [self.view addSubview:editView];
+    [self.view bringSubviewToFront:editView];
     [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
-    [self getEditorView];
-    
+    self.editView = editView;
 }
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    //隐藏
-    [self.dropDown hideDropDown:self.editor.downBtn];
-
-}
-
-
-
-
 
 - (void)login:(id)sender {
     LoginViewController *loginVC = [[LoginViewController alloc]init];
     [self.navigationController pushViewController:loginVC animated:YES];
 }
 
-#pragma mark - 请求接口
--(void)getManager {
-    
-    NSDictionary *dic = @{
-                          @"openID":userValue(@"openId"),
-                          @"grade":self.editor.downBtn.titleLabel.text,
-                          @"city":self.editor.cityBtn.titleLabel.text
-                          };
-    dic = [HMACSHA1 encryptDicForRequest:dic];
-    
-//    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
-//    //设置请求方式
-//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-//    //接收数据是json形式给出
-//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
-    __weak typeof(self) weakSelf = self;
-    [manager GET:[URLBuilder getURLForUpsertUserExt] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"------------------------------%@------------------------------", responseObject);
-        if ([responseObject[@"code"] intValue] == 200) {
-            
-            weakSelf.editor.hidden = YES;
-            [weakSelf.editor removeFromSuperview];
-            [[weakSelf rdv_tabBarController] setTabBarHidden:NO animated:NO];
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
-        
-    }];
-}
 
 #pragma mark - 菜单列表
 - (void)setupMenu {
@@ -563,10 +408,10 @@
         UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
         
         //创建网页内容对象
-        UIImage *logoImg = [UIImage imageNamed:@"logo"];
-        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"作业答案助手" descr:@"作业答案助手 k12学校作业辅导答案大全 海量作业答案任你搜索 一键同步书单" thumImage:logoImg];
+        UIImage *logoImg = [UIImage imageNamed:@"头像logov2"];
+        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"作业答案下载器" descr:@"作业答案下载器是一款写作业必备神器，一键缓存方便查看答案，一键扫码搜索查询书籍答案，亦可将缓存答案同步分享给好友，让家长更好地辅导孩子，引导孩子走上学霸之路！" thumImage:logoImg];
         //设置网页地址
-        shareObject.webpageUrl = @"http://abc.tatatimes.com/palmhomework.html";
+        shareObject.webpageUrl = @"http://abc.tatatimes.com/downloadhomework.html";
         
         //分享消息对象设置分享内容对象
         messageObject.shareObject = shareObject;
@@ -604,18 +449,5 @@
     return [templateGX stringByReplacingOccurrencesOfString:@"APP_ID" withString:appId];
     
 }
-
-#pragma mark - NIDropDownDelegate 代理
-- (void) niDropDownDelegateMethod:(UIView *)sender withTitle:(NSString *)title {
-
-    NSLog(@"%@", self.editor.downBtn.titleLabel.text);
-    [self.editor.downBtn setTitle:title forState:UIControlStateNormal];
-    
-}
-
-- (void)niDropDownHidden{
-    _dropDown = nil;
-}
-
 
 @end

@@ -7,12 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import "AnswerViewController.h"
 #import "MainViewController.h"
 #import "MyViewController.h"
 #import "RDVTabBarController.h"
 #import "RDVTabBarItem.h"
 #import "LoginViewController.h"
 #import "QRScanViewController.h"
+#import "Book.h"
 
 @interface AppDelegate ()<RDVTabBarDelegate>
 
@@ -26,6 +28,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     //判断是否为第一次安装
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"firstInstalled"] == nil) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstInstalled"];
@@ -98,22 +101,50 @@
     [self.window makeKeyAndVisible];
     
     //umeng初始化
-    [UMConfigure initWithAppkey:@"5bed3ff1b465f50e1200008e" channel:@"App Store"];
+    [UMConfigure initWithAppkey:@"5c3c008bb465f53b1b000387" channel:@"App Store"];
     // U-Share 平台设置
     [self configUSharePlatforms];
     
     //向微信注册
-    [WXApi registerApp:@"wxdd59bf4228be5b2d"];
-    
+    [WXApi registerApp:WX_APPID];
     
     return YES;
 }
 
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    //分享书籍返回的url样式：tataera.downloadhomework://book/（answerID），并跳转到相应的答案详情页
     
-    return [WXApi handleOpenURL:url delegate:self.loginVC];
+//    NSLog(@"%@",[[url absoluteString] substringFromIndex:30]);
     
+    NSString *checkURL = [url absoluteString];
+    if (checkURL.length > 7) {
+        checkURL = [checkURL substringToIndex:7];
+        if ([checkURL isEqualToString:@"tataera"]) {
+            if ([url absoluteString].length >= 32) {
+                MainViewController *mainVC = (MainViewController *)self.firstNC.viewControllers[0];
+                MyViewController *myVC = (MyViewController *)self.thirdNC.viewControllers[0];
+                
+                [mainVC.navigationController popToRootViewControllerAnimated:YES];
+                [myVC.navigationController popToRootViewControllerAnimated:NO];
+                
+                AnswerViewController *answerVC = [[AnswerViewController alloc]init];
+                Book *model = [Book new];
+                model.answerID = [[url absoluteString] substringFromIndex:32];
+                answerVC.bookModel = model;
+                //        [mainVC.navigationController popToRootViewControllerAnimated:NO];
+                [mainVC.navigationController pushViewController:answerVC animated:YES];
+                
+                [self.viewController setSelectedIndex:0];
+                return NO;
+            }
+        }
+        else {
+            return [WXApi handleOpenURL:url delegate:self.loginVC];
+        }
+    }
+    
+    return NO;
 }
 
 - (void)test:(NSNotification *)note {
@@ -124,7 +155,7 @@
 
 - (void)configUSharePlatforms {
     /* 设置微信的appKey和appSecret */
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxdd59bf4228be5b2d" appSecret:@"e21f45c9103b92de4b64cea1fb304ab3" redirectURL:@"http://abc.tatatimes.com/palmhomework.html"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:WX_APPID appSecret:WX_APPKEYSECRET redirectURL:@"http://abc.tatatimes.com/downloadhomework.html"];
     /*
      * 移除相应平台的分享，如微信收藏
      */
@@ -133,7 +164,7 @@
     /* 设置分享到QQ互联的appID
      * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
      */
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1105821097"/*设置QQ平台的appID*/  appSecret:nil redirectURL:@"http://abc.tatatimes.com/palmhomework.html"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1108038381"/*设置QQ平台的appID*/  appSecret:nil redirectURL:@"http://abc.tatatimes.com/palmhomework.html"];
     
 }
 

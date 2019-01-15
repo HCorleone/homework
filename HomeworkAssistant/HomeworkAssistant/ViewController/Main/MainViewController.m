@@ -167,6 +167,7 @@
         }
         if (self.recommendListView) {
             [self.recommendListView reloadDataWithList:self.recommendListViewData];
+            self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, self.recommendView.frame.origin.y + self.recommendListView.frame.origin.y + self.recommendListView.frame.size.height);
         }
         else {
             [self setupViewWithData:self.recommendListViewData];
@@ -184,9 +185,8 @@
     rTableView.currentVC = self;
     rTableView.allowsSelection = YES;
     self.recommendListView = rTableView;
-//    self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, 456 + rTableView.frame.size.height);
+    self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, self.recommendView.frame.origin.y + rTableView.frame.origin.y + rTableView.frame.size.height);
     
-    self.mainView.contentSize = CGSizeMake(SCREEN_WIDTH, 1.505 * SCREEN_WIDTH + 30 * 128);
 }
 
 

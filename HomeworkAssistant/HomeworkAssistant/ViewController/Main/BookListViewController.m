@@ -139,10 +139,18 @@
     [manager GET:[URLBuilder getURLForMyCollections] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"------------------------------%@------------------------------", responseObject);
         
-        self.imgArray = [responseObject[@"datas"] valueForKey:@"coverURL"];
-        self.idArray = [responseObject[@"datas"] valueForKey:@"id"];
-        
-        [self getCollectionView];
+        if ([responseObject[@"code"] integerValue] == 200) {
+            if (responseObject[@"datas"] == [NSNull null]) {
+                [XWHUDManager showTipHUD:@"无收藏书籍"];
+                [self dismissViewControllerAnimated:NO completion:nil];
+            }
+            else {
+                self.imgArray = [responseObject[@"datas"] valueForKey:@"coverURL"];
+                self.idArray = [responseObject[@"datas"] valueForKey:@"id"];
+                
+                [self getCollectionView];
+            }
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);

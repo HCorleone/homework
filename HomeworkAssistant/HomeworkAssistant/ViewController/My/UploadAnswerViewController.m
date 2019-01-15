@@ -16,7 +16,7 @@
 @property (nonatomic, strong) HXCollectionView *collectionView;
 @property (nonatomic, strong) HXPhotoModel *addModel;
 @property (nonatomic, strong) NSMutableArray *answerImgModelArr;
-//@property (nonatomic, strong) NSMutableArray *answerImgArr;
+@property (nonatomic, strong) NSMutableArray *answerImgArr;
 
 @property (nonatomic, strong) UIButton *addCoverBtn;
 @property (nonatomic, strong) UIImageView *bookCover;
@@ -114,7 +114,7 @@
     
     //添加答案的collectionView
     self.answerImgModelArr = [NSMutableArray array];
-//    self.answerImgArr = [NSMutableArray array];
+    self.answerImgArr = [NSMutableArray array];
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.itemSize = CGSizeMake(0.224 * SCREEN_WIDTH, 0.224 * SCREEN_WIDTH * 1.33);
@@ -176,72 +176,73 @@
 
 - (void)uploadAnswerPics {
     
-    HXPhotoModel *tempModel = self.answerImgModelArr[0];
+    UIImage *bookCover = self.bookCover.image;
     
-    self.bookCover.image = tempModel.previewPhoto;
-    
-//    UIImage *bookCover = self.bookCover.image;
-    
-//    NSOperationQueue *testQueue = [[NSOperationQueue alloc] init];
-//    testQueue.maxConcurrentOperationCount = 3;
+    NSOperationQueue *testQueue = [[NSOperationQueue alloc] init];
+    testQueue.maxConcurrentOperationCount = 3;
 
-//    NSDictionary *dict = @{
-//                           @"id":self.answerID,
-////                           @"fileList":self.bookCover.image
-//                           };
-//
-//    dict = [HMACSHA1 encryptDicForRequest:dict];
-//
-//    NSString *testStr = [CommonToolClass getURLFromDic:dict];
-//    NSString *resURL = [[[URLBuilder getURLForUploadAnswerPic] stringByAppendingString:@"&"] stringByAppendingString:testStr];
-//    NSLog(@"%@",resURL);
-//    resURL = [resURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-//
-//    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
-//    [manager.requestSerializer setValue:@"multipart/form-data; boundary=----WebKitFormBoundary6TAB8KxvuJTZYfUn" forHTTPHeaderField:@"Content-Type"];
-//    NSURLSessionDataTask *dataTask = [manager POST:resURL parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-//
-//        for (int i = 0; i < self.answerImgModelArr.count + 1; i++) {
+    NSDictionary *dict = @{
+                           @"id":self.answerID,
+//                           @"fileList":self.bookCover.image
+                           };
+
+    dict = [HMACSHA1 encryptDicForRequest:dict];
+
+    NSString *testStr = [CommonToolClass getURLFromDic:dict];
+    NSString *resURL = [[[URLBuilder getURLForUploadAnswerPic] stringByAppendingString:@"&"] stringByAppendingString:testStr];
+    NSLog(@"%@",resURL);
+    resURL = [resURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+
+    AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
+    [manager.requestSerializer setValue:@"multipart/form-data; boundary=----WebKitFormBoundary6TAB8KxvuJTZYfUn" forHTTPHeaderField:@"Content-Type"];
+    NSURLSessionDataTask *dataTask = [manager POST:resURL parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.defaultMotionEffectsEnabled = NO;
+        hud.removeFromSuperViewOnHide = YES;
+        hud.backgroundView.color = [UIColor clearColor];
+        hud.backgroundView.style = MBProgressHUDBackgroundStyleSolidColor;
+        hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+        // 注释下面配置代码默认显示浅灰->
+        hud.bezelView.color = [UIColor blackColor];
+        hud.label.textColor = [UIColor whiteColor];
+        hud.contentColor = [UIColor whiteColor];
+        
+        for (int i = 0; i < self.answerImgModelArr.count + 1; i++) {
 //            NSBlockOperation *testBlockOperation1 = [NSBlockOperation blockOperationWithBlock:^{
-//            NSData *imgData = [[NSData alloc] init];
-//
-//            if (i == 0) {
-////                imgData = [self imageData:bookCover];
-//                imgData = UIImagePNGRepresentation(self.bookCover.image);
-//            }
-//            else {
-//                if ([self.answerImgModelArr[i - 1] isKindOfClass:[HXPhotoModel class]]) {
-//                    HXPhotoModel *tempModel = self.answerImgModelArr[i - 1];
-//                    if (tempModel.thumbPhoto == nil) {
-//                        return ;
-//                    }
-//                    imgData = UIImagePNGRepresentation(tempModel.thumbPhoto);
-//                    tempModel = nil;
-//                }
-//            }
-//
-//            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//            [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
-//            NSString *str = [dateFormatter stringFromDate:[NSDate date]];
-//            NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
-//
-//            [formData appendPartWithFileData:imgData name:@"fileList" fileName:fileName mimeType:@"image/png"];
-//                imgData = nil;
+                NSData *imgData = [[NSData alloc] init];
+
+            if (i == 0) {
+                imgData = UIImageJPEGRepresentation(bookCover, 0.5);
+            }
+            else {
+                imgData = UIImagePNGRepresentation(self.answerImgArr[i + self.answerImgModelArr.count - 1]);
+//                imgData = UIImageJPEGRepresentation(self.answerImgArr[i - 1]);
+            }
+
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+            NSString *str = [dateFormatter stringFromDate:[NSDate date]];
+            NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+
+                [formData appendPartWithFileData:imgData name:@"fileList" fileName:fileName mimeType:@"image/png"];
+                imgData = nil;
 //            }];
 //
 //            [testQueue addOperation:testBlockOperation1];
-//        }
-//
-//    } progress:^(NSProgress * _Nonnull uploadProgress) {
-//
-//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        //        NSLog(@"test+++++%@",responseObject);
-//        [XWHUDManager showSuccessTipHUDInView:@"感谢您的反馈"];
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        //        NSLog(@"test-----%@",error);
-//        [XWHUDManager showWarningTipHUDInView:@"反馈失败"];
-//    }];
-//    [dataTask resume];
+        }
+
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [XWHUDManager showSuccessTipHUDInView:@"上传成功"];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [XWHUDManager showWarningTipHUDInView:@"上传失败，请稍后再试"];
+    }];
+    [dataTask resume];
 
 }
 
@@ -300,6 +301,7 @@
     if (indexPath.item == self.answerImgModelArr.count) {
         [self goPhotoViewController];
     }
+//    NSLog(@"%@",self.answerImgArr);
 }
 
 //选取答案页照片
@@ -313,33 +315,17 @@
         [self.answerImgModelArr addObjectsFromArray:photoList];
         [self.collectionView reloadData];
         
-        HXPhotoModel *tempModel = (HXPhotoModel *)photoList[0];
-        [HXPhotoTools getImageWithModel:tempModel completion:^(UIImage *image, HXPhotoModel *model) {
-            self.bookCover.hidden = NO;
-            self.bookCover.image = image;
-        }];
-
+        for (int i = 0; i < photoList.count; i++) {
+            HXPhotoModel *tempModel = (HXPhotoModel *)photoList[i];
+            tempModel.requestSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
+            [HXPhotoTools getImageWithModel:tempModel completion:^(UIImage *image, HXPhotoModel *model) {
+                [self.answerImgArr addObject:image];
+            }];
+        }
         
     } cancel:nil];
     
-//    HXAlbumListViewController *selectImgVC = [[HXAlbumListViewController alloc] init];
-//    selectImgVC.delegate = self;
-//    selectImgVC.manager = self.manager;
-//    HXCustomNavigationController *nav = [[HXCustomNavigationController alloc] initWithRootViewController:selectImgVC];
-//
-//    [self presentViewController:nav animated:YES completion:nil];
-    
 }
-
-////选着照片之后的回调
-//- (void)albumListViewController:(HXAlbumListViewController *)albumListViewController didDoneAllImage:(NSArray<UIImage *> *)imageList {
-//    [self.answerImgArr addObjectsFromArray:imageList];
-//}
-//
-//- (void)albumListViewController:(HXAlbumListViewController *)albumListViewController didDoneAllList:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photoList videos:(NSArray<HXPhotoModel *> *)videoList original:(BOOL)original {
-//    [self.answerImgModelArr addObjectsFromArray:photoList];
-//    [self.collectionView reloadData];
-//}
 
 /**
  cell删除按钮的代理
@@ -361,8 +347,16 @@
         myCell.imageView.image = nil;
         [mirrorView removeFromSuperview];
     }];
+    
+    if (self.answerImgModelArr.count == 1) {
+        [self.answerImgArr removeObjectAtIndex:indexPath.item];
+        [self.answerImgArr removeObjectAtIndex:indexPath.item];
+    }
+    else{
+        [self.answerImgArr removeObjectAtIndex:indexPath.item + self.answerImgModelArr.count];
+        [self.answerImgArr removeObjectAtIndex:indexPath.item];
+    }
     [self.answerImgModelArr removeObjectAtIndex:indexPath.item];
-//    [self.answerImgArr removeObjectAtIndex:indexPath.item];
     [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
     [self.collectionView reloadData];
     

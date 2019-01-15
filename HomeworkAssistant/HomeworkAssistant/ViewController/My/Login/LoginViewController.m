@@ -260,7 +260,7 @@
             NSString *URL = @"https://api.weixin.qq.com/sns/oauth2/access_token?";
             NSDictionary *dict = @{
                                    @"appid":WX_APPID,
-                                   @"secret":WXAPPKEYSECRET,
+                                   @"secret":WX_APPKEYSECRET,
                                    @"code":temp.code,
                                    @"grant_type":@"authorization_code"
                                    };

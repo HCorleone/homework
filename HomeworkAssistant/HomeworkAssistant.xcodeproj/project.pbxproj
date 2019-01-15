@@ -198,6 +198,13 @@
 		3DC8CC7F21E4CE5900FEE10E /* 分组_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC7C21E4CE5900FEE10E /* 分组_3@2x.png */; };
 		3DC8CC8221E5A54000FEE10E /* FillBookInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC8121E5A54000FEE10E /* FillBookInfoViewController.m */; };
 		3DC8CC8521E5A99A00FEE10E /* UploadAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC8421E5A99A00FEE10E /* UploadAnswerViewController.m */; };
+		3DC8CC8921EC675400FEE10E /* EditInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC8821EC675400FEE10E /* EditInfoView.m */; };
+		3DC8CC9B21EC7C9600FEE10E /* area.db in Resources */ = {isa = PBXBuildFile; fileRef = 3DC8CC8B21EC7C9600FEE10E /* area.db */; };
+		3DC8CC9C21EC7C9600FEE10E /* AreaSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC8E21EC7C9600FEE10E /* AreaSelectViewController.m */; };
+		3DC8CC9D21EC7C9600FEE10E /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC9121EC7C9600FEE10E /* AreaModel.m */; };
+		3DC8CC9E21EC7C9600FEE10E /* AreaSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC9421EC7C9600FEE10E /* AreaSelectView.m */; };
+		3DC8CC9F21EC7C9600FEE10E /* SQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC9821EC7C9600FEE10E /* SQLiteManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3DC8CCA021EC7C9600FEE10E /* DBUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC8CC9A21EC7C9600FEE10E /* DBUtil.m */; };
 		3DF0B96621BFDC4D00AF682A /* 添加书籍.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B95821BFDC4C00AF682A /* 添加书籍.png */; };
 		3DF0B96721BFDC4D00AF682A /* 添加书籍@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B95921BFDC4C00AF682A /* 添加书籍@2x.png */; };
 		3DF0B99221BFE05E00AF682A /* 学习-选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF0B98621BFE05C00AF682A /* 学习-选中@3x.png */; };
@@ -514,6 +521,19 @@
 		3DC8CC8121E5A54000FEE10E /* FillBookInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FillBookInfoViewController.m; sourceTree = "<group>"; };
 		3DC8CC8321E5A99A00FEE10E /* UploadAnswerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadAnswerViewController.h; sourceTree = "<group>"; };
 		3DC8CC8421E5A99A00FEE10E /* UploadAnswerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadAnswerViewController.m; sourceTree = "<group>"; };
+		3DC8CC8721EC675400FEE10E /* EditInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditInfoView.h; sourceTree = "<group>"; };
+		3DC8CC8821EC675400FEE10E /* EditInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditInfoView.m; sourceTree = "<group>"; };
+		3DC8CC8B21EC7C9600FEE10E /* area.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = area.db; sourceTree = "<group>"; };
+		3DC8CC8D21EC7C9600FEE10E /* AreaSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaSelectViewController.h; sourceTree = "<group>"; };
+		3DC8CC8E21EC7C9600FEE10E /* AreaSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaSelectViewController.m; sourceTree = "<group>"; };
+		3DC8CC9021EC7C9600FEE10E /* AreaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaModel.h; sourceTree = "<group>"; };
+		3DC8CC9121EC7C9600FEE10E /* AreaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaModel.m; sourceTree = "<group>"; };
+		3DC8CC9321EC7C9600FEE10E /* AreaSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaSelectView.h; sourceTree = "<group>"; };
+		3DC8CC9421EC7C9600FEE10E /* AreaSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaSelectView.m; sourceTree = "<group>"; };
+		3DC8CC9721EC7C9600FEE10E /* SQLiteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteManager.h; sourceTree = "<group>"; };
+		3DC8CC9821EC7C9600FEE10E /* SQLiteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteManager.m; sourceTree = "<group>"; };
+		3DC8CC9921EC7C9600FEE10E /* DBUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBUtil.h; sourceTree = "<group>"; };
+		3DC8CC9A21EC7C9600FEE10E /* DBUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBUtil.m; sourceTree = "<group>"; };
 		3DF0B95821BFDC4C00AF682A /* 添加书籍.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加书籍.png"; sourceTree = "<group>"; };
 		3DF0B95921BFDC4C00AF682A /* 添加书籍@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加书籍@2x.png"; sourceTree = "<group>"; };
 		3DF0B98621BFE05C00AF682A /* 学习-选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "学习-选中@3x.png"; sourceTree = "<group>"; };
@@ -620,6 +640,7 @@
 		3D47258B21BA58F800C0E7CF /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				3DC8CC8A21EC7C9600FEE10E /* AreaSelect */,
 				3DC8CC3021DE18C800FEE10E /* HHDropDownList */,
 				3D47259221BA59B000C0E7CF /* YZPullDownMenu */,
 			);
@@ -1134,6 +1155,64 @@
 			path = "即将被废弃的";
 			sourceTree = "<group>";
 		};
+		3DC8CC8A21EC7C9600FEE10E /* AreaSelect */ = {
+			isa = PBXGroup;
+			children = (
+				3DC8CC8B21EC7C9600FEE10E /* area.db */,
+				3DC8CC8C21EC7C9600FEE10E /* Controller */,
+				3DC8CC8F21EC7C9600FEE10E /* Model */,
+				3DC8CC9221EC7C9600FEE10E /* View */,
+				3DC8CC9521EC7C9600FEE10E /* Tool */,
+			);
+			path = AreaSelect;
+			sourceTree = "<group>";
+		};
+		3DC8CC8C21EC7C9600FEE10E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3DC8CC8D21EC7C9600FEE10E /* AreaSelectViewController.h */,
+				3DC8CC8E21EC7C9600FEE10E /* AreaSelectViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3DC8CC8F21EC7C9600FEE10E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3DC8CC9021EC7C9600FEE10E /* AreaModel.h */,
+				3DC8CC9121EC7C9600FEE10E /* AreaModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3DC8CC9221EC7C9600FEE10E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3DC8CC9321EC7C9600FEE10E /* AreaSelectView.h */,
+				3DC8CC9421EC7C9600FEE10E /* AreaSelectView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3DC8CC9521EC7C9600FEE10E /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				3DC8CC9621EC7C9600FEE10E /* SQLiteManager */,
+				3DC8CC9921EC7C9600FEE10E /* DBUtil.h */,
+				3DC8CC9A21EC7C9600FEE10E /* DBUtil.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		3DC8CC9621EC7C9600FEE10E /* SQLiteManager */ = {
+			isa = PBXGroup;
+			children = (
+				3DC8CC9721EC7C9600FEE10E /* SQLiteManager.h */,
+				3DC8CC9821EC7C9600FEE10E /* SQLiteManager.m */,
+			);
+			path = SQLiteManager;
+			sourceTree = "<group>";
+		};
 		71F5933A8C7F218E60BA7735 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1148,10 +1227,6 @@
 			children = (
 				3D47257521BA20C300C0E7CF /* QRCodeView.h */,
 				3D47257421BA20C300C0E7CF /* QRCodeView.m */,
-				9FD90A3021BA49C000EDF389 /* EditorNameView.h */,
-				9FD90A3121BA49C000EDF389 /* EditorNameView.m */,
-				9FD3795B21BFC90B005581BC /* BookListView.h */,
-				9FD3795C21BFC90B005581BC /* BookListView.m */,
 				3D4725AF21BA78CA00C0E7CF /* SearchMenuHeaderView.h */,
 				3D4725B021BA78CA00C0E7CF /* SearchMenuHeaderView.m */,
 				3DC8CC2821DCA3B600FEE10E /* AgreementView.h */,
@@ -1160,6 +1235,12 @@
 				3D9EAF0821A39968006AF423 /* BookView.m */,
 				3D7D18F921B0CEE4006B9C8F /* MyCollectionsView.h */,
 				3D7D18FA21B0CEE4006B9C8F /* MyCollectionsView.m */,
+				3DC8CC8721EC675400FEE10E /* EditInfoView.h */,
+				3DC8CC8821EC675400FEE10E /* EditInfoView.m */,
+				9FD90A3021BA49C000EDF389 /* EditorNameView.h */,
+				9FD90A3121BA49C000EDF389 /* EditorNameView.m */,
+				9FD3795B21BFC90B005581BC /* BookListView.h */,
+				9FD3795C21BFC90B005581BC /* BookListView.m */,
 				9F4D103C21B7D05E00F4610A /* My */,
 			);
 			path = View;
@@ -1413,6 +1494,7 @@
 				3D9EA941219A9DBF006AF423 /* 我的-未激活@2x.png in Resources */,
 				3DF0B99821BFE05E00AF682A /* 学习-选中@2x.png in Resources */,
 				3D958B9D21C8994E00AF7F3F /* 中文作文v2@3x.png in Resources */,
+				3DC8CC9B21EC7C9600FEE10E /* area.db in Resources */,
 				3D958B9F21C8994E00AF7F3F /* 中文作文v2@2x.png in Resources */,
 				3DBE438421CB7FE600CE677F /* 给个好评v2@2x.png in Resources */,
 				9FAB956D21C49A9C00859BBB /* 下拉icon@2x.png in Resources */,
@@ -1572,6 +1654,7 @@
 				3DA91F3821CC9D4A005262D4 /* EnglishViewController.m in Sources */,
 				3D7D18ED21AE42E0006B9C8F /* TTUserModel.m in Sources */,
 				3D9EA90D219916F6006AF423 /* Book.m in Sources */,
+				3DC8CC9F21EC7C9600FEE10E /* SQLiteManager.m in Sources */,
 				3D9EA8FD2195A788006AF423 /* main.m in Sources */,
 				3DA91F7821D07BB1005262D4 /* WordsNumViewController.m in Sources */,
 				9F7690FB21C4D6B400A4AA5D /* UIImage+Extension.m in Sources */,
@@ -1587,6 +1670,7 @@
 				3D47259021BA591C00C0E7CF /* YZPullDownMenu.m in Sources */,
 				9F629B7721BE425B002A79AC /* PlaceModel.m in Sources */,
 				3D1C2BDE21A5430400725BD4 /* NSString+MD5.m in Sources */,
+				3DC8CC8921EC675400FEE10E /* EditInfoView.m in Sources */,
 				9FD3795A21BFC63B005581BC /* BookListViewController.m in Sources */,
 				3D7C713221A659DD008F9D52 /* SearchViewController.m in Sources */,
 				9F4D104321B7E5FC00F4610A /* FillBookInformationViewController.m in Sources */,
@@ -1619,6 +1703,8 @@
 				3D7D18F021AE69E6006B9C8F /* TTUserManager.m in Sources */,
 				3DC8CC3321DE18F200FEE10E /* HHDropDownList.m in Sources */,
 				3D97C68221BE96D900D9404E /* GetCurrentDevice.m in Sources */,
+				3DC8CC9E21EC7C9600FEE10E /* AreaSelectView.m in Sources */,
+				3DC8CC9C21EC7C9600FEE10E /* AreaSelectViewController.m in Sources */,
 				3D9EAF1B21A53010006AF423 /* AnswerDetail.m in Sources */,
 				3DC8CC2721D61E5200FEE10E /* DBManager.m in Sources */,
 				9FD90A3221BA49C000EDF389 /* EditorNameView.m in Sources */,
@@ -1628,6 +1714,7 @@
 				3D47257621BA20C300C0E7CF /* QRCodeView.m in Sources */,
 				3D7D18FB21B0CEE4006B9C8F /* MyCollectionsView.m in Sources */,
 				3DA91F6021CF2925005262D4 /* ArticleCell.m in Sources */,
+				3DC8CC9D21EC7C9600FEE10E /* AreaModel.m in Sources */,
 				3D9EA95E219D6024006AF423 /* LoginTextField.m in Sources */,
 				3D4725A521BA5F3F00C0E7CF /* SubjectViewController.m in Sources */,
 				3D9EA94C219BBA19006AF423 /* UITextView+UITextView_Placeholder.m in Sources */,
@@ -1647,6 +1734,7 @@
 				9F4D10A121B8037900F4610A /* UILabel+Category.m in Sources */,
 				9F4D103321B7C67A00F4610A /* SingUpView.m in Sources */,
 				3D7D18D921AB9BD0006B9C8F /* SearchResultViewController.m in Sources */,
+				3DC8CCA021EC7C9600FEE10E /* DBUtil.m in Sources */,
 				9F629B7921BE425B002A79AC /* SHPlacePickerView.m in Sources */,
 				9F4D10A221B8037900F4610A /* UITextField+Category.m in Sources */,
 				9F4D10A021B8037900F4610A /* UIImageView+Category.m in Sources */,
@@ -1809,10 +1897,10 @@
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/umeng",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/weixin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = enjoytime.palmhomework;
+				PRODUCT_BUNDLE_IDENTIFIER = tataera.downloadhomework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1843,10 +1931,10 @@
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/umeng",
 					"$(PROJECT_DIR)/HomeworkAssistant/Daoru/palmhomeowork/tatayuwen/Classes/Lib/weixin",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = enjoytime.palmhomework;
+				PRODUCT_BUNDLE_IDENTIFIER = tataera.downloadhomework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -11,6 +11,7 @@
 #import "ClassificationCell.h"
 #import "SearchMenuHeaderView.h"
 #import "FillOthersView.h"
+#import "AreaSelectViewController.h"
 
 @interface FillOthersViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -205,16 +206,24 @@
 -(void)selectCity {
     
     __weak __typeof(self)weakSelf = self;
-    self.shplacePicker = [[SHPlacePickerView alloc] initWithIsRecordLocation:YES SendPlaceArray:^(NSArray *placeArray) {
-        
-        NSLog(@"省:%@ 市:%@ 区:%@",placeArray[0],placeArray[1],placeArray[2]);
-        [weakSelf.otherView.areaBtn setTitle:[NSString stringWithFormat:@"%@", placeArray[1]] forState:UIControlStateNormal];
-        
-    }];
-    self.shplacePicker.backgroundColor = [UIColor whiteColor];
-    self.shplacePicker.isRecordLocation = NO;
-    [self.view addSubview:self.shplacePicker];
+//    self.shplacePicker = [[SHPlacePickerView alloc] initWithIsRecordLocation:YES SendPlaceArray:^(NSArray *placeArray) {
+//
+//        NSLog(@"省:%@ 市:%@ 区:%@",placeArray[0],placeArray[1],placeArray[2]);
+//        [weakSelf.otherView.areaBtn setTitle:[NSString stringWithFormat:@"%@", placeArray[1]] forState:UIControlStateNormal];
+//
+//    }];
+//    self.shplacePicker.backgroundColor = [UIColor whiteColor];
+//    self.shplacePicker.isRecordLocation = NO;
+//    [self.view addSubview:self.shplacePicker];
     
+    AreaSelectViewController *ctrl = [[AreaSelectViewController alloc] init];
+    [self.navigationController pushViewController:ctrl animated:YES];
+    
+    __weak AreaSelectViewController *_ctrl = ctrl;
+    [ctrl setSelectedCityBlock:^(AreaModel * info) {
+        [weakSelf.otherView.areaBtn setTitle:info.areaName forState:UIControlStateNormal];
+        [_ctrl.navigationController popViewControllerAnimated:YES];
+    }];
 }
 
 #pragma mark - 请求网络
@@ -224,10 +233,6 @@
                           @"openID":userValue(@"openId"),
                           @"grade":self.cell.title.text,
                           @"city":self.otherView.areaBtn.titleLabel.text,
-                          @"schoolID":@"3",
-                          @"schoolName":@"4",
-                          @"longitude":@"1.000000",
-                          @"latitude":@"2.000000"
                           };
     
     dic = [HMACSHA1 encryptDicForRequest:dic];
@@ -239,14 +244,12 @@
     AFHTTPSessionManager *manager = [HttpTool initializeHttpManager];
     //    __weak typeof(self) weakSelf = self;
     [manager GET:[URLBuilder getURLForUpsertUserExt] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"------------------------------%@------------------------------", responseObject);
-        
         //返回成功
         if ([responseObject[@"code"] intValue] == 200) {
             
-            [TTUserManager sharedInstance].currentUser.city = responseObject[@"city"];
-            [TTUserManager sharedInstance].currentUser.grade = responseObject[@"grade"];
-            [TTUserManager sharedInstance].currentUser.schoolID = responseObject[@"schoolID"];
+            [TTUserManager sharedInstance].currentUser.grade = self.cell.title.text;
+            [TTUserManager sharedInstance].currentUser.city = self.otherView.areaBtn.titleLabel.text;
+            [[TTUserManager sharedInstance] saveCurrentUserInfo];
             
             [self.navigationController popToRootViewControllerAnimated:YES];
         }

@@ -304,8 +304,19 @@
     [manager.requestSerializer setValue:@"multipart/form-data; boundary=----WebKitFormBoundary6TAB8KxvuJTZYfUn" forHTTPHeaderField:@"Content-Type"];
     NSURLSessionDataTask *dataTask = [manager POST:resURL parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
 
-        NSData *imgData = UIImagePNGRepresentation(self.bookCover.image);
-
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.defaultMotionEffectsEnabled = NO;
+        hud.removeFromSuperViewOnHide = YES;
+        hud.backgroundView.color = [UIColor clearColor];
+        hud.backgroundView.style = MBProgressHUDBackgroundStyleSolidColor;
+        hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+        // 注释下面配置代码默认显示浅灰->
+        hud.bezelView.color = [UIColor blackColor];
+        hud.label.textColor = [UIColor whiteColor];
+        hud.contentColor = [UIColor whiteColor];
+        
+        NSData *imgData = UIImageJPEGRepresentation(self.bookCover.image, 0.5);
+        
 //        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 //        [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
 //        NSString *str = [dateFormatter stringFromDate:[NSDate date]];
@@ -317,10 +328,11 @@
     } progress:^(NSProgress * _Nonnull uploadProgress) {
 
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"test+++++%@",responseObject);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [XWHUDManager showSuccessTipHUDInView:@"感谢您的反馈"];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSLog(@"test-----%@",error);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [XWHUDManager showWarningTipHUDInView:@"反馈失败"];
     }];
     [dataTask resume];

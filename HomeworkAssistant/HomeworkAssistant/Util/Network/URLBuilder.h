@@ -33,7 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)getURLForUploadAnswerPic;//上传答案图片
 
-+ (NSString *)getURLForUploadFeedBack;
++ (NSString *)getURLForUploadFeedBack;//反馈接口
+
++ (NSString *)getURLForShareBook;//分享书籍接口
 
 //作文接口
 + (NSString *)getURLForArticle;//作文搜索

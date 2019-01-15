@@ -27,7 +27,7 @@
 			<string>微信appKey</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wxdd59bf4228be5b2d</string>
+				<string>wx0ce44ca288dd81b0</string>
 			</array>
 		</dict>
 		<dict>
@@ -37,7 +37,33 @@
 			<string>weixin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wxdd59bf4228be5b2d</string>
+				<string>wx0ce44ca288dd81b0</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>tataera.downloadhomework</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tataera.downloadhomework</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tencent1108038381</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>QQ420b52ed</string>
 			</array>
 		</dict>
 	</array>
@@ -107,7 +133,7 @@
 		<string>armv7</string>
 	</array>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
+	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
